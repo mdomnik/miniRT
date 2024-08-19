@@ -2,6 +2,13 @@
 .obsidian/
 .vscode/
 
+# Main binary
+minirt
+
+# MLX42
+*.tar.gz
+MLX42/
+
 # Prerequisites
 *.d
 
