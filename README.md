@@ -10,8 +10,6 @@ This project is our humble (but not too humble) attempt to dive into the world o
 Ray tracing is that magical process that makes computer-generated images look like they’ve been plucked straight from reality - or at least from a well-lit, impeccably polished version of it.
 It’s the secret sauce behind those jaw-dropping visuals in movies and games, minus the multi-million dollar budget and the Hollywood credits.
 
-_Just remember: it’s all fun and games until the sphere starts rotating. Oh wait, it can’t._
-
 ## Features
 
 🟥 - not implemented yet
@@ -20,8 +18,6 @@ _Just remember: it’s all fun and games until the sphere starts rotating. Oh wa
 
 🟩 - implemented
 
-❔ - not sure
-
 ### Mandatory part
 
 - 🟥 Window management (resizing?, exiting)
@@ -29,13 +25,13 @@ _Just remember: it’s all fun and games until the sphere starts rotating. Oh wa
     * 🟥 Plane
     * 🟥 Sphere
     * 🟥 Cylinder
-- ❔ Objects intersections
-- ❔ Inside of the object
+- 🟥 Objects intersections
+- 🟥 Inside of the object
 - 🟥 Change object's (unique) properties (diameter, height)
 - 🟥 Translation of an object
 - 🟥 Rotation of an object
 - 🟥 Light management
-    * 🟥 Spot birghtness
+    * 🟥 Spot brightness
     * 🟥 Hard shadows
     * 🟥 Ambiance lightning
     * 🟥 Diffuse lightning
@@ -46,18 +42,18 @@ _Just remember: it’s all fun and games until the sphere starts rotating. Oh wa
 - 🟥 Specular reflection (Phong reflection model)
 - 🟥 Color disruption
 - 🟥 Colored light
-- ❔ Multi-spot light
+- 🟥 Multi-spot light
 - 🟥 2nd degree object(s) (Cone, Hyperboloid)
 - 🟥 Bump mapping
 
 ### Extras
 
-- ❔ Skybox (lightning?)
-- ❔ Materials
-- ❔ `.obj` files
-- ❔ Complex objects
-- ❔ Soft shadows
-- ❔ Refractions
-- ❔ Global illumination
-- ❔ Caustic
-- ❔ Multi-threading
+- 🟥 Skybox (lightning?)
+- 🟥 Materials
+- 🟥 `.obj` files
+- 🟥 Complex objects
+- 🟥 Soft shadows
+- 🟥 Refraction
+- 🟥 Global illumination
+- 🟥 Caustic
+- 🟥 Multi-threading
