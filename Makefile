@@ -44,6 +44,11 @@ SRC_DIR			:= src
 # Source files
 SRC_FILES		+= main.c
 
+# VEC3 Sources
+SRC_FILES		+= vec3/vec3.c
+SRC_FILES		+= vec3/vec3_basic_ops.c
+SRC_FILES		+= vec3/vec3_utils.c
+
 # Object files directory
 OBJ_DIR			:= .obj
 
@@ -90,7 +95,8 @@ mlx: ## Build MLX42
 	cmake --build $(MLX_DIR)/build -j4
 
 # Compilation rule for object files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@$(MKDIR) $(@D)
 	$(CC) $(CFLAGS) -MMD -MF $(patsubst %.o, %.d, $@) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR):

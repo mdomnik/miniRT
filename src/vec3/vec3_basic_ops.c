@@ -6,11 +6,11 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:26:28 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/20 21:43:50 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:21:52 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../rayft.h"
+#include "../../inc/rayft.h"
 
 void	vec3_neg(t_vec3 *v)
 {
