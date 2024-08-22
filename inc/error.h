@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mrt.h                                              :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/22 19:36:52 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/08/22 16:30:43 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/08/22 18:21:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MRT_H
-# define MRT_H
+#ifndef ERROR_H
+# define ERROR_H
 
-# include "input.h"
-# include "error.h"
-# include "obj_n_materials.h"
+# define ERR_SCENE_FILE "Error: No scene file provided"
+# define ERR_INVALID_OPT "Error: Invalid option"
+# define ERR_DOUBLE_OPT "Error: Option already set"
 
-#endif /* MRT_H */
+#endif /* ERROR_H */

@@ -42,7 +42,9 @@ NAME			:= minirt
 SRC_DIR			:= src
 
 # Source files
-SRC_FILES		+= main.c
+SRC_FILES		+=	input/file_parser.c \
+					input/option_parser.c \
+					input/option_arg_parser.c \
 
 # Object files directory
 OBJ_DIR			:= .obj
@@ -90,7 +92,8 @@ mlx: ## Build MLX42
 	cmake --build $(MLX_DIR)/build -j4
 
 # Compilation rule for object files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	$(MKDIR) $(@D)
 	$(CC) $(CFLAGS) -MMD -MF $(patsubst %.o, %.d, $@) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR):
