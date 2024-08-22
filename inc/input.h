@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:11:31 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/22 19:55:58 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/22 20:07:36 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 typedef struct s_options
 {
+	int		opts_flags;
 	char	*save;
 	char	*reflection;
 }	t_options;
