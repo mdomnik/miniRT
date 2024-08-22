@@ -1,6 +1,7 @@
 # additional
 .obsidian/
 .vscode/
+*.txt
 
 # Main binary
 minirt
