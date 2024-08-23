@@ -6,25 +6,27 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:49:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/22 20:11:17 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/23 16:51:55 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-int get_option_values (int opt_flags, t_options *options, char **argv)
+// to be implemented
+int get_option_values (t_options *options, char **argv)
 {
 	int i;
 
 	i = 1;
 	while (argv[i])
 	{
-		if (opt_flags & (1 << 0))
-			options->save = argv[i + 1];
-		if (opt_flags & (1 << 1))
-			options->reflection = argv[i + 1];
+/* 		if (argv[i] == "--save" || argv[i] == "-s") //save
+			if (save_option(argv[i + 1], options))
+				return (-1); */
+/* 		if (options->opts_flags & (1 << 1))
+			options->reflection = argv[i + 1]; */
 		i++;
 	}
-	printf("Save: %s\n", options->save);
+	printf("opts_flags: %d\n", options->opts_flags);
 	return (0);
 }

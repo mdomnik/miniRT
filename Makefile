@@ -11,7 +11,7 @@
 CC				:= cc
 
 # Compiler flags
-CFLAGS			+= -Wall -Werror -Wextra
+CFLAGS			+= -Wall -Werror -Wextra -g
 CFLAGS			+= -pedantic -Wunreachable-code
 CFLAGS			+= -Wshadow
 
@@ -45,6 +45,7 @@ SRC_DIR			:= src
 SRC_FILES		+=	input/file_parser.c \
 					input/option_parser.c \
 					input/option_arg_parser.c \
+					input/ft_atob.c \
 
 # Object files directory
 OBJ_DIR			:= .obj
