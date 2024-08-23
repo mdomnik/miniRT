@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3_utils.c                                       :+:      :+:    :+:   */
+/*   vec3_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 17:03:26 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/22 20:00:30 by astavrop         ###   ########.fr       */
+/*   Created: 2024/08/22 21:39:21 by astavrop          #+#    #+#             */
+/*   Updated: 2024/08/22 21:41:17 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/vec3.h"
 
-void	v_vec3_unit(t_vec3 *v)
+t_vec3	vec3(double x, double y, double z)
 {
-	v_vec3_div(v, vec3_len(v));
+	t_vec3	v;
+
+	v.a[X] = x;
+	v.a[Y] = y;
+	v.a[Z] = z;
+	return (v);
 }
 
-t_vec3	*vec3_unit(t_vec3 *v)
+t_point3	point3(double x, double y, double z)
 {
-	return (vec3_div(vec3_copy(v), vec3_len(v)));
-}
+	t_point3	p;
 
-t_vec3	*vec3_copy(t_vec3 *orig)
-{
-	t_vec3	*copy;
-
-	copy = vec3_new(orig->a[X], orig->a[Y], orig->a[Z]);
-	if (!copy)
-		return (NULL);
-	return (copy);
+	p.a[X] = x;
+	p.a[Y] = y;
+	p.a[Z] = z;
+	return (p);
 }

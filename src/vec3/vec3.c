@@ -6,14 +6,14 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:22:28 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/21 18:22:22 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:33:56 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/rayft.h"
+#include "../../inc/vec3.h"
 #include "../../lib/libft/libft.h"
 
-t_vec3	*new_vec3(double x, double y, double z)
+t_vec3	*vec3_new(double x, double y, double z)
 {
 	t_vec3	*v;
 
@@ -53,7 +53,7 @@ t_vec3	*cross(t_vec3 *u, t_vec3 *v)
 {
 	t_vec3	*ret;
 
-	ret = new_vec3(0, 0, 0);
+	ret = vec3_new(0, 0, 0);
 	if (!ret)
 		return (NULL);
 	ret->a[X] = u->a[Y] * v->a[Z] - u->a[Z] * v->a[Y];

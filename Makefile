@@ -11,7 +11,7 @@
 CC				:= cc
 
 # Compiler flags
-CFLAGS			+= -Wall -Werror -Wextra
+CFLAGS			+= -Wall -Wextra
 CFLAGS			+= -pedantic -Wunreachable-code
 CFLAGS			+= -Wshadow
 
@@ -47,7 +47,13 @@ SRC_FILES		+= main.c
 # VEC3 Sources
 SRC_FILES		+= vec3/vec3.c
 SRC_FILES		+= vec3/vec3_basic_ops.c
+SRC_FILES		+= vec3/vec3_basic_ops_ret.c
 SRC_FILES		+= vec3/vec3_utils.c
+SRC_FILES		+= vec3/vec3_print.c
+
+SRC_FILES		+= color/color.c
+
+SRC_FILES		+= ray/ray.c
 
 # Object files directory
 OBJ_DIR			:= .obj
