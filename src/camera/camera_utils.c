@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   camera_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 15:58:36 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/24 18:45:26 by astavrop         ###   ########.fr       */
+/*   Created: 2024/08/23 13:46:12 by astavrop          #+#    #+#             */
+/*   Updated: 2024/08/23 13:50:31 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include "../../inc/camera.h"
 
-# include "vec3.h"
-# include "ray.h"
-
-# define R 0
-# define G 1
-# define B 2
-
-typedef struct s_vec3	t_color;
-
-t_color		*ray_color(t_ray *r);
-int			write_color(int fd, t_color *pixel_color);
-t_color		per_pixel(t_ray ray);
-
-#endif /* COLOR_H */
+inline double	deg_to_rad(double deg)
+{
+	return (deg * PI / 180.0);
+}

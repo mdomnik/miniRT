@@ -46,6 +46,7 @@ SRC_FILES		+= main.c
 
 # VEC3 Sources
 SRC_FILES		+= vec3/vec3.c
+SRC_FILES		+= vec3/vec3_2.c
 SRC_FILES		+= vec3/vec3_basic_ops.c
 SRC_FILES		+= vec3/vec3_basic_ops_ret.c
 SRC_FILES		+= vec3/vec3_utils.c

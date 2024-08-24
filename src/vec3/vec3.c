@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:22:28 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/22 19:33:56 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/08/24 20:04:20 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_vec3	*vec3_new(double x, double y, double z)
 {
 	t_vec3	*v;
 
-	v = gc_malloc(sizeof(*v));
+	v = malloc(sizeof(*v));
 	if (!v)
 		return (NULL);
 	v->a[X] = x;
