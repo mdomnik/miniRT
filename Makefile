@@ -11,7 +11,7 @@
 CC				:= cc
 
 # Compiler flags
-CFLAGS			+= -Wall -Wextra
+CFLAGS			+= -Wall -Wextra -Werror
 CFLAGS			+= -pedantic -Wunreachable-code
 CFLAGS			+= -Wshadow
 
@@ -55,6 +55,8 @@ SRC_FILES		+= vec3/vec3_print.c
 SRC_FILES		+= color/color.c
 
 SRC_FILES		+= ray/ray.c
+
+SRC_FILES		+= objects/sphere.c
 
 # Object files directory
 OBJ_DIR			:= .obj
@@ -101,10 +103,11 @@ mlx: ## Build MLX42
 	cmake $(MLX_DIR) -B $(MLX_DIR)/build
 	cmake --build $(MLX_DIR)/build -j4
 
+WIDTH		?= 720
 # Compilation rule for object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(MKDIR) $(@D)
-	$(CC) $(CFLAGS) -MMD -MF $(patsubst %.o, %.d, $@) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) -MMD -MF $(patsubst %.o, %.d, $@) $(INCLUDES) -DWIDTH=$(WIDTH) -c $< -o $@
 
 $(OBJ_DIR):
 	@$(MKDIR) $@

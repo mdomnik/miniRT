@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 15:58:36 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/26 17:28:30 by astavrop         ###   ########.fr       */
+/*   Created: 2024/08/26 15:12:52 by astavrop          #+#    #+#             */
+/*   Updated: 2024/08/26 17:22:21 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#ifndef OBJECTS_H
+# define OBJECTS_H
 
 # include "vec3.h"
 # include "ray.h"
 
-# define R 0
-# define G 1
-# define B 2
+# include <stdbool.h>
 
-typedef struct s_vec3	t_color;
+typedef struct s_sphere	t_sphere;
 
-t_color		ray_color(t_ray *r);
-int			write_color(int fd, t_color *pixel_color);
-t_color		per_pixel(t_ray ray);
+/* SPHERE */
 
-#endif /* COLOR_H */
+struct	s_sphere
+{
+	t_point3	center;
+	float		radius;
+};
+
+t_sphere			sphere(t_point3 c, float r);
+bool				hit_sphere(const t_sphere *s, t_ray *r);
+
+#endif /* OBJECTS_H */
