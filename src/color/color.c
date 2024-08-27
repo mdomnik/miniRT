@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:59:34 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/26 17:36:45 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/08/27 14:11:22 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,14 @@ t_color	color(float red, float green, float blue)
 t_color	ray_color(t_ray *r)
 {
 	/* TEST */
-	t_point3	sc = point3(0, 0, -1); // Test sphere center
-	t_sphere	s = sphere(sc, 0.5f);
-	if (hit_sphere(&s, r))
+	t_point3	sc1 = point3(4, 4, -40); // Test sphere center
+	t_sphere	s1 = sphere(sc1, 4.0f);
+	t_point3	sc2 = point3(-1, -1, -5); // Test sphere center
+	t_sphere	s2 = sphere(sc2, 0.5f);
+	if (hit_sphere(&s1, r))
 		return (color(1, 0, 0));
+	else if (hit_sphere(&s2, r))
+		return (color(0, 1, 0));
 
 	t_color	clr1;
 	t_color	clr2;

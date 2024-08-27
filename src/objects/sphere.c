@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:12:37 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/26 17:23:31 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/08/27 14:04:52 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,17 @@ t_sphere	sphere(t_point3 c, float r)
  */
 bool	hit_sphere(const t_sphere *s, t_ray *r)
 {
-	float	a;
-	float	b;
-	float	c;
-	float	d;
+	float		a;
+	float		b;
+	float		c;
+	float		d;
 
 	a = dot(&r->dir, &r->dir);
-	b = -2 * dot(&r->orig, &r->dir);
-	c = dot(&r->orig, &r->orig) - (s->radius * s->radius);
+	v_vec3_mult(&r->dir, -2.0f);
+	v_vec3_sub((t_vec3 *) &s->center, &r->orig);
+	// b = -2 * dot(&r->orig, &r->dir);
+	b = dot(&r->dir, (t_vec3 *) &s->center);
+	c = dot((t_vec3 *) &s->center, (t_vec3 *) &s->center) - (s->radius * s->radius);
 	d = (b * b) - 4.0f * a * c;
 	return (d >= 0.0f);
 }
