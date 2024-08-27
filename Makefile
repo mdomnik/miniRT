@@ -57,6 +57,7 @@ SRC_FILES		+= color/color.c
 SRC_FILES		+= ray/ray.c
 
 SRC_FILES		+= objects/sphere.c
+SRC_FILES		+= objects/plane.c
 
 # Object files directory
 OBJ_DIR			:= .obj
