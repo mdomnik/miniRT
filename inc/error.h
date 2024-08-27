@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:30:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 03:25:12 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/27 16:24:26 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@
 # define ERR_MULTIPLE_SCENE "Error: Multiple scene files provided"
 # define ERR_NO_SCENE "Error: No scene file provided"
 # define ERR_ARGS "Error: Invalid number of arguments"
+# define ERR_NO_NAME "Error: No file name provided with '.rt' extension"
 #endif /* ERROR_H */

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:49:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 03:20:41 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/27 16:26:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ int	scene_file_check(char *filename, char **scene_file, bool *scene_count)
 			return (-1);
 		}
 	}
+	else if (check_scene_file(filename) == -2)
+	{
+		ft_dprintf(2, "%s\n", ERR_NO_NAME);
+		return (-1);
+	}
 	return (0);
 }
 
@@ -63,6 +68,9 @@ int	check_scene_file(char *args)
 		return (-1);
 	while (args[i] != '\0')
 		i++;
+	if (args[i] == '\0' && args[i - 1] == 't'
+	&& args[i - 2] == 'r' && args[i - 3] == '.' && i == 3)
+		return (-2);
 	if (i < 4)
 		return (-1);
 	if (args[i] != '\0' || args[i - 1] != 't'

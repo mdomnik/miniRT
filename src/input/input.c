@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_parser.c                                      :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:33:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 03:49:01 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/27 16:41:11 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	main(int argc, char **argv)
 		return (1);
 	if (option_preferences(argv, options) == -1)
 		return (1);
+	// if (parse_scene_file(options) == -1)
+	// 	return (1);
 	printf("scene file: %s\n", options->scene_file);
 	printf_option_values(options);
 }
@@ -39,7 +41,7 @@ int	check_arg_count(char **argv)
 	repeat = false;
 	while (argv[i])
 	{
-		if (argv[i][0] != '-')
+		if (argv[i][0] != '-' || (argv[i][0] == '-' && is_number(argv[i]) == 0))
 		{
 			if (repeat == true && check_scene_file(argv[i]) == -1)
 			{
@@ -48,7 +50,7 @@ int	check_arg_count(char **argv)
 			}
 			repeat = true;
 		}
-		if (argv[i][0] == '-')
+		if (argv[i][0] == '-' && is_number(argv[i]) == 1)
 			repeat = false;
 		i++;
 	}

@@ -1,17 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_n_materials.h                                  :+:      :+:    :+:   */
+/*   scene_file.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/22 16:35:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/27 16:16:00 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJ_N_MATERIALS_H
-# define OBJ_N_MATERIALS_H
+#ifndef SCENE_FILE_H
+# define SCENE_FILE_H
+
+//scene_file/scene_file.c
+int	parse_scene_file(t_options *options);
+
+
+# define RULES "SPHERE_RULES, CUBE_RULES"
+# define SPHERE_RULES "sp UNLIMITED,UNLIMITED,UNLIMITED UNLIMETED COLOR\n"
 
 // typedef struct s_vector
 // {
@@ -27,6 +34,12 @@
 // 	int		blue;
 // }			t_color;
 
+// typedef struct s_objects
+// {
+// 	char	*id;
+// 	(void *)object;
+// }
+
 
 // typedef struct s_object
 // {
@@ -41,6 +54,12 @@
 // 	t_vector		center;
 // 	double			diameter;
 // 	t_color			color;
+//	struct s_sphere	*next;
 // }			t_sphere;
 
-#endif /* OBJ_N_MATERIALS_H */
+// typedef struct s_scene
+// {
+	// t_sphere *spheres;
+// }
+// 
+#endif

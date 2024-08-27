@@ -47,7 +47,8 @@ SRC_FILES		+=	input/flags/check_value_format.c \
 					input/flags/flag_formatting.c \
 					input/flags/flag_utils.c \
 					input/flags/handle_values.c \
-					input/file_parser.c \
+					input/scene_file/file_parser.c \
+					input/input.c \
 					input/find_scene_file.c \
 
 # Object files directory
