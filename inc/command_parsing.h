@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mrt.h                                              :+:      :+:    :+:   */
+/*   command_parsing.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/27 02:18:44 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/08/27 02:18:21 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/08/27 02:19:35 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MRT_H
-# define MRT_H
+#ifndef COMMAND_PARSING_H
+# define COMMAND_PARSING_H
 
+//file_parser.c
+int validate_arg_count(int argc);
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include <MLX42/MLX42.h>
-# include "../lib/libft/libft.h"
-# include "flags.h"
-# include "error.h"
-# include "obj_n_materials.h"
+//option_arg_parser.c
+int get_option_values (t_options *options, char **argv);
 
-#endif /* MRT_H */
+#endif
