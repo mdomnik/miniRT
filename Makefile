@@ -42,10 +42,12 @@ NAME			:= minirt
 SRC_DIR			:= src
 
 # Source files
-SRC_FILES		+=	input/file_parser.c \
-					input/option_parser.c \
-					input/option_arg_parser.c \
-					input/ft_atob.c \
+SRC_FILES		+=	input/flags/check_value_format.c \
+					input/flags/create_flag_nodes.c \
+					input/flags/flag_formatting.c \
+					input/flags/flag_utils.c \
+					input/flags/handle_values.c \
+					input/file_parser.c \
 
 # Object files directory
 OBJ_DIR			:= .obj

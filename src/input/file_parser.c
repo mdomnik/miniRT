@@ -18,24 +18,13 @@ int	main(int argc, char **argv)
 {
 	t_options	*options;
 
+	(void)argc;
 	options = gc_malloc(sizeof(t_options));
-	if (validate_arg_count(argc))
-		return (1);
+	// if (validate_file_name(argv))
+	// 	return (1);
 	if (option_preferences(argv, options) == -1)
 		return (1);
-	if (get_option_values(options, argv) == -1)
-		return (1);
 	printf_option_values(options);
-}
-
-int	validate_arg_count(int argc)
-{
-	if (argc < 2)
-	{
-		ft_dprintf(2, "%s\n", ERR_SCENE_FILE);
-		return (1);
-	}
-	return (0);
 }
 
 void printf_option_values(t_options *options)
@@ -46,17 +35,40 @@ void printf_option_values(t_options *options)
 	while (current != NULL)
 	{
 		if (current->type == 0)
+		{
+			printf("type: %d | ", current->type);
 			printf("string: %s\n", current->value.string.string_value);
+		}
 		if (current->type == 1)
+		{
+			printf("type: %d | ", current->type);
 			printf("float: %f\n", current->value.float_value.float_value);
+		}
 		if (current->type == 2)
+		{
+			printf("type: %d | ", current->type);
 			printf("string: %s\n", current->value.string.string_value);
+		}
 		if (current->type == 4)
+		{
+			printf("type: %d | ", current->type);
 			printf("float: %f\n", current->value.float_value.float_value);
+		}
 		if (current->type == 5)
+		{
+			printf("type: %d | ", current->type);
 			printf("vector: %f %f %f\n", current->value.vector.x, current->value.vector.y, current->value.vector.z);
+		}
 		if (current->type == 7)
+		{
+			printf("type: %d | ", current->type);
 			printf("string: %s\n", current->value.string.string_value);
+		}
+		if (current->type == 6)
+		{
+			printf("type: %d | ", current->type);
+			printf("vector: %f %f %f\n", current->value.vector.x, current->value.vector.y, current->value.vector.z);
+		}
 		current = current->next;
 	}
 }

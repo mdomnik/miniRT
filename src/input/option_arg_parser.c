@@ -12,21 +12,65 @@
 
 #include "mrt.h"
 
-// to be implemented
-int get_option_values (t_options *options, char **argv)
+int	validate_file_name(char **argv)
+{
+	char **args =  double_dup(argv);
+	
+	args = remove_flags(args);
+	return (0);
+}
+
+char **double_dup(char **strs)
+{
+	char **ret;
+	int i;
+
+	i = 0;
+	while (strs[i])
+		i++;
+	ret = gc_malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (strs[i])
+	{
+		ret[i] = ft_strdup(strs[i]);
+		i++;
+	}
+	ret[i] = NULL;
+	return (ret);
+}
+
+char **remove_flags(char **args)
+{
+	int i;
+	int j;
+	char **ret;
+
+	i = 0;
+	j = 0;
+	ret = NULL;
+	while (args[i])
+	{
+		if (args[i][0] != '-')
+		{
+			ret[j] = ft_strdup(args[i]);
+			j++;
+		}
+		i++;
+	}
+	ret[j] = NULL;
+	return (ret);
+}
+
+int valid_format(char *str)
 {
 	int i;
 
-	i = 1;
-	while (argv[i])
+	i = 0;
+	while (str[i])
 	{
-/* 		if (argv[i] == "--save" || argv[i] == "-s") //save
-			if (save_option(argv[i + 1], options))
-				return (-1); */
-/* 		if (options->opts_flags & (1 << 1))
-			options->reflection = argv[i + 1]; */
+		if ((str[i] > 90 || str[i] < 65) && (str[i] > 122 || str[i] < 97) && (str[i] < 48 || str[i] > 57) && str[i] != '_')
+			return (1);
 		i++;
 	}
-	printf("opts_flags: %d\n", options->opts_flags);
 	return (0);
 }
