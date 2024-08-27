@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:33:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 03:39:44 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/27 03:49:01 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,31 @@ int	main(int argc, char **argv)
 		return (1);
 	printf("scene file: %s\n", options->scene_file);
 	printf_option_values(options);
+}
+
+int	check_arg_count(char **argv)
+{
+	int		i;
+	bool	repeat;
+
+	i = 0;
+	repeat = false;
+	while (argv[i])
+	{
+		if (argv[i][0] != '-')
+		{
+			if (repeat == true && check_scene_file(argv[i]) == -1)
+			{
+				ft_dprintf(2, "%s\n", ERR_ARGS);
+				return (-1);
+			}
+			repeat = true;
+		}
+		if (argv[i][0] == '-')
+			repeat = false;
+		i++;
+	}
+	return (0);
 }
 
 void	printf_option_values(t_options *options)
