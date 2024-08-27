@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 16:16:00 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/27 16:53:37 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,40 @@ int	parse_scene_file(t_options *options);
 
 # define RULES "SPHERE_RULES, CUBE_RULES"
 # define SPHERE_RULES "sp UNLIMITED,UNLIMITED,UNLIMITED UNLIMETED COLOR\n"
+# define AMBIENT_RULES "A RANGE COLOR\n"
 
-// typedef struct s_vector
-// {
-// 	double	x;
-// 	double	y;
-// 	double	z;
-// }			t_vector;
 
-// typedef struct s_color
-// {
-// 	int		red;
-// 	int		green;
-// 	int		blue;
-// }			t_color;
+typedef struct s_color
+{
+	int		r;
+	int		g;
+	int		b;
+}			t_color;
+
+typedef struct s_ratio
+{
+	double	range;
+}			t_ratio;
+
+typedef struct s_coords
+{
+	double	x;
+	double	y;
+	double	z;
+}			t_coords;
+
+typedef struct s_vector_range
+{
+	t_ratio		x;
+	t_ratio		y;
+	t_ratio		z;
+}	t_vector_range;
+
+typedef struct s_f
+{
+	double f;
+} t_float;
+
 
 // typedef struct s_objects
 // {
