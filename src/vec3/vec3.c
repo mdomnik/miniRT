@@ -6,13 +6,20 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:22:28 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/24 20:04:20 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:25:00 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/vec3.h"
-#include "../../lib/libft/libft.h"
 
+/**
+ * @brief Allocates and initializes a new 3D vector with given components.
+ * 
+ * @param x The x component of the vector.
+ * @param y The y component of the vector.
+ * @param z The z component of the vector.
+ * @return t_vec3* Pointer to the vector or NULL in case of error
+ */
 t_vec3	*vec3_new(double x, double y, double z)
 {
 	t_vec3	*v;
@@ -26,6 +33,12 @@ t_vec3	*vec3_new(double x, double y, double z)
 	return (v);
 }
 
+/**
+ * @brief Computes the squared length of a 3D vector.
+ * 
+ * @param v Pointer to the vector.
+ * @return double The squared length of the vector.
+ */
 double	vec3_len_sq(t_vec3 *v)
 {
 	return (
@@ -35,11 +48,24 @@ double	vec3_len_sq(t_vec3 *v)
 	);
 }
 
+/**
+ * @brief Computes the length (magnitude) of a 3D vector.
+ * 
+ * @param v Pointer to the vector.
+ * @return double The length of the vector.
+ */
 double	vec3_len(t_vec3 *v)
 {
 	return (sqrt(vec3_len_sq(v)));
 }
 
+/**
+ * @brief Computes the dot product of two 3D vectors.
+ * 
+ * @param u Pointer to the first vector.
+ * @param v Pointer to the second vector.
+ * @return double The dot product of the two vectors.
+ */
 double	dot(t_vec3 *u, t_vec3 *v)
 {
 	return (
@@ -49,6 +75,13 @@ double	dot(t_vec3 *u, t_vec3 *v)
 	);
 }
 
+/**
+ * @brief Computes the cross product of two 3D vectors.
+ * 
+ * @param u Pointer to the first vector.
+ * @param v Pointer to the second vector.
+ * @return t_vec3* Pointer to the vector cross product or NULL in case of error.
+ */
 t_vec3	*cross(t_vec3 *u, t_vec3 *v)
 {
 	t_vec3	*ret;
