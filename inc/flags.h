@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:11:31 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 02:21:54 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/27 02:50:21 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_value
 typedef struct s_options
 {
 	int		opts_flags;
+	char	*scene_file;
 	t_value	*values;
 }	t_options;
 

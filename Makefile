@@ -48,6 +48,8 @@ SRC_FILES		+=	input/flags/check_value_format.c \
 					input/flags/flag_utils.c \
 					input/flags/handle_values.c \
 					input/file_parser.c \
+					input/find_scene_file.c \
+					input/arg_count.c \
 
 # Object files directory
 OBJ_DIR			:= .obj

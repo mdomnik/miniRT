@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 19:22:37 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 01:05:15 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/27 03:02:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*check_if_option(char *str)
 	char	*ret;
 
 	if (!str)
+		return (NULL);
+	if (check_scene_file(str) == 0)
 		return (NULL);
 	if ((is_number(str) == 1) && str[0] == '-')
 		return (NULL);

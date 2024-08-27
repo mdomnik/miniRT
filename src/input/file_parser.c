@@ -6,13 +6,13 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:33:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/23 20:15:06 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/27 03:39:44 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-void printf_option_values(t_options *options);
+void	printf_option_values(t_options *options);
 
 int	main(int argc, char **argv)
 {
@@ -20,16 +20,19 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	options = gc_malloc(sizeof(t_options));
-	// if (validate_file_name(argv))
-	// 	return (1);
+	if (validate_file_name(argv, options) == -1)
+		return (1);
+	if (check_arg_count(argv) == -1)
+		return (1);
 	if (option_preferences(argv, options) == -1)
 		return (1);
+	printf("scene file: %s\n", options->scene_file);
 	printf_option_values(options);
 }
 
-void printf_option_values(t_options *options)
+void	printf_option_values(t_options *options)
 {
-	t_value *current;
+	t_value	*current;
 
 	current = options->values;
 	while (current != NULL)
@@ -57,7 +60,8 @@ void printf_option_values(t_options *options)
 		if (current->type == 5)
 		{
 			printf("type: %d | ", current->type);
-			printf("vector: %f %f %f\n", current->value.vector.x, current->value.vector.y, current->value.vector.z);
+			printf("vector: %f %f %f\n", current->value.vector.x,
+				current->value.vector.y, current->value.vector.z);
 		}
 		if (current->type == 7)
 		{
@@ -67,7 +71,8 @@ void printf_option_values(t_options *options)
 		if (current->type == 6)
 		{
 			printf("type: %d | ", current->type);
-			printf("vector: %f %f %f\n", current->value.vector.x, current->value.vector.y, current->value.vector.z);
+			printf("vector: %f %f %f\n", current->value.vector.x,
+				current->value.vector.y, current->value.vector.z);
 		}
 		current = current->next;
 	}

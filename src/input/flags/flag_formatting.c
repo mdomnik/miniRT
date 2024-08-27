@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:32:44 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 00:25:23 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/27 03:26:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	args_to_opts(char *str, char *flag, int type)
 			return (i);
 		i++;
 	}
-	if (is_number(str) == 1)
+	if (is_number(str) == 1 && check_scene_file(str) == -1)
 	{
 		if ((type == 0 && str[0] == '-' && str[1] == '-' )
 			|| (type == 1 && str[0] == '-' && str[1] != '-'))
