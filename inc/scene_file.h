@@ -6,80 +6,64 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 16:53:37 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/29 17:54:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_FILE_H
 # define SCENE_FILE_H
 
-//scene_file/scene_file.c
-int	parse_scene_file(t_options *options);
+# define SCENE_OBJECTS	"A,C,L,SP,PL,CY"
 
-
-# define RULES "SPHERE_RULES, CUBE_RULES"
-# define SPHERE_RULES "sp UNLIMITED,UNLIMITED,UNLIMITED UNLIMETED COLOR\n"
-# define AMBIENT_RULES "A RANGE COLOR\n"
-
-
-typedef struct s_color
+//REQUIRED OBJECT STRUCTS
+typedef struct s_ambient
 {
-	int		r;
-	int		g;
-	int		b;
-}			t_color;
+	char	*id;
+	double	ratio;
+	t_color	color;
+} t_ambient;
 
-typedef struct s_ratio
+typedef struct s_camera
 {
-	double	range;
-}			t_ratio;
+	char	*id;
+	t_vector	coords;
+	t_vector_range	vector_range;
+	double	fov;
+}	t_camera;
 
-typedef struct s_coords
+typedef struct s_light
 {
-	double	x;
-	double	y;
-	double	z;
-}			t_coords;
+	char			*id;
+	t_vector		coords;
+	double			ratio;
+	t_color			color;
+	struct s_light	*next;
+}	t_light;
 
-typedef struct s_vector_range
+// OPTIONAL OBJECT STRUCTS
+
+typedef struct s_sphere
 {
-	t_ratio		x;
-	t_ratio		y;
-	t_ratio		z;
-}	t_vector_range;
+	char	*id;
+	t_vector	coords;
+	double		diameter;
+	t_color		color;
+}	t_sphere;
 
-typedef struct s_f
+//SCENE STRUCTS
+typedef struct s_obj
 {
-	double f;
-} t_float;
+	t_ambient	ambient;
+	t_camera	camera;
+	t_light		light;
+	t_sphere	sphere;
+}	t_obj;
 
+typedef struct s_scene
+{
+	char	*scene_file;
+	char	***scene_objects;
+	t_obj	*obj;
+}	t_scene;
 
-// typedef struct s_objects
-// {
-// 	char	*id;
-// 	(void *)object;
-// }
-
-
-// typedef struct s_object
-// {
-// 	t_vector	origin;
-// 	t_vector	direction;
-// 	double		distance;
-// }	t_object;
-
-// typedef struct s_sphere
-// {
-// 	struct s_object	obj;
-// 	t_vector		center;
-// 	double			diameter;
-// 	t_color			color;
-//	struct s_sphere	*next;
-// }			t_sphere;
-
-// typedef struct s_scene
-// {
-	// t_sphere *spheres;
-// }
-// 
 #endif

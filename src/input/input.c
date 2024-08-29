@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:33:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 16:45:12 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/29 17:20:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ int	main(int argc, char **argv)
 		return (1);
 	if (option_preferences(argv, options) == -1)
 		return (1);
-	if (parse_scene_file(options) == -1)
+	if (get_scene_data(options) == -1)
 		return (1);
-	printf("scene file: %s\n", options->scene_file);
+	if (check_scene_data(options) == -1)
+		return (1);
 	printf_option_values(options);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:30:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 16:24:26 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/29 15:58:07 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,8 @@
 # define ERR_NO_SCENE "Error: No scene file provided"
 # define ERR_ARGS "Error: Invalid number of arguments"
 # define ERR_NO_NAME "Error: No file name provided with '.rt' extension"
+
+//FILE READING
+# define ERR_OPEN_FILE "Error: Failed to open file"
+
 #endif /* ERROR_H */

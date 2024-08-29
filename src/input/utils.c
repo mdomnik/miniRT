@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_parsing.h                                  :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 02:18:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/29 15:49:07 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/08/22 20:55:12 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/08/22 20:56:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMAND_PARSING_H
-# define COMMAND_PARSING_H
+#include "mrt.h"
 
-// OPTIONS STRUCT
-typedef struct s_options
+char **double_dup(char **src)
 {
-	int		opts_flags;
-	t_scene	scene;
-	t_value	*values;
-}	t_options;
+	char	**dst;
+	int		i;
 
-
-//file_parser.c
-int	check_arg_count(char **argv);
-
-//find_scene_file.c
-int	validate_file_name(char **argv, t_options *options);
-int	scene_file_check(char *filename, char **scene_file, bool *scene_count);
-int	check_scene_file(char *args);
-
-#endif
+	i = 0;
+	while (src[i])
+		i++;
+	dst = gc_malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = ft_strdup(src[i]);
+		i++;
+	}
+	dst[i] = NULL;
+	return (dst);
+}

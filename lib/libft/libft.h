@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:29:54 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/19 19:55:23 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/08/29 16:10:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ char			**ft_strarray_remove_by_index(char **array, size_t index);
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
+
 # endif
 
 char			*gnl(int fd);

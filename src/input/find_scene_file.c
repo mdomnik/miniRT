@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:49:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 16:26:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/29 16:55:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	validate_file_name(char **argv, t_options *options)
 		ft_dprintf(2, "%s\n", ERR_SCENE_FILE);
 		return (-1);
 	}
-	options->scene_file = scene_file;
+	options->scene.scene_file = scene_file;
 	return (0);
 }
 
@@ -78,3 +78,4 @@ int	check_scene_file(char *args)
 		return (-1);
 	return (0);
 }
+

@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_parser.c                                      :+:      :+:    :+:   */
+/*   file_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 14:51:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 16:45:00 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/08/29 15:24:02 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/08/29 16:25:01 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-int	parse_scene_file(t_options *options)
+int omit_whitespaces(char *str, int i)
 {
-	char *scene_file;
-	
-	scene_file = options->scene_file;
-	printf("rules %s\n", RULES);
-	return (0);	
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	return (i);
 }
