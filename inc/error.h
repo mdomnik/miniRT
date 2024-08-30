@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:30:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/29 15:58:07 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/30 17:47:30 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,8 @@
 
 //FILE READING
 # define ERR_OPEN_FILE "Error: Failed to open file"
+
+//FILE CHECKING
+# define ERR_INV_OBJ "Error: Invalid object type"
 
 #endif /* ERROR_H */

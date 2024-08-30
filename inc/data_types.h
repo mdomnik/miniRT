@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:37:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/29 17:42:25 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/30 18:29:51 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 #ifndef DATA_TYPES_H
 # define DATA_TYPES_H
 
-// STRING DATA TYPE STRUCT
+// STRING DATA TYPE STRUCT | 1
 typedef struct s_string
 {
 	char	*string_value;
 }	t_string;
 
-// FLOAT DATA TYPE STRUCT
+// FLOAT DATA TYPE STRUCT | 2
 typedef struct s_float
 {
 	double	float_value;
 }	t_float;
 
-// VECTOR DATA TYPE STRUCT
+// VECTOR DATA TYPE STRUCT | 4
 typedef struct s_vector
 {
 	double	x;
@@ -35,7 +35,7 @@ typedef struct s_vector
 	double	z;
 }	t_vector;
 
-//PARAMETER STRUCTS
+// COLOR DATA TYPE STRUCT | 8
 typedef struct s_color
 {
 	int		r;
@@ -43,11 +43,13 @@ typedef struct s_color
 	int		b;
 }			t_color;
 
+// RATIO DATA TYPE STRUCT | 16
 typedef struct s_ratio
 {
 	double	range;
 }			t_ratio;
 
+// VECTOR RANGE DATA TYPE STRUCT | 32
 typedef struct s_vector_range
 {
 	t_ratio		x;

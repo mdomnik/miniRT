@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:46:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/29 17:59:25 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/30 18:26:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int omit_whitespaces(char *str, int i);
 //scene_file/check_data.c
 int check_scene_data(t_options *options);
 int check_object_data(t_options *options, char **args);
+int determine_object(t_options *options, char **args);
 
 #endif

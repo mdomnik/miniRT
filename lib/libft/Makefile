@@ -90,7 +90,6 @@ SRC_FILES		+= hash_table/hashtable.c
 SRC_FILES		+= hash_table/ht_utils.c
 
 SRC_FILES		+= gnl/get_next_line.c
-SRC_FILES		+= gnl/get_next_line_utils.c
 
 SRC_FILES		+= ftprintf/formatter_c.c
 SRC_FILES		+= ftprintf/formatter_di.c

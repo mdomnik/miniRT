@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:21:04 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/29 18:02:44 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/08/30 18:44:58 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,30 @@ int check_scene_data(t_options *options)
 
 int check_object_data(t_options *options, char **args)
 {
-	if (strncmp(args[0], "A", ft_strlen(args[0])) == 0)
+	char	**ids;
+	int		i;
+	
+	ids = ft_split(SCENE_OBJECTS, ',');
+	i = 0;
+	while (ids[i] != NULL)
 	{
-		printf("Ambient light: %s\n", args[0]);
+		if (ft_strcmp(ids[i], args[0]) == 0)
+			break;
+		i++;
 	}
-	(void)options;
+	if (ids[i] == NULL)
+	{
+		ft_dprintf(2, "%s '%s'\n", ERR_INV_OBJ, args[0]);
+		return (-1);
+	}
+	if (determine_object(options, args) == -1)
+		return (-1);
 	return (0);
+}
+
+int determine_object(t_options *options, char **args)
+{
+	char **values;
+
+
 }
