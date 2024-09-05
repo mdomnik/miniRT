@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:21:04 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/30 18:44:58 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/05 14:54:03 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,22 @@ int check_scene_data(t_options *options)
 	int i;
 	
 	i = 0;
+	if (check_dup_objects(options) == -1)
+		return (-1);
 	while(options->scene.scene_objects[i] != NULL)
 	{
 		if (check_object_data(options, options->scene.scene_objects[i]) == -1)
 			return (-1);
 		i++;
 	}
+	return (0);
+}
+int check_dup_objects(t_options *options)
+{
+	char **unique;
+
+	unique = ft_split(UNIQUE_OBJECTS, ',');
+	while (options->scene.o)
 	return (0);
 }
 
@@ -51,7 +61,7 @@ int check_object_data(t_options *options, char **args)
 
 int determine_object(t_options *options, char **args)
 {
-	char **values;
-
-
+	(void)options;
+	printf("Object: %s\n", args[0]);
+	return (0);
 }

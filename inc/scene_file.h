@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/30 18:37:57 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/05 14:52:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 
 # define SCENE_OBJECTS	"A,C,L,sp,pl,cy"
 
-//MANDATORY OBJECTS
-# define SCENE_AMBIENT	"FLOAT,COLOR"
-# define SCENE_CAMERA	"VECTOR,VECTOR_RANGE,FLOAT"
-# define SCENE_LIGHT	"VECTOR,FLOAT,COLOR"
+# define UNIQUE_OBJECTS	"A,C"
 
-//OPTIONAL OBJECTS
-# define SCENE_SPHERE	"VECTOR,FLOAT,COLOR"
+//MANDATORY OBJECTS
+# define OBJECT_RULES	"A,FLOAT,COLOR;\
+						C,VECTOR,VECTOR_RANGE,FLOAT;\
+						L,VECTOR,FLOAT,COLOR;\
+						sp,VECTOR,FLOAT,COLOR;\
+						pl,VECTOR,VECTOR_RANGE,COLOR;\
+						cy,VECTOR,VECTOR_RANGE,FLOAT,FLOAT,COLOR"
 
 //ENUM OF OBJECTS
 typedef enum e_objects
@@ -90,6 +92,8 @@ typedef struct s_cylinder
 typedef union u_object
 {
 	t_sphere	sphere;
+	t_plane		plane;
+	t_cylinder	cylinder;
 }	t_object;
 
 //SCENE STRUCTS
