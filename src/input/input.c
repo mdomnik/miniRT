@@ -6,13 +6,14 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:33:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/29 17:20:50 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/06 18:00:49 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
 void	printf_option_values(t_options *options);
+void	printf_objects(t_options *options);
 
 int	main(int argc, char **argv)
 {
@@ -31,6 +32,7 @@ int	main(int argc, char **argv)
 	if (check_scene_data(options) == -1)
 		return (1);
 	printf_option_values(options);
+	printf_objects(options);
 }
 
 int	check_arg_count(char **argv)
@@ -56,6 +58,30 @@ int	check_arg_count(char **argv)
 		i++;
 	}
 	return (0);
+}
+
+void printf_objects(t_options *options)
+{
+	printf("ambient_ratio: %f\n", options->objects.ambient->ratio.range);
+	printf("ambient_color: %d %d %d\n", options->objects.ambient->color.r,
+		options->objects.ambient->color.g, options->objects.ambient->color.b);
+	printf("camera_coords: %f %f %f\n", options->objects.camera->coords.x,
+		options->objects.camera->coords.y, options->objects.camera->coords.z);
+	printf("camera_vector_range: %f %f %f\n", options->objects.camera->vector_range.x.range,
+		options->objects.camera->vector_range.y.range, options->objects.camera->vector_range.z.range);
+	printf("camera_fov: %f\n", options->objects.camera->fov.float_value);
+	printf("light_coords: %f %f %f\n", options->objects.light->coords.x,
+		options->objects.light->coords.y, options->objects.light->coords.z);
+	printf("light_range: %f\n", options->objects.light->ratio.float_value);
+	printf("light_color: %d %d %d\n", options->objects.light->color.r,
+		options->objects.light->color.g, options->objects.light->color.b);
+	printf("light_coords: %f %f %f\n", options->objects.light->next->coords.x,
+		options->objects.light->next->coords.y, options->objects.light->next->coords.z);
+	printf("light_range: %f\n", options->objects.light->next->ratio.float_value);
+	printf("light_color: %d %d %d\n", options->objects.light->next->color.r,
+		options->objects.light->next->color.g, options->objects.light->next->color.b);
+
+	
 }
 
 void	printf_option_values(t_options *options)

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:30:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/30 17:47:30 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/06 17:23:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,15 @@
 
 //FILE CHECKING
 # define ERR_INV_OBJ "Error: Invalid object type"
+# define ERR_DUP_OBJ "Error: Duplicate object"
+# define ERR_RULES "Error: Invalid object rules for object"
+# define ERR_MISS_OBJ "Error: Missing object; required"
+//DATA TYPES
+# define ERR_COLOR_NUM "ERROR: Colors take 3 arguments 'r,g,b'"
+# define ERR_COLOR_RANGE "ERROR: Color values must be between 0 and 255"
+# define ERR_INV_CHAR "ERROR: Invalid character in value"
+# define ERR_RANGE "ERROR: Value out of range"
+# define ERR_VEC_NUM "ERROR: Vector range takes 3 float arguments"
+
 
 #endif /* ERROR_H */
