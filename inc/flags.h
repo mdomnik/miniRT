@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:11:31 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/09 17:10:26 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/09 17:38:44 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,5 @@ typedef enum e_opts_type
 	OPT_NOARGVECTOR = 6,
 	OPT_ADDED = 7
 }	t_opts_type;
-
-// VALUE NODE STRUCT
-typedef struct s_value
-{
-	t_opts_type		type;
-	t_value_type	value;
-	struct s_value	*next;
-}	t_value;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 16:41:41 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/09 16:42:01 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/09 17:38:01 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void	printf_objects(t_options *options)
 		options->objects.light = options->objects.light->next;
 	}
 	printf("SPHERES\n");
-	while(options->objects.sphere != NULL)
+	while (options->objects.sphere != NULL)
 	{
 		printf("sphere_coords: %f %f %f\n", options->objects.sphere->coords.x,
-		options->objects.sphere->coords.y, options->objects.sphere->coords.z);
+			options->objects.sphere->coords.y, options->objects.sphere->coords.z);
 		printf("sphere_diameter: %f\n", options->objects.sphere->diameter);
 		printf("sphere_color: %d %d %d\n", options->objects.sphere->color.r,
-		options->objects.sphere->color.g, options->objects.sphere->color.b);
+			options->objects.sphere->color.g, options->objects.sphere->color.b);
 		printf("--------------------\n");
 		options->objects.sphere = options->objects.sphere->next;
 	}
@@ -50,29 +50,28 @@ void	printf_objects(t_options *options)
 	while (options->objects.plane != NULL)
 	{
 		printf("plane_coords: %f %f %f\n", options->objects.plane->coords.x,
-		options->objects.plane->coords.y, options->objects.plane->coords.z);
+			options->objects.plane->coords.y, options->objects.plane->coords.z);
 		printf("plane_normal: %f %f %f\n", options->objects.plane->normal.x,
-		options->objects.plane->normal.y, options->objects.plane->normal.z);
+			options->objects.plane->normal.y, options->objects.plane->normal.z);
 		printf("plane_color: %d %d %d\n", options->objects.plane->color.r,
-		options->objects.plane->color.g, options->objects.plane->color.b);
+			options->objects.plane->color.g, options->objects.plane->color.b);
 		printf("--------------------\n");
 		options->objects.plane = options->objects.plane->next;
 	}
 	printf("CYLINDERS\n");
-	while(options->objects.cylinder != NULL)
+	while (options->objects.cylinder != NULL)
 	{
 		printf("cylinder_coords: %f %f %f\n", options->objects.cylinder->coords.x,
-		options->objects.cylinder->coords.y, options->objects.cylinder->coords.z);
+			options->objects.cylinder->coords.y, options->objects.cylinder->coords.z);
 		printf("cylinder_normal: %f %f %f\n", options->objects.cylinder->normal.x,
-		options->objects.cylinder->normal.y, options->objects.cylinder->normal.z);
+			options->objects.cylinder->normal.y, options->objects.cylinder->normal.z);
 		printf("cylinder_diameter: %f\n", options->objects.cylinder->diameter);
 		printf("cylinder_height: %f\n", options->objects.cylinder->height);
 		printf("cylinder_color: %d %d %d\n", options->objects.cylinder->color.r,
-		options->objects.cylinder->color.g, options->objects.cylinder->color.b);
+			options->objects.cylinder->color.g, options->objects.cylinder->color.b);
 		printf("--------------------\n");
 		options->objects.cylinder = options->objects.cylinder->next;
 	}
-	
 }
 
 void	printf_option_values(t_options *options)
