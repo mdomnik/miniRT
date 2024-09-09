@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:11:31 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/29 17:38:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/09 13:52:27 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@
 
 // FULL FLAG STRINGS
 # define OPTS_FULL "--save,--reflection,--test,--help, \
-					--testy,--vector,--noargvector,--added,--skybox" 
+					--testy,--vector,--noargvector,--added,--skybox,--what" 
 // SHORT FLAG STRINGS
-# define OPTS_SHORT "-s,-r,-t,-h,-y,-v,-n,-a,-k"
+# define OPTS_SHORT "-s,-r,-t,-h,-y,-v,-n,-a,-k,-w"
 
 // DATA TYPES
-# define OPTS_VALUE "STRING,FLOAT,*STRING,NULL,*FLOAT,VECTOR,*VECTOR,*STRING,STRING"
+# define OPTS_VALUE "STRING,FLOAT,*STRING,NULL,*FLOAT,VECTOR,*VECTOR,*STRING,STRING,FLOAT"
 
 // FLAGS
 typedef enum e_opts_type

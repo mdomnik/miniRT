@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:37:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/30 18:29:51 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/09 15:23:13 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,10 @@ typedef struct s_ratio
 // VECTOR RANGE DATA TYPE STRUCT | 32
 typedef struct s_vector_range
 {
-	t_ratio		x;
-	t_ratio		y;
-	t_ratio		z;
+	double		x;
+	double		y;
+	double		z;
 }	t_vector_range;
-
 
 // VALUE TYPE UNION
 typedef union u_value_type

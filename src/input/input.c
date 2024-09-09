@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:33:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/06 18:00:49 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/09 15:32:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,25 +62,64 @@ int	check_arg_count(char **argv)
 
 void printf_objects(t_options *options)
 {
-	printf("ambient_ratio: %f\n", options->objects.ambient->ratio.range);
+	printf("AMBIENT\n");
+	printf("ambient_ratio: %f\n", options->objects.ambient->light_ratio);
 	printf("ambient_color: %d %d %d\n", options->objects.ambient->color.r,
 		options->objects.ambient->color.g, options->objects.ambient->color.b);
+	printf("---------------------------------------------------\nCAMERA\n");
 	printf("camera_coords: %f %f %f\n", options->objects.camera->coords.x,
 		options->objects.camera->coords.y, options->objects.camera->coords.z);
-	printf("camera_vector_range: %f %f %f\n", options->objects.camera->vector_range.x.range,
-		options->objects.camera->vector_range.y.range, options->objects.camera->vector_range.z.range);
-	printf("camera_fov: %f\n", options->objects.camera->fov.float_value);
-	printf("light_coords: %f %f %f\n", options->objects.light->coords.x,
+	printf("camera_vector_range: %f %f %f\n", options->objects.camera->vrange.x,
+		options->objects.camera->vrange.y, options->objects.camera->vrange.z);
+	printf("camera_fov: %f\n", options->objects.camera->fov);
+	printf("---------------------------------------------------\nLIGHTS\n");
+	while (options->objects.light != NULL)
+	{
+		printf("light_coords: %f %f %f\n", options->objects.light->coords.x,
 		options->objects.light->coords.y, options->objects.light->coords.z);
-	printf("light_range: %f\n", options->objects.light->ratio.float_value);
-	printf("light_color: %d %d %d\n", options->objects.light->color.r,
+		printf("light_range: %f\n", options->objects.light->brightness);
+		printf("light_color: %d %d %d\n", options->objects.light->color.r,
 		options->objects.light->color.g, options->objects.light->color.b);
-	printf("light_coords: %f %f %f\n", options->objects.light->next->coords.x,
-		options->objects.light->next->coords.y, options->objects.light->next->coords.z);
-	printf("light_range: %f\n", options->objects.light->next->ratio.float_value);
-	printf("light_color: %d %d %d\n", options->objects.light->next->color.r,
-		options->objects.light->next->color.g, options->objects.light->next->color.b);
-
+		printf("--------------------\n");
+		options->objects.light = options->objects.light->next;
+	}
+	printf("SPHERES\n");
+	while(options->objects.sphere != NULL)
+	{
+		printf("sphere_coords: %f %f %f\n", options->objects.sphere->coords.x,
+		options->objects.sphere->coords.y, options->objects.sphere->coords.z);
+		printf("sphere_diameter: %f\n", options->objects.sphere->diameter);
+		printf("sphere_color: %d %d %d\n", options->objects.sphere->color.r,
+		options->objects.sphere->color.g, options->objects.sphere->color.b);
+		printf("--------------------\n");
+		options->objects.sphere = options->objects.sphere->next;
+	}
+	printf("PLANES\n");
+	while (options->objects.plane != NULL)
+	{
+		printf("plane_coords: %f %f %f\n", options->objects.plane->coords.x,
+		options->objects.plane->coords.y, options->objects.plane->coords.z);
+		printf("plane_normal: %f %f %f\n", options->objects.plane->normal.x,
+		options->objects.plane->normal.y, options->objects.plane->normal.z);
+		printf("plane_color: %d %d %d\n", options->objects.plane->color.r,
+		options->objects.plane->color.g, options->objects.plane->color.b);
+		printf("--------------------\n");
+		options->objects.plane = options->objects.plane->next;
+	}
+	printf("CYLINDERS\n");
+	while(options->objects.cylinder != NULL)
+	{
+		printf("cylinder_coords: %f %f %f\n", options->objects.cylinder->coords.x,
+		options->objects.cylinder->coords.y, options->objects.cylinder->coords.z);
+		printf("cylinder_normal: %f %f %f\n", options->objects.cylinder->normal.x,
+		options->objects.cylinder->normal.y, options->objects.cylinder->normal.z);
+		printf("cylinder_diameter: %f\n", options->objects.cylinder->diameter);
+		printf("cylinder_height: %f\n", options->objects.cylinder->height);
+		printf("cylinder_color: %d %d %d\n", options->objects.cylinder->color.r,
+		options->objects.cylinder->color.g, options->objects.cylinder->color.b);
+		printf("--------------------\n");
+		options->objects.cylinder = options->objects.cylinder->next;
+	}
 	
 }
 

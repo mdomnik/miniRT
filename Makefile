@@ -47,8 +47,10 @@ SRC_FILES		+=	input/flags/check_value_format.c \
 					input/flags/flag_formatting.c \
 					input/flags/flag_utils.c \
 					input/flags/handle_values.c \
+					input/scene_file/append.c \
 					input/scene_file/check_data.c \
 					input/scene_file/create_mand.c \
+					input/scene_file/create_obj.c \
 					input/scene_file/file_data.c \
 					input/scene_file/file_utils.c \
 					input/scene_file/ruleset.c \

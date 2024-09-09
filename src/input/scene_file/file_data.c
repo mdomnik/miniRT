@@ -32,6 +32,7 @@ int get_scene_data(t_options *options)
 		if (line == NULL)
 			break;
 	}
+	close(fd);
 	return(0);
 }
 
@@ -103,7 +104,7 @@ int append_to_triple(t_options *options, char **args)
 	}
 	if (args == NULL || args[0] == NULL)
 		return (-1);
-	while (args[i] != NULL)
+	while (options->scene.scene_objects[i] != NULL)
 		i++;
 	new_triple = gc_malloc(sizeof(char **) * (i + 2));
 	i = 0;

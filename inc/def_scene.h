@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:46:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/06 17:49:00 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/09 15:12:03 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int omit_whitespaces(char *str, int i);
 void free_double(char **args);
 int pointer_count(char **args);
 int ret_message(char *message, char *str);
-t_light *append_to_list(t_light *list, t_light *new);
 
 //scene_file/check_data.c
 int check_scene_data(t_options *options);
@@ -45,4 +44,14 @@ int create_ambient(t_options *options, char **args);
 int create_camera(t_options *options, char **args);
 int create_light(t_options *options, char **args);
 
+//scene_file/create_obj.c
+int create_sphere(t_options *options, char **args);
+int create_plane(t_options *options, char **args);
+int create_cylinder(t_options *options, char **args);
+
+//scene_file/append.c
+t_light *append_light_list(t_light *list, t_light *new);
+t_sphere *append_sphere_list(t_sphere *list, t_sphere *new);
+t_plane *append_plane_list(t_plane *list, t_plane *new);
+t_cylinder *append_cylinder_list(t_cylinder *list, t_cylinder *new);
 #endif

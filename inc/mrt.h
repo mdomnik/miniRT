@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/29 17:38:36 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/09 15:20:45 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@
 # include "error.h"
 
 # include "flags.h"
-# include "scene_file.h"
+# include "scene_obj.h"
 # include "command_parsing.h"
 
-# include "flag_def.h"
-# include "scene_def.h"
+# include "def_flags.h"
+# include "def_scene.h"
 
 #endif /* MRT_H */

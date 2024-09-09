@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:24:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/06 17:51:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/09 14:35:55 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,4 @@ int ret_message(char *message, char *str)
 {
 	ft_dprintf(2, "%s '%s'\n", message, str);
 	return (-1);
-}
-
-t_light *append_to_list(t_light *list, t_light *new)
-{
-	t_light *current;
-
-	if (list == NULL)
-		return (new);
-	current = list;
-	while (current->next != NULL)
-		current = current->next;
-	current->next = new;
-	return (list);
 }
