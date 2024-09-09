@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_obj.h                                        :+:      :+:    :+:   */
+/*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/09 15:31:05 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/09 17:17:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_FILE_H
-# define SCENE_FILE_H
+#ifndef OBJECTS_H
+# define OBJECTS_H
 
 # define SCENE_OBJECTS	"A,C,L,sp,pl,cy"
 
@@ -40,14 +40,14 @@ typedef enum e_objects
 //REQUIRED OBJECT STRUCTS
 typedef struct s_ambient
 {
-	double	light_ratio;
-	t_color	color;
-} t_ambient;
+	double			light_ratio;
+	t_color			color;
+}	t_ambient;
 
 typedef struct s_camera
 {
 	t_vector		coords;
-	t_vector_range	vrange;
+	t_vector		vrange;
 	double			fov;
 }	t_camera;
 
@@ -71,18 +71,18 @@ typedef struct s_sphere
 typedef struct s_plane
 {
 	t_vector		coords;
-	t_vector_range	normal;
+	t_vector		normal;
 	t_color			color;
 	struct s_plane	*next;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_vector		coords;
-	t_vector_range	normal;
-	double			diameter;
-	double			height;
-	t_color			color;
+	t_vector			coords;
+	t_vector			normal;
+	double				diameter;
+	double				height;
+	t_color				color;
 	struct s_cylinder	*next;
 }	t_cylinder;
 
@@ -96,11 +96,5 @@ typedef struct s_obj
 	t_plane		*plane;
 	t_cylinder	*cylinder;
 }	t_obj;
-
-typedef struct s_scene
-{
-	char	*scene_file;
-	char	***scene_objects;
-}	t_scene;
 
 #endif

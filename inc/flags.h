@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:11:31 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/09 13:52:27 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/09 17:10:26 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 # define OPTS_SHORT "-s,-r,-t,-h,-y,-v,-n,-a,-k,-w"
 
 // DATA TYPES
-# define OPTS_VALUE "STRING,FLOAT,*STRING,NULL,*FLOAT,VECTOR,*VECTOR,*STRING,STRING,FLOAT"
+# define OPTS_VALUE "STRING,FLOAT,*STRING,NULL,\
+*FLOAT,VECTOR,*VECTOR,*STRING,STRING,FLOAT"
 
 // FLAGS
 typedef enum e_opts_type

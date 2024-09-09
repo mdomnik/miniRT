@@ -54,6 +54,7 @@ SRC_FILES		+=	input/flags/check_value_format.c \
 					input/scene_file/file_data.c \
 					input/scene_file/file_utils.c \
 					input/scene_file/ruleset.c \
+					input/tests.c \
 					input/input.c \
 					input/find_scene_file.c \
 

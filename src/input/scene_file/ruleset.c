@@ -6,19 +6,30 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:32:39 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/06 17:56:17 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/09 17:04:49 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-int check_object_rules(t_options *options, char **args, char **rules)
+/**
+ * @brief Checks the rules for the objects in the scene file.
+ *
+ * This function checks the rules for each object in the scene file based on
+ * the given arguments and rules. It iterates through the rules and performs
+ * specific checks based on the rule type.
+ * The supported rule types are: COLOR, RATIO, VECTOR, VRANGE, FLOAT, and FOV.
+ *
+ * @param args An array of strings representing the arguments for each object.
+ * @param rules An array of strings representing the rules for each object.
+ * @return Returns 0 if all the rules are satisfied, -1 otherwise.
+ */
+int	check_object_rules(char **args, char **rules)
 {
-	int i;
-	(void)options;
+	int	i;
 
-	i = 1;
-	while (rules[i] != NULL)
+	i = 0;
+	while (rules[++i] != NULL)
 	{
 		if (ft_strcmp(rules[i], "COLOR") == 0)
 			if (check_color_format(args[i]) == -1)
@@ -38,17 +49,27 @@ int check_object_rules(t_options *options, char **args, char **rules)
 		if (ft_strcmp(rules[i], "FOV") == 0)
 			if (check_ratio_format(args[i], 0, 180) == -1)
 				return (-1);
-		i++;
 	}
 	return (0);
 }
 
-int check_color_format(char *str)
+/**
+ * @brief Checks the format of a color string.
+ *
+ * This function checks if the given string represents a valid color format.
+ * The color format should be in the form "R,G,B" where R, G, and B are integers
+ * between 0 and 255 inclusive. The function returns 0 if the color format
+ * is valid, otherwise it returns an error code.
+ *
+ * @param str The string to be checked.
+ * @return 0 if the color format is valid, otherwise an error code.
+ */
+int	check_color_format(char *str)
 {
 	char	**rgb;
 	int		i;
-	int 	num;
-	
+	int		num;
+
 	i = 0;
 	while (str[i] != '\0')
 	{
@@ -70,10 +91,22 @@ int check_color_format(char *str)
 	return (0);
 }
 
-int check_ratio_format(char *str, int min, int max)
+/**
+ * @brief Check the format of a ratio string.
+ *
+ * This function checks if a given string has a valid format for a ratio.
+ * The ratio should consist of digits, a dot ('.'), and a minus sign ('-').
+ * Any other character will cause the function to return an error.
+ *
+ * @param str The string to be checked.
+ * @param min The minimum value allowed for the ratio.
+ * @param max The maximum value allowed for the ratio.
+ * @return 0 if the ratio format is valid, otherwise an error code.
+ */
+int	check_ratio_format(char *str, int min, int max)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (str[i] != '\0')
 	{
@@ -87,15 +120,28 @@ int check_ratio_format(char *str, int min, int max)
 	return (0);
 }
 
-int check_vector_range_format(char *str)
+/**
+ * @brief Checks if the given string has a valid vector range format.
+ *
+ * This function checks if the string contains valid characters and follows
+ * the format for a vector range. The valid characters include digits, commas,
+ * dashes, and periods.
+ * The format for a vector range is three numbers separated by commas.
+ *
+ * @param str The string to be checked.
+ * @return Returns 0 if the string has a valid vector range format,
+ * otherwise returns an error code.
+ */
+int	check_vector_range_format(char *str)
 {
 	char	**xyz;
 	int		i;
-	
+
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] != ',' && str[i] != '-' &&  str[i] != '.' && ft_isdigit(str[i]) == 0)
+		if (str[i] != ',' && str[i] != '-'
+			&& str[i] != '.' && ft_isdigit(str[i]) == 0)
 			return (ret_message(ERR_INV_CHAR, str));
 		i++;
 	}

@@ -6,18 +6,25 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/09 15:31:21 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/09 16:58:45 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-int create_sphere(t_options *options, char **args)
+/**
+ * Creates a sphere object and adds it to the list of objects in the options.
+ *
+ * @param options The options struct containing the list of objects.
+ * @param args The arguments for creating the sphere.
+ * @return 0 if successful.
+ */
+int	create_sphere(t_options *options, char **args)
 {
 	t_sphere	*sphere;
 	char		**coords;
 	char		**color;
-	
+
 	sphere = gc_malloc(sizeof(t_sphere));
 	coords = ft_split(args[1], ',');
 	color = ft_split(args[3], ',');
@@ -28,17 +35,26 @@ int create_sphere(t_options *options, char **args)
 	sphere->color.r = ft_atoi(color[0]);
 	sphere->color.g = ft_atoi(color[1]);
 	sphere->color.b = ft_atoi(color[2]);
-	options->objects.sphere = append_sphere_list(options->objects.sphere, sphere);
+	options->objects.sphere
+		= append_sphere_list(options->objects.sphere, sphere);
 	return (0);
 }
 
-int create_plane(t_options *options, char **args)
+/**
+ * Creates a plane object and adds it to the list of
+ * objects in the options structure.
+ *
+ * @param options The options structure.
+ * @param args The arguments for creating the plane.
+ * @return 0 if successful.
+ */
+int	create_plane(t_options *options, char **args)
 {
 	t_plane		*plane;
 	char		**coords;
 	char		**normal;
 	char		**color;
-	
+
 	plane = gc_malloc(sizeof(t_plane));
 	coords = ft_split(args[1], ',');
 	normal = ft_split(args[2], ',');
@@ -55,13 +71,22 @@ int create_plane(t_options *options, char **args)
 	options->objects.plane = append_plane_list(options->objects.plane, plane);
 	return (0);
 }
-int create_cylinder(t_options *options, char **args)
+
+/**
+ * Creates a cylinder object and adds it to the list of objects
+ * in the options structure.
+ *
+ * @param options The options structure.
+ * @param args The arguments for creating the cylinder.
+ * @return 0 on success.
+ */
+int	create_cylinder(t_options *options, char **args)
 {
 	t_cylinder	*cylinder;
 	char		**coords;
 	char		**normal;
 	char		**color;
-	
+
 	cylinder = gc_malloc(sizeof(t_cylinder));
 	coords = ft_split(args[1], ',');
 	normal = ft_split(args[2], ',');
@@ -77,6 +102,7 @@ int create_cylinder(t_options *options, char **args)
 	cylinder->color.r = ft_atoi(color[0]);
 	cylinder->color.g = ft_atoi(color[1]);
 	cylinder->color.b = ft_atoi(color[2]);
-	options->objects.cylinder = append_cylinder_list(options->objects.cylinder, cylinder);
+	options->objects.cylinder
+		= append_cylinder_list(options->objects.cylinder, cylinder);
 	return (0);
 }
