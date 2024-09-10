@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:59:34 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/22 19:56:17 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/10 17:28:08 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/color.h"
 #include "../../lib/libft/libft.h"
 
-int	write_color(int fd, t_color *pixel_color)
+int	write_color(int fd, t_colors *pixel_color)
 {
 	int	r;
 	int	g;
@@ -31,7 +31,7 @@ int	write_color(int fd, t_color *pixel_color)
 	return (0);
 }
 
-t_color	*ray_color(t_ray *r)
+t_colors	*ray_color(t_ray *r)
 {
 	t_vec3	*udir;
 	float	a;

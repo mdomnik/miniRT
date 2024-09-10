@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   def_mlx.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/19 20:06:31 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/10 18:50:45 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/09/10 18:08:52 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/09/10 19:12:44 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/mrt.h"
+#ifndef DEF_MLX_H
+# define DEF_MLX_H
 
-int main(int argc, char **argv)
-{
-	t_render	render;
-	
-	if(check_args(argc, argv, &render) == 1)
-		return(1);
-	if(start_mlx(&render) == 1)
-		return(1);
-	printf_option_values(render.options);
-	printf_objects(render.options);
-	mlx_loop(render.window);
-}
+//mlx_handle/mlx_init.c
+int start_mlx(t_render *render);
+
+//mlx_handle/mlx_hooks.c
+void closing_hook(mlx_key_data_t keydata, void *param);
+void movement_hook_press(mlx_key_data_t keydata, void *param);
+void movement_hook_hold(mlx_key_data_t keydata, void *param);
+#endif /* DEF_MLX_H */

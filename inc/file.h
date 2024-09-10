@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 02:18:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/09 17:39:29 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/10 18:04:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_options
 }	t_options;
 
 //input.c
+int	check_args(int argc, char **argv, t_render *render);
 
 //find_scene_file.c
 int		validate_file_name(char **argv, t_options *options);

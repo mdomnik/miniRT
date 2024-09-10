@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/19 20:06:31 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/10 18:50:45 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/09/10 18:02:26 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/09/10 19:15:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/mrt.h"
+#include "mrt.h"
 
-int main(int argc, char **argv)
+int start_mlx(t_render *render)
 {
-	t_render	render;
+	render->window = mlx_init(960, 540, "TriCycles", true);
+	mlx_key_hook(render->window, &closing_hook, render);
+	mlx_key_hook(render->window, &movement_hook_press, render);
+	mlx_key_hook(render->window, &movement_hook_hold, render);
 	
-	if(check_args(argc, argv, &render) == 1)
-		return(1);
-	if(start_mlx(&render) == 1)
-		return(1);
-	printf_option_values(render.options);
-	printf_objects(render.options);
-	mlx_loop(render.window);
+	return(0);
 }
+
+
