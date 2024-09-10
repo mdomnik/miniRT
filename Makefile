@@ -11,7 +11,7 @@
 CC				:= cc
 
 # Compiler flags
-CFLAGS			+= -Wall -Werror -Wextra -g
+CFLAGS			+= -Wall -Werror -Wextra
 CFLAGS			+= -pedantic -Wunreachable-code
 CFLAGS			+= -Wshadow
 
@@ -42,21 +42,32 @@ NAME			:= minirt
 SRC_DIR			:= src
 
 # Source files
-SRC_FILES		+=	input/flags/check_value_format.c \
-					input/flags/create_flag_nodes.c \
-					input/flags/flag_formatting.c \
-					input/flags/flag_utils.c \
-					input/flags/handle_values.c \
-					input/scene_file/append.c \
-					input/scene_file/check_data.c \
-					input/scene_file/create_mand.c \
-					input/scene_file/create_obj.c \
-					input/scene_file/file_data.c \
-					input/scene_file/file_utils.c \
-					input/scene_file/ruleset.c \
-					input/tests.c \
-					input/input.c \
-					input/find_scene_file.c \
+SRC_FILES		+= input/flags/check_value_format.c
+SRC_FILES		+= input/flags/create_flag_nodes.c
+SRC_FILES		+= input/flags/flag_formatting.c
+SRC_FILES		+= input/flags/flag_utils.c
+SRC_FILES		+= input/flags/handle_values.c
+SRC_FILES		+= input/scene_file/append.c
+SRC_FILES		+= input/scene_file/check_data.c
+SRC_FILES		+= input/scene_file/create_mand.c
+SRC_FILES		+= input/scene_file/create_obj.c
+SRC_FILES		+= input/scene_file/file_data.c
+SRC_FILES		+= input/scene_file/file_utils.c
+SRC_FILES		+= input/scene_file/ruleset.c
+SRC_FILES		+= input/tests.c
+SRC_FILES		+= input/input.c
+SRC_FILES		+= input/find_scene_file.c
+
+# VEC3 Sources
+SRC_FILES		+= vec3/vec3.c
+SRC_FILES		+= vec3/vec3_basic_ops.c
+SRC_FILES		+= vec3/vec3_basic_ops_ret.c
+SRC_FILES		+= vec3/vec3_utils.c
+SRC_FILES		+= vec3/vec3_print.c
+
+SRC_FILES		+= color/color.c
+
+SRC_FILES		+= ray/ray.c
 
 # Object files directory
 OBJ_DIR			:= .obj
@@ -105,7 +116,7 @@ mlx: ## Build MLX42
 
 # Compilation rule for object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(MKDIR) $(@D)
+	@$(MKDIR) $(@D)
 	$(CC) $(CFLAGS) -MMD -MF $(patsubst %.o, %.d, $@) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR):

@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3.c                                             :+:      :+:    :+:   */
+/*   vec3_print.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/20 19:22:28 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/20 21:26:51 by astavrop         ###   ########.fr       */
+/*   Created: 2024/08/22 20:47:13 by astavrop          #+#    #+#             */
+/*   Updated: 2024/08/22 20:50:08 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../rayft.h"
-#include "../../libft/libft.h"
+#include "../../inc/vec3.h"
 
-t_vec3	*new_vec3(double x, double y, double z)
+#include <stdio.h>
+
+int	vec3_print(t_vec3 *v, char *msg)
 {
-	t_vec3	*v;
-
-	v = gc_malloc(sizeof(*v));
 	if (!v)
-		return (NULL);
-	v->a[X] = x;
-	v->a[Y] = y;
-	v->a[Z] = z;
-	return (v);
+	{
+		ft_dprintf(2, "%s: Error\n", msg);
+		return (1);
+	}
+	dprintf(2, "<%s> {%.3f, %.3f, %.3f}\n", msg, v->a[X], v->a[Y], v->a[Z]);
+	return (0);
 }

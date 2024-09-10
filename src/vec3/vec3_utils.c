@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rayft.h                                            :+:      :+:    :+:   */
+/*   vec3_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/20 19:16:16 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/20 21:25:53 by astavrop         ###   ########.fr       */
+/*   Created: 2024/08/21 17:03:26 by astavrop          #+#    #+#             */
+/*   Updated: 2024/08/22 20:00:30 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAYFT_H
-# define RAYFT_H
+#include "../../inc/vec3.h"
 
-# include <math.h>
-
-/* VEC3 */
-
-# define X 0
-# define Y 1
-# define Z 2
-
-typedef struct s_vec3	t_vec3;
-
-struct	s_vec3
+void	v_vec3_unit(t_vec3 *v)
 {
-	double	a[3];
-};
+	v_vec3_div(v, vec3_len(v));
+}
 
-#endif /* RAYFT_H */
+t_vec3	*vec3_unit(t_vec3 *v)
+{
+	return (vec3_div(vec3_copy(v), vec3_len(v)));
+}
+
+t_vec3	*vec3_copy(t_vec3 *orig)
+{
+	t_vec3	*copy;
+
+	copy = vec3_new(orig->a[X], orig->a[Y], orig->a[Z]);
+	if (!copy)
+		return (NULL);
+	return (copy);
+}
