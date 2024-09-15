@@ -58,6 +58,7 @@ SRC_FILES		+= ray/ray.c
 
 SRC_FILES		+= objects/sphere.c
 SRC_FILES		+= objects/plane.c
+SRC_FILES		+= objects/cylinder.c
 
 # Object files directory
 OBJ_DIR			:= .obj
@@ -108,7 +109,7 @@ WIDTH		?= 720
 # Compilation rule for object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(MKDIR) $(@D)
-	$(CC) $(CFLAGS) -MMD -MF $(patsubst %.o, %.d, $@) $(INCLUDES) -DWIDTH=$(WIDTH) -c $< -o $@
+	$(CC) $(CFLAGS) -MMD -MF $(patsubst %.o, %.d, $@) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR):
 	@$(MKDIR) $@

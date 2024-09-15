@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:31 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/26 17:43:13 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/15 14:11:16 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@
 #include <unistd.h>
 
 #ifndef WIDTH
-# define WIDTH 720
+# define WIDTH 900
+#endif
+
+#ifndef HEIGHT
+# define HEIGHT 600
 #endif
 
 int	main(void)
@@ -26,8 +30,8 @@ int	main(void)
 	t_ray	ray;
 	t_color	c;
 	double	image_width = WIDTH;
-	double	aspect_ratio = (double) 16.0f / 9.0f;
-	double	image_height = (double) image_width / aspect_ratio;
+	double	image_height = HEIGHT;
+	double	aspect_ratio = image_width / image_height;
 	double	view_height = 2.0;
 	double	view_width = aspect_ratio * view_height;
 	double	focal_length = 1.0;

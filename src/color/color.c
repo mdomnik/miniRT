@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:59:34 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/27 21:08:52 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/15 18:33:19 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,27 @@ t_color	color(float red, float green, float blue)
 t_color	ray_color(t_ray *r)
 {
 	/* TEST */
-	t_point3	sc1 = point3(4, 4, -40); // Test sphere center
-	t_sphere	s1 = sphere(sc1, 4.0f);
+	// t_point3	sc1 = point3(4, 4, -40); // Test sphere center
+	// v_vec3_neg(&sc1);
+	// t_sphere	s1 = sphere(sc1, 4.0f);
+	
 	t_point3	sc2 = point3(-1, -1, -5); // Test sphere center
 	t_sphere	s2 = sphere(sc2, 0.5f);
-	t_point3	p1c = point3(0, 0, -1);
+	
+	t_point3	p1c = point3(0, 0, -1); // Test plane
 	t_vec3		p1n = vec3(-0.5f, -2, 0.1f);
 	t_plane		p1 = plane(p1c, p1n);
-	if (hit_sphere(&s1, r))
+
+	t_vec3		cyc1 = vec3(1, 1, -10);
+	t_vec3		cyax1 = vec3(0.8, 0.3, 0);
+	//v_vec3_unit(&cyax1);
+
+	float		cyr1 = 0.4f;
+	float		cyh1 = 0.8f;
+	t_cylinder	cy1 = cylinder(cyc1, cyax1, cyr1, cyh1);
+
+
+	if (hit_cylinder(&cy1, r))
 		return (color(1, 0, 0));
 	else if (hit_sphere(&s2, r))
 		return (color(0, 1, 0));
