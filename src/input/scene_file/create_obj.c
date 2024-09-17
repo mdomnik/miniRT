@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_obj.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/09 16:58:45 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/17 18:29:16 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	create_sphere(t_options *options, char **args)
 	sphere->coords.x = ft_atob(coords[0]);
 	sphere->coords.y = ft_atob(coords[1]);
 	sphere->coords.z = ft_atob(coords[2]);
-	sphere->diameter = ft_atob(args[2]);
+	sphere->radius = ft_atob(args[2]) / 2.0;
 	sphere->color.r = ft_atoi(color[0]);
 	sphere->color.g = ft_atoi(color[1]);
 	sphere->color.b = ft_atoi(color[2]);
@@ -97,7 +97,7 @@ int	create_cylinder(t_options *options, char **args)
 	cylinder->normal.x = ft_atob(normal[0]);
 	cylinder->normal.y = ft_atob(normal[1]);
 	cylinder->normal.z = ft_atob(normal[2]);
-	cylinder->diameter = ft_atob(args[2]);
+	cylinder->radius = ft_atob(args[2]) / 2.0;
 	cylinder->height = ft_atob(args[3]);
 	cylinder->color.r = ft_atoi(color[0]);
 	cylinder->color.g = ft_atoi(color[1]);

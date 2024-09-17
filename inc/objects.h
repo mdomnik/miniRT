@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/09 17:17:06 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/17 18:50:11 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,49 +15,9 @@
 
 # include "vec3.h"
 # include "ray.h"
+# include "color.h"
 
 # include <stdbool.h>
-
-typedef struct s_ft_sphere		t_ft_sphere;
-typedef struct s_ft_plane		t_ft_plane;
-typedef struct s_ft_cylinder	t_ft_cylinder;
-
-/* SPHERE */
-
-struct	s_ft_sphere
-{
-	t_point3	center;
-	float		radius;
-};
-
-t_sphere			sphere(t_point3 c, float r);
-bool				hit_sphere(const t_sphere *s, t_ray *r);
-
-/* PLANE */
-
-struct	s_ft_plane
-{
-	t_point3	center;
-	t_vec3		norm;
-};
-
-t_plane				plane(t_point3 center, t_vec3 norm);
-bool				hit_plane(t_plane *p, t_ray *r);
-
-/* CYLINDER */
-
-struct	s_ft_cylinder
-{
-	t_vec3		center;
-	t_vec3		axis;
-	t_vec3		btop;
-	t_vec3		bbottom;
-	float		radius;
-	float		height;
-};
-
-t_cylinder	cylinder(t_vec3 center, t_vec3 axis, float radius, float height);
-bool		hit_cylinder(t_cylinder *cy, t_ray *r);
 
 # define SCENE_OBJECTS	"A,C,L,sp,pl,cy"
 
@@ -92,14 +52,14 @@ typedef struct s_ambient
 
 typedef struct s_camera
 {
-	t_vector		coords;
-	t_vector		vrange;
+	t_vec3		coords;
+	t_vec3		vrange;
 	double			fov;
 }	t_camera;
 
 typedef struct s_light
 {
-	t_vector		coords;
+	t_vec3		coords;
 	t_color			color;
 	double			brightness;
 	struct s_light	*next;
@@ -108,25 +68,25 @@ typedef struct s_light
 // OPTIONAL OBJECT STRUCTS
 typedef struct s_sphere
 {
-	t_vector		coords;
-	double			diameter;
+	t_vec3			coords;
+	double			radius;
 	t_color			color;
 	struct s_sphere	*next;
 }	t_sphere;
 
 typedef struct s_plane
 {
-	t_vector		coords;
-	t_vector		normal;
+	t_vec3		coords;
+	t_vec3		normal;
 	t_color			color;
 	struct s_plane	*next;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_vector			coords;
-	t_vector			normal;
-	double				diameter;
+	t_vec3			coords;
+	t_vec3			normal;
+	double				radius;
 	double				height;
 	t_color				color;
 	struct s_cylinder	*next;
@@ -142,5 +102,14 @@ typedef struct s_obj
 	t_plane		*plane;
 	t_cylinder	*cylinder;
 }	t_obj;
+
+t_sphere			sphere(t_point3 c, float r);
+bool				hit_sphere(const t_sphere *s, t_ray *r);
+
+t_plane				plane(t_point3 center, t_vec3 norm);
+bool				hit_plane(t_plane *p, t_ray *r);
+
+t_cylinder			cylinder(t_vec3 center, t_vec3 axis, float radius, float height);
+bool				hit_cylinder(t_cylinder *cy, t_ray *r);
 
 #endif
