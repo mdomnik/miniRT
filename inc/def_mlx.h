@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   def_mlx.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 15:58:36 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/10 17:27:57 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/09/10 18:08:52 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/09/10 19:12:44 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#ifndef DEF_MLX_H
+# define DEF_MLX_H
 
-# include "vec3.h"
-# include "ray.h"
+//mlx_handle/mlx_init.c
+int start_mlx(t_render *render);
 
-# define R 0
-# define G 1
-# define B 2
-
-typedef struct s_vec3	t_colors;
-
-t_colors		*ray_color(t_ray *r);
-int			write_color(int fd, t_colors *pixel_color);
-t_colors		per_pixel(t_ray ray);
-
-#endif /* COLOR_H */
+//mlx_handle/mlx_hooks.c
+void closing_hook(mlx_key_data_t keydata, void *param);
+void movement_hook_press(mlx_key_data_t keydata, void *param);
+void movement_hook_hold(mlx_key_data_t keydata, void *param);
+#endif /* DEF_MLX_H */

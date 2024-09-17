@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:59:34 by astavrop          #+#    #+#             */
 /*   Updated: 2024/09/15 18:33:19 by astavrop         ###   ########.fr       */
@@ -15,7 +15,7 @@
 #include "../../inc/objects.h"
 #include <stdio.h>
 
-int	write_color(int fd, t_color *pixel_color)
+int	write_color(int fd, t_colors *pixel_color)
 {
 	int	r;
 	int	g;
@@ -34,7 +34,7 @@ int	write_color(int fd, t_color *pixel_color)
 	return (0);
 }
 
-t_color	color(float red, float green, float blue)
+t_colors	*ray_color(t_ray *r)
 {
 	t_color	c;
 

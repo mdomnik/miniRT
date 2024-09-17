@@ -41,8 +41,31 @@ NAME			:= minirt
 # Source files directory
 SRC_DIR			:= src
 
-# Source files
+# MAIN
 SRC_FILES		+= main.c
+
+# INPUT Sources
+SRC_FILES		+= input/flags/check_value_format.c
+SRC_FILES		+= input/flags/create_flag_nodes.c
+SRC_FILES		+= input/flags/flag_formatting.c
+SRC_FILES		+= input/flags/flag_utils.c
+SRC_FILES		+= input/flags/handle_values.c
+
+SRC_FILES		+= input/scene_file/append.c
+SRC_FILES		+= input/scene_file/check_data.c
+SRC_FILES		+= input/scene_file/create_mand.c
+SRC_FILES		+= input/scene_file/create_obj.c
+SRC_FILES		+= input/scene_file/file_data.c
+SRC_FILES		+= input/scene_file/file_utils.c
+SRC_FILES		+= input/scene_file/ruleset.c
+
+SRC_FILES		+= input/input.c
+SRC_FILES		+= input/find_scene_file.c
+SRC_FILES		+= input/tests.c #remove
+
+# MLX_HANDLER Sources
+SRC_FILES		+= mlx_handle/mlx_init.c
+SRC_FILES		+= mlx_handle/mlx_hooks.c
 
 # VEC3 Sources
 SRC_FILES		+= vec3/vec3.c
