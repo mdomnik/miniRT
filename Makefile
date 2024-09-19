@@ -66,6 +66,7 @@ SRC_FILES		+= input/tests.c #remove
 # MLX_HANDLER Sources
 SRC_FILES		+= mlx_handle/mlx_init.c
 SRC_FILES		+= mlx_handle/mlx_hooks.c
+SRC_FILES		+= mlx_handle/render_image.c
 
 # VEC3 Sources
 SRC_FILES		+= vec3/vec3.c

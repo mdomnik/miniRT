@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/10 18:11:24 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/19 20:50:14 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,12 @@ typedef struct s_render t_render;
 typedef struct s_render
 {
     mlx_t       *window;
+    mlx_image_t *vp_img;
     t_options   *options;
 }   t_render;
 
+# define VP_WIDTH  960
+# define VP_HEIGHT 540
 
 # define ASPECT_R 1.77777777777
 # define IWIDTH 400
