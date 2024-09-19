@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:16:16 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/22 21:43:25 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:14:57 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,19 @@ typedef struct s_vec3	t_point3;
 
 struct	s_vec3
 {
-	double	a[3];
+	union {
+		double	a[3];
+		struct {
+			double	x;
+			double	y;
+			double	z;
+		};
+		struct {
+			double	r;
+			double	g;
+			double	b;
+		};
+	};
 };
 
 t_vec3		*vec3_new(double x, double y, double z);

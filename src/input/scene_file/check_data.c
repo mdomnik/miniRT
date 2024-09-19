@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:21:04 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/09 16:50:42 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/17 18:59:07 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
-
 /**
  * @brief Checks the validity of the scene data.
  *

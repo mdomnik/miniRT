@@ -11,7 +11,7 @@
 CC				:= cc
 
 # Compiler flags
-CFLAGS			+= -Wall -Werror -Wextra
+CFLAGS			+= -Wall -Wextra -Werror
 CFLAGS			+= -pedantic -Wunreachable-code
 CFLAGS			+= -Wshadow
 
@@ -69,6 +69,7 @@ SRC_FILES		+= mlx_handle/mlx_hooks.c
 
 # VEC3 Sources
 SRC_FILES		+= vec3/vec3.c
+SRC_FILES		+= vec3/vec3_2.c
 SRC_FILES		+= vec3/vec3_basic_ops.c
 SRC_FILES		+= vec3/vec3_basic_ops_ret.c
 SRC_FILES		+= vec3/vec3_utils.c
@@ -77,6 +78,10 @@ SRC_FILES		+= vec3/vec3_print.c
 SRC_FILES		+= color/color.c
 
 SRC_FILES		+= ray/ray.c
+
+SRC_FILES		+= objects/sphere.c
+SRC_FILES		+= objects/plane.c
+SRC_FILES		+= objects/cylinder.c
 
 # Object files directory
 OBJ_DIR			:= .obj
@@ -123,6 +128,7 @@ mlx: ## Build MLX42
 	cmake $(MLX_DIR) -B $(MLX_DIR)/build
 	cmake --build $(MLX_DIR)/build -j4
 
+WIDTH		?= 720
 # Compilation rule for object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(MKDIR) $(@D)

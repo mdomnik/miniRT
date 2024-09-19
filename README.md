@@ -22,8 +22,8 @@ It’s the secret sauce behind those jaw-dropping visuals in movies and games, m
 
 - 🟥 Window management (resizing?, exiting)
 - 🟥 3 Simple geometric objects
-    * 🟥 Plane
-    * 🟥 Sphere
+    * 🟨 Plane
+    * 🟨 Sphere
     * 🟥 Cylinder
 - 🟥 Objects intersections
 - 🟥 Inside of the object

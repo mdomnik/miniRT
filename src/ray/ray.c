@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:44:11 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/22 19:40:36 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/08/24 18:54:03 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_ray	*ray_new(t_point3 *orig, t_vec3 *dir)
 	ray = gc_malloc(sizeof(*ray));
 	if (!ray)
 		return (ray);
-	ray->orig = orig;
-	ray->dir = dir;
+	ray->orig = *orig;
+	ray->dir = *dir;
 	return (ray);
 }
 
@@ -35,10 +35,10 @@ t_point3	*ray_at(t_ray *ray, double t)
 	t_vec3		*dir;
 	t_point3	*orig;
 
-	dir = vec3_copy(ray->dir);
+	dir = vec3_copy(&ray->dir);
 	if (!dir)
 		return (NULL);
-	orig = vec3_copy(ray->orig);
+	orig = vec3_copy(&ray->orig);
 	if (!orig)
 		return (NULL);
 	v_vec3_mult(dir, t);
