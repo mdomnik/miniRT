@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:51:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/09 17:01:58 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/21 21:05:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	append_object_nodes(t_options *options, char *line)
 	while (line[i] != '\0' && line[i] != '\n')
 	{
 		i = omit_whitespaces(line, i);
+		if (line[i] == '#')
+			return (0);
 		j = 0;
 		if (line[i] == '\0' || line[i] == '\n')
 			return (0);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:12:37 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/17 18:25:17 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/21 20:48:37 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/objects.h"
+#include "mrt.h"
 
 t_sphere	sphere(t_point3 c, float r)
 {

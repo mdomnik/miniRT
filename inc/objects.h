@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/17 18:50:11 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/21 21:17:49 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "vec3.h"
 # include "ray.h"
-# include "color.h"
 
 # include <stdbool.h>
 
@@ -49,13 +48,6 @@ typedef struct s_ambient
 	double			light_ratio;
 	t_color			color;
 }	t_ambient;
-
-typedef struct s_camera
-{
-	t_vec3		coords;
-	t_vec3		vrange;
-	double			fov;
-}	t_camera;
 
 typedef struct s_light
 {

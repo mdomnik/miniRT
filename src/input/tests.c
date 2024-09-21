@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 16:41:41 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/17 18:25:52 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:56:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 // 	printf("ambient_color: %d %d %d\n", options->objects.ambient->color.r,
 // 		options->objects.ambient->color.g, options->objects.ambient->color.b);
 // 	printf("---------------------------------------------------\nCAMERA\n");
-// 	printf("camera_coords: %f %f %f\n", options->objects.camera->coords.x,
-// 		options->objects.camera->coords.y, options->objects.camera->coords.z);
+// 	printf("camera_coords: %f %f %f\n", options->objects.camera->center.x,
+// 		options->objects.camera->center.y, options->objects.camera->center.z);
 // 	printf("camera_vector_range: %f %f %f\n", options->objects.camera->vrange.x,
 // 		options->objects.camera->vrange.y, options->objects.camera->vrange.z);
 // 	printf("camera_fov: %f\n", options->objects.camera->fov);

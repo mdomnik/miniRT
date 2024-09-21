@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vec3_basic_ops.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:26:28 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/27 17:52:12 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:48:47 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/vec3.h"
+#include "mrt.h"
 
 /**
  * @brief Negates the components of a 3D vector.

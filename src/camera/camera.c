@@ -3,37 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 21:06:27 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/23 13:53:38 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/21 21:50:33 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/camera.h"
+#include "mrt.h"
 
-t_camera	camera_new(void)
+static int	viewport_init(t_camera *c);
+
+t_camera	camera_new(t_render *render)
 {
 	t_camera	c;
 
-	c.aspect_ration = (double) AR_WIDTH / AR_HEIGHT;
-	c.img_width = IMG_WIDTH;
-	c.img_height = (double) c.img_width / c.aspect_ration;
-	if (c.img_height < 1)
-		c.img_height = 1;
+	c = *render->options->objects.camera;
+	c.aspect_ratio = (double) render->vp_img->width / render->vp_img->height;
+	c.img_width = render->vp_img->width;
+	c.img_height = render->vp_img->height;
 	c.max_depth = MAX_DEPTH;
-	c.FOV = 70;
-	c.focal_dist = 10;
-	c.origin = point3(0, 0, 0);
-	c.center = c.origin;
-	c.dir = point3(0, 0, 1);
+	viewport_init(&c);
+	return(c);
 }
 
-int	viewport_init(t_camera *c)
+static int	viewport_init(t_camera *c)
 {
-	double	vp_width;
-	double	vp_height;
+	c->vp_height = 2 * tan(deg_to_rad(c->FOV) / 2);
+	c->vp_width = c->vp_height * c->aspect_ratio;
+	c->pix_size = c->vp_width / c->img_width;
+	return (0);
+}
 
-	vp_height = 2 * tan(deg_to_rad(c->FOV) / 2) * c->focal_dist;
-	vp_width = vp_height * ((double) c->img_width / c->img_height);
+#define OFFSET_X 0
+#define OFFSET_Y 1
+#define WORLD_X 2
+#define WORLD_Y 3
+
+t_ray ray_to_pixel(t_camera *c, int px, int py)
+{
+	t_ray	ray;
+	double	x_offset;
+	double	y_offset;
+	double	world_x;
+	double	world_y;
+
+	x_offset = (px + 0.5) * c->pix_size;
+	y_offset = (py + 0.5) * c->pix_size;
+	world_x = c->vp_width / 2 - x_offset;
+	world_y = c->vp_height / 2 - y_offset;
+	ray.orig = c->center;
+	ray.dir = point3(world_x, world_y, 1);
+	v_vec3_neg(&ray.dir);
+	v_vec3_unit(&ray.dir);
+	return (ray);
 }

@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:58:36 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/17 18:49:34 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/21 19:09:36 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOR_H
 # define COLOR_H
-
-# include "vec3.h"
-# include "ray.h"
-# include "data_types.h"
 
 # define R 0
 # define G 1
@@ -35,7 +31,7 @@ struct s_color
 	};
 };
 
-t_color		ray_color(t_ray *r);
+t_color		ray_color(t_ray *r, t_render *render);
 int			write_color(int fd, t_color *pixel_color);
 
 #endif /* COLOR_H */

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/19 20:50:14 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/21 19:10:03 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ typedef struct s_render t_render;
 # include "data_types.h"
 # include "error.h"
 
+# include "camera.h"
+# include "ray.h"
+# include "color.h"
 # include "objects.h"
 # include "file.h"
 
@@ -37,9 +40,7 @@ typedef struct s_render t_render;
 # include "def_mlx.h"
 
 
-#include "color.h"
-#include "vec3.h"
-#include "ray.h"
+# include "vec3.h"
 
 typedef struct s_render
 {

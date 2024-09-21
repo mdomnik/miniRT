@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:16:16 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/17 18:14:57 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/21 17:59:08 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void		v_vec3_neg(t_vec3 *v);
 void		v_vec3_add(t_vec3 *n, t_vec3 *m);
 void		v_vec3_sub(t_vec3 *n, t_vec3 *m);
 void		v_vec3_mult(t_vec3 *n, double t);
+void		v_vec3_mult_vec3(t_vec3 *n, t_vec3 *m);
 void		v_vec3_div(t_vec3 *n, double t);
 
 t_vec3		*vec3_neg(t_vec3 *v);

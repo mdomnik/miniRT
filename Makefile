@@ -69,12 +69,16 @@ SRC_FILES		+= mlx_handle/mlx_hooks.c
 SRC_FILES		+= mlx_handle/render_image.c
 
 # VEC3 Sources
+SRC_FILES		+= vec3/vec3_2_basic_ops.c
 SRC_FILES		+= vec3/vec3.c
 SRC_FILES		+= vec3/vec3_2.c
 SRC_FILES		+= vec3/vec3_basic_ops.c
 SRC_FILES		+= vec3/vec3_basic_ops_ret.c
 SRC_FILES		+= vec3/vec3_utils.c
 SRC_FILES		+= vec3/vec3_print.c
+
+SRC_FILES		+= camera/camera.c
+SRC_FILES		+= camera/camera_utils.c
 
 SRC_FILES		+= color/color.c
 

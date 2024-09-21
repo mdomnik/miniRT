@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 19:30:40 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/17 18:27:01 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/21 21:24:43 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/objects.h"
+#include "mrt.h"
 
 t_plane	plane(t_point3 center, t_vec3 norm)
 {
@@ -42,7 +42,7 @@ bool	hit_plane(t_plane *p, t_ray *r)
 	float	b;
 	float	t;
 
-	v_vec3_sub(&p->coords, &r->orig);
+	v_vec3_sub((t_vec3 *) &p->coords, &r->orig);
 	a = dot(&p->normal, &p->coords);
 	b = dot(&p->normal, &r->dir);
 	t = (float) a / b;

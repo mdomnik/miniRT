@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vec3_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 21:39:21 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/27 17:55:44 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:48:39 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/vec3.h"
+#include "mrt.h"
 
 /**
  * @brief Creates and returns a 3D vector with the specified components.

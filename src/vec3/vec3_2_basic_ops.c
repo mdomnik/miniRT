@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera_utils.c                                     :+:      :+:    :+:   */
+/*   vec3_2_basic_ops.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/23 13:46:12 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/21 18:49:28 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/09/21 17:59:42 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/09/21 18:48:37 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-// Convert degrees to radians (conversion of degrees into radians)
-inline double	deg_to_rad(double deg)
+void v_vec3_mult_vec3(t_vec3 *n, t_vec3 *m)
 {
-	return (deg * PI / 180.0);
+	n->a[X] *= m->a[X];
+	n->a[Y] *= m->a[Y];
+	n->a[Z] *= m->a[Z];
 }

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:43:25 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/09 16:57:51 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/21 18:54:38 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,13 @@ int	create_camera(t_options *options, char **args)
 	camera = gc_malloc(sizeof(t_camera));
 	coords = ft_split(args[1], ',');
 	vector = ft_split(args[2], ',');
-	camera->coords.x = ft_atob(coords[0]);
-	camera->coords.y = ft_atob(coords[1]);
-	camera->coords.z = ft_atob(coords[2]);
-	camera->vrange.x = ft_atob(vector[0]);
-	camera->vrange.y = ft_atob(vector[1]);
-	camera->vrange.z = ft_atob(vector[2]);
-	camera->fov = ft_atob(args[3]);
+	camera->center.x = ft_atob(coords[0]);
+	camera->center.y = ft_atob(coords[1]);
+	camera->center.z = ft_atob(coords[2]);
+	camera->dir.x = ft_atob(vector[0]);
+	camera->dir.y = ft_atob(vector[1]);
+	camera->dir.z = ft_atob(vector[2]);
+	camera->FOV = ft_atob(args[3]);
 	options->objects.camera = camera;
 	return (0);
 }

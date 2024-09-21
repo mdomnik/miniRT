@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 17:16:46 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/19 20:48:05 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/21 21:41:12 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,27 @@ int	transform_color(t_color *color)
 	return (color->r << 24 | color->g << 16 | color->b << 8 | 255);
 }
 
-int display_image(t_render *render)
+int render(t_render *rnd, t_camera *camera)
 {
-	t_ray	ray;
-	t_color	c;
-	int image_width = render->vp_img->width;
-	int image_height = render->vp_img->height;
-	double	aspect_ratio = image_width / image_height;
-	double	view_height = 2.0;
-	double	view_width = aspect_ratio * view_height;
-	double	focal_length = 1.0;
-	t_vec3	horizontal = vec3(view_width, 0.0, 0.0);
-	t_vec3	vertical = vec3(0.0, view_height, 0.0);
-	t_vec3	lower_left_corner = vec3(-view_width / 2, -view_height / 2, -focal_length);
-// 
-	dprintf(2, "W/H :: %d/%d\n", (int) image_width, (int) image_height);
-// 
-	ray.orig = vec3(0.0f, 0.0f, 2.0f);
-	dprintf(2, "rendering...\n");
-	for (int y = 0; y < image_height; ++y)
+	int		x;
+	int 	y;
+	t_color pcolor;
+	t_ray	pray;
+	
+	y = 0;
+	while(y < rnd->window->height)
 	{
-		dprintf(2, "%d/%d        \r", y, (int) image_height);
-		for (int x = 0; x < image_width; ++x)
+		x = 0;
+		while(x < rnd->window->width)
 		{
-			double u = (double)x / (image_width - 1);
-			double v = (double)y / (image_height - 1);
-			t_vec3 dir = lower_left_corner;
-			v_vec3_add(&dir, vec3_mult(&horizontal, u));
-			v_vec3_add(&dir, vec3_mult(&vertical, v));
-			ray.dir = *vec3_unit(vec3_sub(&dir, &ray.orig));
-			c = ray_color(&ray);
-			int color = transform_color(&c);
-			mlx_put_pixel(render->vp_img, x, y, color);
+			pray = ray_to_pixel(camera, x, y);
+			pcolor = ray_color(&pray, rnd);
+			mlx_put_pixel(rnd->vp_img, x, y, transform_color(&pcolor));
+			x++;
 		}
+		y++;
 	}
-	write(2, "\n", 1);
-	mlx_image_to_window(render->window, render->vp_img, 0, 0);
+	mlx_image_to_window(rnd->window, rnd->vp_img, 0, 0);
 	return (0);
 }
 

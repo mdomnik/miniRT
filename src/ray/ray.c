@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:44:11 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/24 18:54:03 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:48:34 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/ray.h"
+#include "mrt.h"
 
 t_ray	*ray_new(t_point3 *orig, t_vec3 *dir)
 {
@@ -27,6 +27,15 @@ t_ray	*ray_new(t_point3 *orig, t_vec3 *dir)
 		return (ray);
 	ray->orig = *orig;
 	ray->dir = *dir;
+	return (ray);
+}
+
+t_ray	ray(t_point3 *orig, t_vec3 *dir)
+{
+	t_ray	ray;
+
+	ray.orig = *orig;
+	ray.dir = *dir;
 	return (ray);
 }
 

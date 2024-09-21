@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:41:55 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/17 18:30:15 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/21 21:17:24 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/objects.h"
-#include "../../lib/libft/libft.h"
+#include "mrt.h"
 
 t_cylinder	cylinder(t_vec3 center, t_vec3 axis, float radius, float height)
 {

@@ -6,19 +6,14 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/21 15:15:43 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/21 18:49:07 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
 
-#include "../inc/color.h"
-#include "../inc/vec3.h"
-#include "../inc/ray.h"
-
-#include <stdio.h>
-#include <unistd.h>
+#include "mrt.h"
 
 #ifndef WIDTH
 # define WIDTH 900

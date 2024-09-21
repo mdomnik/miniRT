@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:52:13 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/10 19:13:22 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/21 18:56:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ void movement_hook_press(mlx_key_data_t keydata, void *param)
 	render = (t_render *)param;
 
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		render->options->objects.camera->coords.z += 1;
+		render->options->objects.camera->center.z += 1;
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		render->options->objects.camera->coords.z -= 1;
+		render->options->objects.camera->center.z -= 1;
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		render->options->objects.camera->coords.x -= 1;
+		render->options->objects.camera->center.x -= 1;
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		render->options->objects.camera->coords.x += 1;
+		render->options->objects.camera->center.x += 1;
 
 	// Print the camera coordinates using the full path
 	printf("x: %f, y: %f, z: %f\n",
-		   render->options->objects.camera->coords.x,
-		   render->options->objects.camera->coords.y,
-		   render->options->objects.camera->coords.z);
+		   render->options->objects.camera->center.x,
+		   render->options->objects.camera->center.y,
+		   render->options->objects.camera->center.z);
 }
 
 void movement_hook_hold(mlx_key_data_t keydata, void *param)
@@ -53,17 +53,17 @@ void movement_hook_hold(mlx_key_data_t keydata, void *param)
 	render = (t_render *)param;
 
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_REPEAT)
-		render->options->objects.camera->coords.z += 1;
+		render->options->objects.camera->center.z += 1;
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_REPEAT)
-		render->options->objects.camera->coords.z -= 1;
+		render->options->objects.camera->center.z -= 1;
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_REPEAT)
-		render->options->objects.camera->coords.x -= 1;
+		render->options->objects.camera->center.x -= 1;
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_REPEAT)
-		render->options->objects.camera->coords.x += 1;
+		render->options->objects.camera->center.x += 1;
 		// Print the camera coordinates using the full path
 	printf("x: %f, y: %f, z: %f\n",
-		   render->options->objects.camera->coords.x,
-		   render->options->objects.camera->coords.y,
-		   render->options->objects.camera->coords.z);
+		   render->options->objects.camera->center.x,
+		   render->options->objects.camera->center.y,
+		   render->options->objects.camera->center.z);
 }
 

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vec3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:22:28 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/27 16:25:00 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:49:03 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/vec3.h"
+#include "mrt.h"
 
 /**
  * @brief Allocates and initializes a new 3D vector with given components.
