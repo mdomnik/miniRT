@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:51:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/21 21:05:06 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/10/16 20:59:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	get_scene_data(t_options *options)
 	while (line != NULL)
 	{
 		if (append_object_nodes(options, line) == -1)
-			return (-1);
+			return (ret_message(ERR_FAIL_LINE, line));
 		line = gnl(fd);
 		if (line == NULL)
 			break ;

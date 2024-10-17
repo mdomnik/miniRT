@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:21:04 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/17 18:59:07 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:15:56 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	check_mandatory_objects(t_options *options)
 	char	**mandatory;
 	int		count;
 	int		i;
+	int		j;
 
 	mandatory = ft_split(MANDATORY_OBJECTS, ',');
 	count = 0;
@@ -64,8 +65,13 @@ int	check_mandatory_objects(t_options *options)
 	count = pointer_count(mandatory);
 	while (mandatory[i] != NULL)
 	{
-		if (ft_strcmp(options->scene.scene_objects[i][0], mandatory[i]) == 0)
-			count--;
+		j = 0;
+		while (options->scene.scene_objects[j] != NULL)
+		{
+			if (ft_strcmp(options->scene.scene_objects[j][0], mandatory[i]) == 0)
+				count--;
+			j++;
+		}
 		i++;
 	}
 	if (count != 0)

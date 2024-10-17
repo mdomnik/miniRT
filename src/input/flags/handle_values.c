@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:39:24 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 01:19:25 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/10/16 02:48:38 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	handle_null_value(char *str)
  * @param data The string value to assign.
  * @return 0 on success, -1 if the format check fails.
  */
-int	handle_string_value(t_value *new_value_node, char *data)
+int	handle_string_value(t_flags *new_value_node, char *data)
 {
 	if (data == NULL)
 	{
@@ -79,7 +79,7 @@ int	handle_string_value(t_value *new_value_node, char *data)
  * @param data The float value to assign.
  * @return 0 on success, -1 if the format check fails.
  */
-int	handle_float_value(t_value *new_value_node, char *data)
+int	handle_float_value(t_flags *new_value_node, char *data)
 {
 	if (data == NULL)
 	{
@@ -90,7 +90,7 @@ int	handle_float_value(t_value *new_value_node, char *data)
 		if (check_float_format(data) == -1)
 			return (-1);
 		else
-			new_value_node->value.float_value.float_value = ft_atob(data);
+			new_value_node->value.float_value.float_value = ft_atof(data);
 	}
 	return (0);
 }
@@ -110,7 +110,7 @@ int	handle_float_value(t_value *new_value_node, char *data)
  * @param data The float value to assign.
  * @return 0 on success, -1 if the format check fails.
  */
-int	handle_vector_value(t_value *new_value_node, char *data)
+int	handle_vector_value(t_flags *new_value_node, char *data)
 {
 	char	**vector;
 	int		i;
@@ -148,7 +148,7 @@ int	handle_vector_value(t_value *new_value_node, char *data)
  * @param new_value_node The value node to set the vector values in.
  * @param vector The vector values to set.
  */
-void	set_vector_values(t_value *new_value_node, char **vector)
+void	set_vector_values(t_flags *new_value_node, char **vector)
 {
 	if (vector == NULL)
 	{
@@ -158,8 +158,8 @@ void	set_vector_values(t_value *new_value_node, char **vector)
 	}
 	else
 	{
-		new_value_node->value.vector.x = ft_atob(vector[0]);
-		new_value_node->value.vector.y = ft_atob(vector[1]);
-		new_value_node->value.vector.z = ft_atob(vector[2]);
+		new_value_node->value.vector.x = ft_atof(vector[0]);
+		new_value_node->value.vector.y = ft_atof(vector[1]);
+		new_value_node->value.vector.z = ft_atof(vector[2]);
 	}
 }

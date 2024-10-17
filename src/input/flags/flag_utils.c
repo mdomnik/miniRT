@@ -6,14 +6,14 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 19:22:37 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 03:02:06 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/10/16 02:46:41 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-static double	parse_num(const char *str, int *i, bool isf, double frac_div);
-static double	parse_frac(const char *str, int *i, double frac_div);
+static float	parse_num(const char *str, int *i, bool isf, float frac_div);
+static float	parse_frac(const char *str, int *i, float frac_div);
 
 /**
  * @brief Checks if the given string is of 'flag' format.
@@ -68,15 +68,15 @@ int	is_number(char *str)
 }
 
 /**
- * Converts a string to a double value.
+ * Converts a string to a float value.
  *
  * @param str The string to be converted.
- * @return The converted double value.
+ * @return The converted float value.
  */
-double	ft_atob(char *str)
+float	ft_atof(char *str)
 {
 	int		i;
-	double	result;
+	float	result;
 	bool	is_negative;
 
 	i = 0;
@@ -88,11 +88,11 @@ double	ft_atob(char *str)
 	}
 	else if (str[i] == '+')
 		i++;
-	result = parse_num(str, &i, false, 10.0);
+	result = parse_num(str, &i, false, 10.0f);
 	if (str[i] == '.')
 	{
 		i++;
-		result += parse_frac(str, &i, 10.0);
+		result += parse_frac(str, &i, 10.0f);
 	}
 	if (is_negative)
 		result = -result;
@@ -104,23 +104,22 @@ double	ft_atob(char *str)
  *
  * This function takes a string and parses a number from it.
  * It iterates through the characters of the string and converts them
- * into a double value. The function supports both integer and
+ * into a float value. The function supports both integer and
  * floating-point numbers. If the string contains invalid characters,
- * an error message is printed
- * to the standard error stream and -1 is returned.
+ * an error message is printed to the standard error stream and -1 is returned.
  *
  * @param str The string to parse the number from.
  * @param i   A pointer to the current index in the string.
  * @param isf A boolean flag indicating if the number is a floating-point number.
  * @param frac_div The divisor used to calculate
  * the fractional part of the number.
- * @return The parsed number as a double value, or -1 if an error occurred.
+ * @return The parsed number as a float value, or -1 if an error occurred.
  */
-static double	parse_num(const char *str, int *i, bool isf, double frac_div)
+static float	parse_num(const char *str, int *i, bool isf, float frac_div)
 {
-	double	result;
+	float	result;
 
-	result = 0.0;
+	result = 0.0f;
 	while (str[*i] != '\0' && (ft_isdigit(str[*i]) || (str[*i] == '.' && !isf)))
 	{
 		if (ft_isdigit(str[*i]))
@@ -146,18 +145,18 @@ static double	parse_num(const char *str, int *i, bool isf, double frac_div)
 }
 
 /**
- * Parses a fraction from a string and returns the corresponding double value.
+ * Parses a fraction from a string and returns the corresponding float value.
  *
  * @param str The string to parse the fraction from.
  * @param i   A pointer to the current index in the string.
  * @param frac_div The divisor used to calculate the fraction.
- * @return The parsed fraction as a double value.
+ * @return The parsed fraction as a float value.
  */
-static double	parse_frac(const char *str, int *i, double frac_div)
+static float	parse_frac(const char *str, int *i, float frac_div)
 {
-	double	frac;
+	float	frac;
 
-	frac = 0.0;
+	frac = 0.0f;
 	while (str[*i] != '\0' && ft_isdigit(str[*i]))
 	{
 		frac += (str[*i] - '0') / frac_div;
@@ -166,3 +165,4 @@ static double	parse_frac(const char *str, int *i, double frac_div)
 	}
 	return (frac);
 }
+

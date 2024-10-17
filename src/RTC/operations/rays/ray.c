@@ -5,53 +5,41 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 16:44:11 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/21 18:48:34 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/10/15 20:54:51 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/10/17 07:03:53 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_ray	*ray_new(t_point3 *orig, t_vec3 *dir)
+t_ray		*ray_new(t_point3 *orig, t_vec3 *dir)
 {
 	t_ray	*ray;
 
-	if (!orig || !dir)
-	{
-		ft_dprintf(2, "Error [%s:%d] dir or orig == NULL\n",
-				(char *) __func__, __LINE__);
-		return (NULL);
-	}
-	ray = gc_malloc(sizeof(*ray));
+	ray = malloc(sizeof(t_ray));
 	if (!ray)
-		return (ray);
+		return (NULL);
 	ray->orig = *orig;
 	ray->dir = *dir;
 	return (ray);
 }
 
-t_ray	ray(t_point3 *orig, t_vec3 *dir)
+t_point3	ray_position(t_ray *ray, float t)
 {
-	t_ray	ray;
+	t_point3	pos;
 
-	ray.orig = *orig;
-	ray.dir = *dir;
-	return (ray);
+	pos = add_tuples(ray->orig, mult_tuple(ray->dir, t));
+	return (pos);
 }
 
-t_point3	*ray_at(t_ray *ray, double t)
+t_ray		*ray_transform(t_ray *ray, t_matrix *matrix)
 {
-	t_vec3		*dir;
-	t_point3	*orig;
+	t_ray	*new_ray;
 
-	dir = vec3_copy(&ray->dir);
-	if (!dir)
+	new_ray = malloc(sizeof(t_ray));
+	if (!new_ray)
 		return (NULL);
-	orig = vec3_copy(&ray->orig);
-	if (!orig)
-		return (NULL);
-	v_vec3_mult(dir, t);
-	v_vec3_add(orig, dir);
-	gc_free_ptr((void **) &dir);
-	return (orig);
+	new_ray->orig = multiply_matrix_tuple(*matrix, ray->orig);
+	new_ray->dir = multiply_matrix_tuple(*matrix, ray->dir);
+	return (new_ray);
 }

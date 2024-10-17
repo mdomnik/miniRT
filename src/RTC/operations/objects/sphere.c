@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3_print.c                                       :+:      :+:    :+:   */
+/*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 20:47:13 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/21 18:48:51 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/10/15 21:17:22 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/10/17 14:37:36 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-/**
- * @brief Prints a vector with a custom message
- *
- * @param v Pointer to the vecotr
- * @param msg Custom message
- * @return int 0 on success and 1 in case of an error
- */
-int	vec3_print(t_vec3 *v, char *msg)
+// Create a new sphere object
+t_sphere	*sphere_new()
 {
-	if (!v)
-	{
-		ft_dprintf(2, "%s: Error\n", msg);
-		return (1);
-	}
-	dprintf(2, "<%s> {%.3f, %.3f, %.3f}\n", msg, v->a[X], v->a[Y], v->a[Z]);
-	return (0);
+	t_sphere	*sphere;
+	static int	id = 0;
+
+	sphere = malloc(sizeof(t_sphere));
+	sphere->id = id++;
+	sphere->coords = new_point3(0, 0, 0);
+	sphere->radius = 1;
+	sphere->color = new_tuple(0, 0, 0, 0);
+	sphere->transform = *init_identity_matrix(4);
+	return (sphere);
 }

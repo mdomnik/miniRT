@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:32:39 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/09 17:04:49 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/10/16 03:12:55 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	check_ratio_format(char *str, int min, int max)
 		i++;
 	}
 	i = 0;
-	if (ft_atob(str) < min || ft_atob(str) > max)
+	if (ft_atof(str) < min || ft_atof(str) > max)
 		return (ret_message(ERR_RANGE, str));
 	return (0);
 }

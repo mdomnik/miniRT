@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   flags.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:11:31 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/17 19:12:41 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/10/16 03:30:27 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FLAGS_H
 # define FLAGS_H
-
-# include "vec3.h"
 
 // FLAG PARSING
 
@@ -33,6 +31,8 @@
 // DATA TYPES
 # define OPTS_VALUE "STRING,FLOAT,*STRING,NULL,\
 *FLOAT,VECTOR,*VECTOR,*STRING,STRING,FLOAT"
+
+typedef struct s_flags	t_flags;
 
 // FLAGS
 typedef enum e_opts_type
@@ -68,11 +68,11 @@ typedef union u_value_type
 }	t_value_type;
 
 // VALUE NODE STRUCT
-typedef struct s_value
+struct s_flags
 {
 	t_opts_type		type;
 	t_value_type	value;
-	struct s_value	*next;
-}	t_value;
+	struct s_flags	*next;
+};
 
 #endif

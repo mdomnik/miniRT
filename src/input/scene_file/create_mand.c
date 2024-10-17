@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:43:25 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/21 18:54:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/10/16 02:53:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,9 @@ int	create_ambient(t_options *options, char **args)
 
 	ambient = gc_malloc(sizeof(t_ambient));
 	colors = ft_split(args[2], ',');
-	ambient->light_ratio = ft_atob(args[1]);
-	ambient->color.r = ft_atoi(colors[0]);
-	ambient->color.g = ft_atoi(colors[1]);
-	ambient->color.b = ft_atoi(colors[2]);
+	ambient->light_ratio = ft_atof(args[1]);
+	ambient->color = new_tuple(ft_atof(colors[0]), ft_atof(colors[1]),
+			ft_atof(colors[2]), 1);
 	options->objects.ambient = ambient;
 	return (0);
 }
@@ -107,13 +106,11 @@ int	create_camera(t_options *options, char **args)
 	camera = gc_malloc(sizeof(t_camera));
 	coords = ft_split(args[1], ',');
 	vector = ft_split(args[2], ',');
-	camera->center.x = ft_atob(coords[0]);
-	camera->center.y = ft_atob(coords[1]);
-	camera->center.z = ft_atob(coords[2]);
-	camera->dir.x = ft_atob(vector[0]);
-	camera->dir.y = ft_atob(vector[1]);
-	camera->dir.z = ft_atob(vector[2]);
-	camera->FOV = ft_atob(args[3]);
+	camera->coords = new_point3(ft_atof(coords[0]), ft_atof(coords[1]),
+			ft_atof(coords[2]));
+	camera->normal = new_vec3(ft_atof(vector[0]), ft_atof(vector[1]),
+			ft_atof(vector[2]));
+	camera->fov = ft_atof(args[3]);
 	options->objects.camera = camera;
 	return (0);
 }
@@ -137,13 +134,11 @@ int	create_light(t_options *options, char **args)
 	coords = ft_split(args[1], ',');
 	colors = ft_split(args[3], ',');
 	light = gc_malloc(sizeof(t_light));
-	light->coords.x = ft_atob(coords[0]);
-	light->coords.y = ft_atob(coords[1]);
-	light->coords.z = ft_atob(coords[2]);
-	light->color.r = ft_atoi(colors[0]);
-	light->color.g = ft_atoi(colors[1]);
-	light->color.b = ft_atoi(colors[2]);
-	light->brightness = ft_atob(args[2]);
+	light->coords = new_point3(ft_atof(coords[0]), ft_atof(coords[1]),
+			ft_atof(coords[2]));
+	light->color = new_tuple(ft_atof(colors[0]), ft_atof(colors[1]),
+			ft_atof(colors[2]), 1);
+	light->brightness = ft_atof(args[2]);
 	options->objects.light = append_light_list(options->objects.light, light);
 	return (0);
 }

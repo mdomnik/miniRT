@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/21 19:10:03 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/10/17 05:34:33 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,38 +16,31 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <stdarg.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <string.h>
 # include <errno.h>
+# include <math.h>
 # include <MLX42/MLX42.h>
 # include "../lib/libft/libft.h"
 
-typedef struct s_render t_render;
+# include "settings/config.h"
+# include "settings/error.h"
 
-# include "flags.h"
-# include "data_types.h"
-# include "error.h"
-
-# include "camera.h"
-# include "ray.h"
-# include "color.h"
+# include "types.h"
 # include "objects.h"
-# include "file.h"
+# include "flags.h"
+# include "rtc.h"
 
-# include "def_flags.h"
-# include "def_scene.h"
-# include "def_mlx.h"
-
-
-# include "vec3.h"
-
-typedef struct s_render
-{
-    mlx_t       *window;
-    mlx_image_t *vp_img;
-    t_options   *options;
-}   t_render;
+# include "defines/def_file.h"
+# include "defines/def_flags.h"
+# include "defines/def_matrix.h"
+# include "defines/def_rays.h"
+# include "defines/def_scene.h"
+# include "defines/def_tuples.h"
+# include "defines/def_utils.h"
+# include "defines/def_intersection.h"
 
 # define VP_WIDTH  960
 # define VP_HEIGHT 540
@@ -55,6 +48,7 @@ typedef struct s_render
 # define ASPECT_R 1.77777777777
 # define IWIDTH 400
 
+// Define the DEBUG macro
 // Define the DEBUG macro
 #define DEBUG(fmt, ...) \
     fprintf(stderr, "[DEBUG] %s:%d:%s(): " fmt "\n", __FILE__, __LINE__, __func__, ##__VA_ARGS__)

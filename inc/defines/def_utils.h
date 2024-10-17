@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   formatter_s.c                                      :+:      :+:    :+:   */
+/*   def_utils.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 12:15:18 by astavrop          #+#    #+#             */
-/*   Updated: 2024/10/16 03:20:37 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/10/15 21:45:30 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/10/15 21:46:13 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft.h"
+#ifndef DEF_UTILS_H
+# define DEF_UTILS_H
 
-int	s_null(int fd)
-{
-	ft_putstr_fd("(null)", fd);
-	return (6);
-}
+//operations/utils/utils_1.c
+bool		is_equal(float a, float b);
+float		deg_to_rad(float deg);
 
-int	formatter_s(char *s, int count, int fd)
-{
-	if (!s)
-		return (s_null(fd));
-	ft_putstr_fd(s, fd);
-	return (count + ft_strlen(s));
-}
+#endif

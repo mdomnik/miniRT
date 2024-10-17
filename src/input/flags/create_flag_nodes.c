@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:43:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 03:02:36 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/10/16 03:28:12 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	process_flag(char *f_type, t_options *options, int value, char **flag_join)
  */
 int	create_option(t_options *options, int value, char **flag_join)
 {
-	t_value	*new_value_node;
+	t_flags	*new_value_node;
 	char	*arg;
 
 	arg = check_if_option(flag_join[2]);
@@ -141,11 +141,11 @@ int	create_option(t_options *options, int value, char **flag_join)
  * @return A pointer to the newly created value node,
  * or NULL if an error occurred.
  */
-t_value	*create_value_node(t_opts_type type, char *value_type, char *data)
+t_flags	*create_value_node(t_opts_type type, char *value_type, char *data)
 {
-	t_value	*new_value_node;
+	t_flags	*new_value_node;
 
-	new_value_node = (t_value *)gc_malloc(sizeof(t_value));
+	new_value_node = (t_flags *)gc_malloc(sizeof(t_flags));
 	new_value_node->type = type;
 	if (ft_strnstr(value_type, "STRING", ft_strlen(value_type)))
 	{
@@ -172,9 +172,9 @@ t_value	*create_value_node(t_opts_type type, char *value_type, char *data)
  * @param options The options structure to append the value node to.
  * @param new_value_node The new value node to append.
  */
-void	append_value_node(t_options *options, t_value *new_value_node)
+void	append_value_node(t_options *options, t_flags *new_value_node)
 {
-	t_value	*last;
+	t_flags	*last;
 
 	if (options->values == NULL)
 	{

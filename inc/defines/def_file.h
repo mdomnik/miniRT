@@ -6,30 +6,15 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 02:18:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/10 18:04:15 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/10/15 21:32:49 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILE_H
 # define FILE_H
 
-typedef struct s_scene
-{
-	char	*scene_file;
-	char	***scene_objects;
-}	t_scene;
-
-// OPTIONS STRUCT
-typedef struct s_options
-{
-	int		opts_flags;
-	t_scene	scene;
-	t_value	*values;
-	t_obj	objects;
-}	t_options;
-
 //input.c
-int	check_args(int argc, char **argv, t_render *render);
+int	check_args(int argc, char **argv, t_project *project);
 
 //find_scene_file.c
 int		validate_file_name(char **argv, t_options *options);

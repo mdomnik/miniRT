@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_types.h                                       :+:      :+:    :+:   */
+/*   def_rays.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/29 17:37:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/17 18:56:03 by astavrop         ###   ########.fr       */
+/*   Created: 2024/10/15 21:43:46 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/10/17 07:04:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_TYPES_H
-# define DATA_TYPES_H
+#ifndef DEF_RAYS_H
+# define DEF_RAYS_H
 
-# include "flags.h"
-# include "vec3.h"
-
-
+//operations/rays/ray.c
+t_ray		*ray_new(t_point3 *orig, t_vec3 *dir);
+t_point3	ray_position(t_ray *ray, float t);
+t_ray		*ray_transform(t_ray *ray, t_matrix *matrix);
 
 #endif

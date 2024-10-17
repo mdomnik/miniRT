@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3_2_basic_ops.c                                 :+:      :+:    :+:   */
+/*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/21 17:59:42 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/21 18:48:37 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/09/24 15:37:50 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/10/14 23:28:36 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mrt.h"
+#ifndef CONFIG_H
+# define CONFIG_H
 
-void v_vec3_mult_vec3(t_vec3 *n, t_vec3 *m)
-{
-	n->a[X] *= m->a[X];
-	n->a[Y] *= m->a[Y];
-	n->a[Z] *= m->a[Z];
-}
+#define EPSILON 0.0001
+
+#endif

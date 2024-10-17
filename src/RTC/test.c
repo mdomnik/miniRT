@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 16:37:28 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/21 20:34:03 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/10/09 19:41:10 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/10/14 21:42:43 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#include "mrt.h"
+//print 4x4 matrix
+void	print_matrix(t_matrix mat) {
+	for (int i = 0; i < mat.size; i++) {
+		for (int j = 0; j < mat.size; j++) {
+			printf("%f ", mat.a[i][j]);
+		}
+		printf("\n");
+	}
+}
 
-typedef struct s_ray	t_ray;
-
-struct	s_ray
-{
-	t_point3	orig;
-	t_vec3		dir;
-};
-
-t_ray		*ray_new(t_point3 *orig, t_vec3 *dir);
-t_ray		ray(t_point3 *orig, t_vec3 *dir);
-t_point3	*ray_at(t_ray *ray, double t);
-t_ray ray_to_pixel(t_camera *c, int px, int py);
-
-#endif /* RAY_H */
+//print tuple
+void	print_tuple(t_tuple tuple) {
+	printf("x: %f, y: %f, z: %f, w: %f\n", tuple.x, tuple.y, tuple.z, tuple.w);
+}

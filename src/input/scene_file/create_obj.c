@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_obj.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/17 18:29:16 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/10/17 14:19:11 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@ int	create_sphere(t_options *options, char **args)
 	sphere = gc_malloc(sizeof(t_sphere));
 	coords = ft_split(args[1], ',');
 	color = ft_split(args[3], ',');
-	sphere->coords.x = ft_atob(coords[0]);
-	sphere->coords.y = ft_atob(coords[1]);
-	sphere->coords.z = ft_atob(coords[2]);
-	sphere->radius = ft_atob(args[2]) / 2.0;
-	sphere->color.r = ft_atoi(color[0]);
-	sphere->color.g = ft_atoi(color[1]);
-	sphere->color.b = ft_atoi(color[2]);
+	sphere->coords = new_point3(ft_atof(coords[0]), ft_atof(coords[1]),
+			ft_atof(coords[2]));
+	sphere->radius = ft_atof(args[2]) / 2.0;
+	sphere->color = new_tuple(ft_atoi(color[0]), ft_atoi(color[1]),
+			ft_atoi(color[2]), 1);
+	sphere->transform = init_identity_matrix(4);
 	options->objects.sphere
 		= append_sphere_list(options->objects.sphere, sphere);
 	return (0);
@@ -59,15 +58,12 @@ int	create_plane(t_options *options, char **args)
 	coords = ft_split(args[1], ',');
 	normal = ft_split(args[2], ',');
 	color = ft_split(args[3], ',');
-	plane->coords.x = ft_atob(coords[0]);
-	plane->coords.y = ft_atob(coords[1]);
-	plane->coords.z = ft_atob(coords[2]);
-	plane->normal.x = ft_atob(normal[0]);
-	plane->normal.y = ft_atob(normal[1]);
-	plane->normal.z = ft_atob(normal[2]);
-	plane->color.r = ft_atoi(color[0]);
-	plane->color.g = ft_atoi(color[1]);
-	plane->color.b = ft_atoi(color[2]);
+	plane->coords = new_point3(ft_atof(coords[0]), ft_atof(coords[1]),
+			ft_atof(coords[2]));
+	plane->normal = new_vec3(ft_atof(normal[0]), ft_atof(normal[1]),
+			ft_atof(normal[2]));
+	plane->color = new_tuple(ft_atoi(color[0]), ft_atoi(color[1]),
+			ft_atoi(color[2]), 1);
 	options->objects.plane = append_plane_list(options->objects.plane, plane);
 	return (0);
 }
@@ -91,17 +87,14 @@ int	create_cylinder(t_options *options, char **args)
 	coords = ft_split(args[1], ',');
 	normal = ft_split(args[2], ',');
 	color = ft_split(args[5], ',');
-	cylinder->coords.x = ft_atob(coords[0]);
-	cylinder->coords.y = ft_atob(coords[1]);
-	cylinder->coords.z = ft_atob(coords[2]);
-	cylinder->normal.x = ft_atob(normal[0]);
-	cylinder->normal.y = ft_atob(normal[1]);
-	cylinder->normal.z = ft_atob(normal[2]);
-	cylinder->radius = ft_atob(args[2]) / 2.0;
-	cylinder->height = ft_atob(args[3]);
-	cylinder->color.r = ft_atoi(color[0]);
-	cylinder->color.g = ft_atoi(color[1]);
-	cylinder->color.b = ft_atoi(color[2]);
+	cylinder->coords = new_point3(ft_atof(coords[0]), ft_atof(coords[1]),
+			ft_atof(coords[2]));
+	cylinder->normal = new_vec3(ft_atof(normal[0]), ft_atof(normal[1]),
+			ft_atof(normal[2]));
+	cylinder->radius = ft_atof(args[2]) / 2.0;
+	cylinder->height = ft_atof(args[3]);
+	cylinder->color = new_tuple(ft_atoi(color[0]), ft_atoi(color[1]),
+			ft_atoi(color[2]), 1);
 	options->objects.cylinder
 		= append_cylinder_list(options->objects.cylinder, cylinder);
 	return (0);
