@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/17 14:19:11 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/10/24 11:27:07 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	create_sphere(t_options *options, char **args)
 	sphere->radius = ft_atof(args[2]) / 2.0;
 	sphere->color = new_tuple(ft_atoi(color[0]), ft_atoi(color[1]),
 			ft_atoi(color[2]), 1);
-	sphere->transform = init_identity_matrix(4);
+	sphere->transform = *init_identity_matrix(4);
 	options->objects.sphere
 		= append_sphere_list(options->objects.sphere, sphere);
 	return (0);

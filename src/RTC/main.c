@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/17 17:46:52 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/11 18:34:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int main(void)
 	mlx_t *mlx = mlx_init(500, 500, "test", 1);
 	mlx_image_t *image = mlx_new_image(mlx, 500, 500);
 
-	t_point3	origin = new_point3(0, 0, -5);
+	t_point3	origin = new_point3(-2, 2, 0);
 	float wall_z = 10;
 	float wall_size = 7;
 	int canvas_width = (int)image->width;
@@ -104,7 +104,7 @@ int main(void)
 	o.object = sphere_new();
 	o.type = SPHERE;
 	t_sphere *s = (t_sphere *)o.object;
-	set_transform(&s->transform, multiply_matrices(translation(0, 0, 5), scaling(1, 0.5, 1)));
+	set_transform(&s->transform, multiply_matrices(translation(0, 0, 5), scaling(1, 1, 1)));
 	// set_transform(&s->transform, scaling(0.5, 1, 1));
 	// set_transform(&s->transform, (multiply_matrices(rotation_z(M_PI / 4), scaling(0.5, 1, 1))));
 	// set_transform(&s->transform, (multiply_matrices(shearing_x(1, 0), scaling(0.5, 1, 1))));
