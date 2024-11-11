@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:30:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/17 16:20:11 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/11 20:26:13 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_matrix *inverse(t_matrix mat)
 		i++;
 	}
 	result->size = mat.size;
-	transpose_matrix(result);
+	result = transpose_matrix(result);
 	divide_matrix(result, determinant(mat));
 	return result;
 }

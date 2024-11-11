@@ -64,33 +64,7 @@ SRC_FILES		+= input/input.c
 SRC_FILES		+= input/find_scene_file.c
 SRC_FILES		+= input/tests.c #remove
 
-# MLX_HANDLER Sources
-#SRC_FILES		+= mlx_handle/mlx_init.c
-#SRC_FILES		+= mlx_handle/mlx_hooks.c
-#SRC_FILES		+= mlx_handle/render_image.c
-
-# VEC3 Sources
-#SRC_FILES		+= vec3/vec3_2_basic_ops.c
-#SRC_FILES		+= vec3/vec3.c
-#SRC_FILES		+= vec3/vec3_2.c
-#SRC_FILES		+= vec3/vec3_basic_ops.c
-#SRC_FILES		+= vec3/vec3_basic_ops_ret.c
-#SRC_FILES		+= vec3/vec3_utils.c
-#SRC_FILES		+= vec3/vec3_print.c
-
-#SRC_FILES		+= camera/camera.c
-#SRC_FILES		+= camera/camera_utils.c
-
-#SRC_FILES		+= color/color.c
-
-#SRC_FILES		+= ray/ray.c
-
-#SRC_FILES		+= objects/sphere.c
-#SRC_FILES		+= objects/plane.c
-#SRC_FILES		+= objects/cylinder.c
-
 SRC_FILES		+= RTC/main.c
-# SRC_FILES		+= RTC/canvas_colors.c
 
 #MATRIX
 SRC_FILES		+= RTC/operations/matrix/matrix_ops_1.c
@@ -103,6 +77,8 @@ SRC_FILES		+= RTC/operations/matrix/matrix_transform_2.c
 SRC_FILES		+= RTC/operations/objects/sphere.c
 
 #RAY
+SRC_FILES		+= RTC/operations/rays/ray_normal.c
+SRC_FILES		+= RTC/operations/rays/ray_reflect.c
 SRC_FILES		+= RTC/operations/rays/ray.c
 
 #TUPLES

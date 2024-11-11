@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:40:48 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/15 21:41:30 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/11 18:40:19 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,4 @@ t_vec3		neg_vec3(t_vec3 a);
 t_vec3		normalize(t_vec3 a);
 t_vec3		cross_product(t_vec3 a, t_vec3 b);
 
-#endif	
+#endif

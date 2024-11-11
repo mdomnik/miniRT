@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:42:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/17 16:27:19 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/11 20:26:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 //operations/matrix/matrix_ops_1.c
 t_matrix	*multiply_matrices(t_matrix *mat1, t_matrix *mat2);
-t_tuple		multiply_matrix_tuple(t_matrix mat, t_tuple tuple);
+t_tuple		multiply_matrix_tuple(t_matrix *mat, t_tuple *tuple);
 t_matrix	*init_identity_matrix(int size);
 t_matrix	submatrix(t_matrix mat, int ex_row, int ex_col);
 
 //operations/matrix/matrix_ops_2.c
 float		cofactor(t_matrix mat, int row, int col);
 float		minor(t_matrix mat, int row, int col);
-void		transpose_matrix(t_matrix *mat);
+t_matrix	*transpose_matrix(t_matrix *mat);
 bool		compare_matrices(t_matrix mat1, t_matrix mat2);
 
 //operations/matrix/matrix_ops_3.c

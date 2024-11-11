@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/11 18:34:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/11 20:37:05 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,47 +88,98 @@
 	// printf("xs->i[0].t: %f\n", xs->i[0].t);
 	// printf("xs->i[1].t: %f\n", xs->i[1].t);
 // }
+
+
+
+
+// int main(void)
+// {
+// 	// t_object	o;
+// 	// o.object = sphere_new();
+// 	// o.type = SPHERE;
+// 	// t_sphere *s = (t_sphere *)o.object;
+// 	// t_matrix *m = translation(0, 1, 0);
+// 	// set_transform(&s->transform, m);
+// 	// print_matrix(s->transform);
+// 	// t_sphere *s2 = (t_sphere *)o.object;
+// 	// printf("-----------------\n");
+// 	// print_matrix(s2->transform);
+// 	// t_vec3 n = normal_at(&o, new_point3(0, 1.70711, -0.70711));
+// 	// print_tuple(n);
+
+// 	t_object	o;
+// 	o.object = sphere_new();
+// 	o.type = SPHERE;
+// 	t_sphere *s = (t_sphere *)o.object;
+// 	t_matrix *m = multiply_matrices(scaling(1, 0.5, 1), rotation_z(M_PI / 5));
+// 	set_transform(&s->transform, m);
+// 	t_vec3 n = normal_at(&o, new_point3(0, sqrt(2) / 2, -sqrt(2) / 2));
+// 	print_tuple(n);
+
+// }
+
+
 int main(void)
 {
-	mlx_t *mlx = mlx_init(500, 500, "test", 1);
-	mlx_image_t *image = mlx_new_image(mlx, 500, 500);
-
-	t_point3	origin = new_point3(-2, 2, 0);
-	float wall_z = 10;
-	float wall_size = 7;
-	int canvas_width = (int)image->width;
-	int canvas_height = (int)image->height;
-	float pixel_size = wall_size / canvas_width;
-	float half = wall_size / 2;
-	t_object	o;
-	o.object = sphere_new();
-	o.type = SPHERE;
-	t_sphere *s = (t_sphere *)o.object;
-	set_transform(&s->transform, multiply_matrices(translation(0, 0, 5), scaling(1, 1, 1)));
-	// set_transform(&s->transform, scaling(0.5, 1, 1));
-	// set_transform(&s->transform, (multiply_matrices(rotation_z(M_PI / 4), scaling(0.5, 1, 1))));
-	// set_transform(&s->transform, (multiply_matrices(shearing_x(1, 0), scaling(0.5, 1, 1))));
-	for (int y = 0; y < canvas_height; y++)
-	{
-		float world_y = half - pixel_size * y;
-		for (int x = 0; x < canvas_width; x++)
-		{
-			float world_x = -half + pixel_size * x;
-			t_point3 position = new_point3(world_x, world_y, wall_z);
-			t_vec3 direction = normalize(sub_tuple(position, origin));
-			t_ray *ray = ray_new(&origin, &direction);
-			t_x *xs = intersect(&o, ray);
-			t_i h = hit(xs);
-			if (h.object != NULL)
-				mlx_put_pixel(image, x, y, 0xFF0000FF);
-			else
-				mlx_put_pixel(image, x, y, 0x000000FF);
-		}
-	}
-	mlx_image_to_window(mlx, image, 0, 0);
-	mlx_loop(mlx);
-	return(0);
+	t_vec3 v = new_vec3(0, -1, 0);
+	t_vec3 n = new_vec3(sqrt(2) / 2, sqrt(2) / 2, 0);
+	t_vec3 r = reflect(v, n);
+	print_tuple(r);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// int main(void)
+// {
+// 	mlx_t *mlx = mlx_init(500, 500, "test", 1);
+// 	mlx_image_t *image = mlx_new_image(mlx, 500, 500);
+
+// 	t_point3	origin = new_point3(-2, 2, 0);
+// 	float wall_z = 10;
+// 	float wall_size = 7;
+// 	int canvas_width = (int)image->width;
+// 	int canvas_height = (int)image->height;
+// 	float pixel_size = wall_size / canvas_width;
+// 	float half = wall_size / 2;
+// 	t_object	o;
+// 	o.object = sphere_new();
+// 	o.type = SPHERE;
+// 	t_sphere *s = (t_sphere *)o.object;
+// 	set_transform(&s->transform, multiply_matrices(translation(0, 0, 5), scaling(1, 1, 1)));
+// 	// set_transform(&s->transform, scaling(0.5, 1, 1));
+// 	// set_transform(&s->transform, (multiply_matrices(rotation_z(M_PI / 4), scaling(0.5, 1, 1))));
+// 	// set_transform(&s->transform, (multiply_matrices(shearing_x(1, 0), scaling(0.5, 1, 1))));
+// 	for (int y = 0; y < canvas_height; y++)
+// 	{
+// 		float world_y = half - pixel_size * y;
+// 		for (int x = 0; x < canvas_width; x++)
+// 		{
+// 			float world_x = -half + pixel_size * x;
+// 			t_point3 position = new_point3(world_x, world_y, wall_z);
+// 			t_vec3 direction = normalize(sub_tuple(position, origin));
+// 			t_ray *ray = ray_new(&origin, &direction);
+// 			t_x *xs = intersect(&o, ray);
+// 			t_i h = hit(xs);
+// 			if (h.object != NULL)
+// 				mlx_put_pixel(image, x, y, 0xFF0000FF);
+// 			else
+// 				mlx_put_pixel(image, x, y, 0x000000FF);
+// 		}
+// 	}
+// 	mlx_image_to_window(mlx, image, 0, 0);
+// 	mlx_loop(mlx);
+// 	return(0);
+// }
 
 
 

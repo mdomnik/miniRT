@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:41:37 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/17 16:26:03 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/11 19:54:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ t_matrix	*multiply_matrices(t_matrix *mat1, t_matrix *mat2)
 }
 
 //multiply 4x4 matrix by tuple
-t_tuple	multiply_matrix_tuple(t_matrix mat, t_tuple tuple)
+t_tuple	multiply_matrix_tuple(t_matrix *mat, t_tuple *tuple)
 {
 	int i;
 	t_tuple result;
 	
 	i = 0;
-	while(i < mat.size)
+	while(i < mat->size)
 	{
-		result.a[i] = mat.a[i][0] * tuple.x + mat.a[i][1] * tuple.y + mat.a[i][2] * tuple.z + mat.a[i][3] * tuple.w;
+		result.a[i] = mat->a[i][0] * tuple->x + mat->a[i][1] * tuple->y + mat->a[i][2] * tuple->z + mat->a[i][3] * tuple->w;
 		i++;
 	}
 	return (result);

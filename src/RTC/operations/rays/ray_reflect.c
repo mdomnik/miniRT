@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera_utils.c                                     :+:      :+:    :+:   */
+/*   ray_reflect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/23 13:46:12 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/21 18:49:28 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/11/11 20:33:08 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/11/11 20:36:11 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-// Convert degrees to radians (conversion of degrees into radians)
-inline double	deg_to_rad(double deg)
+t_vec3 reflect(t_vec3 in, t_vec3 normal)
 {
-	return (deg * PI / 180.0);
+	float	dot;
+	t_vec3	reflect;
+
+	dot = dot_product(in, normal);
+	reflect = sub_tuple(in, mult_tuple(normal, 2 * dot));
+	return (reflect);
 }

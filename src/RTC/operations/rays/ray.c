@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:54:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/17 07:03:53 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/11 19:50:47 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_ray		*ray_transform(t_ray *ray, t_matrix *matrix)
 	new_ray = malloc(sizeof(t_ray));
 	if (!new_ray)
 		return (NULL);
-	new_ray->orig = multiply_matrix_tuple(*matrix, ray->orig);
-	new_ray->dir = multiply_matrix_tuple(*matrix, ray->dir);
+	new_ray->orig = multiply_matrix_tuple(matrix, &ray->orig);
+	new_ray->dir = multiply_matrix_tuple(matrix, &ray->dir);
 	return (new_ray);
 }

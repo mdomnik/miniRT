@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:15:19 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/14 23:51:02 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/11 20:27:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,28 @@ float	minor(t_matrix mat, int row, int col)
 	return (det);
 }
 
-void transpose_matrix(t_matrix *mat)
+t_matrix *transpose_matrix(t_matrix *mat)
 {
 	int i;
 	int j;
-	t_matrix result;
+	t_matrix *result = malloc(sizeof(t_matrix));
+		
+	if (result == NULL)
+		return NULL; // Handle memory allocation failure
 
+	result->size = mat->size;
 	i = 0;
 	while (i < mat->size)
 	{
 		j = 0;
 		while (j < mat->size)
 		{
-			result.a[i][j] = mat->a[j][i];
+			result->a[i][j] = mat->a[j][i];
 			j++;
 		}
 		i++;
 	}
-	result.size = mat->size;
-	*mat = result;
+	return result;
 }
 
 // Function to compare two matrices
