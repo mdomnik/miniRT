@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_vectors.c                                      :+:      :+:    :+:   */
+/*   ray_normal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 19:19:48 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/11 20:24:03 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/12 17:48:57 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static t_vec3 normal_at_sphere(t_sphere *sphere, t_point3 *world_point);
 t_vec3	normal_at(t_object *object, t_point3 point)
 {
 	if (object->type == SPHERE)
+	{
 		return(normal_at_sphere((t_sphere *)object->object, &point));
+	}
 	return (new_vec3(0, 0, 0));
 }
 

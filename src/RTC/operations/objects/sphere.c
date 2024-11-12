@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:17:22 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/17 14:37:36 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/12 15:22:23 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ t_sphere	*sphere_new()
 	sphere->radius = 1;
 	sphere->color = new_tuple(0, 0, 0, 0);
 	sphere->transform = *init_identity_matrix(4);
+	sphere->material = default_material();
 	return (sphere);
 }

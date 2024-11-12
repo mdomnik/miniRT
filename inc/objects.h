@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/17 17:54:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/12 17:12:37 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ L,VECTOR,FLOAT,COLOR;\
 sp,VECTOR,FLOAT,COLOR;\
 pl,VECTOR,VRANGE,COLOR;\
 cy,VECTOR,VRANGE,FLOAT,FLOAT,COLOR"
+
 
 typedef struct s_ambient	t_ambient;
 typedef struct s_camera		t_camera;
@@ -78,6 +79,7 @@ struct s_sphere
 	float				radius;
 	t_color3			color;
 	t_matrix			transform;
+	t_material			*material;
 	struct s_sphere		*next;
 };
 
@@ -116,5 +118,7 @@ struct s_object
 	void			*object;
 	struct s_object	*next;
 };
+
+
 
 #endif

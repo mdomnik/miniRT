@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/11 18:40:11 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/12 15:25:03 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ typedef struct s_project	t_project;
 typedef struct s_x	t_x;
 
 typedef struct s_intersection		t_i;
+
+typedef struct s_light_p	t_light_p;
+
+
 
 struct s_canvas
 {
@@ -75,6 +79,14 @@ struct s_intersection
 	float			t;
 	t_object		*object;
 };
+
+struct s_light_p
+{
+	t_point3		*position;
+	t_color3		*intensity;
+};
+
+
 
 
 t_sphere	*sphere_new();

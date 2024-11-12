@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:37:37 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/11 18:41:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/12 17:49:17 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_tuple add_tuples(t_tuple a, t_tuple b)
 	result.y = a.y + b.y;
 	result.z = a.z + b.z;
 	result.w = a.w + b.w;
-	if (result.w > 1) //delete later
-		printf("Warning: Tuple w value is greater than 1\n");
+	// if (result.w > 1) //delete later
+	// 	printf("Warning: Tuple w value is greater than 1\n");
 	return (result);
 }
 
@@ -39,8 +39,8 @@ t_tuple sub_tuple(t_tuple a, t_tuple b)
 	result.y = a.y - b.y;
 	result.z = a.z - b.z;
 	result.w = a.w - b.w;
-	if (result.w < 0) //delete later
-		printf("Warning: Tuple w value is less than 0\n");
+	// if (result.w < 0) //delete later
+	// 	printf("Warning: Tuple w value is less than 0\n");
 	return (result);
 }
 
