@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:17:22 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/12 15:22:23 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/13 14:54:39 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
 // Create a new sphere object
-t_sphere	*sphere_new()
+t_sphere	*sphere_new(void)
 {
 	t_sphere	*sphere;
 	static int	id = 0;

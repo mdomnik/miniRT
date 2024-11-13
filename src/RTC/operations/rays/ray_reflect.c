@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_reflect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 20:33:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/12 18:07:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/13 14:55:05 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_light_p *new_light(t_point3 *position, t_color3 *intensity)
 	return (light);
 }
 
-t_material *default_material()
+t_material *default_material(void)
 {
 	t_material *material;
 

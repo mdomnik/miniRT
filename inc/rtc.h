@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtc.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/12 15:25:03 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/13 14:54:33 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ struct s_light_p
 
 
 
-t_sphere	*sphere_new();
+t_sphere	*sphere_new(void);
 
 
 
