@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   default.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 13:38:53 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/14 17:45:19 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_material *default_material()
+t_material *default_material(void)
 {
 	t_material *material;
 
@@ -25,7 +25,7 @@ t_material *default_material()
 	return (material);
 }
 //default world
-t_world	*default_world()
+t_world	*default_world(void)
 {
 	t_world	*world;
 

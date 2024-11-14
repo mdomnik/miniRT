@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtc.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 13:43:13 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/14 17:44:12 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ struct s_world
 
 
 
-t_sphere	*sphere_new();
+t_sphere	*sphere_new(void);
 
 
 
