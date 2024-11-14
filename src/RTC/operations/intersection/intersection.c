@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 05:02:00 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/12 17:49:35 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/13 21:40:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_x *intersect_sphere(t_object *object, t_sphere *sphere, t_ray *ray)
 	xs->i = malloc(sizeof(t_i) * 2);
 	sphere_to_ray = sub_tuple(ray_t->orig, sphere->coords);
 	a = dot_product(ray_t->dir, ray_t->dir);
-	b = 2 * dot_product(ray->dir, sphere_to_ray);
+	b = 2 * dot_product(ray_t->dir, sphere_to_ray);
 	c = dot_product(sphere_to_ray, sphere_to_ray) - 1;
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
@@ -68,27 +68,55 @@ t_i	intersection(float t, t_object *object)
 	return (i);
 }
 
-t_x *intersections(int num_x, t_i i1, t_i i2, ...)
-{
-	t_x		*xs;
-	va_list	args;
-	t_i		i;
+// t_x *intersections(int num_x, t_i i1, t_i i2, ...)
+// {
+// 	t_x		*xs;
+// 	va_list	args;
+// 	t_i		i;
 
-	xs = malloc(sizeof(t_x));
-	xs->count = num_x;
-	xs->i = malloc(sizeof(t_i) * num_x);
-	xs->i[0].t = i1.t;
-	xs->i[1].t = i2.t;
-	xs->i[0].object = i1.object;
-	xs->i[1].object = i2.object;
-	va_start(args, i2);
-	for (int j = 2; j < num_x; j++) {
-		i = va_arg(args, t_i);
-		xs->i[j].t = i.t;
-		xs->i[j].object = i.object;
+// 	xs = malloc(sizeof(t_x));
+// 	xs->count = num_x;
+// 	xs->i = malloc(sizeof(t_i) * num_x);
+// 	xs->i[0].t = i1.t;
+// 	xs->i[1].t = i2.t;
+// 	xs->i[0].object = i1.object;
+// 	xs->i[1].object = i2.object;
+// 	va_start(args, i2);
+// 	for (int j = 2; j < num_x; j++) {
+// 		i = va_arg(args, t_i);
+// 		xs->i[j].t = i.t;
+// 		xs->i[j].object = i.object;
+// 	}
+// 	va_end(args);
+// 	return (xs);
+// }
+
+t_x *intersections(int num_x, t_x *xs, t_x *temp_xs)
+{
+	t_x		*new_xs;
+	int		i;
+	int		j;
+
+	new_xs = malloc(sizeof(t_x));
+	new_xs->count = num_x;
+	new_xs->i = malloc(sizeof(t_i) * num_x);
+	i = 0;
+	while (i < xs->count)
+	{
+		new_xs->i[i].t = xs->i[i].t;
+		new_xs->i[i].object = xs->i[i].object;
+		i++;
 	}
-	va_end(args);
-	return (xs);
+	j = 0;
+	while (j < temp_xs->count)
+	{
+		new_xs->i[i].t = temp_xs->i[j].t;
+		new_xs->i[i].object = temp_xs->i[j].object;
+		i++;
+		j++;
+	}
+	
+	return (new_xs);
 }
 
 t_i hit(t_x *xs)

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:30:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/11 20:26:13 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/13 17:36:29 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ t_matrix *inverse(t_matrix mat)
 	t_matrix *result;
 
 	i = 0;
-	result = init_identity_matrix(mat.size);
 	if (determinant(mat) == 0)
 	{
 		printf("Error: Matrix is not invertible\n");
 		exit(1);
 	}
+	result = init_identity_matrix(mat.size);
 	while(i < mat.size)
 	{
 		j = 0;

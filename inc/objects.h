@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/12 17:12:37 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/13 13:54:02 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_obj		t_obj;
 typedef struct s_object		t_object;
 
 //ENUM OF OBJECTS
-typedef enum e_objects
+typedef enum e_object_type
 {
 	NONE = -1,
 	AMBIENT = 0,
@@ -47,7 +47,7 @@ typedef enum e_objects
 	SPHERE = 3,
 	PLANE = 4,
 	CYLINDER = 5
-}	t_objects;
+}	t_object_type;
 
 //REQUIRED OBJECT STRUCTS
 struct s_ambient
@@ -114,7 +114,7 @@ struct s_obj
 
 struct s_object
 {
-	t_objects		type;
+	t_object_type		type;
 	void			*object;
 	struct s_object	*next;
 };

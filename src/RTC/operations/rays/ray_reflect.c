@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 20:33:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/12 18:07:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/13 18:45:04 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,6 @@ t_light_p *new_light(t_point3 *position, t_color3 *intensity)
 	light->position = position;
 	light->intensity = intensity;
 	return (light);
-}
-
-t_material *default_material()
-{
-	t_material *material;
-
-	material = malloc(sizeof(t_material));
-	material->color = new_color3_p(1, 1, 1);
-	material->ambient = 0.1;
-	material->diffuse = 0.9;
-	material->specular = 0.9;
-	material->shininess = 200.0;
-	return (material);
 }
 
 t_color3 lighting(t_material *m, t_light_p *light, t_point3 *point, t_vec3 eyev, t_vec3 normalv)
@@ -79,10 +66,9 @@ t_color3 lighting(t_material *m, t_light_p *light, t_point3 *point, t_vec3 eyev,
 			specular = new_color3(0, 0, 0);
 		else
 		{
-
 			factor = powf(reflect_dot_eye, m->shininess);
 			specular = mult_tuple(*light->intensity, (m->specular * factor));
-			print_tuple(specular);
+			
 		}
 	}
 	result = (add_tuples(add_tuples(ambient, diffuse), specular));

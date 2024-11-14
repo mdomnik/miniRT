@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   def_utils.h                                        :+:      :+:    :+:   */
+/*   def_objects.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 21:45:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 15:52:46 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/11/13 13:52:07 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/11/13 13:54:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEF_UTILS_H
-# define DEF_UTILS_H
+#ifndef DEF_OBJECTS_H
+# define DEF_OBJECTS_H
 
-//operations/utils/default.c
-t_material *default_material(void);
-t_world	*default_world(void);
 
-//operations/utils/utils_1.c
-bool		is_equal(float a, float b);
-float		deg_to_rad(float deg);
-int			color_to_int(t_color3 color);
+t_object	*object_new(void *object, t_object_type type);
+void 		add_object(t_object **objects, t_object *new_object);
 
 #endif

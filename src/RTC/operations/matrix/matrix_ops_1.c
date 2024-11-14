@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:41:37 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/11 19:54:06 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/13 19:02:33 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ t_matrix *init_identity_matrix(int size)
 	int j;
 	t_matrix *result;
 
-	result = malloc(sizeof(t_matrix));
 	i = 0;
+	result = malloc(sizeof(t_matrix));
 	while (i < size)
 	{
 		j = 0;

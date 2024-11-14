@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:31:22 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/12 16:35:42 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/13 18:43:02 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,17 @@ t_tuple div_tuple(t_tuple a, float scalar)
 	result.x = a.x / scalar;
 	result.y = a.y / scalar;
 	result.z = a.z / scalar;
-	result.w = a.w / scalar;
 	return (result);
 }
 
 //magnitude of a vector
 float magnitude(t_vec3 a)
 {
-	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z + a.w * a.w));
+	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }
 
 //dot product of two vectors
 float dot_product(t_vec3 a, t_vec3 b)
 {
-	return (a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w);
+	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }

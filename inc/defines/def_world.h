@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   def_utils.h                                        :+:      :+:    :+:   */
+/*   def_world.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 21:45:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 15:52:46 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/11/13 13:40:41 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/11/13 14:50:03 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEF_UTILS_H
-# define DEF_UTILS_H
+#ifndef DEF_WORLD_H
+# define DEF_WORLD_H
 
-//operations/utils/default.c
-t_material *default_material(void);
-t_world	*default_world(void);
-
-//operations/utils/utils_1.c
-bool		is_equal(float a, float b);
-float		deg_to_rad(float deg);
-int			color_to_int(t_color3 color);
+//operations/world/create.c
+t_world *create_world(t_object *objects, t_light_p *light);
+t_x		*intersect_world(t_world *world, t_ray *ray);
 
 #endif

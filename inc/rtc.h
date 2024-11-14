@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/12 15:25:03 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/13 13:43:13 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_intersection		t_i;
 
 typedef struct s_light_p	t_light_p;
 
-
+typedef struct s_world		t_world;
 
 struct s_canvas
 {
@@ -84,6 +84,12 @@ struct s_light_p
 {
 	t_point3		*position;
 	t_color3		*intensity;
+};
+
+struct s_world
+{
+	t_light_p		*light;
+	t_object		*objects;
 };
 
 

@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere.c                                           :+:      :+:    :+:   */
+/*   default.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 21:17:22 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 16:50:58 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/11/13 13:38:53 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-// Create a new sphere object
-t_sphere	*sphere_new()
+t_material *default_material()
 {
-	t_sphere	*sphere;
-	static int	id = 0;
+	t_material *material;
 
-	sphere = malloc(sizeof(t_sphere));
-	sphere->id = id++;
-	sphere->coords = new_point3(0, 0, 0);
-	sphere->radius = 1;
-	sphere->color = new_tuple(0, 0, 0, 0);
-	sphere->transform = *init_identity_matrix(4);
-	sphere->material = default_material();
-	return (sphere);
+	material = malloc(sizeof(t_material));
+	material->color = new_color3_p(1, 1, 1);
+	material->ambient = 0.1;
+	material->diffuse = 0.9;
+	material->specular = 0.9;
+	material->shininess = 200.0;
+	return (material);
+}
+//default world
+t_world	*default_world()
+{
+	t_world	*world;
+
+	world = malloc(sizeof(t_world));
+	world->objects = NULL;
+	world->light = NULL;
+	return (world);
 }

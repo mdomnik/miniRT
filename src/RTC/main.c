@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/12 18:09:48 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/13 19:06:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,65 +190,111 @@
 
 
 
-int color_to_int(t_color3 color);
+//WORKING SPHERE LIGHTING
+// int main(void)
+// {
+// 	mlx_t *mlx = mlx_init(500, 500, "test", 1);
+// 	mlx_image_t *image = mlx_new_image(mlx, 500, 500);
+
+// 	t_point3	origin = new_point3(0, 0, 0);
+// 	float wall_z = 10;
+// 	float wall_size = 7;
+// 	int canvas_width = (int)image->width;
+// 	int canvas_height = (int)image->height;
+// 	float pixel_size = wall_size / canvas_width;
+// 	float half = wall_size / 2;
+// 	t_object	o;
+// 	o.object = sphere_new();
+// 	o.type = SPHERE;
+// 	t_sphere *s = (t_sphere *)o.object;
+// 	s->material = default_material();
+// 	s->material->color = new_color3_p(0.8, 0.2, 1);
+// 	t_point3 *light_position = new_point3_p(10, -10, -10);
+// 	t_color3 *light_color = new_color3_p(0.5, 1, 1);
+// 	t_light_p *light = new_light(light_position, light_color);
+	
+// 	set_transform(&s->transform, multiply_matrices(translation(0, 0, 5), scaling(1, 1, 1)));
+	// set_transform(&s->transform, scaling(0.5, 1, 1));
+// 	// set_transform(&s->transform, (multiply_matrices(rotation_z(M_PI / 4), scaling(0.5, 1, 1))));
+// 	// set_transform(&s->transform, (multiply_matrices(shearing_x(1, 0), scaling(0.5, 1, 1))));
+// 	for (int y = 0; y < canvas_height; y++)
+// 	{
+// 		float world_y = half - pixel_size * y;
+// 		for (int x = 0; x < canvas_width; x++)
+// 		{
+// 			float world_x = -half + pixel_size * x;
+// 			t_point3 position = new_point3(world_x, world_y, wall_z);
+// 			t_vec3 direction = normalize(sub_tuple(position, origin));
+// 			t_ray *ray = ray_new(&origin, &direction);
+// 			t_x *xs = intersect(&o, ray);
+// 			t_i h = hit(xs);
+// 			if (h.object != NULL)
+// 			{
+// 				t_point3 point = ray_position(ray, h.t);
+// 				t_vec3 normal = normal_at(h.object, point);
+// 				t_vec3 eye = neg_tuple(ray->dir);
+// 				t_color3 color = lighting(s->material, light, &point, eye, normal);
+// 				// color = normalize(color);
+// 				int color_int = color_to_int(color);
+// 				mlx_put_pixel(image, x, y, color_int);
+// 			}
+// 			else
+// 				mlx_put_pixel(image, x, y, 0x000000FF);
+// 		}
+// 	}
+// 	mlx_image_to_window(mlx, image, 0, 0);
+// 	mlx_loop(mlx);
+// 	return(0);
+// }
 
 int main(void)
 {
-	mlx_t *mlx = mlx_init(500, 500, "test", 1);
-	mlx_image_t *image = mlx_new_image(mlx, 500, 500);
-
-	t_point3	origin = new_point3(0, 0, 0);
-	float wall_z = 10;
-	float wall_size = 7;
-	int canvas_width = (int)image->width;
-	int canvas_height = (int)image->height;
-	float pixel_size = wall_size / canvas_width;
-	float half = wall_size / 2;
-	t_object	o;
-	o.object = sphere_new();
-	o.type = SPHERE;
-	t_sphere *s = (t_sphere *)o.object;
-	s->material = default_material();
-	s->material->color = new_color3_p(0.8, 0.2, 1);
-	t_point3 *light_position = new_point3_p(-10, 10, -10);
-	t_color3 *light_color = new_color3_p(1, 1, 1);
-	t_light_p *light = new_light(light_position, light_color);
-	
-	set_transform(&s->transform, multiply_matrices(translation(0, 0, 5), scaling(1, 1, 1)));
-	// set_transform(&s->transform, scaling(0.5, 1, 1));
-	// set_transform(&s->transform, (multiply_matrices(rotation_z(M_PI / 4), scaling(0.5, 1, 1))));
-	// set_transform(&s->transform, (multiply_matrices(shearing_x(1, 0), scaling(0.5, 1, 1))));
-	for (int y = 0; y < canvas_height; y++)
+	t_light_p *light = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));	
+	t_sphere  *s1 = sphere_new();
+	s1->material->color = new_color3_p(0.8, 1.0, 0.6);
+	s1->material->diffuse = 0.7;
+	s1->material->specular = 0.2;
+	t_sphere  *s2 = sphere_new();
+	set_transform(&s2->transform, scaling(0.5, 0.5, 0.5));
+	t_object  *o1 = object_new(s1, SPHERE);
+	t_object  *o2 = object_new(s2, SPHERE);
+	add_object(&o1, o2);
+	t_world	*world = create_world(o1, light);
+	// if (world->light == NULL)
+	// 	printf("light is NULL\n");
+	// else
+	// {
+	// 	printf("light is not NULL\n");
+	// 	printf("light->position: %f, %f, %f\n", world->light->position->x, world->light->position->y, world->light->position->z);
+	// 	printf("light->intensity: %f, %f, %f\n", world->light->intensity->x, world->light->intensity->y, world->light->intensity->z);
+	// }
+	// if (world->objects == NULL)
+	// 	printf("objects is NULL\n");
+	// else
+	// 	{
+	// 		while (world->objects != NULL)
+	// 		{
+	// 			printf("object->type: %d\n", world->objects->type);
+	// 			if (world->objects->type == SPHERE)
+	// 			{
+	// 				t_sphere *s = (t_sphere *)world->objects->object;
+	// 				print_matrix(s->transform);
+	// 				print_tuple(*s->material->color);
+	// 				printf("diffuse: %f\n", s->material->diffuse);
+	// 				printf("specular: %f\n", s->material->specular);
+	// 				printf("-----------------\n");
+	// 			}
+	// 			world->objects = world->objects->next;
+	// 		}
+	// 	}
+	t_ray *r = ray_new(new_point3_p(0, 0, -5), new_vec3_p(0, 0, 1));
+	t_x *xs = intersect_world(world, r);
+	int i = 0;
+	printf("xs_count: %d\n", xs->count);
+	while (i < xs->count)
 	{
-		float world_y = half - pixel_size * y;
-		for (int x = 0; x < canvas_width; x++)
-		{
-			float world_x = -half + pixel_size * x;
-			t_point3 position = new_point3(world_x, world_y, wall_z);
-			t_vec3 direction = normalize(sub_tuple(position, origin));
-			t_ray *ray = ray_new(&origin, &direction);
-			t_x *xs = intersect(&o, ray);
-			t_i h = hit(xs);
-			if (h.object != NULL)
-			{
-				t_point3 point = ray_position(ray, h.t);
-				t_vec3 normal = normal_at(h.object, point);
-				t_vec3 eye = neg_tuple(ray->dir);
-				t_color3 color = lighting(s->material, light, &point, eye, normal);
-				int color_int = color_to_int(color);
-				mlx_put_pixel(image, x, y, color_int);
-			}
-			else
-				mlx_put_pixel(image, x, y, 0x000000FF);
-		}
+		printf("xs->i[%d].t: %f\n", i, xs->i[i].t);
+		i++;
 	}
-	mlx_image_to_window(mlx, image, 0, 0);
-	mlx_loop(mlx);
-	return(0);
 }
 
-//color to int
-int color_to_int(t_color3 color)
-{
-	return((int)(color.r * 255) << 24 | (int)(color.g * 255) << 16 | (int)(color.b * 255) << 8 | 0xFF);
-}

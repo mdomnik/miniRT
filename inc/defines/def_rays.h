@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:43:46 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/12 17:10:39 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/13 13:36:49 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_vec3	normal_at(t_object *object, t_point3 point);
 //operations/rays/ray_reflect.c
 t_vec3 reflect(t_vec3 in, t_vec3 normal);
 t_light_p *new_light(t_point3 *position, t_color3 *intensity);
-t_material *default_material();
 t_color3 lighting(t_material *m, t_light_p *light, t_point3 *point, t_vec3 eyev, t_vec3 normalv);
 
 //operations/rays/ray.c

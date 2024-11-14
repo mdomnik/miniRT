@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2024/11/12 15:24:34 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/13 13:53:23 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 # include "defines/def_tuples.h"
 # include "defines/def_utils.h"
 # include "defines/def_intersection.h"
+# include "defines/def_world.h"
+# include "defines/def_objects.h"
 
 # define VP_WIDTH  960
 # define VP_HEIGHT 540

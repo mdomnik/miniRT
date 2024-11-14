@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 23:56:53 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/12 17:10:44 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/13 18:46:56 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_color3 color_mult(t_color3 *a, t_color3 *b)
 	result.r = a->r * b->r;
 	result.g = a->g * b->g;
 	result.b = a->b * b->b;
-	result.al = a->al * b->al;
+	result.al = 1;
 	return (result);
 }
 

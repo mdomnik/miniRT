@@ -11,12 +11,12 @@
 CC				:= cc
 
 # Compiler flags
-CFLAGS			+= -Wall -Wextra -Werror -g
+CFLAGS			+= -Wall -Wextra -Werror 
 CFLAGS			+= -pedantic -Wunreachable-code
 CFLAGS			+= -Wshadow
 
 ifeq ($(DEBUG), 1)
-	CFLAGS		+= -ggdb3 -O0
+	CFLAGS		+= -gdwarf-2
 endif
 
 # Libraries to be linked
@@ -74,6 +74,7 @@ SRC_FILES		+= RTC/operations/matrix/matrix_transform_1.c
 SRC_FILES		+= RTC/operations/matrix/matrix_transform_2.c
 
 #OBJECTS
+SRC_FILES		+= RTC/operations/objects/object_struct.c
 SRC_FILES		+= RTC/operations/objects/sphere.c
 
 #RAY
@@ -89,7 +90,12 @@ SRC_FILES		+= RTC/operations/tuples/tuples_ops_2.c
 SRC_FILES		+= RTC/operations/tuples/tuples_ops_3.c
 
 #UTILS
+SRC_FILES		+= RTC/operations/utils/default.c
 SRC_FILES		+= RTC/operations/utils/utils_1.c
+
+#WORLD
+SRC_FILES		+= RTC/operations/world/create.c
+SRC_FILES		+= RTC/operations/world/intersect.c
 
 SRC_FILES		+= RTC/operations/intersection/intersection.c
 
