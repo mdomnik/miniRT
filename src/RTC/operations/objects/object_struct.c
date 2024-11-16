@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:47:10 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 17:45:04 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/14 18:58:43 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,19 @@ void add_object(t_object **objects, t_object *new_object)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new_object;
+}
+
+void add_light(t_light_p **lights, t_light_p *new_light)
+{
+	t_light_p	*tmp;
+
+	if(!*lights)
+	{
+		*lights = new_light;
+		return ;
+	}
+	tmp = *lights;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new_light;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtc.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/14 17:44:12 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:02:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_intersection		t_i;
 typedef struct s_light_p	t_light_p;
 
 typedef struct s_world		t_world;
+
+typedef struct s_comp		t_comp;
 
 struct s_canvas
 {
@@ -82,8 +84,9 @@ struct s_intersection
 
 struct s_light_p
 {
-	t_point3		*position;
-	t_color3		*intensity;
+	t_point3			*position;
+	t_color3			*intensity;
+	struct s_light_p	*next;
 };
 
 struct s_world
@@ -92,6 +95,16 @@ struct s_world
 	t_object		*objects;
 };
 
+struct s_comp
+{
+	float			t;
+	t_object		*object;
+	t_point3		point;
+	t_vec3			eyev;
+	t_vec3			normalv;
+	t_vec3			reflectv;
+	int				inside;
+};
 
 
 

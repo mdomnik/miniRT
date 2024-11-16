@@ -94,6 +94,7 @@ SRC_FILES		+= RTC/operations/utils/default.c
 SRC_FILES		+= RTC/operations/utils/utils_1.c
 
 #WORLD
+SRC_FILES		+= RTC/operations/world/comps.c
 SRC_FILES		+= RTC/operations/world/create.c
 SRC_FILES		+= RTC/operations/world/intersect.c
 
