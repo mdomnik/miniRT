@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/16 19:53:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/16 20:07:58 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ t_world	*default_world(void)
 	t_light_p *l1 = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
 	// t_light_p *l2 = new_light(new_point3_p(10, -10, -10), new_color3_p(0.1, 0.8, 0.1));
 	t_sphere  *s1 = sphere_new();
-	s1->material->color = new_color3_p(0.1, 1.0, 0.1);
+	s1->material->color = new_color3_p(1, 0, 0);
 	s1->material->diffuse = 0.7;
 	s1->material->specular = 0.2;
 	t_sphere  *s2 = sphere_new();
-	s1->material->color = new_color3_p(1, 0.1, 0.1);
+	s1->material->color = new_color3_p(0, 0, 1);
 	set_transform(&s2->transform, scaling(0.5, 0.5, 0.5));
 	t_object  *o1 = object_new(s1, SPHERE);
 	t_object  *o2 = object_new(s2, SPHERE);

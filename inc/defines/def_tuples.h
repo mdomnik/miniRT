@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:40:48 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 18:44:32 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/16 20:06:08 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 t_tuple		*new_tuple_p(float x, float y, float z, float w);
 t_point3	*new_point3_p(float x, float y, float z);
 t_vec3		*new_vec3_p(float x, float y, float z);
-t_color3	*new_color3_p(float x, float y, float z);
+t_color3 	*new_color3_p(float r, float g, float b);
 
 //operations/tuples/tuples_init.c
 t_tuple		new_tuple(float x, float y, float z, float w);

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/16 19:47:02 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/16 20:28:00 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,6 @@ t_color3 shade_hit(t_world *world, t_comp *comps)
 
 t_color3 color_at(t_world *world, t_ray *ray)
 {
-
-
-	// t_i i = intersection(4, shape);
-	// t_comp *comps = prepare_computations(&i, r);
-	// t_color3 c = shade_hit(world, comps);
-
-
 	t_x *xs;
 	t_i i;
 	t_comp *comps;
@@ -83,3 +76,6 @@ t_color3 color_at(t_world *world, t_ray *ray)
 	free(comps);
 	return (color);	
 }
+
+
+

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/16 19:52:20 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/16 20:32:35 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,36 +324,47 @@
 // 	print_tuple(c);
 // }
 
-// //WORKING SPHERE LIGHTING
-int main(void)
-{
-	mlx_t *mlx = mlx_init(500, 500, "test", 1);
-	mlx_image_t *image = mlx_new_image(mlx, 500, 500);
+// // // //WORKING SPHERE LIGHTING
+// int main(void)
+// {
+// 	mlx_t *mlx = mlx_init(500, 500, "test", 1);
+// 	mlx_image_t *image = mlx_new_image(mlx, 500, 500);
 
-	t_point3	origin = new_point3(0, 0, 0);
-	float wall_z = 10;
-	float wall_size = 7;
-	int canvas_width = (int)image->width;
-	int canvas_height = (int)image->height;
-	float pixel_size = wall_size / canvas_width;
-	float half = wall_size / 2;
-	t_world	*world = default_world();
-	for (int y = 0; y < canvas_height; y++)
-	{
-		float world_y = half - pixel_size * y;
-		for (int x = 0; x < canvas_width; x++)
-		{
-			float world_x = -half + pixel_size * x;
-			t_point3 position = new_point3(world_x, world_y, wall_z);
-			t_vec3 direction = normalize(sub_tuple(position, origin));
-			t_ray *ray = ray_new(&origin, &direction);
-			t_color3 color = color_at(world, ray);
-			int color_int = color_to_int(color);
-			mlx_put_pixel(image, x, y, color_int);
-		}
-	}
-	printf("done\n");
-	mlx_image_to_window(mlx, image, 0, 0);
-	mlx_loop(mlx);
-	return(0);
+// 	t_point3	origin = new_point3(0, 0, 0);
+// 	float wall_z = 10;
+// 	float wall_size = 7;
+// 	int canvas_width = (int)image->width;
+// 	int canvas_height = (int)image->height;
+// 	float pixel_size = wall_size / canvas_width;
+// 	float half = wall_size / 2;
+// 	t_world	*world = default_world();
+// 	for (int y = 0; y < canvas_height; y++)
+// 	{
+// 		float world_y = half - pixel_size * y;
+// 		for (int x = 0; x < canvas_width; x++)
+// 		{
+// 			float world_x = -half + pixel_size * x;
+// 			t_point3 position = new_point3(world_x, world_y, wall_z);
+// 			t_vec3 direction = normalize(sub_tuple(position, origin));
+// 			t_ray *ray = ray_new(&origin, &direction);
+// 			t_color3 color = color_at(world, ray);
+// 			int color_int = color_to_int(color);
+// 			mlx_put_pixel(image, x, y, color_int);
+// 		}
+// 	}
+// 	printf("done\n");
+// 	mlx_image_to_window(mlx, image, 0, 0);
+// 	mlx_loop(mlx);
+// 	return(0);
+// }
+
+
+int main (void)
+{
+	t_point3 from = new_point3(1, 3, 2);
+	t_point3 to = new_vec3(4, -2, 8);
+	t_vec3 up = new_vec3(1, 1, 0);
+	t_matrix t = view_transformation(from, to, up);
+	print_matrix(t);
 }
+

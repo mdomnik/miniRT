@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/12 17:12:13 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/16 20:20:35 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ struct s_matrix
 		struct {
 			float	mat[16];
 		};
+		
 	};
 	int size;
 };
