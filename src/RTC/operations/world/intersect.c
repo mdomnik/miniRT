@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:36:41 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 19:05:45 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/16 19:44:07 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ t_x	*intersect_world(t_world *world, t_ray *ray)
 {
 	t_x *xs;
 	t_x *xs_temp;
+	t_object *obj_temp;
 	
 	xs = malloc(sizeof(t_x));
+	obj_temp = world->objects;
 	xs->count = 0;
 	xs = intersect(world->objects, ray);
 	world->objects = world->objects->next;
@@ -30,6 +32,7 @@ t_x	*intersect_world(t_world *world, t_ray *ray)
 		xs = intersections(xs->count + xs_temp->count,xs, xs_temp);
 		world->objects = world->objects->next;
 	}
+	world->objects = obj_temp;
 	sort_intersections(xs);
 	return (xs);
 }

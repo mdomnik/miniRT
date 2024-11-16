@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/16 16:54:43 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/16 19:47:02 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,50 @@ t_comp *prepare_computations(t_i *i, t_ray *ray)
 //shade hit
 t_color3 shade_hit(t_world *world, t_comp *comps)
 {
-	t_color3 color;
+	t_color3 color = new_color3(0, 0, 0);
+	t_light_p *light_temp;
 	
+	light_temp = world->light;
 	if (comps->object->type == SPHERE)
 	{
-		t_sphere *sphere = (t_sphere *)comps->object->object;			
+		t_sphere *sphere = (t_sphere *)comps->object->object;	
 		while(world->light != NULL)
 		{
-			printf("light->position: %f, %f, %f\n", world->light->position->x, world->light->position->y, world->light->position->z);
 			color = add_tuples(lighting(sphere->material, world->light, &comps->point, comps->eyev, comps->normalv), color);
-			printf("here\n");
-			print_tuple(color);
 			world->light = world->light->next;
-			printf("light is not NULL\n");
 		}
-		printf("returning color\n");
+		world->light = light_temp;
 		return (color);
 	}
 	return(new_color3(0, 0, 0));
+}
+
+t_color3 color_at(t_world *world, t_ray *ray)
+{
+
+
+	// t_i i = intersection(4, shape);
+	// t_comp *comps = prepare_computations(&i, r);
+	// t_color3 c = shade_hit(world, comps);
+
+
+	t_x *xs;
+	t_i i;
+	t_comp *comps;
+	t_color3 color;
+	
+	xs = intersect_world(world, ray);
+	if (xs->count == 0)
+	{
+		free(xs->i);
+		free(xs);
+		return (new_color3(0, 0, 0));
+	}
+	i = hit(xs);
+	comps = prepare_computations(&i, ray);
+	color = shade_hit(world, comps);
+	free(xs->i);
+	free(xs);
+	free(comps);
+	return (color);	
 }

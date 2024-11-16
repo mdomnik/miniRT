@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/16 16:51:17 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/16 19:52:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,46 +190,39 @@
 
 
 
-// //WORKING SPHERE LIGHTING
-int main(void)
-{
-	mlx_t *mlx = mlx_init(500, 500, "test", 1);
-	mlx_image_t *image = mlx_new_image(mlx, 500, 500);
+// // //WORKING SPHERE LIGHTING
+// int main(void)
+// {
+// 	mlx_t *mlx = mlx_init(500, 500, "test", 1);
+// 	mlx_image_t *image = mlx_new_image(mlx, 500, 500);
 
-	t_point3	origin = new_point3(0, 0, 0);
-	float wall_z = 10;
-	float wall_size = 7;
-	int canvas_width = (int)image->width;
-	int canvas_height = (int)image->height;
-	float pixel_size = wall_size / canvas_width;
-	float half = wall_size / 2;
-	t_world	*world = default_world();
-	for (int y = 0; y < canvas_height; y++)
-	{
-		float world_y = half - pixel_size * y;
-		for (int x = 0; x < canvas_width; x++)
-		{
-			float world_x = -half + pixel_size * x;
-			t_point3 position = new_point3(world_x, world_y, wall_z);
-			t_vec3 direction = normalize(sub_tuple(position, origin));
-			t_ray *ray = ray_new(&origin, &direction);
-			t_x *xs = intersect_world(world, ray);
-			t_i h = hit(xs);
-			if (h.object != NULL)
-			{
-				t_comp *comps = prepare_computations(&h, ray);
-				t_color3 color = shade_hit(world, comps);
-				int color_int = color_to_int(color);
-				mlx_put_pixel(image, x, y, color_int);
-			}
-			else
-				mlx_put_pixel(image, x, y, 0x000000FF);
-		}
-	}
-	mlx_image_to_window(mlx, image, 0, 0);
-	mlx_loop(mlx);
-	return(0);
-}
+// 	t_point3	origin = new_point3(0, 0, 0);
+// 	float wall_z = 10;
+// 	float wall_size = 7;
+// 	int canvas_width = (int)image->width;
+// 	int canvas_height = (int)image->height;
+// 	float pixel_size = wall_size / canvas_width;
+// 	float half = wall_size / 2;
+// 	t_world	*world = default_world();
+// 	for (int y = 0; y < canvas_height; y++)
+// 	{
+// 		float world_y = half - pixel_size * y;
+// 		for (int x = 0; x < canvas_width; x++)
+// 		{
+// 			float world_x = -half + pixel_size * x;
+// 			t_point3 position = new_point3(world_x, world_y, wall_z);
+// 			t_vec3 direction = normalize(sub_tuple(position, origin));
+// 			t_ray *ray = ray_new(&origin, &direction);
+// 			t_color3 color = color_at(world, ray);
+// 			int color_int = color_to_int(color);
+// 			mlx_put_pixel(image, x, y, color_int);
+// 		}
+// 	}
+// 	printf("done\n");
+// 	mlx_image_to_window(mlx, image, 0, 0);
+// 	mlx_loop(mlx);
+// 	return(0);
+// }
 
 // int main(void)
 // {
@@ -320,6 +313,47 @@ int main(void)
 // 	// print_tuple(c);
 	
 // 	//MULTIPLE LIGHTS
-	
+// 	// t_world *world = default_world();
+// 	// t_ray *r = ray_new(new_point3_p(0, 0, -5), new_vec3_p(0, 0, 1));
+// 	// t_color3 c = color_at(world, r);
+// 	// print_tuple(c);
+
+// 	t_world	*world = default_world();
+// 	t_ray *r = ray_new(new_point3_p(0, 0, 0.75), new_vec3_p(0, 0, -1));
+// 	t_color3 c = color_at(world, r);
+// 	print_tuple(c);
 // }
 
+// //WORKING SPHERE LIGHTING
+int main(void)
+{
+	mlx_t *mlx = mlx_init(500, 500, "test", 1);
+	mlx_image_t *image = mlx_new_image(mlx, 500, 500);
+
+	t_point3	origin = new_point3(0, 0, 0);
+	float wall_z = 10;
+	float wall_size = 7;
+	int canvas_width = (int)image->width;
+	int canvas_height = (int)image->height;
+	float pixel_size = wall_size / canvas_width;
+	float half = wall_size / 2;
+	t_world	*world = default_world();
+	for (int y = 0; y < canvas_height; y++)
+	{
+		float world_y = half - pixel_size * y;
+		for (int x = 0; x < canvas_width; x++)
+		{
+			float world_x = -half + pixel_size * x;
+			t_point3 position = new_point3(world_x, world_y, wall_z);
+			t_vec3 direction = normalize(sub_tuple(position, origin));
+			t_ray *ray = ray_new(&origin, &direction);
+			t_color3 color = color_at(world, ray);
+			int color_int = color_to_int(color);
+			mlx_put_pixel(image, x, y, color_int);
+		}
+	}
+	printf("done\n");
+	mlx_image_to_window(mlx, image, 0, 0);
+	mlx_loop(mlx);
+	return(0);
+}

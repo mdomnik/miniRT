@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 20:33:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 18:45:04 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/16 19:25:51 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_light_p *new_light(t_point3 *position, t_color3 *intensity)
 		return (NULL);
 	light->position = position;
 	light->intensity = intensity;
+	light->next = NULL;
 	return (light);
 }
 
