@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:52:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 20:15:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 21:41:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,23 @@ mlx_image_t *render(mlx_t *mlx, t_camera *camera, t_world *world)
 	t_ray *ray;
 	t_color3 color;
 	int color_int;
+	int y = 0;
+	int x = 0;
 
 	image = mlx_new_image(mlx, camera->hsize, camera->vsize);
-	for (int y = 0; y < camera->vsize; y++)
+
+	while(y < camera->vsize)
 	{
-		for (int x = 0; x < camera->hsize; x++)
+		x = 0;
+		while(x < camera->hsize)
 		{
-			ray = ray_for_pixel(camera, x, y);
+			ray = ray_for_pixel(camera, x, y);			
 			color = color_at(world, ray);
 			color_int = color_to_int(color);
 			mlx_put_pixel(image, x, y, color_int);
+			x++;
 		}
+		y++;
 	}
 	return(image);
 }

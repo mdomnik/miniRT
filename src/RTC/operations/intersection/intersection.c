@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 05:02:00 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 20:06:44 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 22:03:55 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@ static t_x *intersect_sphere(t_shape *shape, t_ray *ray)
 	float	b;
 	float	c;
 	float	discriminant;
-	t_ray	*ray_t;
 
-	ray_t = ray_transform(ray, inverse(shape->transform));
 	xs = malloc(sizeof(t_x));
 	xs->count = 0;
 	xs->i = malloc(sizeof(t_i) * 2);
-	sphere_to_ray = sub_tuple(ray_t->orig, new_point3(0, 0, 0));
-	a = dot_product(ray_t->dir, ray_t->dir);
-	b = 2 * dot_product(ray_t->dir, sphere_to_ray);
+	sphere_to_ray = sub_tuple(ray->orig, new_point3(0, 0, 0));
+	a = dot_product(ray->dir, ray->dir);
+	b = 2 * dot_product(ray->dir, sphere_to_ray);
 	c = dot_product(sphere_to_ray, sphere_to_ray) - 1;
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
@@ -49,9 +47,27 @@ static t_x *intersect_sphere(t_shape *shape, t_ray *ray)
 	}
 	return (xs);
 }
+t_x *intersect(t_shape *shape, t_ray *ray)
+{
+	t_ray	*local_ray;
+	t_x		*xs;
+	local_ray = ray_transform(ray, inverse(shape->transform));
+	shape->saved_ray = local_ray;
+	xs = local_intersect(shape, local_ray);
+	if (xs == NULL)
+	{
+		xs = malloc(sizeof(t_x));
+		xs->count = 0;
+		xs->i = malloc(sizeof(t_i) * 2);
+		xs->i[0].t = 0;
+		xs->i[1].t = 0;
+		xs->i[0].shape = NULL;
+		xs->i[1].shape = NULL;
+	}
+	return(xs);
+}
 
-// Intersect a ray with a sphere
-t_x	*intersect(t_shape *shape, t_ray *ray)
+t_x *local_intersect(t_shape *shape, t_ray *ray)
 {
 	if (shape->type == SPHERE)
 		return (intersect_sphere(shape, ray));

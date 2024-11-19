@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 20:20:39 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 21:55:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,11 @@ struct s_camera
 
 struct	s_shape
 {
-	t_type		type;
-	t_matrix	transform;
-	t_material	material;
-	t_shape		*next;
+	t_type				type;
+	t_matrix			transform;
+	t_material			material;
+	t_ray				*saved_ray;
+	struct s_shape		*next;
 };
 
 t_shape	*sphere_new(void);

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 20:20:39 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 21:40:48 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -368,7 +368,7 @@
 // 	print_matrix(t);
 // }
 
-//CAMERA TEST
+// CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 int main (void)
 {
 	mlx_t *mlx = mlx_init(800, 400, "test", 1);
@@ -419,3 +419,39 @@ int main (void)
 	
 // }
 
+// int main(void)
+// {
+// 	// t_shape *s = test_shape();
+// 	// set_transform(&s->transform, translation(2, 3, 4));
+// 	// t_material *m = default_material();
+// 	// m->ambient = 1;
+// 	// s->material = *m;
+// 	// printf("ambient: %f\n", s->material.ambient);
+	
+// 	// t_ray *r = ray_new(new_point3_p(0, 0, -5), new_vec3_p(0, 0, 1));
+// 	// t_shape *s = test_shape();
+// 	// set_transform(s, scaling(2, 2, 2));
+// 	// t_x *xs = intersect(s, r);
+// 	// print_tuple(s->saved_ray->orig);
+// 	// print_tuple(s->saved_ray->dir);
+// 	// printf("xs->count: %d\n", xs->count);
+
+// 	// t_ray *r = ray_new(new_point3_p(0, 0, -5), new_vec3_p(0, 0, 1));
+// 	// t_shape *s = test_shape();
+// 	// set_transform(s, translation(5, 0, 0));
+// 	// t_x *xs = intersect(s, r);
+// 	// printf("xs->count: %d\n", xs->count);
+// 	// print_tuple(s->saved_ray->orig);
+// 	// print_tuple(s->saved_ray->dir);
+
+// 	// t_shape *s = test_shape();
+// 	// set_transform(s, translation(0, 1, 0));
+// 	// t_vec3 n = normal_at(s, new_point3(0, 1.70711, -0.70711));
+// 	// print_tuple(n);
+
+// 	t_shape *s = test_shape();
+// 	t_matrix *m = multiply_matrices(scaling(1, 0.5, 1), rotation_z(M_PI / 5));
+// 	set_transform(s, m);
+// 	t_vec3 n = normal_at(s, new_point3(0, sqrt(2) / 2, -sqrt(2) / 2));
+// 	print_tuple(n);
+// }

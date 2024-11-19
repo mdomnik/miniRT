@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:42:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 16:50:03 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 21:16:05 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ t_matrix	*rotation_z(float rad);
 t_matrix	*shearing_x(float y, float z);
 t_matrix	*shearing_y(float x, float z);
 t_matrix	*shearing_z(float x, float y);
-void		set_transform(t_matrix *transform, t_matrix *new_transform);
+void		set_transform(t_shape *shape, t_matrix *new_transform);
 
 #endif

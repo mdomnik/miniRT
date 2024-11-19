@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 03:08:40 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/11 18:40:54 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 21:14:47 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ t_matrix *shearing_z(float x, float y)
 }
 
 //set transform
-void	set_transform(t_matrix *transform, t_matrix *new_transform)
+void	set_transform(t_shape *shape, t_matrix *new_transform)
 {
 	int	i;
 	int	j;
+	t_matrix *transform;
 
+	transform = &shape->transform;
 	i = 0;
 	while (i < 4)
 	{
