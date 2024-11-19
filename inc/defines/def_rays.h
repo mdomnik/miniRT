@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:43:46 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 15:54:14 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 20:10:08 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define DEF_RAYS_H
 
 //operations/rays/ray_normal.c
-t_vec3	normal_at(t_object *object, t_point3 point);
+t_vec3	normal_at(t_shape *shape, t_point3 point);
 
 //operations/rays/ray_reflect.c
 t_vec3 reflect(t_vec3 in, t_vec3 normal);

@@ -6,13 +6,13 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 14:40:15 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/11 18:40:34 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 20:20:39 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-static int count_objects(t_obj *source)
+static int count_toremoves(t_obj *source)
 {
 	int count;
 	 t_light *temp_light = source->light;
@@ -44,7 +44,7 @@ static int count_objects(t_obj *source)
 	return (count);
 }
 
-static int	populate_mandatory(t_object *object, t_obj *obj)
+static int	populate_mandatory(t_toremove *object, t_obj *obj)
 {
 	int	index;
 
@@ -71,7 +71,7 @@ static int	populate_mandatory(t_object *object, t_obj *obj)
 	return(index);
 }
 
-static void populate_optional(t_object *object, t_obj *obj, int index)
+static void populate_optional(t_toremove *object, t_obj *obj, int index)
 {
 	while (obj->sphere)
 	{
@@ -98,15 +98,15 @@ static void populate_optional(t_object *object, t_obj *obj, int index)
 	object[index].object = NULL;
 }
 
-t_object	*populate_object_struct(t_obj *obj)
+t_toremove	*populate_object_struct(t_obj *obj)
 {
-	t_object *object;
+	t_toremove *object;
 	int count;
 	int	index;
 
-	count = count_objects(obj);
+	count = count_toremoves(obj);
 
-	object = malloc(sizeof(t_object) * (count + 1));
+	object = malloc(sizeof(t_toremove) * (count + 1));
 	index = populate_mandatory(object, obj);
 	populate_optional(object, obj, index);
 	return (object);

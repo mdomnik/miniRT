@@ -6,15 +6,15 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 05:13:40 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 15:56:48 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 20:08:46 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEF_INTERSECTION_H
 # define DEF_INTERSECTION_H
 
-t_x	*intersect(t_object *object, t_ray *ray);
-t_i	intersection(float t, t_object *object);
+t_x	*intersect(t_shape *shape, t_ray *ray);
+t_i	intersection(float t, t_shape *shape);
 // t_x *intersections(int num_x, t_i i1, t_i i2, ...);
 t_x *intersections(int num_x, t_x *xs, t_x *temp_xs);
 t_i hit(t_x *xs);

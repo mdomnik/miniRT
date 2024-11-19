@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:46:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/16 20:11:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 20:20:39 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ int			check_ratio_format(char *str, int min, int max);
 int			check_vector_range_format(char *str);
 
 //scene_file/to_object.c
-t_object	*populate_object_struct(t_obj *obj);
+t_toremove	*populate_object_struct(t_obj *obj);
 
 #endif

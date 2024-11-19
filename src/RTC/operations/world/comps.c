@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 16:47:52 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 20:18:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ t_comp *prepare_computations(t_i *i, t_ray *ray)
 
 	comps = malloc(sizeof(t_comp));
 	comps->t = i->t;
-	comps->object = i->object;
+	comps->shape = i->shape;
 	comps->point = ray_position(ray, comps->t);
 	comps->eyev = neg_tuple(ray->dir);
-	comps->normalv = normal_at(comps->object, comps->point);
+	comps->normalv = normal_at(comps->shape, comps->point);
 	if (dot_product(comps->normalv, comps->eyev) < 0)
 	{
 		comps->inside = true;
@@ -42,13 +42,12 @@ t_color3 shade_hit(t_world *world, t_comp *comps)
 	
 	light_temp = world->light;
 	bool in_shadow;
-	if (comps->object->type == SPHERE)
+	if (comps->shape->type == SPHERE)
 	{
-		t_sphere *sphere = (t_sphere *)comps->object->object;	
 		while(world->light != NULL)
 		{
 			in_shadow = is_shadowed(world, world->light->position, &comps->over_point);
-			color = add_tuples(lighting(sphere->material, world->light, &comps->point, comps->eyev, comps->normalv, in_shadow), color);
+			color = add_tuples(lighting(&comps->shape->material, world->light, &comps->over_point, comps->eyev, comps->normalv, in_shadow), color);
 			world->light = world->light->next;
 		}
 		world->light = light_temp;

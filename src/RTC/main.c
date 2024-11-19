@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 18:28:00 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 20:20:39 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 // int main(void)
 // {
-	// t_object	object;
+	// t_toremove	object;
 	// object.object = sphere_new();
 	// object.type = SPHERE;
 	// t_i i1 = intersection(1, &object);
@@ -51,7 +51,7 @@
 	// t_i i;
 	// i = intersection(3.5, &object);
 	// t_ray *ray = ray_new(new_point3_p(0, 0, -5), new_vec3_p(0, 0, 1));
-	// t_object	o;
+	// t_toremove	o;
 	// o.object = sphere_new();
 	// o.type = SPHERE;
 	// t_i i1 = intersection(5, &o);
@@ -76,7 +76,7 @@
 
 	// t_ray *r = ray_new(new_point3_p(0, 0, -5), new_vec3_p(0, 0, 1));
 	
-	// t_object	o;
+	// t_toremove	o;
 	// o.object = sphere_new();
 	// o.type = SPHERE;
 
@@ -94,7 +94,7 @@
 
 // int main(void)
 // {
-// 	// t_object	o;
+// 	// t_toremove	o;
 // 	// o.object = sphere_new();
 // 	// o.type = SPHERE;
 // 	// t_sphere *s = (t_sphere *)o.object;
@@ -107,7 +107,7 @@
 // 	// t_vec3 n = normal_at(&o, new_point3(0, 1.70711, -0.70711));
 // 	// print_tuple(n);
 
-// 	t_object	o;
+// 	t_toremove	o;
 // 	o.object = sphere_new();
 // 	o.type = SPHERE;
 // 	t_sphere *s = (t_sphere *)o.object;
@@ -233,8 +233,8 @@
 // 	s1->material->specular = 0.2;
 // 	t_sphere  *s2 = sphere_new();
 // 	set_transform(&s2->transform, scaling(0.5, 0.5, 0.5));
-// 	t_object  *o1 = object_new(s1, SPHERE);
-// 	t_object  *o2 = object_new(s2, SPHERE);
+// 	t_toremove  *o1 = object_new(s1, SPHERE);
+// 	t_toremove  *o2 = object_new(s2, SPHERE);
 // 	add_object(&o1, o2);
 // 	t_world	*world = create_world(o1, light);
 // 	// if (world->light == NULL)
@@ -280,7 +280,7 @@
 // 	//p.94
 // 	// t_ray *r = ray_new(new_point3_p(0, 0, 0), new_vec3_p(0, 0, 1));
 // 	// t_sphere *s = sphere_new();
-// 	// t_object	*o;
+// 	// t_toremove	*o;
 // 	// o = object_new(s, SPHERE);
 // 	// t_i i = intersection(1, o);
 // 	// printf("sphere: %p\n", (void *)o);
@@ -296,7 +296,7 @@
 
 // 	// t_world	*world = default_world();
 // 	// t_ray *r = ray_new(new_point3_p(0, 0, -5), new_vec3_p(0, 0, 1));
-// 	// t_object	*shape = world->objects;
+// 	// t_toremove	*shape = world->objects;
 // 	// t_i i = intersection(4, shape);
 // 	// t_comp *comps = prepare_computations(&i, r);
 // 	// t_color3 c = shade_hit(world, comps);
@@ -306,7 +306,7 @@
 // 	// world->light = new_light(new_point3_p(0, 0.25, 0), new_color3_p(1, 1, 1));
 // 	// t_ray *r = ray_new(new_point3_p(0, 0, 0), new_vec3_p(0, 0, 1));
 // 	// world->objects = world->objects->next;
-// 	// t_object	*shape = world->objects;
+// 	// t_toremove	*shape = world->objects;
 // 	// t_i i = intersection(0.5, shape);
 // 	// t_comp *comps = prepare_computations(&i, r);
 // 	// t_color3 c = shade_hit(world, comps);

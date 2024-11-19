@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:52:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/14 19:02:30 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 20:09:59 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define DEF_OBJECTS_H
 
 
-t_object	*object_new(void *object, t_object_type type);
-void 		add_object(t_object **objects, t_object *new_object);
+void 		add_shape(t_shape **shapes, t_shape *new_shape);
 void 		add_light(t_light_p **lights, t_light_p *new_light);
 
 #endif

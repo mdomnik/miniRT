@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create.c                                           :+:      :+:    :+:   */
+/*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 13:40:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 13:55:41 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/11/19 19:52:39 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/11/19 20:12:03 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_world *create_world(t_object *objects, t_light_p *light)
+void add_shape(t_shape **shapes, t_shape *new_shape)
 {
-	t_world *world;
+	t_shape	*tmp;
 
-	world = malloc(sizeof(t_world));
-	world->objects = objects;
-	world->light = light;
-	return (world);
+	if (!*shapes)
+	{
+		*shapes = new_shape;
+		return ;
+	}
+	tmp = *shapes;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new_shape;
 }

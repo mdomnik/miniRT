@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 16:33:47 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 20:20:39 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,13 @@ typedef struct s_light_p	t_light_p;
 
 typedef struct s_world		t_world;
 
-typedef struct s_comp		t_comp;
+//-----------------------------------------
 
 typedef struct s_camera		t_camera;
+
+typedef struct s_shape		t_shape;
+
+typedef struct s_comp		t_comp;
 
 struct s_canvas
 {
@@ -68,7 +72,7 @@ struct s_project
 	mlx_t		*window;
 	mlx_image_t	*image;
 	t_options	*options;
-	t_object	*objects;
+	t_toremove	*objects;
 	t_canvas	canvas;
 };
 
@@ -81,7 +85,7 @@ struct s_x
 struct s_intersection
 {
 	float			t;
-	t_object		*object;
+	t_shape		*shape;
 };
 
 struct s_light_p
@@ -94,13 +98,13 @@ struct s_light_p
 struct s_world
 {
 	t_light_p		*light;
-	t_object		*objects;
+	t_shape			*shapes;
 };
 
 struct s_comp
 {
 	float			t;
-	t_object		*object;
+	t_shape			*shape;
 	t_point3		point;
 	t_vec3			eyev;
 	t_vec3			normalv;
@@ -120,7 +124,16 @@ struct s_camera
 	t_matrix		transform;
 };
 
-t_sphere	*sphere_new(void);
+
+struct	s_shape
+{
+	t_type		type;
+	t_matrix	transform;
+	t_material	material;
+	t_shape		*next;
+};
+
+t_shape	*sphere_new(void);
 
 
 

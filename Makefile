@@ -75,6 +75,7 @@ SRC_FILES		+= RTC/operations/matrix/matrix_transform_2.c
 
 #OBJECTS
 SRC_FILES		+= RTC/operations/objects/object_struct.c
+SRC_FILES		+= RTC/operations/objects/shapes.c
 SRC_FILES		+= RTC/operations/objects/sphere.c
 
 #RAY
