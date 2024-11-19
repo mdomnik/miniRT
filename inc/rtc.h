@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/16 17:02:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 14:12:05 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_light_p	t_light_p;
 typedef struct s_world		t_world;
 
 typedef struct s_comp		t_comp;
+
+typedef struct s_camera		t_camera;
 
 struct s_canvas
 {
@@ -106,7 +108,16 @@ struct s_comp
 	int				inside;
 };
 
-
+struct s_camera
+{
+	int				hsize;
+	int				vsize;
+	float			fov;
+	float			pixel_size;
+	float			half_width;
+	float			half_height;
+	t_matrix		transform;
+};
 
 t_sphere	*sphere_new(void);
 

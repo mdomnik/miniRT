@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/16 20:32:35 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 15:43:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -359,12 +359,24 @@
 // }
 
 
+// int main (void)
+// {
+// 	t_point3 from = new_point3(1, 3, 2);
+// 	t_point3 to = new_vec3(4, -2, 8);
+// 	t_vec3 up = new_vec3(1, 1, 0);
+// 	t_matrix t = view_transformation(from, to, up);
+// 	print_matrix(t);
+// }
+
+//CAMERA TEST
 int main (void)
 {
-	t_point3 from = new_point3(1, 3, 2);
-	t_point3 to = new_vec3(4, -2, 8);
-	t_vec3 up = new_vec3(1, 1, 0);
-	t_matrix t = view_transformation(from, to, up);
-	print_matrix(t);
+	mlx_t *mlx = mlx_init(800, 400, "test", 1);
+	t_world	*world = test_world();
+	t_camera *camera = camera_new(800, 400, M_PI / 3);
+	camera->transform = view_transformation(new_point3(0, 1.5, -5), new_point3(0, 1, 0), new_vec3(0, 1, 0));
+	mlx_image_t *image = render(mlx, camera, world);
+	mlx_image_to_window(mlx, image, 0, 0);
+	mlx_loop(mlx);
+	return(0);
 }
-

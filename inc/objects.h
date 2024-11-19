@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 13:54:02 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 13:51:38 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ cy,VECTOR,VRANGE,FLOAT,FLOAT,COLOR"
 
 
 typedef struct s_ambient	t_ambient;
-typedef struct s_camera		t_camera;
+// typedef struct s_camera		t_camera;
 typedef struct s_light		t_light;
 typedef struct s_sphere		t_sphere;
 typedef struct s_plane		t_plane;
@@ -56,12 +56,7 @@ struct s_ambient
 	t_color3			color;
 };
 
-struct s_camera
-{
-	t_point3			coords;
-	t_vec3				normal;
-	float				fov;
-};
+
 
 struct s_light
 {
@@ -105,7 +100,7 @@ struct s_cylinder
 struct s_obj
 {
 	t_ambient		*ambient;
-	t_camera		*camera;
+	// t_camera		*camera;
 	t_light			*light;
 	t_sphere		*sphere;
 	t_plane			*plane;
