@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 13:51:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 15:59:04 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_cylinder	t_cylinder;
 
 typedef struct s_obj		t_obj;
 typedef struct s_object		t_object;
+
+typedef struct s_temp		t_temp;
 
 //ENUM OF OBJECTS
 typedef enum e_object_type
@@ -96,11 +98,18 @@ struct s_cylinder
 	struct s_cylinder	*next;
 };
 
+struct s_temp
+{
+	t_point3			coords;
+	t_vec3				normal;
+	float				fov;
+};
+
 //SCENE STRUCTS
 struct s_obj
 {
 	t_ambient		*ambient;
-	// t_camera		*camera;
+	t_temp		*camera;
 	t_light			*light;
 	t_sphere		*sphere;
 	t_plane			*plane;

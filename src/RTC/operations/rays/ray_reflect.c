@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 20:33:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/16 19:25:51 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 16:00:44 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_light_p *new_light(t_point3 *position, t_color3 *intensity)
 	return (light);
 }
 
-t_color3 lighting(t_material *m, t_light_p *light, t_point3 *point, t_vec3 eyev, t_vec3 normalv)
+t_color3 lighting(t_material *m, t_light_p *light, t_point3 *point, t_vec3 eyev, t_vec3 normalv, bool in_shadow)
 {
 	t_color3	effective_color;
 	t_vec3 		lightv;
@@ -72,7 +72,10 @@ t_color3 lighting(t_material *m, t_light_p *light, t_point3 *point, t_vec3 eyev,
 			
 		}
 	}
-	result = (add_tuples(add_tuples(ambient, diffuse), specular));
+	if (in_shadow == true)
+		result = ambient;
+	else
+		result = add_tuples(add_tuples(ambient, diffuse), specular);
 	return (result);
 }
 

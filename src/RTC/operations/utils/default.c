@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 15:47:14 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 18:26:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ t_world	*default_world(void)
 	world = malloc(sizeof(t_world));
 	world->objects = NULL;
 	world->light = NULL;
-	t_light_p *l1 = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
+	t_light_p *l1 = new_light(new_point3_p(0, 0, -10), new_color3_p(1, 1, 1));
 	// t_light_p *l2 = new_light(new_point3_p(10, -10, -10), new_color3_p(0.1, 0.8, 0.1));
 	t_sphere  *s1 = sphere_new();
-	s1->material->color = new_color3_p(0.8, 1.0, 0.6);
-	s1->material->diffuse = 0.7;
-	s1->material->specular = 0.2;
+	// s1->material->color = new_color3_p(0.8, 1.0, 0.6);
+	// s1->material->diffuse = 0.7;
+	// s1->material->specular = 0.2;
 	t_sphere  *s2 = sphere_new();
-	set_transform(&s2->transform, scaling(0.5, 0.5, 0.5));
+	set_transform(&s2->transform, translation(0, 0, 10));
 	t_object  *o1 = object_new(s1, SPHERE);
 	t_object  *o2 = object_new(s2, SPHERE);
 	add_object(&o1, o2);
@@ -61,10 +61,10 @@ t_world *test_world(void)
 	floor->material->color = new_color3_p(1, 0.9, 0.9);
 	floor->material->specular = 0;
 	t_sphere  *left_wall = sphere_new();
-	set_transform(&left_wall->transform, multiply_matrices(multiply_matrices(translation(0, 0, 5), rotation_y(-M_PI / 4)), multiply_matrices(rotation_x(M_PI / 2), scaling(10, 0.01, 10))));
+	set_transform(&left_wall->transform, multiply_matrices(multiply_matrices(translation(0, 0, 5), rotation_y(-M_PI / 4)), multiply_matrices(rotation_x(M_PI / 2), scaling(10, 0.3, 10))));
 	left_wall->material = floor->material;
 	t_sphere  *right_wall = sphere_new();
-	set_transform(&right_wall->transform, multiply_matrices(multiply_matrices(translation(0, 0, 5), rotation_y(M_PI / 4)), multiply_matrices(rotation_x(M_PI / 2), scaling(10, 0.01, 10))));
+	set_transform(&right_wall->transform, multiply_matrices(multiply_matrices(translation(0, 0, 5), rotation_y(M_PI / 4)), multiply_matrices(rotation_x(M_PI / 2), scaling(10, 0.3, 10))));
 	right_wall->material = floor->material;
 	t_sphere  *middle = sphere_new();
 	set_transform(&middle->transform, translation(-0.5, 1, 0.5));

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 15:43:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 18:28:00 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -377,6 +377,45 @@ int main (void)
 	camera->transform = view_transformation(new_point3(0, 1.5, -5), new_point3(0, 1, 0), new_vec3(0, 1, 0));
 	mlx_image_t *image = render(mlx, camera, world);
 	mlx_image_to_window(mlx, image, 0, 0);
+	printf("done\n");
 	mlx_loop(mlx);
 	return(0);
 }
+
+// // CHAPTER 9
+// int main (void)
+// {
+// 	// t_vec3 eyev = new_vec3(0, 0, -1);
+// 	// t_vec3 normalv = new_vec3(0, 0, -1);
+// 	// t_light_p *light = new_light(new_point3_p(0, 0, -10), new_color3_p(1, 1, 1));
+// 	// bool in_shadow = false;
+// 	// t_color3 result = lighting(default_material(), light, new_point3_p(0, 0, 0), eyev, normalv, in_shadow);
+// 	// print_tuple(result);
+
+// 	// t_world *world = default_world();
+// 	// t_point3 *point = new_point3_p(-20, 20, -20);
+// 	// bool shadowed = is_shadowed(world, point);
+// 	// printf("shadowed: %d\n", shadowed);
+
+// 	// t_world *world = default_world();
+// 	// t_point3 *point = new_point3_p(-2, 2, -2);
+// 	// bool shadowed = is_shadowed(world, point);
+// 	// printf("shadowed: %d\n", shadowed);
+
+// 	// t_world *world = default_world();
+// 	// t_ray *r = ray_new(new_point3_p(0, 0, 5), new_vec3_p(0, 0, 1));
+// 	// t_i i = intersection(4, world->objects->next);
+// 	// t_comp *comps = prepare_computations(&i, r);
+	// t_color3 c = shade_hit(world, comps);
+// 	// print_tuple(c);
+	
+// 	// t_ray *r = ray_new(new_point3_p(0, 0, -5), new_vec3_p(0, 0, 1));
+// 	// t_sphere *s = sphere_new();
+// 	// set_transform(&s->transform, translation(0, 0, 1));
+// 	// t_i i = intersection(5, s);
+// 	// t_comp *comps = prepare_computations(&i, r);
+// 	// printf("comps->over_point.z: %f\n", comps->over_point.z);
+// 	// printf("comps->point.z: %f\n", comps->point.z);
+	
+// }
+

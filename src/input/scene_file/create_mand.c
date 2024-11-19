@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:43:25 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/16 02:53:31 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 15:59:11 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	create_ambient(t_options *options, char **args)
  */
 int	create_camera(t_options *options, char **args)
 {
-	t_camera	*camera;
+	t_temp	*camera;
 	char		**coords;
 	char		**vector;
 

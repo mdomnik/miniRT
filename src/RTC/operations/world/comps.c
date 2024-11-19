@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/16 20:28:00 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 16:47:52 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_comp *prepare_computations(t_i *i, t_ray *ray)
 	}
 	else
 		comps->inside = false;
+	comps->over_point = add_tuples(comps->point, mult_tuple(comps->normalv, EPSILON));
 	return (comps);
 }
 
@@ -40,12 +41,14 @@ t_color3 shade_hit(t_world *world, t_comp *comps)
 	t_light_p *light_temp;
 	
 	light_temp = world->light;
+	bool in_shadow;
 	if (comps->object->type == SPHERE)
 	{
 		t_sphere *sphere = (t_sphere *)comps->object->object;	
 		while(world->light != NULL)
 		{
-			color = add_tuples(lighting(sphere->material, world->light, &comps->point, comps->eyev, comps->normalv), color);
+			in_shadow = is_shadowed(world, world->light->position, &comps->over_point);
+			color = add_tuples(lighting(sphere->material, world->light, &comps->point, comps->eyev, comps->normalv, in_shadow), color);
 			world->light = world->light->next;
 		}
 		world->light = light_temp;
@@ -75,6 +78,31 @@ t_color3 color_at(t_world *world, t_ray *ray)
 	free(xs);
 	free(comps);
 	return (color);	
+}
+
+bool is_shadowed(t_world *world, t_point3 *light_pos, t_point3 *point)
+{
+	t_vec3 v = sub_tuple_p(light_pos, point);
+	float distance = magnitude(v);
+	t_vec3 direction = normalize(v);
+
+	t_ray *r = ray_new(point, &direction);
+	t_x *xs = intersect_world(world, r);
+	t_i h = hit(xs);
+	if (h.t > 0 && h.t < distance)
+	{
+		free(xs->i);
+		free(xs);
+		free(r);
+		return (true);
+	}
+	else
+	{
+		free(xs->i);
+		free(xs);
+		free(r);
+		return (false);
+	}
 }
 
 

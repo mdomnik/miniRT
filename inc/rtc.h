@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 14:12:05 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/19 16:33:47 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ struct s_comp
 	t_vec3			normalv;
 	t_vec3			reflectv;
 	int				inside;
+	t_point3		over_point;
 };
 
 struct s_camera
