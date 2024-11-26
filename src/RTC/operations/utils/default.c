@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 22:03:32 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/26 18:29:53 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_material *default_material(void)
 
 	material = malloc(sizeof(t_material));
 	material->color = new_color3_p(1, 1, 1);
+	material->pattern = NULL;
 	material->ambient = 0.1;
 	material->diffuse = 0.9;
 	material->specular = 0.9;
@@ -81,6 +82,48 @@ t_world *test_world(void)
 	left->material.specular = 0.3;
 	add_shape(&floor, left_wall);
 	add_shape(&floor, right_wall);
+	add_shape(&floor, middle);
+	add_shape(&floor, right);
+	add_shape(&floor, left);
+	world->shapes = floor;
+	add_light(&world->light, l1);
+	return (world);
+}
+
+t_world *test_world_plane(void)
+{
+		t_world	*world;
+
+	world = malloc(sizeof(t_world));
+	world->shapes = NULL;
+	world->light = NULL;
+	t_light_p *l1 = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
+	t_shape  *floor = plane_new();
+	floor->material.pattern = stripe_pattern(new_color3_p(1, 0.2, 0.2), new_color3_p(0.2, 1, 0.2));
+	// set_transform(floor, translation(0, 0, 0));
+	floor->material.color = new_color3_p(1, 0.9, 0.9);
+	floor->material.specular = 0;
+	t_shape *wall = plane_new();
+	set_transform(wall, multiply_matrices(translation(0, 0, 3), rotation_x(M_PI / 2)));
+	wall->material.pattern = stripe_pattern(new_color3_p(1, 0.2, 0.2), new_color3_p(0.2, 1, 0.2));
+	wall->material.color = new_color3_p(1, 0.9, 0.9);
+	wall->material.specular = 0;
+	t_shape  *middle = sphere_new();
+	set_transform(middle, translation(-0.5, 1, 0.5));
+	middle->material.color = new_color3_p(0.1, 1, 0.5);
+	middle->material.diffuse = 0.7;
+	middle->material.specular = 0.3;
+	t_shape  *right = sphere_new();
+	set_transform(right, multiply_matrices(translation(1.5, 0.5, -0.5), scaling(0.5, 0.5, 0.5)));
+	right->material.color = new_color3_p(0.5, 1, 0.1);
+	right->material.diffuse = 0.7;
+	right->material.specular = 0.3;
+	t_shape  *left = sphere_new();
+	set_transform(left, multiply_matrices(translation(-1.5, 0.33, -0.75), scaling(0.33, 0.33, 0.33)));
+	left->material.color = new_color3_p(1, 0.8, 0.1);
+	left->material.diffuse = 0.7;
+	left->material.specular = 0.3;
+	add_shape(&floor, wall);
 	add_shape(&floor, middle);
 	add_shape(&floor, right);
 	add_shape(&floor, left);

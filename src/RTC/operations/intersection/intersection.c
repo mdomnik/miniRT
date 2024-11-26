@@ -6,14 +6,14 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 05:02:00 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 22:03:55 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/26 16:38:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
 
-static t_x *intersect_sphere(t_shape *shape, t_ray *ray)
+static t_x *intersect_sphere(t_shape *sphere, t_ray *ray)
 {
 	t_x	*xs;
 	t_vec3	sphere_to_ray;
@@ -42,11 +42,29 @@ static t_x *intersect_sphere(t_shape *shape, t_ray *ray)
 		xs->count = 2;
 		xs->i[0].t = (-b - sqrt(discriminant)) / (2 * a);
 		xs->i[1].t = (-b + sqrt(discriminant)) / (2 * a);
-		xs->i[0].shape = shape;
-		xs->i[1].shape = shape;
+		xs->i[0].shape = sphere;
+		xs->i[1].shape = sphere;
 	}
 	return (xs);
 }
+
+static t_x *intersect_plane(t_shape *plane, t_ray *ray)
+{
+	t_x		*xs;
+	t_i		i;
+	float	t;
+	
+	xs = malloc(sizeof(t_x));
+	if (fabsf(ray->dir.y) < EPSILON)
+		return (NULL);
+	t = -ray->orig.y / ray->dir.y;
+	i = intersection(t, plane);
+	xs->count = 1;
+	xs->i = malloc(sizeof(t_i));
+	xs->i[0] = i;
+	return (xs);
+}
+
 t_x *intersect(t_shape *shape, t_ray *ray)
 {
 	t_ray	*local_ray;
@@ -54,16 +72,6 @@ t_x *intersect(t_shape *shape, t_ray *ray)
 	local_ray = ray_transform(ray, inverse(shape->transform));
 	shape->saved_ray = local_ray;
 	xs = local_intersect(shape, local_ray);
-	if (xs == NULL)
-	{
-		xs = malloc(sizeof(t_x));
-		xs->count = 0;
-		xs->i = malloc(sizeof(t_i) * 2);
-		xs->i[0].t = 0;
-		xs->i[1].t = 0;
-		xs->i[0].shape = NULL;
-		xs->i[1].shape = NULL;
-	}
 	return(xs);
 }
 
@@ -71,6 +79,8 @@ t_x *local_intersect(t_shape *shape, t_ray *ray)
 {
 	if (shape->type == SPHERE)
 		return (intersect_sphere(shape, ray));
+	if (shape->type == PLANE)
+		return (intersect_plane(shape, ray));
 	return (NULL);
 }
 
@@ -83,29 +93,6 @@ t_i	intersection(float t, t_shape *shape)
 	i.shape = shape;
 	return (i);
 }
-
-// t_x *intersections(int num_x, t_i i1, t_i i2, ...)
-// {
-// 	t_x		*xs;
-// 	va_list	args;
-// 	t_i		i;
-
-// 	xs = malloc(sizeof(t_x));
-// 	xs->count = num_x;
-// 	xs->i = malloc(sizeof(t_i) * num_x);
-// 	xs->i[0].t = i1.t;
-// 	xs->i[1].t = i2.t;
-// 	xs->i[0].object = i1.object;
-// 	xs->i[1].object = i2.object;
-// 	va_start(args, i2);
-// 	for (int j = 2; j < num_x; j++) {
-// 		i = va_arg(args, t_i);
-// 		xs->i[j].t = i.t;
-// 		xs->i[j].object = i.object;
-// 	}
-// 	va_end(args);
-// 	return (xs);
-// }
 
 t_x *intersections(int num_x, t_x *xs, t_x *temp_xs)
 {
@@ -142,7 +129,7 @@ t_i hit(t_x *xs)
 	int		count;
 
 	count = xs->count;
-	i.t = 0;
+	i.t = -1;
 	i.shape = NULL;
 	j = 0;
 	while (j < count)

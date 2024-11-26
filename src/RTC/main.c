@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 21:40:48 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/26 18:18:02 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -368,19 +368,6 @@
 // 	print_matrix(t);
 // }
 
-// CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-int main (void)
-{
-	mlx_t *mlx = mlx_init(800, 400, "test", 1);
-	t_world	*world = test_world();
-	t_camera *camera = camera_new(800, 400, M_PI / 3);
-	camera->transform = view_transformation(new_point3(0, 1.5, -5), new_point3(0, 1, 0), new_vec3(0, 1, 0));
-	mlx_image_t *image = render(mlx, camera, world);
-	mlx_image_to_window(mlx, image, 0, 0);
-	printf("done\n");
-	mlx_loop(mlx);
-	return(0);
-}
 
 // // CHAPTER 9
 // int main (void)
@@ -455,3 +442,93 @@ int main (void)
 // 	t_vec3 n = normal_at(s, new_point3(0, sqrt(2) / 2, -sqrt(2) / 2));
 // 	print_tuple(n);
 // }
+
+
+// void print_xs_intersections(t_x *xs)
+// {
+// 	int i = 0;
+// 	if (xs == NULL)
+// 	{
+// 		printf("xs is NULL\n");
+// 		return ;
+// 	}
+// 	if (xs->count == 0)
+// 		printf("intersection count: 0\n");
+// 	printf("xs->count: %d\n", xs->count);
+// 	while (i < xs->count)
+// 	{
+// 		printf("xs->i[%d].t: %f\n", i, xs->i[i].t);
+// 		printf("xs->i[%d].shape: %d\n", i, xs->i[i].shape->type);
+// 		i++;
+// 	}
+// }
+
+// int main (void)
+// {
+// 	t_shape *p = plane_new();
+// 	t_ray *r = ray_new(new_point3_p(0, 10, 0), new_vec3_p(0, 0, 1));
+// 	t_x *xs = intersect(p, r);
+// 	print_xs_intersections(xs);
+// }	
+
+
+// patterns
+// int main(void)
+// {
+// 	t_color3 *black = new_color3_p(0, 0, 0);
+// 	t_color3 *white = new_color3_p(1, 1, 1);
+// 	t_pattern p = stripe_pattern(black, white);
+// 	t_color3 c1 = stripe_at(&p, new_point3_p(0, 0, 0));
+// 	print_tuple(c1);
+// 	t_color3 c2 = stripe_at(&p, new_point3_p(0.9, 0, 0));
+// 	print_tuple(c2);
+// 	t_color3 c3 = stripe_at(&p, new_point3_p(1, 0, 0));
+// 	print_tuple(c3);
+// 	t_color3 c4 = stripe_at(&p, new_point3_p(-0.1, 0, 0));
+// 	print_tuple(c4);
+// 	t_color3 c5 = stripe_at(&p, new_point3_p(-1, 0, 0));
+// 	print_tuple(c5);
+// 	t_color3 c6 = stripe_at(&p, new_point3_p(-1.1, 0, 0));
+// 	print_tuple(c6);
+// }
+
+// int main (void)
+// {
+// 	t_material *m = default_material();
+// 	m->pattern = stripe_pattern(new_color3_p(1, 1, 1), new_color3_p(0, 0, 0));
+// 	m->ambient = 1;
+// 	m->diffuse = 0;
+// 	m->specular = 0;
+// 	// m.shininess = 0;
+// 	t_vec3 eyev = new_vec3(0, 0, -1);
+// 	t_vec3 normalv = new_vec3(0, 0, -1);
+// 	t_light_p light = *new_light(new_point3_p(0, 0, -10), new_color3_p(1, 1, 1));
+// 	t_color3 c1 = lighting(m, &light, new_point3_p(0.9, 0, 0), eyev, normalv, false);
+// 	print_tuple(c1);
+// 	t_color3 c2 = lighting(m, &light, new_point3_p(1.1, 0, 0), eyev, normalv, false);
+// 	print_tuple(c2);
+// }
+
+// int main (void)
+// {
+// 	t_shape *s = sphere_new();
+// 	set_transform(s, scaling(2, 2, 2));
+// 	t_pattern *p = stripe_pattern(new_color3_p(1, 1, 1), new_color3_p(0, 0, 0));
+// 	set_pattern_transform(p, scaling(2, 2, 2));
+// 	t_color3 *c = stripe_at_object(p, s, new_point3_p(1.5, 0, 0));
+// 	print_tuple(*c);
+// }
+
+// // CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+int main (void)
+{
+	mlx_t *mlx = mlx_init(800, 400, "test", 1);
+	t_world	*world = test_world_plane();
+	t_camera *camera = camera_new(800, 400, M_PI / 3);
+	camera->transform = view_transformation(new_point3(0, 1.5, -5), new_point3(0, 1, 0), new_vec3(0, 1, 0));
+	mlx_image_t *image = render(mlx, camera, world);
+	mlx_image_to_window(mlx, image, 0, 0);
+	printf("done\n");
+	mlx_loop(mlx);
+	return(0);
+}

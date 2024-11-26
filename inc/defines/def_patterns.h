@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere.c                                           :+:      :+:    :+:   */
+/*   def_patterns.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 21:17:22 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 22:02:19 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/11/26 17:12:10 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/11/26 18:12:05 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mrt.h"
+#ifndef DEF_PATTERNS_H	
+# define DEF_PATTERNS_H
 
-t_shape	*sphere_new(void)
-{
-	t_shape	*shape;
+t_pattern *stripe_pattern(t_color3 *a, t_color3 *b);
+t_color3 *stripe_at(t_pattern *pattern, t_point3 *point);
+t_color3 *stripe_at_object(t_pattern *pattern, t_shape *shape, t_point3 *point);
+void	set_pattern_transform(t_pattern *pattern, t_matrix *new_transform);
 
-	shape = malloc(sizeof(t_shape));
-	shape->type = SPHERE;
-	shape->transform = *init_identity_matrix(4);
-	shape->material = *default_material();
-	shape->next = NULL;
-	return (shape);
-}
+
+#endif //DEF_PATTERNS_H

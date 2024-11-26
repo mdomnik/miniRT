@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:36:41 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 22:03:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/26 16:25:29 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_x	*intersect_world(t_world *world, t_ray *ray)
 	sort_intersections(xs);
 	return (xs);
 }
-
 void sort_intersections(t_x *xs)
 {
 	int i;

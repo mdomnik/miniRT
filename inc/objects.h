@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 20:20:56 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/26 17:31:58 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ struct s_temp
 struct s_obj
 {
 	t_ambient		*ambient;
-	t_temp		*camera;
+	t_temp			*camera;
 	t_light			*light;
 	t_sphere		*sphere;
 	t_plane			*plane;

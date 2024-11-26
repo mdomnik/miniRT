@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 21:55:15 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/26 17:37:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_camera		t_camera;
 typedef struct s_shape		t_shape;
 
 typedef struct s_comp		t_comp;
+
 
 struct s_canvas
 {
@@ -133,6 +134,8 @@ struct	s_shape
 	t_ray				*saved_ray;
 	struct s_shape		*next;
 };
+
+
 
 t_shape	*sphere_new(void);
 

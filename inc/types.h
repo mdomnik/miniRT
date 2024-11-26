@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/16 20:20:35 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/26 17:38:37 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ typedef struct s_matrix	t_matrix;
 
 typedef struct s_ray	t_ray;
 
+typedef struct s_pattern	t_pattern;
+
 typedef struct s_material	t_material;
+
 
 struct	s_tuple
 {
@@ -60,11 +63,20 @@ struct s_ray
 	t_vec3		dir;
 };
 
+struct s_pattern
+{
+	t_color3		*a;
+	t_color3		*b;
+	t_matrix		transform;
+};
+
 struct s_material
 {
 	t_color3		*color;
+	t_pattern		*pattern;
 	float			ambient;
 	float			diffuse;
 	float			specular;
 	float			shininess;
 };
+

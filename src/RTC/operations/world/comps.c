@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 21:41:30 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/26 18:13:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ t_color3 shade_hit(t_world *world, t_comp *comps)
 	
 	light_temp = world->light;
 	bool in_shadow;
-	if (comps->shape->type == SPHERE)
+	if (comps->shape->type != NONE)
 	{
 		while(world->light != NULL)
 		{
 			in_shadow = is_shadowed(world, world->light->position, &comps->over_point);
-			color = add_tuples(lighting(&comps->shape->material, world->light, &comps->over_point, comps->eyev, comps->normalv, in_shadow), color);
+			color = add_tuples(lighting(&comps->shape->material, comps->shape, world->light, &comps->over_point, comps->eyev, comps->normalv, in_shadow), color);
 			world->light = world->light->next;
 		}
 		world->light = light_temp;
@@ -55,6 +55,8 @@ t_color3 shade_hit(t_world *world, t_comp *comps)
 	}
 	return(new_color3(0, 0, 0));
 }
+
+
 
 t_color3 color_at(t_world *world, t_ray *ray)
 {
@@ -71,6 +73,12 @@ t_color3 color_at(t_world *world, t_ray *ray)
 		return (new_color3(0, 0, 0));
 	}
 	i = hit(xs);
+	if (i.shape == NULL)
+	{
+		free(xs->i);
+		free(xs);
+		return (new_color3(0, 0, 0));
+	}
 	comps = prepare_computations(&i, ray);
 	color = shade_hit(world, comps);
 	free(xs->i);
