@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 23:56:53 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/14 19:30:49 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/26 20:07:49 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,42 @@ t_tuple sub_tuple_p(t_tuple *a, t_tuple *b)
 	result.w = a->w - b->w;
 	if (result.w < 0) //delete later
 		printf("Warning: Tuple w value is less than 0\n");
+	return (result);
+}
+
+t_tuple *add_tuples_p(t_tuple *a, t_tuple *b)
+{
+	t_tuple *result;
+
+	result = malloc(sizeof(t_tuple));
+	result->x = a->x + b->x;
+	result->y = a->y + b->y;
+	result->z = a->z + b->z;
+	result->w = a->w + b->w;
+
+	return (result);
+}
+
+t_color3 *sub_color(t_tuple *a, t_tuple *b)
+{
+	t_color3 *result;
+
+	result = malloc(sizeof(t_color3));
+	result->x = a->x - b->x;
+	result->y = a->y - b->y;
+	result->z = a->z - b->z;
+	result->w = 2;
+	return (result);
+}
+
+t_color3 *mult_color(t_color3 *a, float scalar)
+{
+	t_color3 *result;
+
+	result = malloc(sizeof(t_color3));
+	result->x = a->x * scalar;
+	result->y = a->y * scalar;
+	result->z = a->z * scalar;
+	result->w = 2;
 	return (result);
 }

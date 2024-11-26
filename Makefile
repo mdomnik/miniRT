@@ -80,6 +80,7 @@ SRC_FILES		+= RTC/operations/objects/objects.c
 
 #PATTERNS
 SRC_FILES		+= RTC/operations/patterns/patterns.c
+SRC_FILES		+= RTC/operations/patterns/pattern_types.c
 
 #RAY
 SRC_FILES		+= RTC/operations/rays/ray_normal.c

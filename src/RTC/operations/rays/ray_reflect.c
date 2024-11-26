@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 20:33:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 18:11:31 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/26 19:32:12 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_color3 lighting(t_material *m, t_shape *shape, t_light_p *light, t_point3 *poi
 	t_color3	result;
 
 	if (m->pattern)
-		effective_color = color_mult(stripe_at_object((m->pattern), shape, point), light->intensity);
+		effective_color = color_mult(pattern_at_object(m->pattern, shape, point), light->intensity);
 	else
 		effective_color = color_mult(m->color, light->intensity);
 	lightv = normalize(sub_tuple_p(light->position, point));

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 18:29:53 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/26 23:10:11 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,22 +99,27 @@ t_world *test_world_plane(void)
 	world->light = NULL;
 	t_light_p *l1 = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
 	t_shape  *floor = plane_new();
-	floor->material.pattern = stripe_pattern(new_color3_p(1, 0.2, 0.2), new_color3_p(0.2, 1, 0.2));
-	// set_transform(floor, translation(0, 0, 0));
+	floor->material.pattern = new_pattern(CHECKERS, new_color3_p(0.8, 0.2, 0.2), new_color3_p(0.2, 1, 0.2));
+	set_pattern_transform(floor->material.pattern, multiply_matrices(rotation_y(M_PI / 4), scaling(0.1, 0.1, 0.1)));
 	floor->material.color = new_color3_p(1, 0.9, 0.9);
 	floor->material.specular = 0;
 	t_shape *wall = plane_new();
 	set_transform(wall, multiply_matrices(translation(0, 0, 3), rotation_x(M_PI / 2)));
-	wall->material.pattern = stripe_pattern(new_color3_p(1, 0.2, 0.2), new_color3_p(0.2, 1, 0.2));
+	wall->material.pattern = new_pattern(CHECKERS, new_color3_p(0.8, 0.2, 0.2), new_color3_p(0.2, 1, 0.2));
+	set_pattern_transform(wall->material.pattern, multiply_matrices(rotation_y(M_PI / 2), scaling(0.5, 0.5, 0.5)));
 	wall->material.color = new_color3_p(1, 0.9, 0.9);
 	wall->material.specular = 0;
 	t_shape  *middle = sphere_new();
 	set_transform(middle, translation(-0.5, 1, 0.5));
+	middle->material.pattern = new_pattern(RING, new_color3_p(0.5, 0.3, 0.9), new_color3_p(0.1, 0.5, 0.8));
+	set_pattern_transform(middle->material.pattern, multiply_matrices(scaling(0.1, 0.1, 0.1), rotation_x(M_PI / 2)));
 	middle->material.color = new_color3_p(0.1, 1, 0.5);
 	middle->material.diffuse = 0.7;
 	middle->material.specular = 0.3;
 	t_shape  *right = sphere_new();
 	set_transform(right, multiply_matrices(translation(1.5, 0.5, -0.5), scaling(0.5, 0.5, 0.5)));
+	right->material.pattern = new_pattern(GRADIENT, new_color3_p(0.8, 0.1, 0.1), new_color3_p(0.1, 1, 0.8));
+	set_pattern_transform(right->material.pattern, multiply_matrices(translation(-1, 0, 0), scaling(2, 2, 2)));
 	right->material.color = new_color3_p(0.5, 1, 0.1);
 	right->material.diffuse = 0.7;
 	right->material.specular = 0.3;

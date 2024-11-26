@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 18:18:02 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/26 22:55:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -519,7 +519,21 @@
 // 	print_tuple(*c);
 // }
 
-// // CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// int main (void)
+// {
+// 	t_pattern *p = new_pattern(GRADIENT, new_color3_p(1, 1, 1), new_color3_p(0, 0, 0));
+// 	t_color3 *c1 = pattern_at(p, new_point3_p(0, 0, 0));
+// 	print_tuple(*c1);
+// 	t_color3 *c2 = pattern_at(p, new_point3_p(0.25, 0, 0));
+// 	print_tuple(*c2);
+// 	t_color3 *c3 = pattern_at(p, new_point3_p(0.5, 0, 0));
+// 	print_tuple(*c3);
+// 	t_color3 *c4 = pattern_at(p, new_point3_p(0.75, 0, 0));
+// 	print_tuple(*c4);
+// }
+
+
+// CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 int main (void)
 {
 	mlx_t *mlx = mlx_init(800, 400, "test", 1);
@@ -532,3 +546,29 @@ int main (void)
 	mlx_loop(mlx);
 	return(0);
 }
+
+
+// int main (void)
+// {
+// 	t_pattern *p = new_pattern(CHECKERS, new_color3_p(1, 1, 1), new_color3_p(0, 0, 0));
+// 	t_color3 *c1 = pattern_at(p, new_point3_p(0, 0, 0));
+// 	print_tuple(*c1);
+// 	t_color3 *c2 = pattern_at(p, new_point3_p(0.99, 0, 0));
+// 	print_tuple(*c2);
+// 	t_color3 *c3 = pattern_at(p, new_point3_p(1.01, 0, 0));
+// 	print_tuple(*c3);
+// 	printf("------------\n");
+// 	t_color3 *c4 = pattern_at(p, new_point3_p(0, 0, 0));
+// 	print_tuple(*c4);
+// 	t_color3 *c5 = pattern_at(p, new_point3_p(0, 0.99, 0));
+// 	print_tuple(*c5);
+// 	t_color3 *c6 = pattern_at(p, new_point3_p(0, 1.01, 0));
+// 	print_tuple(*c6);
+// 	printf("------------\n");
+// 	t_color3 *c7 = pattern_at(p, new_point3_p(0, 0, 0));
+// 	print_tuple(*c7);
+// 	t_color3 *c8 = pattern_at(p, new_point3_p(0, 0, 0.99));
+// 	print_tuple(*c8);
+// 	t_color3 *c9 = pattern_at(p, new_point3_p(0, 0, 1.01));
+// 	print_tuple(*c9);
+// }

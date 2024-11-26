@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:40:48 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/16 20:06:08 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/26 20:08:00 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ t_vec3		normalize(t_vec3 a);
 t_vec3		cross_product(t_vec3 a, t_vec3 b);
 t_color3 	color_mult(t_color3 *a, t_color3 *b);
 t_tuple		sub_tuple_p(t_tuple *a, t_tuple *b);
-
+t_tuple 	*add_tuples_p(t_tuple *a, t_tuple *b);
+t_color3 *sub_color(t_tuple *a, t_tuple *b);
+t_color3 *mult_color(t_color3 *a, float scalar);
 #endif
