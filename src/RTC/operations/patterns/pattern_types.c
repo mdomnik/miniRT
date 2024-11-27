@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:20:31 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 23:06:54 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/26 23:26:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,4 @@ t_color3 *checkers_at(t_pattern *pattern, t_point3 *point)
 	if (((int)floor(point->x) + (int)floor(point->y) + (int)floor(point->z)) % 2 == 0)
 		return (pattern->a);
 	return (pattern->b);
-}
-
-t_color3 *solid_at(t_color3 *color)
-{
-	return (color);
 }

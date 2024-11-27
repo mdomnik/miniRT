@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:52:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 21:41:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/27 16:11:57 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ mlx_image_t *render(mlx_t *mlx, t_camera *camera, t_world *world)
 	int color_int;
 	int y = 0;
 	int x = 0;
+	int total = camera->hsize * camera->vsize;
 
 	image = mlx_new_image(mlx, camera->hsize, camera->vsize);
 
@@ -85,8 +86,9 @@ mlx_image_t *render(mlx_t *mlx, t_camera *camera, t_world *world)
 		x = 0;
 		while(x < camera->hsize)
 		{
+			printf("Rendering %d/%d\n", y * camera->hsize + x, total);
 			ray = ray_for_pixel(camera, x, y);			
-			color = color_at(world, ray);
+			color = color_at(world, ray, RECURSIVE_DEPTH);
 			color_int = color_to_int(color);
 			mlx_put_pixel(image, x, y, color_int);
 			x++;

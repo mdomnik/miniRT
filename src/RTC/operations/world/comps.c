@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 18:13:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/27 13:53:53 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,15 @@ t_comp *prepare_computations(t_i *i, t_ray *ray)
 	else
 		comps->inside = false;
 	comps->over_point = add_tuples(comps->point, mult_tuple(comps->normalv, EPSILON));
+	comps->reflectv = reflect(ray->dir, comps->normalv);
 	return (comps);
 }
 
 //shade hit
-t_color3 shade_hit(t_world *world, t_comp *comps)
+t_color3 shade_hit(t_world *world, t_comp *comps, int remaining)
 {
-	t_color3 color = new_color3(0, 0, 0);
+	t_color3 surface = new_color3(0, 0, 0);
+	t_color3 reflected;
 	t_light_p *light_temp;
 	
 	light_temp = world->light;
@@ -47,18 +49,19 @@ t_color3 shade_hit(t_world *world, t_comp *comps)
 		while(world->light != NULL)
 		{
 			in_shadow = is_shadowed(world, world->light->position, &comps->over_point);
-			color = add_tuples(lighting(&comps->shape->material, comps->shape, world->light, &comps->over_point, comps->eyev, comps->normalv, in_shadow), color);
+			surface = add_tuples(lighting(&comps->shape->material, comps->shape, world->light, &comps->over_point, comps->eyev, comps->normalv, in_shadow), surface);
 			world->light = world->light->next;
 		}
 		world->light = light_temp;
-		return (color);
+		reflected = reflected_color(world, comps, remaining);
+		return (add_tuples(surface, reflected));
 	}
 	return(new_color3(0, 0, 0));
 }
 
 
 
-t_color3 color_at(t_world *world, t_ray *ray)
+t_color3 color_at(t_world *world, t_ray *ray, int remaining)
 {
 	t_x *xs;
 	t_i i;
@@ -80,7 +83,7 @@ t_color3 color_at(t_world *world, t_ray *ray)
 		return (new_color3(0, 0, 0));
 	}
 	comps = prepare_computations(&i, ray);
-	color = shade_hit(world, comps);
+	color = shade_hit(world, comps, remaining);
 	free(xs->i);
 	free(xs);
 	free(comps);

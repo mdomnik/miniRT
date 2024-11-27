@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:40:41 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 19:55:25 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/27 13:53:14 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 //operations/world/create.c
 t_x		*intersect_world(t_world *world, t_ray *ray);
 t_comp *prepare_computations(t_i *i, t_ray *ray);
-t_color3 shade_hit(t_world *world, t_comp *comps);
-t_color3 color_at(t_world *world, t_ray *ray);
+t_color3 shade_hit(t_world *world, t_comp *comps, int remaining);
+t_color3 color_at(t_world *world, t_ray *ray, int remaining);
 t_matrix view_transformation(t_point3 from, t_point3 to, t_vec3 up);
 t_camera	*camera_new(int hsize, int vsize, float fov);
 t_ray *ray_for_pixel(t_camera *camera, int px, int py);

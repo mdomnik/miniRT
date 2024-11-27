@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   def_reflection.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 15:37:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/27 13:47:28 by mdomnik          ###   ########.fr       */
+/*   Created: 2024/11/27 12:46:43 by mdomnik           #+#    #+#             */
+/*   Updated: 2024/11/27 13:50:21 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
+#ifndef DEF_REFLECTION_H
+# define DEF_REFLECTION_H
 
-#define EPSILON 0.0001
-#define RECURSIVE_DEPTH 5
-#endif
+t_color3	reflected_color(t_world *world, t_comp *comps, int remaining);
+
+#endif //DEF_REFLECTION_H

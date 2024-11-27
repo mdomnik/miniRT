@@ -11,12 +11,12 @@
 CC				:= cc
 
 # Compiler flags
-CFLAGS			+= -Wall -Wextra -Werror 
+CFLAGS			+= -Wall -Wextra -Werror
 CFLAGS			+= -pedantic -Wunreachable-code
 CFLAGS			+= -Wshadow
 
 ifeq ($(DEBUG), 1)
-	CFLAGS		+= -gdwarf-2
+	CFLAGS		+= -gdwarf-2 -ggdb3
 endif
 
 # Libraries to be linked
@@ -86,6 +86,9 @@ SRC_FILES		+= RTC/operations/patterns/pattern_types.c
 SRC_FILES		+= RTC/operations/rays/ray_normal.c
 SRC_FILES		+= RTC/operations/rays/ray_reflect.c
 SRC_FILES		+= RTC/operations/rays/ray.c
+
+#REFLECTIONS
+SRC_FILES		+= RTC/operations/reflections/reflection.c
 
 #TUPLES
 SRC_FILES		+= RTC/operations/tuples/tuples_init_p.c

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:36:41 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 16:25:29 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/27 16:04:57 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,13 @@ t_x	*intersect_world(t_world *world, t_ray *ray)
 	while (world->shapes)
 	{
 		xs_temp = intersect(world->shapes, ray);
-		xs = intersections((xs->count + xs_temp->count), xs, xs_temp);
+		if (xs_temp != NULL)
+		{
+			if (xs == NULL)
+				xs = xs_temp;
+			else
+				xs = intersections((xs->count + xs_temp->count), xs, xs_temp);
+		}
 		world->shapes = world->shapes->next;
 	}
 	world->shapes = shape_temp;

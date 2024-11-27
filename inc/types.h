@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 23:00:23 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/27 12:39:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef enum e_pattern_type
 	GRADIENT,
 	RING,
 	CHECKERS,
-	SOLID,
+	BLEND
 }	t_pattern_type;
 
 struct	s_tuple
@@ -88,5 +88,6 @@ struct s_material
 	float			diffuse;
 	float			specular;
 	float			shininess;
+	float			reflective;
 };
 

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 22:55:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/27 16:05:19 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -533,19 +533,6 @@
 // }
 
 
-// CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-int main (void)
-{
-	mlx_t *mlx = mlx_init(800, 400, "test", 1);
-	t_world	*world = test_world_plane();
-	t_camera *camera = camera_new(800, 400, M_PI / 3);
-	camera->transform = view_transformation(new_point3(0, 1.5, -5), new_point3(0, 1, 0), new_vec3(0, 1, 0));
-	mlx_image_t *image = render(mlx, camera, world);
-	mlx_image_to_window(mlx, image, 0, 0);
-	printf("done\n");
-	mlx_loop(mlx);
-	return(0);
-}
 
 
 // int main (void)
@@ -571,4 +558,81 @@ int main (void)
 // 	print_tuple(*c8);
 // 	t_color3 *c9 = pattern_at(p, new_point3_p(0, 0, 1.01));
 // 	print_tuple(*c9);
+// }
+
+
+// // CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+int main (void)
+{
+	mlx_t *mlx = mlx_init(800, 400, "test", 1);
+	t_world	*world = test_world_plane();
+	t_camera *camera = camera_new(800, 400, M_PI / 3);
+	camera->transform = view_transformation(new_point3(0, 1.5, -5), new_point3(0, 1, 0), new_vec3(0, 1, 0));
+	mlx_image_t *image = render(mlx, camera, world);
+	mlx_image_to_window(mlx, image, 0, 0);
+	printf("done\n");
+	mlx_loop(mlx);
+	return(0);
+}
+
+// //print_world_shapes
+// void print_world_shapes(t_world *world)
+// {
+// 	while (world->shapes)
+// 	{
+// 		printf("shape->type: %d\n", world->shapes->type);
+// 		printf("shape->material.reflective: %f\n", world->shapes->material.reflective);
+// 		world->shapes = world->shapes->next;
+// 	}
+// 	printf("end\n");
+// }
+
+
+// int main (void)
+// {
+	// t_material *m = default_material();
+	// printf("reflective: %f\n", m->reflective);
+
+	// t_shape *shape = plane_new();
+	// t_ray *r = ray_new(new_point3_p(0, 1, -1), new_vec3_p(0, -sqrt(2) / 2, sqrt(2) / 2));
+	// t_i i = intersection(sqrt(2), shape);
+	// t_comp *comps = prepare_computations(&i, r);
+	// print_tuple(comps->reflectv);
+
+	// t_world *world = default_world();
+	// t_ray *r = ray_new(new_point3_p(0, 0, 0), new_vec3_p(0, 0, 1));
+	// t_shape *shape = world->shapes->next;
+	// shape->material.ambient = 1;
+	// t_i i = intersection(1, shape);
+	// t_comp *comps = prepare_computations(&i, r);
+	// t_color3 c = reflected_color(world, comps);
+	// print_tuple(c);
+	
+	// t_world *world = default_world();
+	// t_shape *shape = plane_new();
+	// shape->material.reflective = 0.5;
+	// set_transform(shape, translation(0, -1, 0));
+	// add_shape(&world->shapes, shape);
+	// // print_world_shapes(world);
+	// t_ray *r = ray_new(new_point3_p(0, 0, -3), new_vec3_p(0, -sqrt(2) / 2, sqrt(2) / 2));
+	// t_i i = intersection(sqrt(2), shape);
+	// t_comp *comps = prepare_computations(&i, r);
+	// t_color3 c = reflected_color(world, comps, 0);
+	// print_tuple(c);
+
+// 	t_world *world;
+// 	world = malloc(sizeof(t_world));
+// 	world->light = new_light(new_point3_p(0, 0, 0), new_color3_p(1, 1, 1));
+// 	t_shape *lower = plane_new();
+// 	lower->material.reflective = 1;
+// 	set_transform(lower, translation(0, -1, 0));
+// 	t_shape *upper = plane_new();
+// 	upper->material.reflective = 1;
+// 	set_transform(upper, translation(0, 1, 0));
+// 	add_shape(&lower, upper);
+// 	world->shapes = lower;
+// 	t_ray *r = ray_new(new_point3_p(0, 0, 0), new_vec3_p(0, 1, 0));
+// 	t_color3 c = color_at(world, r, 1);
+// 	print_tuple(c);
+	
 // }
