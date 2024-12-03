@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/27 16:05:19 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/12/03 22:41:39 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -561,19 +561,6 @@
 // }
 
 
-// // CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-int main (void)
-{
-	mlx_t *mlx = mlx_init(800, 400, "test", 1);
-	t_world	*world = test_world_plane();
-	t_camera *camera = camera_new(800, 400, M_PI / 3);
-	camera->transform = view_transformation(new_point3(0, 1.5, -5), new_point3(0, 1, 0), new_vec3(0, 1, 0));
-	mlx_image_t *image = render(mlx, camera, world);
-	mlx_image_to_window(mlx, image, 0, 0);
-	printf("done\n");
-	mlx_loop(mlx);
-	return(0);
-}
 
 // //print_world_shapes
 // void print_world_shapes(t_world *world)
@@ -636,3 +623,415 @@ int main (void)
 // 	print_tuple(c);
 	
 // }
+
+
+// void print_intersections(t_x *xs)
+// {
+// 	int i = 0;
+// 	if (xs == NULL)
+// 	{
+// 		printf("xs is NULL\n");
+// 		return ;
+// 	}
+// 	if (xs->count == 0)
+// 		printf("intersection count: 0\n");
+// 	printf("xs->count: %d\n", xs->count);
+// 	while (i < xs->count)
+// 	{
+// 		printf("xs->i[%d].t: %f\n", i, xs->i[i].t);
+// 		printf("xs->i[%d].shape->type: %d\n", i, xs->i[i].shape->type);
+// 		i++;
+// 	}
+// }
+
+// int main (void)
+// {
+// 	// t_material *m = default_material();
+// 	// printf("transparency: %f\n", m->transparency);
+// 	// printf("refractive_index: %f\n", m->refractive_index);
+// 	// t_shape *s = glass_sphere();
+// 	// print_matrix(s->transform);
+// 	// printf("transparency %f\n", s->material.transparency);
+// 	// printf("refractive_index %f\n", s->material.refractive_index);
+
+// 	//finding n1 and n2 at various intersections
+// 	// t_shape *a = glass_sphere();
+// 	// set_transform(a, scaling(2, 2, 2));
+// 	// a->material.refractive_index = 1.5;
+// 	// t_shape *b = glass_sphere();
+// 	// set_transform(b, translation(0, 0, -0.25));
+// 	// b->material.refractive_index = 2.0;
+	// t_shape *c = glass_sphere();
+// 	// set_transform(c, translation(0, 0, 0.25));
+// 	// c->material.refractive_index = 2.5;
+// 	// t_ray *r = ray_new(new_point3_p(0, 0, -4), new_vec3_p(0, 0, 1));
+// 	// t_i i1 = intersection(2, a);
+// 	// t_i i2 = intersection(2.75, b);
+// 	// t_i i3 = intersection(3.25, c);
+// 	// t_i i4 = intersection(4.75, b);
+// 	// t_i i5 = intersection(5.25, c);
+// 	// t_i i6 = intersection(6, a);
+// 	// t_x *xs = malloc(sizeof(t_x));
+// 	// xs->count = 6;
+// 	// xs->i = malloc(sizeof(t_i) * 6);
+// 	// xs->i[0] = i1;
+// 	// xs->i[1] = i2;
+// 	// xs->i[2] = i3;
+// 	// xs->i[3] = i4;
+// 	// xs->i[4] = i5;
+// 	// xs->i[5] = i6;
+// 	// print_intersections(xs);
+// 	// printf("xs_i[0].shape->next address: %p\n", (void *)xs->i[0].shape->next);
+// 	// printf("xs_i[1].shape->next address: %p\n", (void *)xs->i[1].shape->next);
+// 	// printf("xs_i[2].shape->next address: %p\n", (void *)xs->i[2].shape->next);
+// 	// printf("xs_i[3].shape->next address: %p\n", (void *)xs->i[3].shape->next);
+// 	// printf("xs_i[4].shape->next address: %p\n", (void *)xs->i[4].shape->next);
+// 	// printf("xs_i[5].shape->next address: %p\n", (void *)xs->i[5].shape->next);
+// 	// t_comp *comps1 = prepare_computations(&xs->i[0], r, xs);
+// 	// printf("index[0] | n1:%f, n2:%f\n", comps1->n1, comps1->n2);
+// 	// printf("-----------------\n");
+// 	// t_comp *comps2 = prepare_computations(&xs->i[1], r, xs);
+// 	// printf("index[1] | n1:%f, n2:%f\n", comps2->n1, comps2->n2);
+// 	// printf("-----------------\n");
+// 	// t_comp *comps3 = prepare_computations(&xs->i[2], r, xs);
+// 	// printf("index[2] | n1:%f, n2:%f\n", comps3->n1, comps3->n2);
+// 	// printf("-----------------\n");
+// 	// t_comp *comps4 = prepare_computations(&xs->i[3], r, xs);
+// 	// printf("index[3] | n1:%f, n2:%f\n", comps4->n1, comps4->n2);
+// 	// printf("-----------------\n");
+// 	// t_comp *comps5 = prepare_computations(&xs->i[4], r, xs);
+// 	// printf("index[4] | n1:%f, n2:%f\n", comps5->n1, comps5->n2);
+// 	// printf("-----------------\n");
+// 	// t_comp *comps6 = prepare_computations(&xs->i[5], r, xs);
+// 	// printf("index[5] | n1:%f, n2:%f\n", comps6->n1, comps6->n2);
+// 	// printf("-----------------\n");
+// 	// (void)comps1;
+// 	// (void)comps2;
+// 	// (void)comps3;
+// 	// (void)comps4;
+// 	// (void)comps5;
+// 	// (void)comps6; //POTENTIAL ERROR
+	
+	
+// }
+
+// t_x *create_intersections(int count, ...)
+// {
+//     t_x *xs = malloc(sizeof(t_x));
+//     xs->count = count;
+//     xs->i = malloc(sizeof(t_i) * count);
+//     va_list args;
+//     va_start(args, count);
+//     for (int i = 0; i < count; i++)
+//         xs->i[i] = va_arg(args, t_i);
+//     va_end(args);
+//     return xs;
+// }
+
+// void print_comps_data(t_comp *comps)
+// {
+// 	print_tuple(comps->eyev);
+// 	print_tuple(comps->normalv);
+// 	print_tuple(comps->reflectv);
+// 	printf("comps->inside: %d\n", comps->inside);	
+// 	printf("comps->n1: %f\n", comps->n1);
+// 	printf("comps->n2: %f\n", comps->n2);
+// 	printf("comps->under_point.z: %f\n", comps->under_point.z);
+// 	printf("comps->point.z: %f\n", comps->point.z);
+	
+// }
+
+// int main (void)
+// {
+	// t_ray *r = ray_new(new_point3_p(0, 0, -5), new_vec3_p(0, 0, 1));
+	// t_shape *shape = glass_sphere();
+	// set_transform(shape, translation(0, 0, 1));
+	// t_i i = intersection(5, shape);
+	// t_x *xs = malloc(sizeof(t_x));
+	// xs->count = 1;
+	// xs->i = malloc(sizeof(t_i) * 1);
+	// xs->i[0] = i;
+	// t_comp *comps = prepare_computations(&xs->i[0], r, xs);
+	// if (comps->under_point.z > EPSILON / 2)
+	// 	printf("SUCCESS: comps->under_point.z: %f\n", comps->under_point.z);
+	// else
+	// 	printf("FAIL:   comps->under_point.z: %f\n", comps->under_point.z);
+	// if (comps->point.z < comps->under_point.z)
+	// 	printf("SUCCESS: comps->point.z: %f\n", comps->point.z);
+	// else
+	// 	printf("FAIL:   comps->point.z: %f\n", comps->point.z);
+
+	// t_world *world = default_world();
+	// t_shape *shape = world->shapes;
+	// shape->material.transparency = 1.0;
+	// shape->material.refractive_index = 1.5;
+	// t_ray *r = ray_new(new_point3_p(0, 0, sqrt(2) / 2), new_vec3_p(0, 1, 0));
+	// t_i i1 = intersection(-sqrt(2) / 2, shape);
+	// t_i i2 = intersection(sqrt(2) / 2, shape);
+	// t_x *xs = malloc(sizeof(t_x));
+	// xs->count = 2;
+	// xs->i = malloc(sizeof(t_i) * 2);
+	// xs->i[0] = i1;
+	// xs->i[1] = i2;
+	// t_comp *comps = prepare_computations(&xs->i[1], r, xs);
+	// t_color3 c = refracted_color(world, comps, 5);
+	// print_tuple(c);
+
+// 	t_world *world = default_world();
+// 	t_shape *a = world->shapes;
+// 	a->material.ambient = 1;
+// 	a->material.pattern = test_pattern();
+// 	// printf("%f\n", world->shapes->material.ambient);
+// 	t_shape *b = world->shapes->next;
+// 	b->material.transparency = 1;
+// 	b->material.refractive_index = 1.5;
+// 	t_ray *r = ray_new(new_point3_p(0, 0, 0.1), new_vec3_p(0, 1, 0));
+// 	t_i i1 = intersection(-0.9899, a);
+// 	t_i i2 = intersection(-0.4899, b);
+// 	t_i i3 = intersection(0.4899, b);
+// 	t_i i4 = intersection(0.9899, a);
+// 	t_x *xs = create_intersections(4, i1, i2, i3, i4);
+// 	printf("xs->i[2].t: %f\n", xs->i[2].t);
+	
+// 	t_comp *comps = prepare_computations(&xs->i[2], r, xs);
+// 	// print_comps_data(comps);
+// 	t_color3 c = refracted_color(world, comps, 5);
+// 	print_tuple(c);
+// }
+
+
+// void print_xs_intersections(t_x *xs)
+// {
+// 	int i = 0;
+// 	if (xs == NULL)
+// 	{
+// 		printf("xs is NULL\n");
+// 		return ;
+// 	}
+// 	if (xs->count == 0)
+// 		printf("intersection count: 0\n");
+// 	printf("xs->count: %d\n", xs->count);
+// 	while (i < xs->count)
+// 	{
+// 		printf("xs->i[%d].t: %f\n", i, xs->i[i].t);
+// 		i++;
+// 	}
+// 	printf("-----------------\n");
+// }
+
+
+// int main(void)
+// {
+// 	// t_shape *c = cube();
+
+// 	// t_ray *r1 = ray_new(new_point3_p(5, 0.5, 0), new_vec3_p(-1, 0, 0));
+// 	// t_x *xs1 = intersect(c, r1);
+// 	// print_xs_intersections(xs1);
+// 	// t_ray *r2 = ray_new(new_point3_p(-5, 0.5, 0), new_vec3_p(1, 0, 0));
+// 	// t_x *xs2 = intersect(c, r2);
+// 	// print_xs_intersections(xs2);
+// 	// t_ray *r3 = ray_new(new_point3_p(0.5, 5, 0), new_vec3_p(0, -1, 0));
+// 	// t_x *xs3 = intersect(c, r3);
+// 	// print_xs_intersections(xs3);
+// 	// t_ray *r4 = ray_new(new_point3_p(0.5, -5, 0), new_vec3_p(0, 1, 0));
+// 	// t_x *xs4 = intersect(c, r4);
+// 	// print_xs_intersections(xs4);
+// 	// t_ray *r5 = ray_new(new_point3_p(0.5, 0, 5), new_vec3_p(0, 0, -1));
+// 	// t_x *xs5 = intersect(c, r5);
+// 	// print_xs_intersections(xs5);
+// 	// t_ray *r6 = ray_new(new_point3_p(0.5, 0, -5), new_vec3_p(0, 0, 1));
+// 	// t_x *xs6 = intersect(c, r6);
+// 	// print_xs_intersections(xs6);
+// 	// t_ray *r7 = ray_new(new_point3_p(0, 0.5, 0), new_vec3_p(0, 0, 1));
+// 	// t_x *xs7 = intersect(c, r7);
+// 	// print_xs_intersections(xs7);
+
+// 	// t_ray *r1 = ray_new(new_point3_p(-2, 0, 0), new_vec3_p(0.2673, 0.5345, 0.8018));
+// 	// t_x *xs1 = intersect(c, r1);
+// 	// print_xs_intersections(xs1);
+// 	// t_ray *r2 = ray_new(new_point3_p(0, -2, 0), new_vec3_p(0.8018, 0.2673, 0.5345));
+// 	// t_x *xs2 = intersect(c, r2);
+// 	// print_xs_intersections(xs2);
+// 	// t_ray *r3 = ray_new(new_point3_p(0, 0, -2), new_vec3_p(0.5345, 0.8018, 0.2673));
+// 	// t_x *xs3 = intersect(c, r3);
+// 	// print_xs_intersections(xs3);
+// 	// t_ray *r4 = ray_new(new_point3_p(2, 0, 2), new_vec3_p(0, 0, -1));
+// 	// t_x *xs4 = intersect(c, r4);
+// 	// print_xs_intersections(xs4);
+// 	// t_ray *r5 = ray_new(new_point3_p(0, 2, 2), new_vec3_p(0, -1, 0));
+// 	// t_x *xs5 = intersect(c, r5);
+// 	// print_xs_intersections(xs5);
+// 	// t_ray *r6 = ray_new(new_point3_p(2, 2, 0), new_vec3_p(-1, 0, 0));
+// 	// t_x *xs6 = intersect(c, r6);
+// 	// print_xs_intersections(xs6);
+
+	
+// 	t_shape *c = cube();
+	
+// 	t_vec3 n1 = local_normal_at(c, new_point3_p(1, 0.5, -0.8));
+// 	print_tuple(n1);
+// 	t_vec3 n2 = local_normal_at(c, new_point3_p(-1, -0.2, 0.9));
+// 	print_tuple(n2);
+// 	t_vec3 n3 = local_normal_at(c, new_point3_p(-0.4, 1, -0.1));
+// 	print_tuple(n3);
+// 	t_vec3 n4 = local_normal_at(c, new_point3_p(0.3, -1, -0.7));
+// 	print_tuple(n4);
+// 	t_vec3 n5 = local_normal_at(c, new_point3_p(-0.6, 0.3, 1));
+// 	print_tuple(n5);
+// 	t_vec3 n6 = local_normal_at(c, new_point3_p(0.4, 0.4, -1));
+// 	print_tuple(n6);
+// 	t_vec3 n7 = local_normal_at(c, new_point3_p(1, 1, 1));
+// 	print_tuple(n7);
+// 	t_vec3 n8 = local_normal_at(c, new_point3_p(-1, -1, -1));
+// 	print_tuple(n8);
+// }
+
+
+
+// void print_xs_intersections(t_x *xs)
+// {
+// 	int i = 0;
+// 	if (xs == NULL)
+// 	{
+// 		printf("xs is NULL\n");
+// 		return ;
+// 	}
+// 	if (xs->count == 0)
+// 		printf("intersection count: 0\n");
+// 	printf("xs->count: %d\n", xs->count);
+// 	while (i < xs->count)
+// 	{
+// 		printf("xs->i[%d].t: %f\n", i, xs->i[i].t);
+// 		i++;
+// 	}
+// 	printf("-----------------\n");
+// }
+
+// int main(void)
+// {
+// 	// t_shape *cyl = cylinder();
+// 	// t_vec3 dir1 = normalize(new_vec3(0, 0, 1));
+// 	// t_ray *r1 = ray_new(new_point3_p(1, 0, -5), &dir1);
+// 	// t_x *xs1 = intersect(cyl, r1);
+// 	// print_xs_intersections(xs1);
+// 	// t_vec3 dir2 = normalize(new_vec3(0, 0, 1));
+// 	// t_ray *r2 = ray_new(new_point3_p(0, 0, -5), &dir2);
+	// t_x *xs2 = intersect(cyl, r2);
+// 	// print_xs_intersections(xs2);
+// 	// t_vec3 dir3 = normalize(new_vec3(0.1, 1, 1));
+// 	// t_ray *r3 = ray_new(new_point3_p(0.5, 0, -5), &dir3);
+// 	// t_x *xs3 = intersect(cyl, r3);
+// 	// print_xs_intersections(xs3);
+
+// 	t_shape *cyl = cylinder();
+// 	t_vec3 n1 = local_normal_at(cyl, new_point3_p(1, 0, 0));
+// 	print_tuple(n1);
+// 	t_vec3 n2 = local_normal_at(cyl, new_point3_p(0, 5, -1));
+// 	print_tuple(n2);
+// 	t_vec3 n3 = local_normal_at(cyl, new_point3_p(0, -2, 1));
+// 	print_tuple(n3);
+// 	t_vec3 n4 = local_normal_at(cyl, new_point3_p(-1, 1, 0));
+// 	print_tuple(n4);
+	
+// }
+
+// int main(void)
+// {
+// 	// t_shape *cyl = cylinder();
+// 	// t_vec3 dir1 = normalize(new_vec3(0, -1, 0));
+// 	// t_ray *r1 = ray_new(new_point3_p(0, 3, 0), &dir1);
+// 	// t_x *xs1 = intersect(cyl, r1);
+// 	// print_xs_intersections(xs1);
+// 	// t_vec3 dir2 = normalize(new_vec3(0, -1, 2));
+// 	// t_ray *r2 = ray_new(new_point3_p(0, 3, -2), &dir2);
+// 	// t_x *xs2 = intersect(cyl, r2);
+// 	// print_xs_intersections(xs2);
+// 	// t_vec3 dir3 = normalize(new_vec3(0, -1, 1));
+// 	// t_ray *r3 = ray_new(new_point3_p(0, 4, -2), &dir3);
+// 	// t_x *xs3 = intersect(cyl, r3);
+// 	// print_xs_intersections(xs3);
+// 	// t_vec3 dir4 = normalize(new_vec3(0, 1, 2));
+// 	// t_ray *r4 = ray_new(new_point3_p(0, 0, -2), &dir4);
+// 	// t_x *xs4 = intersect(cyl, r4);
+// 	// print_xs_intersections(xs4);
+// 	// t_vec3 dir5 = normalize(new_vec3(0, 1, 1));
+// 	// t_ray *r5 = ray_new(new_point3_p(0, 1, -2), &dir5);
+// 	// t_x *xs5 = intersect(cyl, r5);
+// 	// print_xs_intersections(xs5);
+
+// 	t_shape *cyl = cylinder();
+// 	t_vec3 n1 = local_normal_at(cyl, new_point3_p(0, 1, 0));
+// 	print_tuple(n1);
+// 	t_vec3 n2 = local_normal_at(cyl, new_point3_p(0.5, 1, 0));
+// 	print_tuple(n2);
+// 	t_vec3 n3 = local_normal_at(cyl, new_point3_p(0, 1, 0.5));
+// 	print_tuple(n3);
+// 	t_vec3 n4 = local_normal_at(cyl, new_point3_p(0, 2, 0));
+// 	print_tuple(n4);
+// 	t_vec3 n5 = local_normal_at(cyl, new_point3_p(0.5, 2, 0));
+// 	print_tuple(n5);
+// 	t_vec3 n6 = local_normal_at(cyl, new_point3_p(0, 2, 0.5));
+// 	print_tuple(n6);
+	
+// }
+
+// int main(void)
+// {
+// 	// t_shape *c = cone();
+	
+// 	// t_vec3 dir1 = normalize(new_vec3(0, 0, 1));
+// 	// t_ray *r1 = ray_new(new_point3_p(0, 0, -5), &dir1);
+// 	// t_x *xs1 = intersect(c, r1);
+// 	// print_xs_intersections(xs1);
+// 	// t_vec3 dir2 = normalize(new_vec3(1, 1, 1));
+// 	// t_ray *r2 = ray_new(new_point3_p(0, 0, -5), &dir2);
+// 	// t_x *xs2 = intersect(c, r2);
+// 	// print_xs_intersections(xs2);
+// 	// t_vec3 dir3 = normalize(new_vec3(-0.5, -1, 1));
+// 	// t_ray *r3 = ray_new(new_point3_p(1, 1, -5), &dir3);
+// 	// t_x *xs3 = intersect(c, r3);
+// 	// print_xs_intersections(xs3);
+
+// 	// t_shape *c = cone();
+// 	// t_vec3 dir1 = normalize(new_vec3(0, 1, 1));
+// 	// t_ray *r1 = ray_new(new_point3_p(0, 0, -1), &dir1);
+// 	// t_x *xs1 = intersect(c, r1);
+// 	// print_xs_intersections(xs1);
+
+// 	// t_shape *c = cone();
+	
+// 	// t_vec3 dir1 = normalize(new_vec3(0, 1, 0));
+// 	// t_ray *r1 = ray_new(new_point3_p(0, 0, -5), &dir1);
+// 	// t_x *xs1 = intersect(c, r1);
+// 	// print_xs_intersections(xs1);
+// 	// t_vec3 dir2 = normalize(new_vec3(0, 1, 1));
+// 	// t_ray *r2 = ray_new(new_point3_p(0, 0, -0.25), &dir2);
+// 	// t_x *xs2 = intersect(c, r2);
+// 	// print_xs_intersections(xs2);
+// 	// t_vec3 dir3 = normalize(new_vec3(0, 1, 0));
+// 	// t_ray *r3 = ray_new(new_point3_p(0, 0, -0.25), &dir3);
+// 	// t_x *xs3 = intersect(c, r3);
+// 	// print_xs_intersections(xs3);
+
+// 	t_shape *c = cone();
+// 	t_vec3 n1 = local_normal_at(c, new_point3_p(0, 0, 0));
+// 	print_tuple(n1);
+// 	t_vec3 n2 = local_normal_at(c, new_point3_p(1, 1, 1));
+// 	print_tuple(n2);
+// 	t_vec3 n3 = local_normal_at(c, new_point3_p(-1, -1, 0));
+// 	print_tuple(n3);
+// }
+
+// // CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+int main (void)
+{
+	mlx_t *mlx = mlx_init(800, 400, "test", 1);
+	t_world	*world = test_world_plane();
+	t_camera *camera = camera_new(800, 400, M_PI / 3);
+	camera->transform = view_transformation(new_point3(0, 1.5, -5), new_point3(0, 1, 0), new_vec3(0, 1, 0));
+	mlx_image_t *image = render(mlx, camera, world);
+	mlx_image_to_window(mlx, image, 0, 0);
+	printf("done\n");
+	mlx_loop(mlx);
+	return(0);
+}

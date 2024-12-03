@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 17:37:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/12/03 20:00:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,9 @@ struct s_comp
 	t_vec3			reflectv;
 	int				inside;
 	t_point3		over_point;
+	t_point3		under_point;
+	float			n1;
+	float			n2;
 };
 
 struct s_camera
@@ -125,7 +128,6 @@ struct s_camera
 	t_matrix		transform;
 };
 
-
 struct	s_shape
 {
 	t_type				type;
@@ -134,11 +136,6 @@ struct	s_shape
 	t_ray				*saved_ray;
 	struct s_shape		*next;
 };
-
-
-
-t_shape	*sphere_new(void);
-
 
 
 //test TO REMOVE !!!!!!!!!!!!!

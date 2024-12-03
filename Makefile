@@ -104,10 +104,13 @@ SRC_FILES		+= RTC/operations/utils/utils_1.c
 #WORLD
 SRC_FILES		+= RTC/operations/world/comps.c
 SRC_FILES		+= RTC/operations/world/intersect.c
+SRC_FILES		+= RTC/operations/world/transparency.c
 SRC_FILES		+= RTC/operations/world/view.c
 SRC_FILES		+= RTC/operations/world/camera.c
 
 SRC_FILES		+= RTC/operations/intersection/intersection.c
+SRC_FILES		+= RTC/operations/intersection/obj_inter.c
+SRC_FILES		+= RTC/operations/intersection/inter_helper.c
 
 SRC_FILES		+= RTC/test.c
 

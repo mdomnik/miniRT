@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 17:31:58 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/12/03 18:00:13 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,12 @@ typedef enum e_type
 	AMBIENT = 0,
 	CAMERA = 1,
 	LIGHT = 2,
+
 	SPHERE = 3,
 	PLANE = 4,
-	CYLINDER = 5
+	CUBE = 5,
+	CYLINDER = 6,
+	CONE = 7
 }	t_type;
 
 //REQUIRED OBJECT STRUCTS

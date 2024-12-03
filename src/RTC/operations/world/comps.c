@@ -6,14 +6,14 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/27 13:53:53 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/12/03 16:19:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
 //prepare computations
-t_comp *prepare_computations(t_i *i, t_ray *ray)
+t_comp *prepare_computations(t_i *i, t_ray *ray, t_x *xs)
 {
 	t_comp *comps;
 
@@ -22,7 +22,7 @@ t_comp *prepare_computations(t_i *i, t_ray *ray)
 	comps->shape = i->shape;
 	comps->point = ray_position(ray, comps->t);
 	comps->eyev = neg_tuple(ray->dir);
-	comps->normalv = normal_at(comps->shape, comps->point);
+	comps->normalv = normal_at(comps->shape, comps->point);	
 	if (dot_product(comps->normalv, comps->eyev) < 0)
 	{
 		comps->inside = true;
@@ -31,7 +31,10 @@ t_comp *prepare_computations(t_i *i, t_ray *ray)
 	else
 		comps->inside = false;
 	comps->over_point = add_tuples(comps->point, mult_tuple(comps->normalv, EPSILON));
+	comps->under_point = sub_tuple(comps->point, mult_tuple(comps->normalv, EPSILON));
 	comps->reflectv = reflect(ray->dir, comps->normalv);
+	// transparency_and_refraction(i, comps, xs); reflection broken
+	(void)xs;
 	return (comps);
 }
 
@@ -82,11 +85,8 @@ t_color3 color_at(t_world *world, t_ray *ray, int remaining)
 		free(xs);
 		return (new_color3(0, 0, 0));
 	}
-	comps = prepare_computations(&i, ray);
+	comps = prepare_computations(&i, ray, xs);
 	color = shade_hit(world, comps, remaining);
-	free(xs->i);
-	free(xs);
-	free(comps);
 	return (color);	
 }
 

@@ -6,11 +6,24 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:11:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 23:14:04 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/30 20:29:07 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
+
+t_pattern *test_pattern(void)
+{
+	t_pattern *pattern;
+
+	pattern = malloc(sizeof(t_pattern));
+	pattern->type = STRIPE;
+	pattern->a = new_color3_p(0, 1, 0);
+	pattern->b = new_color3_p(1, 0, 0);
+	pattern->transform = *init_identity_matrix(4);
+	return (pattern);
+}
+
 
 t_pattern *new_pattern(t_pattern_type pattern, t_color3 *a, t_color3 *b)
 {

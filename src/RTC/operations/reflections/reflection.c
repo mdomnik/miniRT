@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:45:36 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/27 15:04:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/30 20:33:22 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,39 @@ t_color3	reflected_color(t_world *world, t_comp *comps, int remaining)
 	reflect_ray = ray_new(&comps->over_point, &comps->reflectv);
 	color = color_at(world, reflect_ray, remaining - 1);
 	return (mult_tuple(color, comps->shape->material.reflective));
+}
+
+//refracted color
+t_color3	refracted_color(t_world *world, t_comp *comps, int remaining)
+{
+	float	n_ratio;
+	float	cos_i;
+	float	sin2_t;
+	float 	cos_t;
+	t_vec3	direction;
+	t_ray	*refract_ray;
+	t_color3 color;
+	
+	if (remaining <= 0)
+		return (new_color3(0, 0, 0));
+	if (comps->shape->material.transparency == 0)
+		return (new_color3(0, 0, 0));
+	n_ratio = comps->n1 / comps->n2;
+	cos_i = dot_product(comps->eyev, comps->normalv);
+	print_tuple(comps->eyev);
+	print_tuple(comps->normalv);
+	sin2_t = (n_ratio * n_ratio) * (1 - (cos_i * cos_i));
+	if (sin2_t > 1.0)
+		return (new_color3(0, 0, 0));
+	cos_t = sqrt(1.0 - sin2_t);
+	direction = add_tuples(mult_tuple(comps->normalv, (n_ratio * cos_i - cos_t)), mult_tuple(comps->eyev, n_ratio));
+	refract_ray = ray_new(&comps->under_point, &direction);
+	
+	color = mult_tuple(color_at(world, refract_ray, remaining - 1), comps->shape->material.transparency);
+	printf("cos_i: %f\n", cos_i);
+	printf("sin2_t: %f\n", sin2_t);
+	printf("cos_t: %f\n", cos_t);
+	printf("direction: ");
+	print_tuple(direction);
+	return (color);
 }

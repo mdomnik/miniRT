@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/27 12:39:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/29 20:48:39 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,7 @@ struct s_material
 	float			specular;
 	float			shininess;
 	float			reflective;
+	float			transparency;
+	float			refractive_index;
 };
 

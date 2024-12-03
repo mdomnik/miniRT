@@ -6,64 +6,11 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 05:02:00 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/27 13:31:39 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/12/03 21:36:25 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
-
-
-static t_x *intersect_sphere(t_shape *sphere, t_ray *ray)
-{
-	t_x	*xs;
-	t_vec3	sphere_to_ray;
-	float	a;
-	float	b;
-	float	c;
-	float	discriminant;
-
-	xs = malloc(sizeof(t_x));
-	xs->count = 0;
-	xs->i = malloc(sizeof(t_i) * 2);
-	sphere_to_ray = sub_tuple(ray->orig, new_point3(0, 0, 0));
-	a = dot_product(ray->dir, ray->dir);
-	b = 2 * dot_product(ray->dir, sphere_to_ray);
-	c = dot_product(sphere_to_ray, sphere_to_ray) - 1;
-	discriminant = b * b - 4 * a * c;
-	if (discriminant < 0)
-	{
-		xs->i[0].t = 0;
-		xs->i[1].t = 0;
-		xs->i[0].shape = NULL;
-		xs->i[1].shape = NULL;
-	}
-	else
-	{
-		xs->count = 2;
-		xs->i[0].t = (-b - sqrt(discriminant)) / (2 * a);
-		xs->i[1].t = (-b + sqrt(discriminant)) / (2 * a);
-		xs->i[0].shape = sphere;
-		xs->i[1].shape = sphere;
-	}
-	return (xs);
-}
-
-static t_x *intersect_plane(t_shape *plane, t_ray *ray)
-{
-	t_x		*xs;
-	t_i		i;
-	float	t;
-	
-	xs = malloc(sizeof(t_x));
-	if (fabsf(ray->dir.y) < EPSILON)
-		return (NULL);
-	t = -ray->orig.y / ray->dir.y;
-	i = intersection(t, plane);
-	xs->count = 1;
-	xs->i = malloc(sizeof(t_i));
-	xs->i[0] = i;
-	return (xs);
-}
 
 t_x *intersect(t_shape *shape, t_ray *ray)
 {
@@ -81,6 +28,12 @@ t_x *local_intersect(t_shape *shape, t_ray *ray)
 		return (intersect_sphere(shape, ray));
 	if (shape->type == PLANE)
 		return (intersect_plane(shape, ray));
+	if (shape->type == CUBE)
+		return (intersect_cube(shape, ray));
+	if (shape->type == CYLINDER)
+		return (intersect_cylinder(shape, ray));
+	if (shape->type == CONE)
+		return (intersect_cone(shape, ray));
 	return (NULL);
 }
 
