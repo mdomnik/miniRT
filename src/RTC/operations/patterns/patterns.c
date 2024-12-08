@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:11:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/30 20:29:07 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/12/08 18:56:55 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,20 @@ t_color3 *pattern_at(t_pattern *pattern, t_point3 *point)
 		return(ring_at(pattern, point));
 	if (pattern->type == CHECKERS)
 		return(checkers_at(pattern, point));
-	return (NULL);
+	if (pattern->type == TEXTURE_MAP)
+	{
+        t_uv_val uv = pattern->uv_map(*point);
+        t_uv *uv_pattern = (t_uv *)pattern->uv_pattern;
+        t_color3 color = uv_pattern_at(uv_pattern, uv.u, uv.v);
+        return (new_color3_p(color.r, color.g, color.b));
+    }
+	if (pattern->type == ALIGN_CHECK)
+	{
+        t_uv_val uv = pattern->uv_map(*point);
+        t_uv_align_check *uv_pattern = (t_uv_align_check *)pattern->uv_pattern;
+        t_color3 color = uv_pattern_at_align_check(uv_pattern, uv.u, uv.v);
+        return (new_color3_p(color.r, color.g, color.b));
+    }
+    fprintf(stderr, "Error: Unsupported pattern type.\n");
+    exit(EXIT_FAILURE);
 }

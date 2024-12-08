@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:37:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/03 22:43:11 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/12/08 17:22:39 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 #define DIAMOND_REFRACTION 2.417
 
 
-#define CYL_MIN 1
-#define CYL_MAX 2
+#define CYL_MIN 0
+#define CYL_MAX 1
 #define CYL_CLOSED true
 
 #define CONE_MIN -1.0
 #define CONE_MAX 0.0
-#define CONE_CLOSED false
+#define CONE_CLOSED true
 
 #endif

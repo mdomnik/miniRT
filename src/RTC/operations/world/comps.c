@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/03 16:19:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/12/04 19:11:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ t_color3 color_at(t_world *world, t_ray *ray, int remaining)
 	t_color3 color;
 	
 	xs = intersect_world(world, ray);
+	if (xs == NULL) //maybe remove
+		return (new_color3(0, 0, 0));
 	if (xs->count == 0)
 	{
 		free(xs->i);

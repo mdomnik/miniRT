@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/03 22:41:39 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/12/08 18:38:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1022,13 +1022,512 @@
 // 	print_tuple(n3);
 // }
 
+void assert_color_equal(t_color3 actual, t_color3 expected) {
+    if (fabs(actual.r - expected.r) > 1e-6 ||
+        fabs(actual.g - expected.g) > 1e-6 ||
+        fabs(actual.b - expected.b) > 1e-6) {
+        fprintf(stderr, "Assertion failed: Color mismatch.\n");
+        exit(EXIT_FAILURE);
+    }
+	else
+		printf("A SUCCESS\n");
+}
+
+
+
+// void test_uv_checkers()
+// {
+// 	t_color3 black = new_color3(0, 0, 0);
+// 	t_color3 white = new_color3(1, 1, 1);
+
+//     t_uv *checkers = uv_checkers(2, 2, black, white);
+
+//     t_color3 color = uv_pattern_at(checkers, 0.0f, 0.0f);
+//     assert_color_equal(color, black);
+
+//     color = uv_pattern_at(checkers, 0.5f, 0.0f);
+//     assert_color_equal(color, white);
+
+//     color = uv_pattern_at(checkers, 0.0f, 0.5f);
+//     assert_color_equal(color, white);
+
+//     color = uv_pattern_at(checkers, 0.5f, 0.5f);
+//     assert_color_equal(color, black);
+
+//     color = uv_pattern_at(checkers, 1.0f, 1.0f);
+//     assert_color_equal(color, black);
+
+//     free(checkers); // Clean up memory.
+// }
+
+// void test_spherical_map() {
+//     // Define test points
+//     t_point3 p1 = new_point3(0, 0, -1);
+//     t_point3 p2 = new_point3(1, 0, 0);
+//     t_point3 p3 = new_point3(0, 0, 1);
+//     t_point3 p4 = new_point3(-1, 0, 0);
+//     t_point3 p5 = new_point3(0, 1, 0);
+//     t_point3 p6 = new_point3(0, -1, 0);
+//     t_point3 p7 = new_point3(sqrt(2) / 2, sqrt(2) / 2, 0);
+
+//     // Compute UV coordinates for each point
+//     t_uv_val uv1 = spherical_map(p1);
+//     t_uv_val uv2 = spherical_map(p2);
+//     t_uv_val uv3 = spherical_map(p3);
+//     t_uv_val uv4 = spherical_map(p4);
+//     t_uv_val uv5 = spherical_map(p5);
+//     t_uv_val uv6 = spherical_map(p6);
+//     t_uv_val uv7 = spherical_map(p7);
+
+//     // Expected results
+//     t_uv_val expected[] = {
+//         {0.0f, 0.5f}, {0.25f, 0.5f}, {0.5f, 0.5f}, {0.75f, 0.5f},
+//         {0.5f, 1.0f}, {0.5f, 0.0f}, {0.25f, 0.75f}
+//     };
+
+//     // Print results
+//     printf("Test results:\n");
+//     printf("P1: (u, v) = (%f, %f) | Expected: (%f, %f)\n", uv1.u, uv1.v, expected[0].u, expected[0].v);
+//     printf("P2: (u, v) = (%f, %f) | Expected: (%f, %f)\n", uv2.u, uv2.v, expected[1].u, expected[1].v);
+//     printf("P3: (u, v) = (%f, %f) | Expected: (%f, %f)\n", uv3.u, uv3.v, expected[2].u, expected[2].v);
+//     printf("P4: (u, v) = (%f, %f) | Expected: (%f, %f)\n", uv4.u, uv4.v, expected[3].u, expected[3].v);
+//     printf("P5: (u, v) = (%f, %f) | Expected: (%f, %f)\n", uv5.u, uv5.v, expected[4].u, expected[4].v);
+//     printf("P6: (u, v) = (%f, %f) | Expected: (%f, %f)\n", uv6.u, uv6.v, expected[5].u, expected[5].v);
+//     printf("P7: (u, v) = (%f, %f) | Expected: (%f, %f)\n", uv7.u, uv7.v, expected[6].u, expected[6].v);
+// }
+
+// void test_texture_map_integration() {
+//     t_color3 black = new_color3(0, 0, 0);
+//     t_color3 white = new_color3(1, 1, 1);
+
+//     // Create UV pattern and texture map
+//     t_uv *checkers = uv_checkers(16, 8, black, white);
+//     t_pattern *pattern = new_texture_map(checkers, spherical_map);
+
+//     // Test points
+//     t_point3 points[] = {
+//         new_point3(0.4315, 0.4670, 0.7719),
+//         new_point3(-0.9654, 0.2552, -0.0534),
+//         new_point3(0.1039, 0.7090, 0.6975),
+//         new_point3(-0.4986, -0.7856, -0.3663),
+//         new_point3(-0.0317, -0.9395, 0.3411),
+//         new_point3(0.4809, -0.7721, 0.4154),
+//         new_point3(0.0285, -0.9612, -0.2745),
+//         new_point3(-0.5734, -0.2162, -0.7903),
+//         new_point3(0.7688, -0.1470, 0.6223),
+//         new_point3(-0.7652, 0.2175, 0.6060),
+//     };
+
+//     t_color3 expected[] = {
+//         white, black, white, black, black, black, black, white, black, black
+//     };
+
+//     // Check results
+//     for (int i = 0; i < 10; i++) {
+//         t_color3 *color = pattern_at(pattern, &points[i]);
+//         assert_color_equal(*color, expected[i]);
+//     }
+
+//     // Cleanup
+//     free(checkers);
+//     free(pattern);
+
+//     printf("All texture map integration tests passed.\n");
+// }
+
+// int main (void)
+// {
+// 	// t_uv *checkers = uv_checkers(2, 2, new_color3(1, 1, 1), new_color3(0, 0, 0));
+// 	// t_color3 color = uv_pattern_at(*checkers, 1, 1);
+// 	// print_tuple(color);
+
+// // 	t_point3 p = new_point3(sqrt(2)/2, sqrt(2)/2, 0);
+// // 	float u = spherical_map(p, false);
+// // 	float v = spherical_map(p, true);
+// // 	printf("u %f\n", u);
+// // 	printf("v %f\n", v);
+// 	test_uv_checkers();
+// 	test_spherical_map();
+// 	test_texture_map_integration();
+
+// }
+
+
+// void test_planar_map() {
+//     t_point3 points[] = {
+//         new_point3(0.25, 0, 0.5),
+//         new_point3(0.25, 0, -0.25),
+//         new_point3(0.25, 0.5, -0.25),
+//         new_point3(1.25, 0, 0.5),
+//         new_point3(0.25, 0, -1.75),
+//         new_point3(1, 0, -1),
+//         new_point3(0, 0, 0)
+//     };
+
+//     t_uv_val expected[] = {
+//         {0.25, 0.5}, {0.25, 0.75}, {0.25, 0.75},
+//         {0.25, 0.5}, {0.25, 0.25}, {0.0, 0.0}, {0.0, 0.0}
+//     };
+
+//     for (int i = 0; i < 7; i++) {
+//         t_uv_val uv = planar_map(points[i]);
+//         printf("Point: (%f, %f, %f) -> (u, v): (%f, %f) | Expected: (%f, %f)\n",
+//                points[i].x, points[i].y, points[i].z,
+//                uv.u, uv.v, expected[i].u, expected[i].v);
+
+//         // Validate results
+//         if (fabs(uv.u - expected[i].u) > 1e-6 || fabs(uv.v - expected[i].v) > 1e-6) {
+//             fprintf(stderr, "Test failed for point (%f, %f, %f)\n",
+//                     points[i].x, points[i].y, points[i].z);
+//             exit(EXIT_FAILURE);
+//         }
+//     }
+
+//     printf("All planar_map tests passed successfully.\n");
+// }
+
+// int main(void)
+// {
+// 	test_planar_map();
+// 	return 0;
+// }
+
+// void test_cylindrical_map() {
+//     t_point3 points[] = {
+//         new_point3(0, 0, -1),
+//         new_point3(0, 0.5, -1),
+//         new_point3(0, 1, -1),
+//         new_point3(0.70711, 0.5, -0.70711),
+//         new_point3(1, 0.5, 0),
+//         new_point3(0.70711, 0.5, 0.70711),
+//         new_point3(0, -0.25, 1),
+//         new_point3(-0.70711, 0.5, 0.70711),
+//         new_point3(-1, 1.25, 0),
+//         new_point3(-0.70711, 0.5, -0.70711),
+//     };
+
+//     t_uv_val expected[] = {
+//         {0.0, 0.0}, {0.0, 0.5}, {0.0, 0.0}, {0.125, 0.5},
+//         {0.25, 0.5}, {0.375, 0.5}, {0.5, 0.75}, {0.625, 0.5},
+//         {0.75, 0.25}, {0.875, 0.5}
+//     };
+
+//     for (int i = 0; i < 10; i++) {
+//         t_uv_val uv = cylindrical_map(points[i]);
+//         printf("Point: (%f, %f, %f) -> (u, v): (%f, %f) | Expected: (%f, %f)\n",
+//                points[i].x, points[i].y, points[i].z,
+//                uv.u, uv.v, expected[i].u, expected[i].v);
+
+//         // Validate results
+//         if (fabs(uv.u - expected[i].u) > 1e-6 || fabs(uv.v - expected[i].v) > 1e-6) {
+//             fprintf(stderr, "Test failed for point (%f, %f, %f)\n",
+//                     points[i].x, points[i].y, points[i].z);
+//             exit(EXIT_FAILURE);
+//         }
+//     }
+
+//     printf("All cylindrical_map tests passed successfully.\n");
+// }
+
+// int main (void)
+// {
+// 	test_cylindrical_map();
+// 	return 0;
+// }
+
+
+
+
+
+
+
+
+// void test_uv_align_check() {
+//     t_color3 main = new_color3(1, 1, 1);
+//     t_color3 ul = new_color3(1, 0, 0);
+//     t_color3 ur = new_color3(1, 1, 0);
+//     t_color3 bl = new_color3(0, 1, 0);
+//     t_color3 br = new_color3(0, 1, 1);
+
+//     t_pattern *pattern = new_uv_align_check(main, ul, ur, bl, br);
+
+//     struct {
+//         float u, v;
+//         t_color3 expected;
+//     } cases[] = {
+//         {0.5, 0.5, main},
+//         {0.1, 0.9, ul},
+//         {0.9, 0.9, ur},
+//         {0.1, 0.1, bl},
+//         {0.9, 0.1, br},
+//     };
+
+//     for (int i = 0; i < 5; i++) {
+//         t_color3 result = uv_pattern_at(pattern, cases[i].u, cases[i].v);
+//         if (fabs(result.r - cases[i].expected.r) > 1e-6 ||
+//             fabs(result.g - cases[i].expected.g) > 1e-6 ||
+//             fabs(result.b - cases[i].expected.b) > 1e-6) {
+//             printf("Test failed for u = %f, v = %f\n", cases[i].u, cases[i].v);
+//             printf("Expected: (%f, %f, %f), Got: (%f, %f, %f)\n",
+//                    cases[i].expected.r, cases[i].expected.g, cases[i].expected.b,
+//                    result.r, result.g, result.b);
+//             exit(EXIT_FAILURE);
+//         }
+//     }
+
+//     printf("All uv_align_check tests passed!\n");
+//     free(pattern->uv_pattern);
+//     free(pattern);
+// }
+
+// int main (void)
+// {
+// 	test_uv_align_check();
+// 	return 0;
+// }
+
+#include <assert.h>
+
+void test_uv_checkers() {
+    t_color3 black = new_color3(0, 0, 0);
+    t_color3 white = new_color3(1, 1, 1);
+
+    t_uv *checkers = uv_checkers(2, 2, black, white);
+
+    assert_color_equal(uv_pattern_at(checkers, 0.0f, 0.0f), black);
+    assert_color_equal(uv_pattern_at(checkers, 0.5f, 0.0f), white);
+    assert_color_equal(uv_pattern_at(checkers, 0.0f, 0.5f), white);
+    assert_color_equal(uv_pattern_at(checkers, 0.5f, 0.5f), black);
+    assert_color_equal(uv_pattern_at(checkers, 1.0f, 1.0f), black);
+
+    free(checkers);
+}
+
+
+
+void assert_uv_equal(t_uv_val actual, t_uv_val expected, const char *test_name) {
+    printf("%s: (u, v) = (%f, %f) | Expected: (%f, %f)\n",
+           test_name, actual.u, actual.v, expected.u, expected.v);
+
+    assert(fabs(actual.u - expected.u) < 1e-6);
+    assert(fabs(actual.v - expected.v) < 1e-6);
+    printf("%s: SUCCESS\n", test_name);
+}
+
+void test_spherical_map() {
+    // Test 1
+    t_point3 p1 = new_point3(0, 0, -1);
+    t_uv_val expected1 = {0.0, 0.5};
+    assert_uv_equal(spherical_map(p1), expected1, "Test 1: point(0, 0, -1)");
+
+    // Test 2
+    t_point3 p2 = new_point3(1, 0, 0);
+    t_uv_val expected2 = {0.25, 0.5};
+    assert_uv_equal(spherical_map(p2), expected2, "Test 2: point(1, 0, 0)");
+
+    // Test 3
+    t_point3 p3 = new_point3(0, 0, 1);
+    t_uv_val expected3 = {0.5, 0.5};
+    assert_uv_equal(spherical_map(p3), expected3, "Test 3: point(0, 0, 1)");
+
+    // Test 4
+    t_point3 p4 = new_point3(-1, 0, 0);
+    t_uv_val expected4 = {0.75, 0.5};
+    assert_uv_equal(spherical_map(p4), expected4, "Test 4: point(-1, 0, 0)");
+
+    // Test 5
+    t_point3 p5 = new_point3(0, 1, 0);
+    t_uv_val expected5 = {0.5, 1.0};
+    assert_uv_equal(spherical_map(p5), expected5, "Test 5: point(0, 1, 0)");
+
+    // Test 6
+    t_point3 p6 = new_point3(0, -1, 0);
+    t_uv_val expected6 = {0.5, 0.0};
+    assert_uv_equal(spherical_map(p6), expected6, "Test 6: point(0, -1, 0)");
+
+    // Test 7
+    t_point3 p7 = new_point3(sqrtf(2) / 2, sqrtf(2) / 2, 0);
+    t_uv_val expected7 = {0.25, 0.75};
+    assert_uv_equal(spherical_map(p7), expected7, "Test 7: point(√2/2, √2/2, 0)");
+}
+
+void test_texture_map() {
+    t_color3 black = new_color3(0, 0, 0);
+    t_color3 white = new_color3(1, 1, 1);
+
+    // Create a UV checkers pattern
+    t_uv *checkers = uv_checkers(16, 8, black, white);
+
+    // Create a texture map pattern with spherical mapping
+    t_pattern *pattern = texture_map(checkers, spherical_map);
+
+    // Define test points and expected colors
+    struct {
+        t_point3 point;
+        t_color3 expected_color;
+    } tests[] = {
+        {new_point3(0.4315, 0.4670, 0.7719), white},
+        {new_point3(-0.9654, 0.2552, -0.0534), black},
+        {new_point3(0.1039, 0.7090, 0.6975), white},
+        {new_point3(-0.4986, -0.7856, -0.3663), black},
+        {new_point3(-0.0317, -0.9395, 0.3411), black},
+        {new_point3(0.4809, -0.7721, 0.4154), black},
+        {new_point3(0.0285, -0.9612, -0.2745), black},
+        {new_point3(-0.5734, -0.2162, -0.7903), white},
+        {new_point3(0.7688, -0.1470, 0.6223), black},
+        {new_point3(-0.7652, 0.2175, 0.6060), black},
+    };
+
+    // Run the tests
+    for (int i = 0; i < 10; i++) {
+        t_color3 *result = pattern_at(pattern, &tests[i].point);
+        assert_color_equal(*result, tests[i].expected_color);
+        printf("Test %d passed!\n", i + 1);
+        free(result);
+    }
+
+    // Clean up
+    free(checkers);
+    free(pattern);
+}
+
+void test_planar_map() {
+    printf("Testing planar_map...\n");
+
+    // Test cases
+    t_point3 p1 = new_point3(0.25, 0, 0.5);
+    t_uv_val expected1 = {0.25, 0.5};
+    assert_uv_equal(planar_map(p1), expected1, "Test 1: point(0.25, 0, 0.5)");
+
+    t_point3 p2 = new_point3(0.25, 0, -0.25);
+    t_uv_val expected2 = {0.25, 0.75};
+    assert_uv_equal(planar_map(p2), expected2, "Test 2: point(0.25, 0, -0.25)");
+
+    t_point3 p3 = new_point3(0.25, 0.5, -0.25);
+    t_uv_val expected3 = {0.25, 0.75};
+    assert_uv_equal(planar_map(p3), expected3, "Test 3: point(0.25, 0.5, -0.25)");
+
+    t_point3 p4 = new_point3(1.25, 0, 0.5);
+    t_uv_val expected4 = {0.25, 0.5};
+    assert_uv_equal(planar_map(p4), expected4, "Test 4: point(1.25, 0, 0.5)");
+
+    t_point3 p5 = new_point3(0.25, 0, -1.75);
+    t_uv_val expected5 = {0.25, 0.25};
+    assert_uv_equal(planar_map(p5), expected5, "Test 5: point(0.25, 0, -1.75)");
+
+    t_point3 p6 = new_point3(1, 0, -1);
+    t_uv_val expected6 = {0.0, 0.0};
+    assert_uv_equal(planar_map(p6), expected6, "Test 6: point(1, 0, -1)");
+
+    t_point3 p7 = new_point3(0, 0, 0);
+    t_uv_val expected7 = {0.0, 0.0};
+    assert_uv_equal(planar_map(p7), expected7, "Test 7: point(0, 0, 0)");
+
+    printf("All planar_map tests passed!\n");
+}
+
+void test_cylindrical_map() {
+    printf("Testing cylindrical_map...\n");
+
+    // Test 1
+    t_point3 p1 = new_point3(0, 0, -1);
+    t_uv_val expected1 = {0.0, 0.0};
+    assert_uv_equal(cylindrical_map(p1), expected1, "Test 1: point(0, 0, -1)");
+
+    // Test 2
+    t_point3 p2 = new_point3(0, 0.5, -1);
+    t_uv_val expected2 = {0.0, 0.5};
+    assert_uv_equal(cylindrical_map(p2), expected2, "Test 2: point(0, 0.5, -1)");
+
+    // Test 3
+    t_point3 p3 = new_point3(0, 1, -1);
+    t_uv_val expected3 = {0.0, 0.0};
+    assert_uv_equal(cylindrical_map(p3), expected3, "Test 3: point(0, 1, -1)");
+
+    // Test 4
+    t_point3 p4 = new_point3(0.70711, 0.5, -0.70711);
+    t_uv_val expected4 = {0.125, 0.5};
+    assert_uv_equal(cylindrical_map(p4), expected4, "Test 4: point(0.70711, 0.5, -0.70711)");
+
+    // Test 5
+    t_point3 p5 = new_point3(1, 0.5, 0);
+    t_uv_val expected5 = {0.25, 0.5};
+    assert_uv_equal(cylindrical_map(p5), expected5, "Test 5: point(1, 0.5, 0)");
+
+    // Test 6
+    t_point3 p6 = new_point3(0.70711, 0.5, 0.70711);
+    t_uv_val expected6 = {0.375, 0.5};
+    assert_uv_equal(cylindrical_map(p6), expected6, "Test 6: point(0.70711, 0.5, 0.70711)");
+
+    // Test 7
+    t_point3 p7 = new_point3(0, -0.25, 1);
+    t_uv_val expected7 = {0.5, 0.75};
+    assert_uv_equal(cylindrical_map(p7), expected7, "Test 7: point(0, -0.25, 1)");
+
+    // Test 8
+    t_point3 p8 = new_point3(-0.70711, 0.5, 0.70711);
+    t_uv_val expected8 = {0.625, 0.5};
+    assert_uv_equal(cylindrical_map(p8), expected8, "Test 8: point(-0.70711, 0.5, 0.70711)");
+
+    // Test 9
+    t_point3 p9 = new_point3(-1, 1.25, 0);
+    t_uv_val expected9 = {0.75, 0.25};
+    assert_uv_equal(cylindrical_map(p9), expected9, "Test 9: point(-1, 1.25, 0)");
+
+    // Test 10
+    t_point3 p10 = new_point3(-0.70711, 0.5, -0.70711);
+    t_uv_val expected10 = {0.875, 0.5};
+    assert_uv_equal(cylindrical_map(p10), expected10, "Test 10: point(-0.70711, 0.5, -0.70711)");
+
+    printf("All cylindrical_map tests passed!\n");
+}
+
+void test_uv_align_check() {
+    printf("Testing uv_align_check...\n");
+
+    t_uv_align_check *pattern = uv_align_check(
+        new_color3(1, 1, 1), // Main (white)
+        new_color3(1, 0, 0), // Upper left (red)
+        new_color3(1, 1, 0), // Upper right (yellow)
+        new_color3(0, 1, 0), // Bottom left (green)
+        new_color3(0, 1, 1)  // Bottom right (cyan)
+    );
+
+    // Test cases
+    assert_color_equal(uv_pattern_at_align_check(pattern, 0.5, 0.5), new_color3(1, 1, 1));
+    assert_color_equal(uv_pattern_at_align_check(pattern, 0.1, 0.9), new_color3(1, 0, 0));
+    assert_color_equal(uv_pattern_at_align_check(pattern, 0.9, 0.9), new_color3(1, 1, 0));
+    assert_color_equal(uv_pattern_at_align_check(pattern, 0.1, 0.1), new_color3(0, 1, 0));
+    assert_color_equal(uv_pattern_at_align_check(pattern, 0.9, 0.1), new_color3(0, 1, 1));
+
+    printf("All uv_align_check tests passed!\n");
+}
+
+
+// int main(void)
+// {
+// 	test_uv_checkers();
+// 	printf("test_uv_checkers passed\n");
+// 	test_spherical_map();
+// 	printf("test_spherical_map passed\n");
+// 	test_texture_map();
+// 	printf("test_texture_map passed\n");
+// 	test_planar_map();
+// 	printf("test_planar_map passed\n");
+// 	test_cylindrical_map();
+// 	printf("test_cylindrical_map passed\n");
+// 	test_uv_align_check();
+// 	printf("test\n");
+// 	return 0;
+// }
+
 // // CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 int main (void)
 {
-	mlx_t *mlx = mlx_init(800, 400, "test", 1);
-	t_world	*world = test_world_plane();
-	t_camera *camera = camera_new(800, 400, M_PI / 3);
-	camera->transform = view_transformation(new_point3(0, 1.5, -5), new_point3(0, 1, 0), new_vec3(0, 1, 0));
+	mlx_t *mlx = mlx_init(400, 400, "test", 1);
+	t_world	*world = test_uv_align_check_scene();
+	t_camera *camera = camera_new(400, 400, 0.5);
+	camera->transform = view_transformation(new_point3(1, 2, -5), new_point3(0, 0, 0), new_vec3(0, 1, 0));
 	mlx_image_t *image = render(mlx, camera, world);
 	mlx_image_to_window(mlx, image, 0, 0);
 	printf("done\n");

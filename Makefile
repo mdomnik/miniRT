@@ -112,6 +112,11 @@ SRC_FILES		+= RTC/operations/intersection/intersection.c
 SRC_FILES		+= RTC/operations/intersection/obj_inter.c
 SRC_FILES		+= RTC/operations/intersection/inter_helper.c
 
+#TEXTURES
+SRC_FILES		+= RTC/operations/textures/aabb_uv.c
+SRC_FILES		+= RTC/operations/textures/uv.c
+SRC_FILES		+= RTC/operations/textures/map.c
+
 SRC_FILES		+= RTC/test.c
 
 # Object files directory

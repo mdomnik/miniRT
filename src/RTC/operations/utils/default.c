@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/03 22:58:47 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/12/08 18:59:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,3 +148,174 @@ t_world *test_world_plane(void)
 	add_light(&world->light, l1);
 	return (world);
 }
+
+t_world *test_textures(void) {
+    t_world *world = malloc(sizeof(t_world));
+    if (!world) {
+        fprintf(stderr, "Error: Could not allocate memory for world.\n");
+        exit(EXIT_FAILURE);
+    }
+    world->shapes = NULL;
+    world->light = NULL;
+
+    // Add light
+    t_light_p *light = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
+    add_light(&world->light, light);
+
+    // Add sphere with a checker texture map
+    t_shape *s = sphere();
+    t_uv *sphere_checkers = uv_checkers(20, 10, new_color3(0, 0.5, 0), new_color3(1, 1, 1));
+    t_pattern *sphere_texture = texture_map(sphere_checkers, spherical_map);
+    s->material.pattern = sphere_texture;
+    s->material.ambient = 0.1;
+    s->material.specular = 0.4;
+    s->material.shininess = 10;
+    s->material.diffuse = 0.6;
+
+    // Add plane for context
+    t_shape *p = plane();
+    p->material.color = new_color3_p(0.9, 0.9, 0.9);
+    p->material.specular = 0;
+    set_transform(p, translation(0, -1, 0)); // Position the plane as the floor
+
+    // Add shapes to world
+    add_shape(&p, s); // Add sphere to plane's linked list
+    world->shapes = p;
+
+    return world;
+}
+
+t_world *test_planar_mapping_scene(void) {
+    t_world *w = malloc(sizeof(t_world));
+    if (!w) {
+        fprintf(stderr, "Error: Could not allocate memory for world.\n");
+        exit(EXIT_FAILURE);
+    }
+    w->shapes = NULL;
+    w->light = NULL;
+
+    // Add light
+    t_light_p *l = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
+    add_light(&w->light, l);
+
+    // Add sphere with a checker texture map
+    t_shape *s = sphere();
+    t_uv *sphere_checkers = uv_checkers(20, 10, new_color3(0, 0.5, 0), new_color3(1, 1, 1));
+    t_pattern *sphere_texture = texture_map(sphere_checkers, spherical_map);
+    s->material.pattern = sphere_texture;
+    s->material.ambient = 0.1;
+    s->material.specular = 0.4;
+    s->material.shininess = 10;
+    s->material.diffuse = 0.6;
+
+
+	t_pattern *align_check_texture = texture_map(
+    uv_align_check(
+        new_color3(1, 1, 1), // Main (white)
+        new_color3(1, 0, 0), // Upper left (red)
+        new_color3(1, 1, 0), // Upper right (yellow)
+        new_color3(0, 1, 0), // Bottom left (green)
+        new_color3(0, 1, 1)  // Bottom right (cyan)
+    ),
+    planar_map
+	);
+	t_shape *p = plane();
+	p->material.pattern = align_check_texture;
+	p->material.ambient = 0.1;
+	p->material.diffuse = 0.8;
+
+	add_shape(&p, s); // Add sphere to plane's linked list
+    w->shapes = p;
+
+    return w;
+}
+
+
+t_world *test_cylindrical_mapping_scene(void) {
+    t_world *w = malloc(sizeof(t_world));
+    if (!w) {
+        fprintf(stderr, "Error: Could not allocate memory for world.\n");
+        exit(EXIT_FAILURE);
+    }
+    w->shapes = NULL;
+    w->light = NULL;
+
+    // Add light
+    t_light_p *l = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
+    add_light(&w->light, l);
+
+    // Add cylinder with cylindrical mapping
+    t_shape *c = cylinder();
+    t_uv *cp = uv_checkers(16, 8, new_color3(0, 0.5, 0), new_color3(1, 1, 1));
+    t_pattern *pt = texture_map(cp, cylindrical_map);
+
+    c->material.pattern = pt;
+    c->material.ambient = 0.1;
+    c->material.specular = 0.6;
+    c->material.shininess = 15;
+    c->material.diffuse = 0.8;
+
+	t_shape *s = sphere();
+    t_uv *sphere_checkers = uv_checkers(20, 10, new_color3(0, 0.5, 0), new_color3(1, 1, 1));
+    t_pattern *sphere_texture = texture_map(sphere_checkers, spherical_map);
+    s->material.pattern = sphere_texture;
+    s->material.ambient = 0.1;
+    s->material.specular = 0.4;
+    s->material.shininess = 10;
+    s->material.diffuse = 0.6;
+
+    set_transform(c, multiply_matrices(rotation_x(5 * (M_PI / 6)), scaling(1, M_PI, 1)));
+	set_transform(s, translation(0, 0, 100));
+    add_shape(&c, s); // Add sphere to cylinder's linked list
+	w->shapes = c;
+
+    return w;
+}
+
+t_world *test_uv_align_check_scene(void) {
+    t_world *world = malloc(sizeof(t_world));
+    if (!world) {
+        fprintf(stderr, "Error: Could not allocate memory for world.\n");
+        exit(EXIT_FAILURE);
+    }
+    world->shapes = NULL;
+    world->light = NULL;
+
+    // Add light
+    t_light_p *light = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
+    add_light(&world->light, light);
+
+    // Add align check pattern to a plane
+    t_shape *p = plane();
+    t_uv_align_check *align_pattern = uv_align_check(
+        new_color3(1, 1, 1), // Main (white)
+        new_color3(1, 0, 0), // Upper left (red)
+        new_color3(1, 1, 0), // Upper right (yellow)
+        new_color3(0, 1, 0), // Bottom left (green)
+        new_color3(0, 1, 1)  // Bottom right (cyan)
+    );
+    t_pattern *plane_pattern = align_check_map(align_pattern, planar_map);
+    p->material.pattern = plane_pattern;
+    p->material.ambient = 0.1;
+    p->material.diffuse = 0.8;
+
+		t_shape *s = sphere();
+    t_uv *sphere_checkers = uv_checkers(20, 10, new_color3(0, 0.5, 0), new_color3(1, 1, 1));
+    t_pattern *sphere_texture = texture_map(sphere_checkers, spherical_map);
+    s->material.pattern = sphere_texture;
+    s->material.ambient = 0.1;
+    s->material.specular = 0.4;
+    s->material.shininess = 10;
+    s->material.diffuse = 0.6;
+
+    // Add plane to world
+	add_shape(&p, s); // Add sphere to plane's linked list
+    world->shapes = p;
+
+    return world;
+}
+
+
+
+
+

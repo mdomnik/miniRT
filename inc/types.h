@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/29 20:48:39 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/12/08 16:27:26 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,20 @@ typedef struct s_pattern	t_pattern;
 
 typedef struct s_material	t_material;
 
+typedef struct s_uv_val		t_uv_val;
+
+typedef struct s_uv			t_uv;
+
+typedef struct s_uv_align_check	t_uv_align_check;
+
 typedef enum e_pattern_type
 {
 	STRIPE,
 	GRADIENT,
 	RING,
 	CHECKERS,
-	BLEND
+	TEXTURE_MAP,
+	ALIGN_CHECK
 }	t_pattern_type;
 
 struct	s_tuple
@@ -72,12 +79,36 @@ struct s_ray
 };
 
 
+struct s_uv_val
+{
+	float			u;
+	float			v;
+};
+
+struct s_uv
+{
+	int				width;
+	int				height;
+	t_color3		color_a;
+	t_color3		color_b;
+};
+
+struct s_uv_align_check {
+	t_color3 main;
+	t_color3 ul;
+	t_color3 ur;
+	t_color3 bl;
+	t_color3 br;
+};
+
 struct s_pattern
 {
 	t_color3		*a;
 	t_color3		*b;
 	t_matrix		transform;
 	t_pattern_type	type;
+    void            *uv_pattern;
+    t_uv_val        (*uv_map)(t_point3 point);
 };
 
 struct s_material

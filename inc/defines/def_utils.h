@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:45:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/20 14:32:34 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/12/08 18:37:54 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ t_material *default_material(void);
 t_world	*default_world(void);
 t_world *test_world(void);
 t_world *test_world_plane(void);
+t_world *test_textures(void);
+t_world *test_planar_mapping_scene(void);
+t_world *test_cylindrical_mapping_scene(void);
+t_world *test_uv_align_check_scene(void);
 
 //operations/utils/utils_1.c
 bool		is_equal(float a, float b);
