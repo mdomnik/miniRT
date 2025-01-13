@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/08 18:38:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/13 21:50:38 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1503,6 +1503,159 @@ void test_uv_align_check() {
     printf("All uv_align_check tests passed!\n");
 }
 
+void test_face_from_point() {
+    struct {
+        t_point3 point;
+        t_directions expected_face;
+    } test_cases[] = {
+        {new_point3(-1, 0.5, -0.25), LEFT},
+        {new_point3(1.1, -0.75, 0.8), RIGHT},
+        {new_point3(0.1, 0.6, 0.9), FRONT},
+        {new_point3(-0.7, 0, -2), BACK},
+        {new_point3(0.5, 1, 0.9), UP},
+        {new_point3(-0.2, -1.3, 1.1), DOWN}
+    };
+
+    for (int i = 0; (unsigned long)i < sizeof(test_cases) / sizeof(test_cases[0]); ++i) {
+        t_directions result = face_from_point(test_cases[i].point);
+        if (result != test_cases[i].expected_face) {
+            fprintf(stderr, "Test %d failed: Expected %d, got %d\n",
+                    i + 1, test_cases[i].expected_face, result);
+            exit(EXIT_FAILURE);
+        } else {
+            printf("Test %d passed.\n", i + 1);
+        }
+    }
+}
+
+
+#include <assert.h>
+#include <stdio.h>
+
+// Helper function for comparing colors
+int color_equals(t_color3 a, t_color3 b) {
+    float epsilon = 1e-6;  // Adjust as needed
+    return fabs(a.r - b.r) < epsilon && fabs(a.g - b.g) < epsilon && fabs(a.b - b.b) < epsilon;
+}
+
+void test_left_face_uv() {
+    t_point3 points[] = {
+        new_point3(-1, 0, 0),      // Center of left face
+        new_point3(-1, 0.9, -0.9), // Top-left corner
+        new_point3(-1, 0.9, 0.9),  // Top-right corner
+        new_point3(-1, -0.9, -0.9),// Bottom-left corner
+        new_point3(-1, -0.9, 0.9)  // Bottom-right corner
+    };
+
+    t_uv_val expected[] = {
+        {0.5, 0.5}, {0.05, 0.95}, {0.95, 0.95}, {0.05, 0.05}, {0.95, 0.05}
+    };
+
+    for (int i = 0; i < 5; i++) {
+        t_uv_val uv = cube_uv_left(points[i]);
+        printf("Left Face: Point (%f, %f, %f) -> UV: u = %f, v = %f (Expected: u = %f, v = %f)\n",
+               points[i].x, points[i].y, points[i].z, uv.u, uv.v, expected[i].u, expected[i].v);
+        assert(fabs(uv.u - expected[i].u) < 1e-6 && fabs(uv.v - expected[i].v) < 1e-6);
+    }
+}
+
+void test_right_face_uv() {
+    t_point3 points[] = {
+        new_point3(1, 0, 0),       // Center of right face
+        new_point3(1, 0.9, 0.9),   // Top-right corner
+        new_point3(1, 0.9, -0.9),  // Top-left corner
+        new_point3(1, -0.9, 0.9),  // Bottom-right corner
+        new_point3(1, -0.9, -0.9),  // Bottom-left corner
+    };
+
+    t_uv_val expected[] = {
+        {0.5, 0.5}, {0.95, 0.95}, {0.05, 0.95}, {0.95, 0.05}, {0.05, 0.05}
+    };
+
+    for (int i = 0; i < 5; i++) {
+        t_uv_val uv = cube_uv_right(points[i]);
+        printf("Right Face: Point (%f, %f, %f) -> UV: u = %f, v = %f (Expected: u = %f, v = %f)\n",
+               points[i].x, points[i].y, points[i].z, uv.u, uv.v, expected[i].u, expected[i].v);
+        assert(fabs(uv.u - expected[i].u) < 1e-6 && fabs(uv.v - expected[i].v) < 1e-6);
+    }
+}
+
+
+
+void test_cube_mapped_colors() {
+    // Define colors
+    t_color3 red = new_color3(1, 0, 0);
+    t_color3 yellow = new_color3(1, 1, 0);
+    t_color3 brown = new_color3(1, 0.5, 0);
+    t_color3 green = new_color3(0, 1, 0);
+    t_color3 cyan = new_color3(0, 1, 1);
+    t_color3 blue = new_color3(0, 0, 1);
+    t_color3 purple = new_color3(1, 0, 1);
+    t_color3 white = new_color3(1, 1, 1);
+
+    // Create align check patterns for each face
+    t_pattern *left = align_check_map(uv_align_check(yellow, cyan, red, blue, brown), cube_uv_left);
+    t_pattern *front = align_check_map(uv_align_check(cyan, red, yellow, brown, green), cube_uv_front);
+    t_pattern *right = align_check_map(uv_align_check(red, yellow, purple, green, white), cube_uv_right);
+    t_pattern *back = align_check_map(uv_align_check(green, purple, cyan, white, blue), cube_uv_back);
+    t_pattern *up = align_check_map(uv_align_check(brown, cyan, purple, red, yellow), cube_uv_up);
+    t_pattern *down = align_check_map(uv_align_check(purple, brown, green, blue, white), cube_uv_down);
+
+    // Create cube map pattern
+    t_pattern *cube_pattern = new_cube_map(left, front, right, back, up, down);
+
+    // Define test cases
+    typedef struct {
+        t_point3 point;
+        t_color3 expected_color;
+        const char *description;
+    } t_test_case;
+
+    t_test_case test_cases[] = {
+        {new_point3(-1, 0, 0), yellow, "Left face, center"},
+        {new_point3(-1, 0.9, -0.9), cyan, "Left face, top-left"},
+        {new_point3(-1, 0.9, 0.9), red, "Left face, top-right"},
+        {new_point3(-1, -0.9, -0.9), blue, "Left face, bottom-left"},
+        {new_point3(-1, -0.9, 0.9), brown, "Left face, bottom-right"},
+        {new_point3(0, 0, 1), cyan, "Front face, center"},
+        {new_point3(-0.9, 0.9, 1), red, "Front face, top-left"},
+        {new_point3(0.9, 0.9, 1), yellow, "Front face, top-right"},
+        {new_point3(-0.9, -0.9, 1), brown, "Front face, bottom-left"},
+        {new_point3(0.9, -0.9, 1), green, "Front face, bottom-right"},
+        {new_point3(1, 0, 0), red, "Right face, center"},
+        {new_point3(1, 0.9, 0.9), yellow, "Right face, top-left"},
+        {new_point3(1, 0.9, -0.9), purple, "Right face, top-right"},
+        {new_point3(1, -0.9, 0.9), green, "Right face, bottom-left"},
+        {new_point3(1, -0.9, -0.9), white, "Right face, bottom-right"},
+        {new_point3(0, 0, -1), green, "Back face, center"},
+        {new_point3(0.9, 0.9, -1), purple, "Back face, top-left"},
+        {new_point3(-0.9, 0.9, -1), cyan, "Back face, top-right"},
+        {new_point3(0.9, -0.9, -1), white, "Back face, bottom-left"},
+        {new_point3(-0.9, -0.9, -1), blue, "Back face, bottom-right"},
+        {new_point3(0, 1, 0), brown, "Up face, center"},
+        {new_point3(-0.9, 1, -0.9), cyan, "Up face, top-left"},
+        {new_point3(0.9, 1, -0.9), purple, "Up face, top-right"},
+        {new_point3(-0.9, 1, 0.9), red, "Up face, bottom-left"},
+        {new_point3(0.9, 1, 0.9), yellow, "Up face, bottom-right"},
+        {new_point3(0, -1, 0), purple, "Down face, center"},
+        {new_point3(-0.9, -1, 0.9), brown, "Down face, top-left"},
+        {new_point3(0.9, -1, 0.9), green, "Down face, top-right"},
+        {new_point3(-0.9, -1, -0.9), blue, "Down face, bottom-left"},
+        {new_point3(0.9, -1, -0.9), white, "Down face, bottom-right"}
+    };
+
+    // Run test cases
+    for (size_t i = 0; i < sizeof(test_cases) / sizeof(t_test_case); i++) {
+        t_color3 *actual_color = pattern_at(cube_pattern, &test_cases[i].point);
+        printf("%s: Point (%f, %f, %f) -> Expected Color (%f, %f, %f), Actual Color (%f, %f, %f)\n",
+               test_cases[i].description,
+               test_cases[i].point.x, test_cases[i].point.y, test_cases[i].point.z,
+               test_cases[i].expected_color.r, test_cases[i].expected_color.g, test_cases[i].expected_color.b,
+               actual_color->r, actual_color->g, actual_color->b);
+        assert(color_equals(*actual_color, test_cases[i].expected_color) && "Test failed!");
+    }
+}
+
 
 // int main(void)
 // {
@@ -1518,16 +1671,33 @@ void test_uv_align_check() {
 // 	printf("test_cylindrical_map passed\n");
 // 	test_uv_align_check();
 // 	printf("test\n");
-// 	return 0;
+// 	test_face_from_point();
+//     printf("test_face_from_point passed\n");
+//     test_cube_mapped_colors();
+//     printf("test_cube_colors_passed\n");
+//     // test_left_face_uv();
+//     // test_right_face_uv();
+//     return 0;
 // }
 
-// // CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// int main (void)
+// {
+//     t_canvas *canvas = canvas_new(800, 800);
+//     t_color3 red = new_color3(1, 0, 0);
+//     write_pixel(canvas, 0, 0, red);
+//     t_color3 color = pixel_at(canvas, 0, 0);
+//     print_tuple(color);
+// }
+
+
+
+// CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 int main (void)
 {
-	mlx_t *mlx = mlx_init(400, 400, "test", 1);
-	t_world	*world = test_uv_align_check_scene();
-	t_camera *camera = camera_new(400, 400, 0.5);
-	camera->transform = view_transformation(new_point3(1, 2, -5), new_point3(0, 0, 0), new_vec3(0, 1, 0));
+	mlx_t *mlx = mlx_init(800, 400, "test", 1);
+	t_world	*world = setup_cube_scene();
+	t_camera *camera = camera_new(800, 400, 0.8);
+	camera->transform = view_transformation(new_point3(0, 0, -20), new_point3(0, 0, 0), new_vec3(0, 1, 0));
 	mlx_image_t *image = render(mlx, camera, world);
 	mlx_image_to_window(mlx, image, 0, 0);
 	printf("done\n");

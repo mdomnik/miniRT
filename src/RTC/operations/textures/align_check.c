@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aabb_uv.c                                          :+:      :+:    :+:   */
+/*   align_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 20:16:01 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/08 18:51:42 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/13 20:11:02 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_uv_align_check *uv_align_check(t_color3 main, t_color3 ul, t_color3 ur, t_colo
     pattern->ur = ur;
     pattern->bl = bl;
     pattern->br = br;
+
     return pattern;
 }
 
@@ -42,3 +43,20 @@ t_color3 uv_pattern_at_align_check(t_uv_align_check *pattern, float u, float v) 
     return pattern->main;
 }
 
+t_pattern *align_check_map(void *uv_pattern, t_uv_val (*uv_map)(t_point3))
+{
+	t_pattern *pattern = malloc(sizeof(t_pattern));
+	if (!pattern) {
+		fprintf(stderr, "Error: Could not allocate memory for align check map.\n");
+		exit(EXIT_FAILURE);
+	}
+
+	pattern->type = ALIGN_CHECK;
+	pattern->uv_pattern = uv_pattern;
+	pattern->uv_map = uv_map;
+	pattern->transform = *init_identity_matrix(4); // Default transform
+	pattern->a = NULL; // Not used for texture maps
+	pattern->b = NULL;
+
+	return pattern;
+}

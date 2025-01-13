@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/08 16:27:26 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/13 18:38:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_uv			t_uv;
 
 typedef struct s_uv_align_check	t_uv_align_check;
 
+typedef struct s_cube_map	t_cube_map;
+
 typedef enum e_pattern_type
 {
 	STRIPE,
@@ -38,8 +40,19 @@ typedef enum e_pattern_type
 	RING,
 	CHECKERS,
 	TEXTURE_MAP,
-	ALIGN_CHECK
+	ALIGN_CHECK,
+	CUBE_MAP
 }	t_pattern_type;
+
+typedef enum e_directions
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	FRONT,
+	BACK
+}	t_directions;
 
 struct	s_tuple
 {
@@ -110,6 +123,12 @@ struct s_pattern
     void            *uv_pattern;
     t_uv_val        (*uv_map)(t_point3 point);
 };
+
+struct s_cube_map
+{
+    t_pattern *faces[6];
+};
+
 
 struct s_material
 {

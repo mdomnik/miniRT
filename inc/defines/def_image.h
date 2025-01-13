@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   def_objects.h                                      :+:      :+:    :+:   */
+/*   def_image.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 13:52:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/13 20:26:47 by mdomnik          ###   ########.fr       */
+/*   Created: 2025/01/13 21:44:55 by mdomnik           #+#    #+#             */
+/*   Updated: 2025/01/13 21:52:54 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEF_OBJECTS_H
-# define DEF_OBJECTS_H
+#ifndef DEF_IMAGE_H
+# define DEF_IMAGE_H
 
-
-void 		add_shape(t_shape **shapes, t_shape *new_shape);
-void 		add_light(t_light_p **lights, t_light_p *new_light);
-t_shape 	*test_shape(void);
-t_shape *glass_sphere(void);
-t_shape *create_mapped_cube(void);
-
-t_shape	*sphere(void);
-t_shape *plane(void);
-t_shape *cube(void);
-t_shape *cylinder(void);
-t_shape *cone(void);
-
+t_canvas *canvas_new(int width, int height);
+void write_pixel(t_canvas *canvas, int x, int y, t_color3 color);
+t_color3 pixel_at(t_canvas *canvas, int x, int y);
+void canvas_to_ppm(t_canvas *canvas, char *filename);
 #endif

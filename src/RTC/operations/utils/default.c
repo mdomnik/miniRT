@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/08 18:59:18 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/13 20:30:05 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_world *test_world_plane(void)
 	t_shape  *floor = plane();
 	floor->material.pattern = new_pattern(CHECKERS, new_color3_p(0.8, 0.2, 0.2), new_color3_p(0.2, 1, 0.2));
 	set_pattern_transform(floor->material.pattern, multiply_matrices(rotation_y(M_PI / 4), scaling(0.1, 0.1, 0.1)));
-	floor->material.reflective = 0.5;
+	floor->material.reflective = 0.2;
 	floor->material.color = new_color3_p(1, 0.9, 0.9);
 	floor->material.specular = 0;
 	t_shape *wall = plane();
@@ -113,7 +113,7 @@ t_world *test_world_plane(void)
 	wall->material.pattern = new_pattern(CHECKERS, new_color3_p(0.8, 0.2, 0.2), new_color3_p(0.2, 1, 0.2));
 	set_pattern_transform(wall->material.pattern, multiply_matrices(rotation_y(M_PI / 2), scaling(0.5, 0.5, 0.5)));
 	wall->material.color = new_color3_p(1, 0.9, 0.9);
-	wall->material.reflective = 0.5;
+	wall->material.reflective = 0;
 	wall->material.specular = 0;
 	t_shape  *middle = sphere();
 	set_transform(middle, translation(-0.5, 1, 0.5));
@@ -314,6 +314,39 @@ t_world *test_uv_align_check_scene(void) {
 
     return world;
 }
+
+t_world *setup_cube_scene() 
+{
+    t_world *world = malloc(sizeof(t_world));
+    world->shapes = NULL;
+    world->light = NULL;
+
+    // Add lights
+    add_light(&world->light, new_light(new_point3_p(0, 100, -100), new_color3_p(0.25, 0.25, 0.25)));
+    add_light(&world->light, new_light(new_point3_p(0, -100, -100), new_color3_p(0.25, 0.25, 0.25)));
+    add_light(&world->light, new_light(new_point3_p(-100, 0, -100), new_color3_p(0.25, 0.25, 0.25)));
+    add_light(&world->light, new_light(new_point3_p(100, 0, -100), new_color3_p(0.25, 0.25, 0.25)));
+
+    // Create and transform mapped cubes
+    float rotations[][3] = {
+        {0.7854, 0.7854, -6}, {2.3562, 0.7854, -2}, {3.927, 0.7854, 2}, {5.4978, 0.7854, 6},
+        {0.7854, -0.7854, -6}, {2.3562, -0.7854, -2}, {3.927, -0.7854, 2}, {5.4978, -0.7854, 6}
+    };
+
+    for (int i = 0; i < 8; i++) {
+        t_shape *cube = create_mapped_cube();
+        cube->transform = *multiply_matrices(
+            multiply_matrices(translation(rotations[i][2], (i < 4 ? 2 : -2), 0),
+                              rotation_y(rotations[i][0])),
+            rotation_x(rotations[i][1])
+        );
+        add_shape(&world->shapes, cube);
+    }
+
+    return world;
+}
+
+
 
 
 

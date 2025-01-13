@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2024/12/04 14:41:30 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/13 21:45:29 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # include "defines/def_patterns.h"
 # include "defines/def_reflection.h"
 # include "defines/def_texture.h"
+# include "defines/def_image.h"
 
 # define VP_WIDTH  960
 # define VP_HEIGHT 540

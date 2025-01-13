@@ -113,9 +113,14 @@ SRC_FILES		+= RTC/operations/intersection/obj_inter.c
 SRC_FILES		+= RTC/operations/intersection/inter_helper.c
 
 #TEXTURES
-SRC_FILES		+= RTC/operations/textures/aabb_uv.c
+SRC_FILES		+= RTC/operations/textures/align_check.c
+SRC_FILES		+= RTC/operations/textures/cube_uv_dir.c
+SRC_FILES		+= RTC/operations/textures/cube_uv.c
 SRC_FILES		+= RTC/operations/textures/uv.c
 SRC_FILES		+= RTC/operations/textures/map.c
+
+#IMAGE
+SRC_FILES		+= RTC/operations/image/write_ppm.c
 
 SRC_FILES		+= RTC/test.c
 
