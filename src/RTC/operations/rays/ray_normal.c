@@ -6,25 +6,30 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 19:19:48 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/03 22:50:51 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/14 21:15:00 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
 //normal at
-t_vec3	normal_at(t_shape *shape, t_point3 point)
-{
-	t_point3 local_point;
-	t_vec3 local_normal;
-	t_vec3 world_normal;
-	
-	local_point = multiply_matrix_tuple(inverse(shape->transform), &point);
-	local_normal = local_normal_at(shape, &local_point);
-	world_normal = multiply_matrix_tuple(transpose_matrix(inverse(shape->transform)), &local_normal);
-	world_normal.w = 0;
-	return (normalize(world_normal));
+t_vec3 normal_at(t_shape *shape, t_point3 point) {
+    t_point3 local_point;
+    t_vec3 local_normal;
+    t_vec3 world_normal;
+
+    // Convert to local space
+    local_point = multiply_matrix_tuple(inverse(shape->transform), &point);
+
+    // Compute the unperturbed local normal
+    local_normal = local_normal_at(shape, &local_point);
+
+    local_normal = perturb_normal(shape, &local_point, local_normal);
+    world_normal = multiply_matrix_tuple(transpose_matrix(inverse(shape->transform)), &local_normal);
+    world_normal.w = 0; // Ensure it's a direction vector
+    return normalize(world_normal);
 }
+
 
 static t_vec3 cube_normal_at(t_point3 *local_point)
 {

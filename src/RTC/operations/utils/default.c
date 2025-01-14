@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/14 19:40:24 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/14 22:35:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_material *default_material(void)
 	material->reflective = 0.0;
 	material->transparency = 0.0;
 	material->refractive_index = 1.0;
+    material->bump_map = NULL;
 	return (material);
 }
 //default world
@@ -428,26 +429,12 @@ t_world *create_skybox_scene(void) {
     skybox->material.ambient = 1;
 
 	// https://www.humus.name/index.php?page=Textures&start=24
-	t_canvas *cnegx = canvas_from_ppm("z_hdri/negx.ppm");
-	t_canvas *cposx = canvas_from_ppm("z_hdri/posx.ppm");
-	t_canvas *cposz = canvas_from_ppm("z_hdri/posz.ppm");
-	t_canvas *cnegz = canvas_from_ppm("z_hdri/negz.ppm");
-	t_canvas *cposy = canvas_from_ppm("z_hdri/posy.ppm");
-	t_canvas *cnegy = canvas_from_ppm("z_hdri/negy.ppm");
-
-	t_pattern *uv_pattern_left = uv_image(cnegx);
-	t_pattern *uv_pattern_front = uv_image(cposz);
-	t_pattern *uv_pattern_right = uv_image(cposx);
-	t_pattern *uv_pattern_back = uv_image(cnegz);
-	t_pattern *uv_pattern_up = uv_image(cposy);
-	t_pattern *uv_pattern_down = uv_image(cnegy);
-
-	t_pattern *uv_left = texture_map(uv_pattern_left, planar_map);
-	t_pattern *uv_front = texture_map(uv_pattern_front, planar_map);
-	t_pattern *uv_right = texture_map(uv_pattern_right, planar_map);
-	t_pattern *uv_back = texture_map(uv_pattern_back, planar_map);
-	t_pattern *uv_up = texture_map(uv_pattern_up, planar_map);
-	t_pattern *uv_down = texture_map(uv_pattern_down, planar_map);
+	t_pattern *uv_left = texture_map(uv_image(canvas_from_ppm("z_hdri/negx.ppm")), planar_map);
+	t_pattern *uv_front = texture_map(uv_image(canvas_from_ppm("z_hdri/posz.ppm")), planar_map);
+	t_pattern *uv_right = texture_map(uv_image(canvas_from_ppm("z_hdri/posx.ppm")), planar_map);
+	t_pattern *uv_back = texture_map(uv_image(canvas_from_ppm("z_hdri/negz.ppm")), planar_map);
+	t_pattern *uv_up = texture_map(uv_image(canvas_from_ppm("z_hdri/posy.ppm")), planar_map);
+	t_pattern *uv_down = texture_map(uv_image(canvas_from_ppm("z_hdri/negy.ppm")), planar_map);
 
 	t_pattern *cube_map = new_cube_map(uv_left, uv_front, uv_right, uv_back, uv_up, uv_down);
     // Cube map pattern
@@ -472,6 +459,59 @@ t_world *create_skybox_scene(void) {
     return world;
 }
 
+
+t_world *create_bump_map_scene(void)
+{
+    t_world *world = malloc(sizeof(t_world));
+    if (!world) {
+        fprintf(stderr, "Failed to allocate world.\n");
+        exit(EXIT_FAILURE);
+    }
+    world->shapes = NULL;
+    world->light = NULL;
+
+    // Add light source
+    t_light_p *light = new_light(new_point3_p(-100, 100, -100), new_color3_p(1, 1, 1));
+    world->light = light;
+
+    // Add plane
+    t_shape *p = plane();
+    p->material.color = new_color3_p(1, 1, 1);
+    p->material.diffuse = 0.1;
+    p->material.specular = 0;
+    p->material.ambient = 0;
+    p->material.reflective = 0.4;
+
+    // Add cylinder
+    t_shape *c = cylinder();
+    c->material.color = new_color3_p(1, 1, 1);
+    c->material.diffuse = 0.2;
+    c->material.specular = 0;
+    c->material.ambient = 0;
+    c->material.reflective = 0.1;
+    add_shape(&p, c);
+
+    t_canvas *earth_canvas = canvas_from_ppm("earthmap1k.ppm");
+    t_pattern *earth_pattern = uv_image(earth_canvas);
+    t_pattern *sphere_texture = texture_map(earth_pattern, spherical_map);
+
+    t_shape *s = sphere();
+    s->material.pattern = sphere_texture;
+    s->material.bump_map = bump_map_from_ppm("bump_map.ppm", 5, spherical_map);
+    s->material.diffuse = 0.9;
+    s->material.specular = 0.1;
+    s->material.shininess = 10;
+    s->material.ambient = 0.1;
+
+    // Apply transformations
+    t_matrix *rotation = rotation_y(1.9);
+    t_matrix *trans = translation(0, 1.1, 0);
+    set_transform(s, multiply_matrices(trans, rotation));
+
+    add_shape(&p, s);
+	world->shapes = p;
+    return world;
+}
 
 
 

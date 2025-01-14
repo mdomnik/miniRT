@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/13 23:53:01 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/14 22:23:12 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ typedef struct s_uv_align_check	t_uv_align_check;
 
 typedef struct s_cube_map	t_cube_map;
 
+typedef struct s_bump_map	t_bump_map;
+
+typedef struct s_canvas	t_canvas;
+
+typedef struct s_uv_image	t_uv_image;
 
 typedef enum e_pattern_type
 {
@@ -131,7 +136,24 @@ struct s_cube_map
     t_pattern *faces[6];
 };
 
+struct s_canvas
+{
+	int			width;
+	int			height;
+	t_color3	**pixels;
+};
 
+struct s_uv_image
+{
+    t_canvas *canvas;
+};
+
+struct s_bump_map
+{
+	t_canvas *height_map;
+	t_uv_val (*uv_map)(t_point3 point);
+	float 	scale;
+};
 
 struct s_material
 {
@@ -144,5 +166,6 @@ struct s_material
 	float			reflective;
 	float			transparency;
 	float			refractive_index;
+	t_bump_map		*bump_map;
 };
 

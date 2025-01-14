@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:08:26 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/14 19:04:01 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/14 21:16:41 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ t_color3 pattern_at_cube_map(t_pattern *pattern, t_point3 point)
 
     t_pattern *face_pattern = cube->faces[face];
     t_color3 color = uv_pattern_at_image(face_pattern->uv_pattern, uv.u, uv.v); //used to be uv_pattern_at_align_check, when running align_check_map
-
     return color;
 }
 
