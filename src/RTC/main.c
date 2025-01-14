@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/14 01:52:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/14 18:12:37 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1755,7 +1755,7 @@ void test_uv_image_pattern() {
 int main (void)
 {
 	mlx_t *mlx = mlx_init(800, 400, "test", 1);
-	t_world	*world = setup_cube_scene();
+	t_world	*world = create_skybox_scene();
 	t_camera *camera = camera_new(800, 400, 0.8);
 	camera->transform = view_transformation(new_point3(1, 2, -10), new_point3(0, 1.1, 0), new_vec3(0, 1, 0));
     mlx_image_t *image = render(mlx, camera, world);

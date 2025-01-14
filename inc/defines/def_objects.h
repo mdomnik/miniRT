@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:52:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/13 20:26:47 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/14 18:23:55 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void 		add_light(t_light_p **lights, t_light_p *new_light);
 t_shape 	*test_shape(void);
 t_shape *glass_sphere(void);
 t_shape *create_mapped_cube(void);
+t_shape *create_texture_cube(void);
 
 t_shape	*sphere(void);
 t_shape *plane(void);

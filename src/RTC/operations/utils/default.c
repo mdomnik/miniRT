@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/14 01:40:47 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/14 18:56:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -413,7 +413,7 @@ t_world *create_skybox_scene(void) {
 
     // Add reflective sphere
     t_shape *s = sphere();
-    set_transform(s, multiply_matrices(translation(0, 0, 5), scaling(0.75, 0.75, 0.75)));
+    set_transform(s, multiply_matrices(translation(0, 0, 5), scaling(1.75, 1.75, 1.75)));
     s->material.diffuse = 0.4;
     s->material.specular = 0.6;
     s->material.shininess = 20;
@@ -421,32 +421,54 @@ t_world *create_skybox_scene(void) {
     s->material.ambient = 0;
 
     // Add skybox cube
-    t_shape *skybox = cube();
-    set_transform(skybox, scaling(1000, 1000, 1000));
+    t_shape *skybox = create_mapped_cube();
+	set_transform(skybox, scaling(500, 500, 500));
     skybox->material.diffuse = 0;
     skybox->material.specular = 0;
     skybox->material.ambient = 1;
 
-	t_canvas *cnegx = canvas_from_ppm("Tenerife4/negx.ppm");
-	t_canvas *cposx = canvas_from_ppm("Tenerife4/posx.ppm");
-	t_canvas *cposz = canvas_from_ppm("Tenerife4/posz.ppm");
-	t_canvas *cnegz = canvas_from_ppm("Tenerife4/negz.ppm");
-	t_canvas *cposy = canvas_from_ppm("Tenerife4/posy.ppm");
-	t_canvas *cnegy = canvas_from_ppm("Tenerife4/negy.ppm");
+	t_canvas *cnegx = canvas_from_ppm("z_hdri/negx.ppm");
+	t_canvas *cposx = canvas_from_ppm("z_hdri/posx.ppm");
+	t_canvas *cposz = canvas_from_ppm("z_hdri/posz.ppm");
+	t_canvas *cnegz = canvas_from_ppm("z_hdri/negz.ppm");
+	t_canvas *cposy = canvas_from_ppm("z_hdri/posy.ppm");
+	t_canvas *cnegy = canvas_from_ppm("z_hdri/negy.ppm");
 
-	t_pattern *uv_left = align_check_map(uv_image(cnegx), cube_uv_left);
-	t_pattern *uv_front = align_check_map(uv_image(cposz), cube_uv_front);
-	t_pattern *uv_right = align_check_map(uv_image(cposx), cube_uv_right);
-	t_pattern *uv_back = align_check_map(uv_image(cnegz), cube_uv_back);
-	t_pattern *uv_up = align_check_map(uv_image(cposy), cube_uv_up);
-	t_pattern *uv_down = align_check_map(uv_image(cnegy), cube_uv_down);
+	t_pattern *uv_pattern_left = uv_image(cnegx);
+	t_pattern *uv_pattern_front = uv_image(cposz);
+	t_pattern *uv_pattern_right = uv_image(cposx);
+	t_pattern *uv_pattern_back = uv_image(cnegz);
+	t_pattern *uv_pattern_up = uv_image(cposy);
+	t_pattern *uv_pattern_down = uv_image(cnegy);
 
+	t_pattern *uv_left = texture_map(uv_pattern_left, planar_map);
+	t_pattern *uv_front = texture_map(uv_pattern_front, planar_map);
+	t_pattern *uv_right = texture_map(uv_pattern_right, planar_map);
+	t_pattern *uv_back = texture_map(uv_pattern_back, planar_map);
+	t_pattern *uv_up = texture_map(uv_pattern_up, planar_map);
+	t_pattern *uv_down = texture_map(uv_pattern_down, planar_map);
+
+	printf("cnegx->width: %d\n", cnegx->width);
+	printf("cnegx->height: %d\n", cnegx->height);
+	t_pattern *cube_map = new_cube_map(uv_left, uv_front, uv_right, uv_back, uv_up, uv_down);
     // Cube map pattern
-    skybox->material.pattern = new_cube_map(uv_left, uv_front, uv_right, uv_back, uv_up, uv_down);
+    skybox->material.pattern = cube_map;
 
     // Add objects to the world
-    add_shape(&s, skybox);
-	world->shapes = s;
+    add_shape(&skybox, s);
+	world->shapes = skybox;
+
+	// t_shape *p = plane();
+	// t_canvas *cnegx = canvas_from_ppm("Tenerife4/negx.ppm");
+	// t_pattern *uv_left = uv_image(cnegx);
+	// t_pattern *uv_left_map = texture_map(uv_left, planar_map);
+	// p->material.pattern = uv_left_map;
+
+	// set_transform(p, scaling(10, 10, 10));
+	
+	// add_shape(&p, s);
+	// world->shapes = p;	
+
 
     return world;
 }
