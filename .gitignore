@@ -1,6 +1,22 @@
 # additional
+*.ppm
+*.bmp
+*.png
+*.jpg
+z_hdri/
+earthmap1k.ppm
 .obsidian/
 .vscode/
+.cache/
+compile_commands.json
+*.txt
+
+# Main binary
+minirt
+
+# MLX42
+*.tar.gz
+MLX42/
 
 # Prerequisites
 *.d
