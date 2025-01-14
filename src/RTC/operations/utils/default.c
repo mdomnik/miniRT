@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/14 18:56:20 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/14 19:05:05 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -427,6 +427,7 @@ t_world *create_skybox_scene(void) {
     skybox->material.specular = 0;
     skybox->material.ambient = 1;
 
+	// https://www.humus.name/index.php?page=Textures&start=24
 	t_canvas *cnegx = canvas_from_ppm("z_hdri/negx.ppm");
 	t_canvas *cposx = canvas_from_ppm("z_hdri/posx.ppm");
 	t_canvas *cposz = canvas_from_ppm("z_hdri/posz.ppm");
@@ -448,8 +449,6 @@ t_world *create_skybox_scene(void) {
 	t_pattern *uv_up = texture_map(uv_pattern_up, planar_map);
 	t_pattern *uv_down = texture_map(uv_pattern_down, planar_map);
 
-	printf("cnegx->width: %d\n", cnegx->width);
-	printf("cnegx->height: %d\n", cnegx->height);
 	t_pattern *cube_map = new_cube_map(uv_left, uv_front, uv_right, uv_back, uv_up, uv_down);
     // Cube map pattern
     skybox->material.pattern = cube_map;
