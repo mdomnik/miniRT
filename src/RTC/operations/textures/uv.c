@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:39:17 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/08 19:02:19 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/13 23:56:17 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,45 @@ t_color3 uv_pattern_at(t_uv *pattern, float u, float v)
         return pattern->color_b;
     }
 }
+
+t_pattern *uv_image(t_canvas *canvas)
+{
+    t_uv_image *uv_img = malloc(sizeof(t_uv_image));
+    if (!uv_img) {
+        ft_dprintf(2, "%s\n", ERR_MEMORY);
+        exit(EXIT_FAILURE);
+    }
+    uv_img->canvas = canvas;
+
+    t_pattern *pattern = malloc(sizeof(t_pattern));
+    if (!pattern) {
+        ft_dprintf(2, "%s\n", ERR_MEMORY);
+        free(uv_img);
+        exit(EXIT_FAILURE);
+    }
+
+    pattern->type = UV_IMAGE;
+    pattern->uv_pattern = uv_img;
+    pattern->transform = *init_identity_matrix(4); // Default transform
+    pattern->a = NULL;
+    pattern->b = NULL;
+    return pattern;
+}
+
+t_color3 uv_pattern_at_image(t_pattern *pattern, double u, double v)
+{
+    t_uv_image *uv_img = (t_uv_image *)pattern->uv_pattern;
+    t_canvas *canvas = uv_img->canvas;
+
+    v = 1 - v;
+    int x = round(u * (canvas->width - 1));
+    int y = round(v * (canvas->height - 1));
+
+    x = fmin(fmax(x, 0), canvas->width - 1);
+    y = fmin(fmax(y, 0), canvas->height - 1);
+
+    return canvas->pixels[y][x];
+}
+
+
 

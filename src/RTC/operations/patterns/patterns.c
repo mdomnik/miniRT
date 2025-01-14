@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:11:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/13 19:57:01 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/14 01:45:44 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,26 +74,36 @@ t_color3 *pattern_at_object(t_pattern *pattern, t_shape *shape, t_point3 *point)
 t_color3 *pattern_at(t_pattern *pattern, t_point3 *point)
 {
 	if (pattern->type == STRIPE)
-		return(stripe_at(pattern, point));
+		return stripe_at(pattern, point);
 	if (pattern->type == GRADIENT)
-		return(gradient_at(pattern, point));
+		return gradient_at(pattern, point);
 	if (pattern->type == RING)
-		return(ring_at(pattern, point));
+		return ring_at(pattern, point);
 	if (pattern->type == CHECKERS)
-		return(checkers_at(pattern, point));
+		return checkers_at(pattern, point);
 	if (pattern->type == TEXTURE_MAP)
 	{
         t_uv_val uv = pattern->uv_map(*point);
-        t_uv *uv_pattern = (t_uv *)pattern->uv_pattern;
-        t_color3 color = uv_pattern_at(uv_pattern, uv.u, uv.v);
-        return (new_color3_p(color.r, color.g, color.b));
+        
+        // Check if uv_pattern is of type UV_IMAGE
+        if (((t_pattern *)pattern->uv_pattern)->type == UV_IMAGE)
+        {
+            t_color3 color = uv_pattern_at_image((t_pattern *)pattern->uv_pattern, uv.u, uv.v);
+            return new_color3_p(color.r, color.g, color.b);
+        }
+        else
+        {
+            t_uv *uv_pattern = (t_uv *)pattern->uv_pattern;
+            t_color3 color = uv_pattern_at(uv_pattern, uv.u, uv.v);
+            return new_color3_p(color.r, color.g, color.b);
+        }
     }
 	if (pattern->type == ALIGN_CHECK)
 	{
         t_uv_val uv = pattern->uv_map(*point);
         t_uv_align_check *uv_pattern = (t_uv_align_check *)pattern->uv_pattern;
         t_color3 color = uv_pattern_at_align_check(uv_pattern, uv.u, uv.v);
-        return (new_color3_p(color.r, color.g, color.b));
+        return new_color3_p(color.r, color.g, color.b);
     }
 	if (pattern->type == CUBE_MAP)
 	{
@@ -103,3 +113,4 @@ t_color3 *pattern_at(t_pattern *pattern, t_point3 *point)
     fprintf(stderr, "Error: Unsupported pattern type.\n");
     exit(EXIT_FAILURE);
 }
+

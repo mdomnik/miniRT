@@ -1,4 +1,8 @@
 # additional
+*.ppm
+*.bmp
+*.png
+*.jpg
 .obsidian/
 .vscode/
 .cache/

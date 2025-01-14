@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:45:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/13 20:28:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/14 01:23:19 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ t_world *test_planar_mapping_scene(void);
 t_world *test_cylindrical_mapping_scene(void);
 t_world *test_uv_align_check_scene(void);
 t_world *setup_cube_scene();
-
+t_world *create_earth_scene(void);
+t_world *create_skybox_scene(void);
 
 //operations/utils/utils_1.c
 bool		is_equal(float a, float b);

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/13 21:50:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/14 01:52:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1655,6 +1655,36 @@ void test_cube_mapped_colors() {
         assert(color_equals(*actual_color, test_cases[i].expected_color) && "Test failed!");
     }
 }
+void test_uv_image_pattern() {
+    // Create a test canvas
+    t_canvas *canvas = canvas_from_ppm("test.ppm");
+
+    // Create a UV image pattern
+    t_pattern *pattern = uv_image(canvas);
+
+    // Test cases
+    double test_uvs[4][2] = {
+        {0, 0},
+        {0.3, 0},
+        {0.6, 0.3},
+        {1, 1}
+    };
+    t_color3 expected_colors[4] = {
+        new_color3(0.9, 0.9, 0.9),
+        new_color3(0.2, 0.2, 0.2),
+        new_color3(0.1, 0.1, 0.1),
+        new_color3(0.9, 0.9, 0.9)
+    };
+
+    for (int i = 0; i < 4; i++) {
+        double u = test_uvs[i][0];
+        double v = test_uvs[i][1];
+        t_color3 actual = uv_pattern_at_image(pattern, u, v);
+        assert(color_equals(actual, expected_colors[i]) && "UV Image Pattern Test Failed!");
+    }
+
+    printf("All UV image pattern tests passed!\n");
+}
 
 
 // int main(void)
@@ -1675,30 +1705,60 @@ void test_cube_mapped_colors() {
 //     printf("test_face_from_point passed\n");
 //     test_cube_mapped_colors();
 //     printf("test_cube_colors_passed\n");
+//     test_uv_image_pattern();
+//     printf("test_uv_image_pattern passed\n");
 //     // test_left_face_uv();
 //     // test_right_face_uv();
 //     return 0;
 // }
 
-// int main (void)
+// int main(void)
 // {
-//     t_canvas *canvas = canvas_new(800, 800);
-//     t_color3 red = new_color3(1, 0, 0);
-//     write_pixel(canvas, 0, 0, red);
-//     t_color3 color = pixel_at(canvas, 0, 0);
-//     print_tuple(color);
+//     t_canvas *canvas = canvas_from_ppm("test.ppm");
+//     printf("width: %d\n", canvas->width);
+//     printf("height: %d\n", canvas->height);
+//     print_tuple(canvas->pixels[1][0]);
 // }
 
 
 
-// CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// int main (void)
+// {
+//     t_canvas *canvas = canvas_new(800, 800);
+//     t_world	*world = setup_cube_scene();
+// 	t_camera *camera = camera_new(800, 400, 0.8);
+// 	camera->transform = view_transformation(new_point3(0, 0, -20), new_point3(0, 0, 0), new_vec3(0, 1, 0));
+//     int x, y;
+//     t_ray *ray;
+//     t_color3 color;
+
+//     y = 0;
+// 	while(y < canvas->height)
+// 	{
+// 		x = 0;
+// 		while(x < canvas->width)
+// 		{
+// 			ray = ray_for_pixel(camera, x, y);			
+// 			color = color_at(world, ray, RECURSIVE_DEPTH);
+// 			write_pixel(canvas, x, y, color);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+//     canvas_to_ppm(canvas, "test.ppm");
+//     printf("done\n");
+// }
+
+
+
+// // CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 int main (void)
 {
 	mlx_t *mlx = mlx_init(800, 400, "test", 1);
 	t_world	*world = setup_cube_scene();
 	t_camera *camera = camera_new(800, 400, 0.8);
-	camera->transform = view_transformation(new_point3(0, 0, -20), new_point3(0, 0, 0), new_vec3(0, 1, 0));
-	mlx_image_t *image = render(mlx, camera, world);
+	camera->transform = view_transformation(new_point3(1, 2, -10), new_point3(0, 1.1, 0), new_vec3(0, 1, 0));
+    mlx_image_t *image = render(mlx, camera, world);
 	mlx_image_to_window(mlx, image, 0, 0);
 	printf("done\n");
 	mlx_loop(mlx);

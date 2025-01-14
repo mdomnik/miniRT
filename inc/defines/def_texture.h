@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:39:32 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/13 18:40:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/13 23:54:51 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_pattern *new_cube_map(t_pattern *left, t_pattern *front, t_pattern *right,
                         t_pattern *back, t_pattern *up, t_pattern *down);
 t_color3 pattern_at_cube_map(t_pattern *pattern, t_point3 point);
 
+t_pattern *uv_image(t_canvas *canvas);
+t_color3 uv_pattern_at_image(t_pattern *pattern, double u, double v);
 
 
 t_uv_val cube_uv_front(t_point3 point);

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:39:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/13 21:53:14 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/13 21:56:23 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ t_color3 pixel_at(t_canvas *canvas, int x, int y)
 void canvas_to_ppm(t_canvas *canvas, char *filename)
 {
 	FILE *file;
+	int i;
+	int j;
 
 	file = fopen(filename, "w");
 	if (!file)
@@ -83,4 +85,17 @@ void canvas_to_ppm(t_canvas *canvas, char *filename)
 		exit(EXIT_FAILURE);
 	}
 	fprintf(file, "P3\n%d %d\n255\n", canvas->width, canvas->height);
+	i = 0;
+	while (i < canvas->height)
+	{
+		j = 0;
+		while (j < canvas->width)
+		{
+			t_color3 color = pixel_at(canvas, j, i);
+			fprintf(file, "%d %d %d\n", (int)(color.r * 255), (int)(color.g * 255), (int)(color.b * 255));
+			j++;
+		}
+		i++;
+	}
+	fclose(file);
 }

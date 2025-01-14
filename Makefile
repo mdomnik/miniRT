@@ -121,6 +121,7 @@ SRC_FILES		+= RTC/operations/textures/map.c
 
 #IMAGE
 SRC_FILES		+= RTC/operations/image/write_ppm.c
+SRC_FILES		+= RTC/operations/image/read_ppm.c
 
 SRC_FILES		+= RTC/test.c
 

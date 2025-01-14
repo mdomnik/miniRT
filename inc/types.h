@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/13 18:38:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/13 23:53:01 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_uv_align_check	t_uv_align_check;
 
 typedef struct s_cube_map	t_cube_map;
 
+
 typedef enum e_pattern_type
 {
 	STRIPE,
@@ -41,7 +42,8 @@ typedef enum e_pattern_type
 	CHECKERS,
 	TEXTURE_MAP,
 	ALIGN_CHECK,
-	CUBE_MAP
+	CUBE_MAP,
+	UV_IMAGE
 }	t_pattern_type;
 
 typedef enum e_directions
@@ -128,6 +130,7 @@ struct s_cube_map
 {
     t_pattern *faces[6];
 };
+
 
 
 struct s_material

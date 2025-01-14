@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/13 20:30:05 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/14 01:40:47 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -345,6 +345,113 @@ t_world *setup_cube_scene()
 
     return world;
 }
+
+t_world *create_earth_scene(void) {
+    t_world *world = malloc(sizeof(t_world));
+    if (!world) {
+        fprintf(stderr, "Failed to allocate world.\n");
+        exit(EXIT_FAILURE);
+    }
+    world->shapes = NULL;
+    world->light = NULL;
+
+    // Add light source
+    t_light_p *light = new_light(new_point3_p(-100, 100, -100), new_color3_p(1, 1, 1));
+    world->light = light;
+
+    // Add plane
+    t_shape *p = plane();
+    p->material.color = new_color3_p(1, 1, 1);
+    p->material.diffuse = 0.1;
+    p->material.specular = 0;
+    p->material.ambient = 0;
+    p->material.reflective = 0.4;
+
+    // Add cylinder
+    t_shape *c = cylinder();
+    c->material.color = new_color3_p(1, 1, 1);
+    c->material.diffuse = 0.2;
+    c->material.specular = 0;
+    c->material.ambient = 0;
+    c->material.reflective = 0.1;
+    add_shape(&p, c);
+
+    // Add sphere with image map
+    t_canvas *earth_canvas = canvas_from_ppm("earthmap1k.ppm");
+    t_pattern *earth_pattern = uv_image(earth_canvas);
+    t_pattern *sphere_texture = texture_map(earth_pattern, spherical_map);
+
+    t_shape *s = sphere();
+    s->material.pattern = sphere_texture;
+    s->material.diffuse = 0.9;
+    s->material.specular = 0.1;
+    s->material.shininess = 10;
+    s->material.ambient = 0.1;
+
+    // Apply transformations
+    t_matrix *rotation = rotation_y(1.9);
+    t_matrix *trans = translation(0, 1.1, 0);
+    set_transform(s, multiply_matrices(trans, rotation));
+
+    add_shape(&p, s);
+	world->shapes = p;
+    return world;
+}
+
+t_world *create_skybox_scene(void) {
+    t_world *world = malloc(sizeof(t_world));
+    if (!world) {
+        fprintf(stderr, "Failed to allocate world.\n");
+        exit(EXIT_FAILURE);
+    }
+    world->shapes = NULL;
+    world->light = NULL;
+
+    // Add light source
+    t_light_p *light = new_light(new_point3_p(0, 100, 0), new_color3_p(1, 1, 1));
+    world->light = light;
+
+    // Add reflective sphere
+    t_shape *s = sphere();
+    set_transform(s, multiply_matrices(translation(0, 0, 5), scaling(0.75, 0.75, 0.75)));
+    s->material.diffuse = 0.4;
+    s->material.specular = 0.6;
+    s->material.shininess = 20;
+    s->material.reflective = 0.6;
+    s->material.ambient = 0;
+
+    // Add skybox cube
+    t_shape *skybox = cube();
+    set_transform(skybox, scaling(1000, 1000, 1000));
+    skybox->material.diffuse = 0;
+    skybox->material.specular = 0;
+    skybox->material.ambient = 1;
+
+	t_canvas *cnegx = canvas_from_ppm("Tenerife4/negx.ppm");
+	t_canvas *cposx = canvas_from_ppm("Tenerife4/posx.ppm");
+	t_canvas *cposz = canvas_from_ppm("Tenerife4/posz.ppm");
+	t_canvas *cnegz = canvas_from_ppm("Tenerife4/negz.ppm");
+	t_canvas *cposy = canvas_from_ppm("Tenerife4/posy.ppm");
+	t_canvas *cnegy = canvas_from_ppm("Tenerife4/negy.ppm");
+
+	t_pattern *uv_left = align_check_map(uv_image(cnegx), cube_uv_left);
+	t_pattern *uv_front = align_check_map(uv_image(cposz), cube_uv_front);
+	t_pattern *uv_right = align_check_map(uv_image(cposx), cube_uv_right);
+	t_pattern *uv_back = align_check_map(uv_image(cnegz), cube_uv_back);
+	t_pattern *uv_up = align_check_map(uv_image(cposy), cube_uv_up);
+	t_pattern *uv_down = align_check_map(uv_image(cnegy), cube_uv_down);
+
+    // Cube map pattern
+    skybox->material.pattern = new_cube_map(uv_left, uv_front, uv_right, uv_back, uv_up, uv_down);
+
+    // Add objects to the world
+    add_shape(&s, skybox);
+	world->shapes = s;
+
+    return world;
+}
+
+
 
 
 

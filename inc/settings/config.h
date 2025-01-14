@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:37:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/14 10:48:44 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/14 00:44:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 
 #define CYL_MIN 0
-#define CYL_MAX 1
+#define CYL_MAX 0.1
 #define CYL_CLOSED true
 
 #define CONE_MIN -0.5

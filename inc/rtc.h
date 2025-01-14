@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/13 21:47:14 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/13 23:53:07 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_shape		t_shape;
 
 typedef struct s_comp		t_comp;
 
+typedef struct s_uv_image	t_uv_image;
+
 
 struct s_canvas
 {
@@ -52,6 +54,12 @@ struct s_canvas
 	int			height;
 	t_color3	**pixels;
 };
+
+struct s_uv_image
+{
+    t_canvas *canvas;
+};
+
 
 struct s_scene
 {
