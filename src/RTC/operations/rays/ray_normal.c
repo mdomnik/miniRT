@@ -6,28 +6,22 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 19:19:48 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/14 21:15:00 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/15 22:54:11 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
 //normal at
-t_vec3 normal_at(t_shape *shape, t_point3 point) {
+t_vec3 normal_at(t_shape *shape, t_point3 point)
+{
     t_point3 local_point;
     t_vec3 local_normal;
-    t_vec3 world_normal;
 
-    // Convert to local space
-    local_point = multiply_matrix_tuple(inverse(shape->transform), &point);
-
-    // Compute the unperturbed local normal
+    local_point = world_to_object(shape, &point);
     local_normal = local_normal_at(shape, &local_point);
-
     local_normal = perturb_normal(shape, &local_point, local_normal);
-    world_normal = multiply_matrix_tuple(transpose_matrix(inverse(shape->transform)), &local_normal);
-    world_normal.w = 0; // Ensure it's a direction vector
-    return normalize(world_normal);
+    return normal_to_world(shape, &local_normal); //might need to return normalize(world_normal)
 }
 
 
@@ -43,20 +37,20 @@ static t_vec3 cube_normal_at(t_point3 *local_point)
 	return (new_vec3(0, 0, local_point->z));
 }
 
-static t_vec3 cyl_normal_at(t_point3 *local_point)
+static t_vec3 cyl_normal_at(t_point3 *local_point, t_shape *cyl)
 {
 	float dist;
 	
 	dist = local_point->x * local_point->x + local_point->z * local_point->z;
-	if (dist < 1 && local_point->y >= CYL_MAX - EPSILON)
+	if (dist < 1 && local_point->y >= cyl->size_cap.max - EPSILON)
 		return (new_vec3(0, 1, 0));
-	else if (dist < 1 && local_point->y <= CYL_MIN + EPSILON)
+	else if (dist < 1 && local_point->y <= cyl->size_cap.min + EPSILON)
 		return (new_vec3(0, -1, 0));
 	else
 		return (new_vec3(local_point->x, 0, local_point->z));
 }
 
-static t_vec3 cone_normal_at(t_point3 *local_point)
+static t_vec3 cone_normal_at(t_point3 *local_point, t_shape *cone)
 {
 	float dist;
 	float y;
@@ -65,9 +59,9 @@ static t_vec3 cone_normal_at(t_point3 *local_point)
 	y = sqrt(dist);
 	if (local_point->y > 0)
 		y = -y;
-	if (dist < 1 && local_point->y >= CONE_MAX - EPSILON)
+	if (dist < 1 && local_point->y >= cone->size_cap.max - EPSILON)
 		return (new_vec3(0, 1, 0));
-	else if (dist < 1 && local_point->y <= CONE_MIN + EPSILON)
+	else if (dist < 1 && local_point->y <= cone->size_cap.min + EPSILON)
 		return (new_vec3(0, -1, 0));
 	else
 		return (new_vec3(local_point->x, y, local_point->z));
@@ -85,8 +79,8 @@ t_vec3	local_normal_at(t_shape *shape, t_point3 *local_point)
 	else if (shape->type == CUBE)
 		local_normal = cube_normal_at(local_point);
 	else if (shape->type == CYLINDER)
-		local_normal = cyl_normal_at(local_point);
+		local_normal = cyl_normal_at(local_point, shape);
 	else if (shape->type == CONE)
-		local_normal = cone_normal_at(local_point);
+		local_normal = cone_normal_at(local_point, shape);
 	return (local_normal);
 }

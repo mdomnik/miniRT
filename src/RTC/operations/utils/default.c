@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/14 23:19:45 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 00:02:01 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ t_material *default_material(void)
     material->bump_map = NULL;
 	return (material);
 }
+
+t_size_cap *default_size_cap(void)
+{
+    t_size_cap *size_cap;
+
+    size_cap = malloc(sizeof(t_size_cap));
+    size_cap->min = -1;
+    size_cap->max = 0;
+    size_cap->cap = 1;
+    return (size_cap);
+}
+
 //default world
 t_world	*default_world(void)
 {
@@ -522,7 +534,48 @@ t_world *create_bump_map_scene(void)
 
 
 
+t_world *test_groups_scene(void)
+{
+		t_world	*world;
 
+	world = malloc(sizeof(t_world));
+	world->shapes = NULL;
+	world->light = NULL;
+	t_light_p *l1 = new_light(new_point3_p(-5, 10, -5), new_color3_p(1, 1, 1));
+	t_shape  *floor = plane();
+    t_pattern *wood_floor = texture_map(uv_image(canvas_from_ppm("textures/planks.ppm")), planar_map);
+    set_pattern_transform(wood_floor, scaling(10, 10, 10));
+	floor->material.color = new_color3_p(1, 0.9, 0.9);
+    floor->material.pattern = wood_floor;
+    floor->material.bump_map = bump_map_from_ppm("textures/planks_bump.ppm", 10, planar_map);
+	floor->material.specular = 0;
+    floor->material.ambient = 0.5;
+	// t_shape  *left_wall = sphere();
+	// set_transform(left_wall, multiply_matrices(multiply_matrices(translation(0, 0, 5), rotation_y(-M_PI / 4)), multiply_matrices(rotation_x(M_PI / 2), scaling(10, 0.3, 10))));
+	// left_wall->material = floor->material;
+	// t_shape  *right_wall = sphere();
+	// set_transform(right_wall, multiply_matrices(multiply_matrices(translation(0, 0, 5), rotation_y(M_PI / 4)), multiply_matrices(rotation_x(M_PI / 2), scaling(10, 0.3, 10))));
+	// right_wall->material = floor->material;
+	t_shape *icecream = ice_cream_cone();
+    set_transform(icecream, multiply_matrices(translation(0, 1, 0), scaling(0.5, 0.5, 0.5)));
+    // print_matrix(c->transform);
+    // printf("cone min: %f\n", c->size_cap->min);
+    // printf("cone max: %f\n", c->size_cap->max);
+	// icecream->material.color = new_color3_p(1, 0.5, 0.5);
+	// icecream->material.diffuse = 0.7;
+	// icecream->material.specular = 0.3;
+	// icecream->material.shininess = 200.0;
+	// icecream->material.reflective = 0.2;
+	// icecream->material.transparency = 0.0;
+	// icecream->material.refractive_index = 1.0;
+    // set_transform(icecream, translation(0, 1, 0));
+	// add_shape(&floor, left_wall);
+	// add_shape(&floor, right_wall);
+	add_shape(&floor, icecream);
+	world->shapes = floor;
+	world->light = l1;
+	return (world);
+}
 
 
 

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 16:43:14 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/03 22:43:07 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/15 22:56:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,14 @@ static bool check_cap(t_ray *ray, float t)
 	return (x * x + z * z <= 1);
 }
 
-static bool check_cap_cone(t_ray *ray, float t)
-{
-    float x, z, radius;
+bool check_cap_cone(t_ray *ray, float t, float cap_radius) {
+    float x = ray->orig.x + t * ray->dir.x;
+    float z = ray->orig.z + t * ray->dir.z;
 
-    x = ray->orig.x + t * ray->dir.x;
-    z = ray->orig.z + t * ray->dir.z;
-
-    // Calculate radius at this cap
-    radius = fabs(CONE_MIN); // Assuming symmetrical cone for both MIN/MAX
-    return (x * x + z * z <= radius * radius);
+    // Cap radius check
+    return (x * x + z * z <= cap_radius * cap_radius);
 }
+
 
 
 
@@ -89,12 +86,12 @@ t_x *intersect_caps(t_shape *cylinder, t_ray *ray, t_x *xs)
 {
 	float	t;
 
-	if (CYL_CLOSED == false || fabsf(ray->dir.y) < EPSILON)
+	if (cylinder->size_cap.cap == false || fabsf(ray->dir.y) < EPSILON)
 		return (xs);
-	t = (CYL_MIN - ray->orig.y) / ray->dir.y;
+	t = (cylinder->size_cap.min - ray->orig.y) / ray->dir.y;
 	if (check_cap(ray, t) == true)
 		xs = add_intersection(xs, t, cylinder);
-	t = (CYL_MAX - ray->orig.y) / ray->dir.y;
+	t = (cylinder->size_cap.max - ray->orig.y) / ray->dir.y;
 	if (check_cap(ray, t) == true)
 		xs = add_intersection(xs, t, cylinder);
 	return (xs);
@@ -104,21 +101,22 @@ t_x *intersect_caps_cone(t_shape *cone, t_ray *ray, t_x *xs)
 {
     float t;
 
-    if (!CONE_CLOSED || fabsf(ray->dir.y) < EPSILON)
+    if (!cone->size_cap.cap || fabsf(ray->dir.y) < EPSILON)
         return xs;
 
     // Check bottom cap (at CONE_MIN)
-    t = (CONE_MIN - ray->orig.y) / ray->dir.y;
-    if (check_cap_cone(ray, t))
+    t = (cone->size_cap.min - ray->orig.y) / ray->dir.y;
+    if (check_cap_cone(ray, t, fabsf(cone->size_cap.min)))
         xs = add_intersection(xs, t, cone);
 
     // Check top cap (at CONE_MAX)
-    t = (CONE_MAX - ray->orig.y) / ray->dir.y;
-    if (check_cap_cone(ray, t))
+    t = (cone->size_cap.max - ray->orig.y) / ray->dir.y;
+    if (check_cap_cone(ray, t, fabsf(cone->size_cap.max)))
         xs = add_intersection(xs, t, cone);
 
     return xs;
 }
+
 
 
 

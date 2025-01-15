@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:40:41 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/30 18:22:25 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/15 17:08:54 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 //operations/world/create.c
 t_x		*intersect_world(t_world *world, t_ray *ray);
+void sort_intersections(t_x *xs);
 t_comp *prepare_computations(t_i *i, t_ray *ray, t_x *xs);
 void transparency_and_refraction(t_i *hit, t_comp *comp, t_x *xs);
 t_color3 shade_hit(t_world *world, t_comp *comps, int remaining);

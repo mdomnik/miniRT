@@ -120,12 +120,15 @@ SRC_FILES		+= RTC/operations/textures/uv.c
 SRC_FILES		+= RTC/operations/textures/map.c
 
 #IMAGE
-SRC_FILES		+= RTC/operations/image/cube_texture.c
 SRC_FILES		+= RTC/operations/image/bump_map.c
 SRC_FILES		+= RTC/operations/image/write_ppm.c
 SRC_FILES		+= RTC/operations/image/read_ppm.c
 
+SRC_FILES		+= RTC/operations/group/group.c
+SRC_FILES		+= RTC/operations/group/group_objs.c
+
 SRC_FILES		+= RTC/test.c
+
 
 # Object files directory
 OBJ_DIR			:= .obj

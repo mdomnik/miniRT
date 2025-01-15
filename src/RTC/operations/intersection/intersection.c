@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 05:02:00 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/03 21:36:25 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/15 16:47:12 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_x *local_intersect(t_shape *shape, t_ray *ray)
 		return (intersect_cylinder(shape, ray));
 	if (shape->type == CONE)
 		return (intersect_cone(shape, ray));
+	if (shape->type == GROUP)
+		return (intersect_group(shape, ray));
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/14 20:22:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/15 22:49:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_camera		t_camera;
 typedef struct s_shape		t_shape;
 
 typedef struct s_comp		t_comp;
+
+typedef struct s_size_cap	t_size_cap;
 
 struct s_scene
 {
@@ -118,12 +120,25 @@ struct s_camera
 	t_matrix		transform;
 };
 
+struct s_size_cap
+{
+	float			min;
+	float			max;
+	bool			cap;
+};
+
 struct	s_shape
 {
 	t_type				type;
 	t_matrix			transform;
 	t_material			material;
-	t_ray				*saved_ray;
+	t_size_cap			size_cap;
+	t_ray				*saved_ray;	
+	
+	struct s_shape		*children;
+	int					children_count;
+	struct s_shape		*parent;
+	
 	struct s_shape		*next;
 };
 

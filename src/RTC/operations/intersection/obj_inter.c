@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 16:28:44 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/03 22:51:12 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/15 22:55:36 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ t_x *intersect_cylinder(t_shape *cylinder, t_ray *ray)
 	t_x		*xs;
 	
 	a = ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z;
-	if (a < EPSILON && CYL_CLOSED == false)
+	if (a < EPSILON && cylinder->size_cap.cap == false)
 		return (NULL);
 	b = (2 * ray->orig.x * ray->dir.x) + (2 * ray->orig.z * ray->dir.z);
 	c = ray->orig.x * ray->orig.x + ray->orig.z * ray->orig.z - 1;
@@ -135,10 +135,10 @@ t_x *intersect_cylinder(t_shape *cylinder, t_ray *ray)
 	xs->count = 0;
 	xs->i = malloc(sizeof(t_i) * 2);
 	float y0 = ray->orig.y + t0 * ray->dir.y;
-	if (CYL_MIN < y0 && y0 < CYL_MAX)
+	if (cylinder->size_cap.min < y0 && y0 < cylinder->size_cap.max)
 		xs = add_intersection(xs, t0, cylinder);
 	float y1 = ray->orig.y + t1 * ray->dir.y;
-	if(CYL_MIN < y1 && y1 < CYL_MAX)
+	if(cylinder->size_cap.min < y1 && y1 < cylinder->size_cap.max)
 		xs = add_intersection(xs, t1, cylinder);
 	xs = intersect_caps(cylinder, ray, xs);
 	return (xs);
@@ -186,10 +186,10 @@ t_x *intersect_cone(t_shape *cone, t_ray *ray)
 		t1 = temp;
 	}
 	y0 = ray->orig.y + t0 * ray->dir.y;
-	if (CONE_MIN < y0 && y0 < CONE_MAX)
+	if (cone->size_cap.min < y0 && y0 < cone->size_cap.max)
 		xs = add_intersection(xs, t0, cone);
 	y1 = ray->orig.y + t1 * ray->dir.y;
-	if (CONE_MIN < y1 && y1 < CONE_MAX)
+	if (cone->size_cap.min < y1 && y1 < cone->size_cap.max)
 		xs = add_intersection(xs, t1, cone);
 	xs = intersect_caps_cone(cone, ray, xs);
 	if (xs->count == 0)
@@ -198,6 +198,31 @@ t_x *intersect_cone(t_shape *cone, t_ray *ray)
 		free(xs);
 		return (NULL);
 	}
+	return (xs);
+}
+
+t_x *intersect_group(t_shape *group, t_ray *ray)
+{
+	t_x		*xs;
+	t_x		*temp_xs;
+	t_shape	*shape;
+
+	xs = malloc(sizeof(t_x));
+	xs->count = 0;
+	xs->i = malloc(sizeof(t_i) * 2);
+	shape = group->children;
+	while (shape != NULL)
+	{
+		temp_xs = intersect(shape, ray); //maybe should be local
+		if (temp_xs != NULL)
+		{
+			xs = intersections((xs->count + temp_xs->count), xs, temp_xs);
+			free(temp_xs->i);
+			free(temp_xs);
+		}
+		shape = shape->next;
+	}
+	sort_intersections(xs); //maybe will cause problems
 	return (xs);
 }
 

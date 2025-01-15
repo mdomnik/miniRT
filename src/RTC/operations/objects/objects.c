@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:17:22 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/03 21:33:50 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/15 22:51:08 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ t_shape	*sphere(void)
 	shape->type = SPHERE;
 	shape->transform = *init_identity_matrix(4);
 	shape->material = *default_material();
+	shape->saved_ray = NULL;
+	shape->children = NULL;
+	shape->children_count = 0;
+	shape->parent = NULL;
 	shape->next = NULL;
 	return (shape);
 }
@@ -32,42 +36,76 @@ t_shape *plane(void)
 	shape->type = PLANE;
 	shape->transform = *init_identity_matrix(4);
 	shape->material = *default_material();
+	shape->saved_ray = NULL;
+	shape->children = NULL;
+	shape->children_count = 0;
+	shape->parent = NULL;
 	shape->next = NULL;
 	return (shape);
 }
 
 t_shape *cube(void)
 {
-	t_shape *shape;
+	t_shape	*shape;
 
 	shape = malloc(sizeof(t_shape));
 	shape->type = CUBE;
 	shape->transform = *init_identity_matrix(4);
 	shape->material = *default_material();
+	shape->saved_ray = NULL;
+	shape->children = NULL;
+	shape->children_count = 0;
+	shape->parent = NULL;
 	shape->next = NULL;
 	return (shape);
 }
 
 t_shape *cylinder(void)
 {
-	t_shape *shape;
+	t_shape	*shape;
 
 	shape = malloc(sizeof(t_shape));
 	shape->type = CYLINDER;
 	shape->transform = *init_identity_matrix(4);
 	shape->material = *default_material();
+	shape->size_cap = *default_size_cap();
+	shape->saved_ray = NULL;
+	shape->children = NULL;
+	shape->children_count = 0;
+	shape->parent = NULL;
 	shape->next = NULL;
 	return (shape);
 }
 
 t_shape *cone(void)
 {
-	t_shape *shape;
+	t_shape	*shape;
 
 	shape = malloc(sizeof(t_shape));
 	shape->type = CONE;
 	shape->transform = *init_identity_matrix(4);
 	shape->material = *default_material();
+	shape->size_cap = *default_size_cap();
+	shape->saved_ray = NULL;
+	shape->children = NULL;
+	shape->children_count = 0;
+	shape->parent = NULL;
+	shape->next = NULL;
+	return (shape);
+}
+
+t_shape *group(void)
+{
+	t_shape	*shape;
+
+	shape = malloc(sizeof(t_shape));
+	shape->type = GROUP;
+	shape->transform = *init_identity_matrix(4);
+	shape->material = *default_material();
+	shape->saved_ray = NULL;
+	shape->children = NULL;
+	shape->children_count = 0;
+	shape->parent = NULL;
 	shape->next = NULL;
 	return (shape);
 }

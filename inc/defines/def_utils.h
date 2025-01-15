@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:45:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/14 21:03:37 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/15 19:04:14 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 //operations/utils/default.c
 t_material *default_material(void);
+t_size_cap *default_size_cap(void);
 t_world	*default_world(void);
 t_world *test_world(void);
 t_world *test_world_plane(void);
@@ -26,6 +27,7 @@ t_world *setup_cube_scene();
 t_world *create_earth_scene(void);
 t_world *create_skybox_scene(void);
 t_world *create_bump_map_scene(void);
+t_world *test_groups_scene(void);
 
 //operations/utils/utils_1.c
 bool		is_equal(float a, float b);

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/14 23:19:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/15 23:58:47 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1749,18 +1749,89 @@ void test_uv_image_pattern() {
 //     printf("done\n");
 // }
 
+// int main(void)
+// {
+// 	t_shape *g = group();
+// 	t_shape *s1 = sphere();
+// 	t_shape *s2 = sphere();
+// 	set_transform(s2, translation(0, 0, -3));
+// 	t_shape *s3 = sphere();
+// 	set_transform(s3, translation(5, 0, 0));
+// 	add_child(g, s1);
+// 	add_child(g, s2);
+// 	add_child(g, s3);
+// 	t_ray *r = ray_new(new_point3_p(0, 0, -5), new_vec3_p(0, 0, 1));
+// 	printf("group->children->count: %d\n", g->children_count);
+// 	t_x *xs = intersect(g, r);
+// 	printf("xs->count: %d\n", xs->count);
+// 	int i = 0;
+// 	printf("shape 1 address: %p\n", (void *)s1);
+// 	printf("shape 2 address: %p\n", (void *)s2);
+// 	printf("shape 3 address: %p\n", (void *)s3);
+// 	while (i < xs->count)
+// 	{
+// 		printf("xs->xs[%d]->t: %p\n", i, (void *)xs->i[i].shape);
+// 		i++;
+// 	}
+// }
+
+// int main (void)
+// {
+// 	t_shape *g = group();
+// 	set_transform(g, scaling(2, 2, 2));
+// 	t_shape *s = sphere();
+// 	set_transform(s, translation(5, 0, 0));
+// 	add_child(g, s);
+// 	t_ray *r = ray_new(new_point3_p(10, 0, -10), new_vec3_p(0, 0, 1));
+// 	t_x *xs = intersect(g, r);
+// 	printf("xs->count: %d\n", xs->count);
+// }
 
 
-// // CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// int main (void)
+// {
+// 	t_shape *g1 = group();
+// 	set_transform(g1, rotation_y(M_PI / 2));
+// 	t_shape *g2 = group();
+// 	set_transform(g2, scaling(1, 2, 3));
+// 	add_child(g1, g2);
+// 	t_shape *s = sphere();
+// 	set_transform(s, translation(5, 0, 0));
+// 	add_child(g2, s);
+// 	t_vec3 n = normal_at(s, new_point3(1.7321, 1.1547, -5.5774));
+// 	// t_point3 p = world_to_object(s, new_point3_p(-2, 0, -10));
+// 	print_tuple(n);
+
+
+// }
+
+
 int main (void)
 {
 	mlx_t *mlx = mlx_init(800, 400, "test", 1);
-	t_world	*world = create_bump_map_scene();
+	t_world	*world = test_groups_scene();
+	// (void)world;
 	t_camera *camera = camera_new(800, 400, 0.8);
-	camera->transform = view_transformation(new_point3(1, 2, -10), new_point3(0, 1.1, 0), new_vec3(0, 1, 0));
+	camera->transform = view_transformation(new_point3(1, 7, -9), new_point3(0, 1.1, 0), new_vec3(0, 1, 0));
     mlx_image_t *image = render(mlx, camera, world);
 	mlx_image_to_window(mlx, image, 0, 0);
 	printf("done\n");
 	mlx_loop(mlx);
 	return(0);
 }
+
+
+// // // // CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// int main (void)
+// {
+// 	// mlx_t *mlx = mlx_init(800, 400, "test", 1);
+// 	t_world	*world = test_groups_scene();
+// 	(void)world;
+// 	// t_camera *camera = camera_new(800, 400, 0.8);
+// 	// camera->transform = view_transformation(new_point3(1, 2, -15), new_point3(0, 1.1, 0), new_vec3(0, 1, 0));
+//     // mlx_image_t *image = render(mlx, camera, world);
+// 	// mlx_image_to_window(mlx, image, 0, 0);
+// 	// printf("done\n");
+// 	// mlx_loop(mlx);
+// 	return(0);
+// }

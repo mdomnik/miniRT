@@ -6,13 +6,12 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:36:41 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/08 18:39:49 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/15 17:08:43 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-static void sort_intersections(t_x *xs);
 
 void print_xs(t_x *xs)
 {
