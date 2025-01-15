@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/14 22:35:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/14 23:19:45 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -471,7 +471,9 @@ t_world *create_bump_map_scene(void)
     world->light = NULL;
 
     // Add light source
-    t_light_p *light = new_light(new_point3_p(-100, 100, -100), new_color3_p(1, 1, 1));
+    t_light_p *light2 = new_light(new_point3_p(100, -100, -100), new_color3_p(1, 1, 1));
+    t_light_p *light = new_light(new_point3_p(-100, 100, -100), new_color3_p(1, 0.5, 1));
+    add_light(&light, light2);
     world->light = light;
 
     // Add plane
@@ -483,32 +485,37 @@ t_world *create_bump_map_scene(void)
     p->material.reflective = 0.4;
 
     // Add cylinder
-    t_shape *c = cylinder();
-    c->material.color = new_color3_p(1, 1, 1);
-    c->material.diffuse = 0.2;
-    c->material.specular = 0;
-    c->material.ambient = 0;
-    c->material.reflective = 0.1;
-    add_shape(&p, c);
+    // t_shape *c = cylinder();
+    // c->material.color = new_color3_p(1, 1, 1);
+    // c->material.diffuse = 0.2;
+    // c->material.specular = 0;
+    // c->material.ambient = 0;
+    // c->material.reflective = 0.1;
+    // add_shape(&p, c);
 
-    t_canvas *earth_canvas = canvas_from_ppm("earthmap1k.ppm");
-    t_pattern *earth_pattern = uv_image(earth_canvas);
-    t_pattern *sphere_texture = texture_map(earth_pattern, spherical_map);
 
-    t_shape *s = sphere();
-    s->material.pattern = sphere_texture;
-    s->material.bump_map = bump_map_from_ppm("bump_map.ppm", 5, spherical_map);
+    t_shape *sph = sphere();
+    set_transform(sph, translation(100, 0, 0));
+    // t_canvas *earth_canvas = canvas_from_ppm("earthmap1k.ppm");
+    // t_pattern *earth_pattern = uv_image(earth_canvas);
+    // t_pattern *sphere_texture = texture_map(earth_pattern, spherical_map);
+
+    t_shape *s = plane();
+    // s->material.pattern = sphere_texture;
+    s->material.bump_map = bump_map_from_ppm("Bass1.ppm", 10, planar_map);
     s->material.diffuse = 0.9;
+    s->material.color = new_color3_p(0.42, 0.42, 0.42);
     s->material.specular = 0.1;
     s->material.shininess = 10;
     s->material.ambient = 0.1;
 
-    // Apply transformations
-    t_matrix *rotation = rotation_y(1.9);
-    t_matrix *trans = translation(0, 1.1, 0);
+    // // Apply transformations
+    t_matrix *rotation = rotation_y(3);
+    t_matrix *trans = translation(0, 1.2, 0);
     set_transform(s, multiply_matrices(trans, rotation));
 
     add_shape(&p, s);
+    add_shape(&p, sph);
 	world->shapes = p;
     return world;
 }
