@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 18:22:35 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 19:49:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1823,11 +1823,11 @@ void test_uv_image_pattern() {
 // 	return(0);
 // }
 
-// //print_bounds
-// void print_bounds(t_bounds *bounds) {
-//     printf("Min: (%f, %f, %f)\n", bounds->min.x, bounds->min.y, bounds->min.z);
-//     printf("Max: (%f, %f, %f)\n", bounds->max.x, bounds->max.y, bounds->max.z);
-// }
+//print_bounds
+void print_bounds(t_bounds *bounds) {
+    printf("Min: (%f, %f, %f)\n", bounds->min.x, bounds->min.y, bounds->min.z);
+    printf("Max: (%f, %f, %f)\n", bounds->max.x, bounds->max.y, bounds->max.z);
+}
 
 // void test_bounds() {
 //     t_shape *sphere1 = sphere();
@@ -1910,12 +1910,57 @@ void test_uv_image_pattern() {
 //     return 0;
 // }
 
+void print_ray(t_ray *ray) {
+    printf("Ray:\n");
+    printf("Origin: (%f, %f, %f)\n", ray->orig.x, ray->orig.y, ray->orig.z);
+    printf("Direction: (%f, %f, %f)\n", ray->dir.x, ray->dir.y, ray->dir.z);
+}
+
+void test_ice_cream_spheres() {
+    // Create the ice cream group with only 3 spheres
+    t_shape *cone_scoop = ice_cream_cone();
+
+    // Print the group bounds
+    t_bounds bounds = cone_scoop->bounds(cone_scoop);
+    printf("Ice Cream Bounds:\n");
+    print_bounds(&bounds);
+
+    // Test rays
+    t_ray *rays[3];
+    rays[0] = ray_new(new_point3_p(0, 2, -5), new_vec3_p(0, 0, 1)); // Hits sphere1
+    rays[1] = ray_new(new_point3_p(0, 0, -5), new_vec3_p(0, 0, 1)); // Misses group
+    rays[2] = ray_new(new_point3_p(0, 3, -5), new_vec3_p(0, 0, 1)); // Hits sphere2 and sphere3
+
+    for (int i = 0; i < 3; i++) {
+        printf("\nTesting Ray %d:\n", i);
+        print_ray(rays[i]);
+
+        t_x *xs = intersect_group(cone_scoop, rays[i]);
+        if (xs) {
+            printf("Intersections found: %d\n", xs->count);
+            for (int j = 0; j < xs->count; j++) {
+                printf("t[%d]: %f (shape type: %d)\n", j, xs->i[j].t, xs->i[j].shape->type);
+            }
+            free(xs->i);
+            free(xs);
+        } else {
+            printf("No intersections found.\n");
+        }
+
+        free(rays[i]);
+    }
+
+    // Free memory for group and children
+    free(cone_scoop);
+}
+
 
 int main (void)
 {
 	mlx_t *mlx = mlx_init(800, 400, "test", 1);
-	t_world	*world = test_groups_scene();
+	t_world	*world = try_huge_scene();
 	// (void)world;
+    // test_ice_cream_spheres();
 	t_camera *camera = camera_new(800, 400, 0.8);
 	camera->transform = view_transformation(new_point3(1, 7, -9), new_point3(0, 1.1, 0), new_vec3(0, 1, 0));
     mlx_image_t *image = render(mlx, camera, world);

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 17:18:37 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 19:48:45 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -578,5 +578,71 @@ t_world *test_groups_scene(void)
 }
 
 
+t_world *try_hexagon_scene(void)
+{
+		t_world	*world;
+
+	world = malloc(sizeof(t_world));
+	world->shapes = NULL;
+	world->light = NULL;
+
+	t_light_p *l1 = new_light(new_point3_p(-5, 10, -5), new_color3_p(1, 1, 1));
+	world->light = l1;
 
 
+	t_shape  *floor = plane();
+    t_pattern *wood_floor = texture_map(uv_image(canvas_from_ppm("textures/planks.ppm")), planar_map);
+    set_pattern_transform(wood_floor, scaling(10, 10, 10));
+	floor->material.color = new_color3_p(1, 0.9, 0.9);
+    floor->material.pattern = wood_floor;
+    floor->material.bump_map = bump_map_from_ppm("textures/planks_bump.ppm", 10, planar_map);
+	floor->material.specular = 0;
+    floor->material.ambient = 0.5;
+
+	t_shape *hex = hexagon();
+	set_transform(hex, multiply_matrices(translation(0, 1, 0), rotation_z(M_PI / 2)));
+	t_shape *hex2 = hexagon();
+	set_transform(hex, multiply_matrices(translation(0, 1, 0), rotation_z(M_PI / 3)));
+	t_shape *hex3 = hexagon();
+	set_transform(hex, multiply_matrices(translation(0, 1, 0), rotation_z(M_PI)));
+	t_shape *hex4 = hexagon();
+	set_transform(hex, translation(0, 1, 0));
+	add_shape(&floor, hex);
+	add_shape(&floor, hex2);
+	add_shape(&floor, hex3);
+	add_shape(&floor, hex4);
+	world->shapes = floor;
+	return (world);
+}
+
+t_world *try_huge_scene(void)
+{
+		t_world	*world;
+
+	world = malloc(sizeof(t_world));
+	world->shapes = NULL;
+	world->light = NULL;
+
+	t_light_p *l1 = new_light(new_point3_p(-5, 10, -5), new_color3_p(1, 1, 1));
+	world->light = l1;
+
+
+	t_shape  *floor = plane();
+    t_pattern *wood_floor = texture_map(uv_image(canvas_from_ppm("textures/planks.ppm")), planar_map);
+    set_pattern_transform(wood_floor, scaling(10, 10, 10));
+	floor->material.color = new_color3_p(1, 0.9, 0.9);
+    floor->material.pattern = wood_floor;
+    floor->material.bump_map = bump_map_from_ppm("textures/planks_bump.ppm", 10, planar_map);
+	floor->material.specular = 0;
+    floor->material.ambient = 0.5;
+
+	for(int i = 0; i < 50; i++)
+	{
+		t_shape *s = sphere();
+		set_transform(s, translation(0, (1 + (0.1 * i)), 0));
+		add_shape(&floor, s);
+	}
+	
+	world->shapes = floor;
+	return (world);
+}

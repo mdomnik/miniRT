@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 16:41:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 18:21:08 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 19:03:46 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,25 +116,25 @@ t_bounds bounds_cap(struct s_shape *shape)
 
 bool intersect_bounds(t_bounds bounds, t_ray *ray)
 {
-	float tmin = -INFINITY;
-	float tmax = INFINITY;
+	float t_min = -INFINITY;
+	float t_max = INFINITY;
 
-	for (int i = 0; i < 3; i++) { // Iterate over X, Y, Z axes
-		float origin = ray->orig.a[i];
-		float direction = ray->dir.a[i];
-
-		float t0 = check_axis(origin, direction, false, bounds.min.a[i], bounds.max.a[i]);
-		float t1 = check_axis(origin, direction, true, bounds.min.a[i], bounds.max.a[i]);
-
-		tmin = fmaxf(tmin, t0);
-		tmax = fminf(tmax, t1);
-
-		if (tmin > tmax) {
+	for (int i = 0; i < 3; i++) {
+		float inv_dir = 1.0f / ray->dir.a[i];
+		float t0 = (bounds.min.a[i] - ray->orig.a[i]) * inv_dir;
+		float t1 = (bounds.max.a[i] - ray->orig.a[i]) * inv_dir;
+		if (inv_dir < 0.0f) {
+			float temp = t0;
+			t0 = t1;
+			t1 = temp;
+		}
+		t_min = fmaxf(t_min, t0);
+		t_max = fminf(t_max, t1);
+		if (t_min > t_max) {
 			return false;
 		}
 	}
-
-	return true; // The ray intersects the bounding box
+	return true;
 }
 
 

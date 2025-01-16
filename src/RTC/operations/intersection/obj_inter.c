@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 16:28:44 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 18:20:50 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 19:12:14 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ t_x *intersect_group(t_shape *group, t_ray *ray)
 
 	if (!intersect_bounds(group_bounds, ray))
 	{
-		printf("Ray misses group bounds.\n");
+		// printf("misses group bounds\n");
 		return NULL;
 	}
 	t_x *xs = NULL;
