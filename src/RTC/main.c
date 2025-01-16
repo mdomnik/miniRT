@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 19:49:06 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 20:31:38 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1958,7 +1958,7 @@ void test_ice_cream_spheres() {
 int main (void)
 {
 	mlx_t *mlx = mlx_init(800, 400, "test", 1);
-	t_world	*world = try_huge_scene();
+	t_world	*world = try_hexagon_scene();
 	// (void)world;
     // test_ice_cream_spheres();
 	t_camera *camera = camera_new(800, 400, 0.8);

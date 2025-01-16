@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 19:48:45 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 21:01:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -600,17 +600,15 @@ t_world *try_hexagon_scene(void)
     floor->material.ambient = 0.5;
 
 	t_shape *hex = hexagon();
-	set_transform(hex, multiply_matrices(translation(0, 1, 0), rotation_z(M_PI / 2)));
-	t_shape *hex2 = hexagon();
-	set_transform(hex, multiply_matrices(translation(0, 1, 0), rotation_z(M_PI / 3)));
-	t_shape *hex3 = hexagon();
-	set_transform(hex, multiply_matrices(translation(0, 1, 0), rotation_z(M_PI)));
-	t_shape *hex4 = hexagon();
-	set_transform(hex, translation(0, 1, 0));
+	set_transform(hex, multiply_matrices(translation(0, 2, 0), scaling(3, 3, 3)));
+    hex->material.diffuse = 0.4;
+    hex->material.specular = 0.6;
+    hex->material.shininess = 20;
+    hex->material.reflective = 0.6;
+    hex->material.ambient = 0;
+	inherit_material(hex);
 	add_shape(&floor, hex);
-	add_shape(&floor, hex2);
-	add_shape(&floor, hex3);
-	add_shape(&floor, hex4);
+
 	world->shapes = floor;
 	return (world);
 }

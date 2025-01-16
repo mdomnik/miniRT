@@ -124,6 +124,7 @@ SRC_FILES		+= RTC/operations/image/bump_map.c
 SRC_FILES		+= RTC/operations/image/write_ppm.c
 SRC_FILES		+= RTC/operations/image/read_ppm.c
 
+SRC_FILES		+= RTC/operations/group/inherit.c
 SRC_FILES		+= RTC/operations/group/group.c
 SRC_FILES		+= RTC/operations/group/group_objs.c
 SRC_FILES		+= RTC/operations/group/bounds.c

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:37:11 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 18:30:54 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 20:37:27 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ bool 	intersect_bounds(t_bounds bounds, t_ray *ray);
 t_bounds bounds_unit(struct s_shape *shape);
 t_bounds bounds_inf(struct s_shape *shape);
 t_bounds bounds_cap(struct s_shape *shape);
+
+void inherit_material(t_shape *group);
 
 
 t_shape *ice_cream_cone(void);
