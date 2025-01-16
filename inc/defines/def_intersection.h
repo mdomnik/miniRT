@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 05:13:40 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/15 16:04:51 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 18:07:33 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define DEF_INTERSECTION_H
 
 
-float check_axis(float origin, float direction, bool ret);
+float check_axis(float origin, float direction, bool ret, int min, int max);
 t_x *intersect_caps(t_shape *cylinder, t_ray *ray, t_x *xs);
 t_x *intersect_caps_cone(t_shape *cone, t_ray *ray, t_x *xs);
 t_x *add_intersection(t_x *xs, float t, t_shape *shape);

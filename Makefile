@@ -126,6 +126,7 @@ SRC_FILES		+= RTC/operations/image/read_ppm.c
 
 SRC_FILES		+= RTC/operations/group/group.c
 SRC_FILES		+= RTC/operations/group/group_objs.c
+SRC_FILES		+= RTC/operations/group/bounds.c
 
 SRC_FILES		+= RTC/test.c
 

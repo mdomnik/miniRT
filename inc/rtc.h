@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/15 22:49:50 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 17:07:12 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_shape		t_shape;
 typedef struct s_comp		t_comp;
 
 typedef struct s_size_cap	t_size_cap;
+
+typedef struct s_bounds		t_bounds;
 
 struct s_scene
 {
@@ -127,6 +129,12 @@ struct s_size_cap
 	bool			cap;
 };
 
+struct s_bounds
+{
+	t_point3		min;
+	t_point3		max;
+};
+
 struct	s_shape
 {
 	t_type				type;
@@ -139,6 +147,7 @@ struct	s_shape
 	int					children_count;
 	struct s_shape		*parent;
 	
+	struct s_bounds    (*bounds)(struct s_shape *shape);
 	struct s_shape		*next;
 };
 

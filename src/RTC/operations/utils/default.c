@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 00:02:01 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 17:18:37 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -557,7 +557,7 @@ t_world *test_groups_scene(void)
 	// set_transform(right_wall, multiply_matrices(multiply_matrices(translation(0, 0, 5), rotation_y(M_PI / 4)), multiply_matrices(rotation_x(M_PI / 2), scaling(10, 0.3, 10))));
 	// right_wall->material = floor->material;
 	t_shape *icecream = ice_cream_cone();
-    set_transform(icecream, multiply_matrices(translation(0, 1, 0), scaling(0.5, 0.5, 0.5)));
+    // set_transform(icecream, multiply_matrices(translation(0, 1, 0), scaling(0.5, 0.5, 0.5)));
     // print_matrix(c->transform);
     // printf("cone min: %f\n", c->size_cap->min);
     // printf("cone max: %f\n", c->size_cap->max);

@@ -6,13 +6,13 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 16:43:14 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/15 22:56:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 18:08:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-float check_axis(float origin, float direction, bool ret)
+float check_axis(float origin, float direction, bool ret, int min, int max)
 {
 	float tmin_numerator;
 	float tmax_numerator;
@@ -20,8 +20,8 @@ float check_axis(float origin, float direction, bool ret)
 	float tmax;
 	float temp;
 
-	tmin_numerator = (-1 - origin);
-	tmax_numerator = (1 - origin);
+	tmin_numerator = (min - origin);
+	tmax_numerator = (max - origin);
 	
 	if(fabsf(direction) >= EPSILON)
 	{

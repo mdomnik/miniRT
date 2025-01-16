@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/15 23:58:47 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 18:22:35 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1806,19 +1806,6 @@ void test_uv_image_pattern() {
 // }
 
 
-int main (void)
-{
-	mlx_t *mlx = mlx_init(800, 400, "test", 1);
-	t_world	*world = test_groups_scene();
-	// (void)world;
-	t_camera *camera = camera_new(800, 400, 0.8);
-	camera->transform = view_transformation(new_point3(1, 7, -9), new_point3(0, 1.1, 0), new_vec3(0, 1, 0));
-    mlx_image_t *image = render(mlx, camera, world);
-	mlx_image_to_window(mlx, image, 0, 0);
-	printf("done\n");
-	mlx_loop(mlx);
-	return(0);
-}
 
 
 // // // // CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -1835,3 +1822,105 @@ int main (void)
 // 	// mlx_loop(mlx);
 // 	return(0);
 // }
+
+// //print_bounds
+// void print_bounds(t_bounds *bounds) {
+//     printf("Min: (%f, %f, %f)\n", bounds->min.x, bounds->min.y, bounds->min.z);
+//     printf("Max: (%f, %f, %f)\n", bounds->max.x, bounds->max.y, bounds->max.z);
+// }
+
+// void test_bounds() {
+//     t_shape *sphere1 = sphere();
+//     set_transform(sphere1, scaling(2, 2, 2)); // Scale sphere1
+
+//     t_shape *sphere2 = sphere();
+//     set_transform(sphere2, translation(5, 0, 0)); // Translate sphere2
+
+//     t_shape *group1 = group();
+//     add_child(group1, sphere1);
+//     add_child(group1, sphere2);
+
+//     printf("Child 1 Transform:\n");
+//     print_matrix(sphere1->transform);
+
+//     printf("Child 2 Transform:\n");
+//     print_matrix(sphere2->transform);
+
+//     t_bounds bounds = group_bounds(group1);
+//     print_bounds(&bounds); // Debug output to verify correctness
+// }
+
+// void test_intersect_group() {
+//     // Create a group
+//     t_shape *group1 = group();
+
+//     t_shape *s = sphere();
+//     // Add a sphere to the group
+//     t_shape *sphere1 = sphere();
+//     set_transform(sphere1, translation(0, 0, -3)); // Translate sphere1
+//     add_child(group1, s);
+//     add_child(group1, sphere1);
+
+//     // Add a cube to the group
+//     t_shape *cube1 = cube();
+//     set_transform(cube1, translation(5, 0, 0)); // Translate cube1
+//     add_child(group1, cube1);
+
+//     // Print group bounds for debugging
+//     t_bounds group_bounds = group1->bounds(group1);
+//     printf("Group Bounds:\n");
+//     print_bounds(&group_bounds);
+
+//     // Create a ray that intersects the group bounds
+//     t_ray *ray = ray_new(new_point3_p(0, 9, -5), new_vec3_p(0, 0, 1));
+
+//     // Print ray for debugging
+//     printf("Ray:\n");
+//     printf("ray origin: (%f, %f, %f)\n", ray->orig.x, ray->orig.y, ray->orig.z);
+//     printf("ray direction: (%f, %f, %f)\n", ray->dir.x, ray->dir.y, ray->dir.z);
+
+//     // Intersect the ray with the group
+//     t_x *xs = intersect_group(group1, ray);
+
+//     // Check results
+//     if (xs) {
+//         printf("Intersections found: %d\n", xs->count);
+//         for (int i = 0; i < xs->count; i++) {
+//             printf("t[%d]: %f (shape type: %d)\n", i, xs->i[i].t, xs->i[i].shape->type);
+//         }
+//         free(xs->i);
+//         free(xs);
+//     } else {
+//         printf("No intersections found.\n");
+//     }
+
+//     // Free allocated memory
+//     free(ray);
+//     free(group1);
+//     free(sphere1);
+//     free(cube1);
+// }
+
+
+
+// int main(void)
+// {
+//     // test_bounds();
+//     test_intersect_group();
+//     return 0;
+// }
+
+
+int main (void)
+{
+	mlx_t *mlx = mlx_init(800, 400, "test", 1);
+	t_world	*world = test_groups_scene();
+	// (void)world;
+	t_camera *camera = camera_new(800, 400, 0.8);
+	camera->transform = view_transformation(new_point3(1, 7, -9), new_point3(0, 1.1, 0), new_vec3(0, 1, 0));
+    mlx_image_t *image = render(mlx, camera, world);
+	mlx_image_to_window(mlx, image, 0, 0);
+	printf("done\n");
+	mlx_loop(mlx);
+	return(0);
+}

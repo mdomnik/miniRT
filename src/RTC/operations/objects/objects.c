@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:17:22 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/15 22:51:08 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 17:15:25 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_shape	*sphere(void)
 	shape->children = NULL;
 	shape->children_count = 0;
 	shape->parent = NULL;
+	shape->bounds = bounds_unit;
 	shape->next = NULL;
 	return (shape);
 }
@@ -40,6 +41,7 @@ t_shape *plane(void)
 	shape->children = NULL;
 	shape->children_count = 0;
 	shape->parent = NULL;
+	shape->bounds = bounds_inf;
 	shape->next = NULL;
 	return (shape);
 }
@@ -56,6 +58,7 @@ t_shape *cube(void)
 	shape->children = NULL;
 	shape->children_count = 0;
 	shape->parent = NULL;
+	shape->bounds = bounds_unit;
 	shape->next = NULL;
 	return (shape);
 }
@@ -73,6 +76,7 @@ t_shape *cylinder(void)
 	shape->children = NULL;
 	shape->children_count = 0;
 	shape->parent = NULL;
+	shape->bounds = bounds_cap;
 	shape->next = NULL;
 	return (shape);
 }
@@ -90,6 +94,7 @@ t_shape *cone(void)
 	shape->children = NULL;
 	shape->children_count = 0;
 	shape->parent = NULL;
+	shape->bounds = bounds_cap;
 	shape->next = NULL;
 	return (shape);
 }
@@ -106,6 +111,7 @@ t_shape *group(void)
 	shape->children = NULL;
 	shape->children_count = 0;
 	shape->parent = NULL;
+	shape->bounds = group_bounds;
 	shape->next = NULL;
 	return (shape);
 }

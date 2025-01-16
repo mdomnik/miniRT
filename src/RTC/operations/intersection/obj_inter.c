@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 16:28:44 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/15 22:55:36 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 18:20:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ t_x *intersect_cube(t_shape *cube, t_ray *ray)
 	t_i i2;
 	t_x *xs;
 
-	xtmin = check_axis(ray->orig.x, ray->dir.x, false);
-	xtmax = check_axis(ray->orig.x, ray->dir.x, true);
-	ytmin = check_axis(ray->orig.y, ray->dir.y, false);
-	ytmax = check_axis(ray->orig.y, ray->dir.y, true);
-	ztmin = check_axis(ray->orig.z, ray->dir.z, false);
-	ztmax = check_axis(ray->orig.z, ray->dir.z, true);
+	xtmin = check_axis(ray->orig.x, ray->dir.x, false, -1, 1);
+	xtmax = check_axis(ray->orig.x, ray->dir.x, true, -1, 1);
+	ytmin = check_axis(ray->orig.y, ray->dir.y, false, -1, 1);
+	ytmax = check_axis(ray->orig.y, ray->dir.y, true, -1, 1);
+	ztmin = check_axis(ray->orig.z, ray->dir.z, false, -1, 1);
+	ztmax = check_axis(ray->orig.z, ray->dir.z, true, -1, 1);
 	
 	tmin = fmaxf(fmaxf(xtmin, ytmin), ztmin);
 	tmax = fminf(fminf(xtmax, ytmax), ztmax);
@@ -201,28 +201,72 @@ t_x *intersect_cone(t_shape *cone, t_ray *ray)
 	return (xs);
 }
 
+// t_x *intersect_group(t_shape *group, t_ray *ray) {
+//     t_bounds group_bounds = group->bounds(group);
+
+//     printf("Group bounds:\n");
+//     print_tuple(group_bounds.min);
+//     print_tuple(group_bounds.max);
+
+//     if (!intersect_bounds(group_bounds, ray)) {
+//         printf("Ray misses group bounds.\n");
+//         return NULL;
+//     }
+
+//     printf("Ray intersects group bounds.\n");
+
+//     t_x *xs = NULL;
+//     t_shape *child = group->children;
+
+//     while (child != NULL) {
+//         printf("Testing child shape of type: %d\n", child->type);
+//         t_x *temp_xs = intersect(child, ray);
+//         if (temp_xs != NULL) {
+//             if (xs == NULL) {
+//                 xs = temp_xs;
+//             } else {
+//                 xs = intersections((xs->count + temp_xs->count), xs, temp_xs);
+//                 free(temp_xs->i);
+//                 free(temp_xs);
+//             }
+//         }
+//         child = child->next;
+//     }
+
+//     return xs;
+// }
+
 t_x *intersect_group(t_shape *group, t_ray *ray)
 {
-	t_x		*xs;
-	t_x		*temp_xs;
-	t_shape	*shape;
+	t_bounds group_bounds = group->bounds(group);
 
-	xs = malloc(sizeof(t_x));
-	xs->count = 0;
-	xs->i = malloc(sizeof(t_i) * 2);
-	shape = group->children;
-	while (shape != NULL)
+	if (!intersect_bounds(group_bounds, ray))
 	{
-		temp_xs = intersect(shape, ray); //maybe should be local
-		if (temp_xs != NULL)
-		{
-			xs = intersections((xs->count + temp_xs->count), xs, temp_xs);
-			free(temp_xs->i);
-			free(temp_xs);
-		}
-		shape = shape->next;
+		printf("Ray misses group bounds.\n");
+		return NULL;
 	}
-	sort_intersections(xs); //maybe will cause problems
-	return (xs);
+	t_x *xs = NULL;
+	t_shape *child = group->children;
+	while (child != NULL) {
+		t_x *temp_xs = intersect(child, ray);
+		if (temp_xs != NULL) {
+			if (xs == NULL) {
+				xs = temp_xs;
+			} else {
+				xs = intersections((xs->count + temp_xs->count), xs, temp_xs);
+				free(temp_xs->i);
+				free(temp_xs);
+			}
+		}
+		child = child->next; // Move to the next child
+	}
+	if (xs != NULL && xs->count > 1) 
+		sort_intersections(xs);
+	return xs; // Return the final list of intersections
 }
+
+
+
+
+
 

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 18:32:53 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/15 23:51:08 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 16:19:44 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ t_shape *ice_cream_cone(void)
     t_pattern *waffle_pattern = uv_image(waffle);
     t_pattern *cone_texture = texture_map(waffle_pattern, cylindrical_map);
 	
+	set_pattern_transform(cone_texture, scaling(2, 2, 2));
 	c = cone();
 	set_transform(c, multiply_matrices(translation(0, -1, 0), multiply_matrices(rotation_z(M_PI), scaling(0.5, 2, 0.5))));
 	c->material.color = new_color3_p(1, 0.5, 0.5);
 	c->material.pattern = cone_texture;
-	c->material.bump_map = bump_map_from_ppm("textures/waffle_bump.ppm", 1, cylindrical_map);
+	c->material.bump_map = bump_map_from_ppm("textures/waffle_bump.ppm", 2, cylindrical_map);
 	c->material.diffuse = 0.7;
 	c->material.specular = 0.3;
 	c->material.shininess = 200.0;
