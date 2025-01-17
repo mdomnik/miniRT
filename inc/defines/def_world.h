@@ -24,5 +24,5 @@ t_matrix view_transformation(t_point3 from, t_point3 to, t_vec3 up);
 t_camera	*camera_new(int hsize, int vsize, float fov);
 t_ray *ray_for_pixel(t_camera *camera, int px, int py);
 mlx_image_t *render(mlx_t *mlx, t_camera *camera, t_world *world);
-bool is_shadowed(t_world *world, t_point3 *light_pos, t_point3 *point);
+bool is_shadowed(t_world *world, t_point3 light_pos, t_point3 *point);
 #endif

@@ -150,32 +150,32 @@
 
 // 	// t_vec3 eyev = new_vec3(0, 0, -1);
 // 	// t_vec3 normalv = new_vec3(0, 0, -1);
-// 	// t_light_p *light = new_light(new_point3_p(0, 0, -10), new_color3_p(1, 1, 1));
+// 	// t_light_p *light = new_light(new_point3_p(0, 0, -10), new_color3(1, 1, 1));
 // 	// t_color3 result = lighting(m, light, position, eyev, normalv);
 // 	// print_tuple(result);
 
 
 // 	// t_vec3 eyev = new_vec3(0, sqrt(2) / 2, -(sqrt(2) / 2));
 // 	// t_vec3 normalv = new_vec3(0, 0, -1);
-// 	// t_light_p *light = new_light(new_point3_p(0, 0, -10), new_color3_p(1, 1, 1));
+// 	// t_light_p *light = new_light(new_point3_p(0, 0, -10), new_color3(1, 1, 1));
 // 	// t_color3 result = lighting(m, light, position, eyev, normalv);
 // 	// print_tuple(result);
 
 // 	// t_vec3 eyev = new_vec3(0, 0, -1);
 // 	// t_vec3 normalv = new_vec3(0, 0, -1);
-// 	// t_light_p *light = new_light(new_point3_p(0, 10, -10), new_color3_p(1, 1, 1));
+// 	// t_light_p *light = new_light(new_point3_p(0, 10, -10), new_color3(1, 1, 1));
 // 	// t_color3 result = lighting(m, light, position, eyev, normalv);
 // 	// print_tuple(result);
 
 // 	// t_vec3 eyev = new_vec3(0, -sqrt(2) / 2, -(sqrt(2) / 2));
 // 	// t_vec3 normalv = new_vec3(0, 0, -1);
-// 	// t_light_p *light = new_light(new_point3_p(0, 10, -10), new_color3_p(1, 1, 1));
+// 	// t_light_p *light = new_light(new_point3_p(0, 10, -10), new_color3(1, 1, 1));
 // 	// t_color3 result = lighting(m, light, position, eyev, normalv);
 // 	// print_tuple(result);
 
 // 	// t_vec3 eyev = new_vec3(0, 0, -1);
 // 	// t_vec3 normalv = new_vec3(0, 0, -1);
-// 	// t_light_p *light = new_light(new_point3_p(0, 0, 10), new_color3_p(1, 1, 1));
+// 	// t_light_p *light = new_light(new_point3_p(0, 0, 10), new_color3(1, 1, 1));
 // 	// t_color3 result = lighting(m, light, position, eyev, normalv);
 // 	// print_tuple(result);
 // }
@@ -226,9 +226,9 @@
 
 // int main(void)
 // {
-// 	t_light_p *light = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));	
+// 	t_light_p *light = new_light(new_point3_p(-10, 10, -10), new_color3(1, 1, 1));	
 // 	t_sphere  *s1 = sphere_new();
-// 	s1->material->color = new_color3_p(0.8, 1.0, 0.6);
+// 	s1->material->color = new_color3(0.8, 1.0, 0.6);
 // 	s1->material->diffuse = 0.7;
 // 	s1->material->specular = 0.2;
 // 	t_sphere  *s2 = sphere_new();
@@ -303,7 +303,7 @@
 // 	// print_tuple(c);
 
 // 	// t_world	*world = default_world();
-// 	// world->light = new_light(new_point3_p(0, 0.25, 0), new_color3_p(1, 1, 1));
+// 	// world->light = new_light(new_point3_p(0, 0.25, 0), new_color3(1, 1, 1));
 // 	// t_ray *r = ray_new(new_point3_p(0, 0, 0), new_vec3_p(0, 0, 1));
 // 	// world->objects = world->objects->next;
 // 	// t_toremove	*shape = world->objects;
@@ -374,7 +374,7 @@
 // {
 // 	// t_vec3 eyev = new_vec3(0, 0, -1);
 // 	// t_vec3 normalv = new_vec3(0, 0, -1);
-// 	// t_light_p *light = new_light(new_point3_p(0, 0, -10), new_color3_p(1, 1, 1));
+// 	// t_light_p *light = new_light(new_point3_p(0, 0, -10), new_color3(1, 1, 1));
 // 	// bool in_shadow = false;
 // 	// t_color3 result = lighting(default_material(), light, new_point3_p(0, 0, 0), eyev, normalv, in_shadow);
 // 	// print_tuple(result);
@@ -475,8 +475,8 @@
 // patterns
 // int main(void)
 // {
-// 	t_color3 *black = new_color3_p(0, 0, 0);
-// 	t_color3 *white = new_color3_p(1, 1, 1);
+// 	t_color3 *black = new_color3(0, 0, 0);
+// 	t_color3 *white = new_color3(1, 1, 1);
 // 	t_pattern p = stripe_pattern(black, white);
 // 	t_color3 c1 = stripe_at(&p, new_point3_p(0, 0, 0));
 // 	print_tuple(c1);
@@ -495,14 +495,14 @@
 // int main (void)
 // {
 // 	t_material *m = default_material();
-// 	m->pattern = stripe_pattern(new_color3_p(1, 1, 1), new_color3_p(0, 0, 0));
+// 	m->pattern = stripe_pattern(new_color3(1, 1, 1), new_color3(0, 0, 0));
 // 	m->ambient = 1;
 // 	m->diffuse = 0;
 // 	m->specular = 0;
 // 	// m.shininess = 0;
 // 	t_vec3 eyev = new_vec3(0, 0, -1);
 // 	t_vec3 normalv = new_vec3(0, 0, -1);
-// 	t_light_p light = *new_light(new_point3_p(0, 0, -10), new_color3_p(1, 1, 1));
+// 	t_light_p light = *new_light(new_point3_p(0, 0, -10), new_color3(1, 1, 1));
 // 	t_color3 c1 = lighting(m, &light, new_point3_p(0.9, 0, 0), eyev, normalv, false);
 // 	print_tuple(c1);
 // 	t_color3 c2 = lighting(m, &light, new_point3_p(1.1, 0, 0), eyev, normalv, false);
@@ -513,7 +513,7 @@
 // {
 // 	t_shape *s = sphere_new();
 // 	set_transform(s, scaling(2, 2, 2));
-// 	t_pattern *p = stripe_pattern(new_color3_p(1, 1, 1), new_color3_p(0, 0, 0));
+// 	t_pattern *p = stripe_pattern(new_color3(1, 1, 1), new_color3(0, 0, 0));
 // 	set_pattern_transform(p, scaling(2, 2, 2));
 // 	t_color3 *c = stripe_at_object(p, s, new_point3_p(1.5, 0, 0));
 // 	print_tuple(*c);
@@ -521,7 +521,7 @@
 
 // int main (void)
 // {
-// 	t_pattern *p = new_pattern(GRADIENT, new_color3_p(1, 1, 1), new_color3_p(0, 0, 0));
+// 	t_pattern *p = new_pattern(GRADIENT, new_color3(1, 1, 1), new_color3(0, 0, 0));
 // 	t_color3 *c1 = pattern_at(p, new_point3_p(0, 0, 0));
 // 	print_tuple(*c1);
 // 	t_color3 *c2 = pattern_at(p, new_point3_p(0.25, 0, 0));
@@ -537,7 +537,7 @@
 
 // int main (void)
 // {
-// 	t_pattern *p = new_pattern(CHECKERS, new_color3_p(1, 1, 1), new_color3_p(0, 0, 0));
+// 	t_pattern *p = new_pattern(CHECKERS, new_color3(1, 1, 1), new_color3(0, 0, 0));
 // 	t_color3 *c1 = pattern_at(p, new_point3_p(0, 0, 0));
 // 	print_tuple(*c1);
 // 	t_color3 *c2 = pattern_at(p, new_point3_p(0.99, 0, 0));
@@ -609,7 +609,7 @@
 
 // 	t_world *world;
 // 	world = malloc(sizeof(t_world));
-// 	world->light = new_light(new_point3_p(0, 0, 0), new_color3_p(1, 1, 1));
+// 	world->light = new_light(new_point3_p(0, 0, 0), new_color3(1, 1, 1));
 // 	t_shape *lower = plane_new();
 // 	lower->material.reflective = 1;
 // 	set_transform(lower, translation(0, -1, 0));
@@ -1022,16 +1022,16 @@
 // 	print_tuple(n3);
 // }
 
-void assert_color_equal(t_color3 actual, t_color3 expected) {
-    if (fabs(actual.r - expected.r) > 1e-6 ||
-        fabs(actual.g - expected.g) > 1e-6 ||
-        fabs(actual.b - expected.b) > 1e-6) {
-        fprintf(stderr, "Assertion failed: Color mismatch.\n");
-        exit(EXIT_FAILURE);
-    }
-	else
-		printf("A SUCCESS\n");
-}
+// void assert_color_equal(t_color3 actual, t_color3 expected) {
+//     if (fabs(actual.r - expected.r) > 1e-6 ||
+//         fabs(actual.g - expected.g) > 1e-6 ||
+//         fabs(actual.b - expected.b) > 1e-6) {
+//         fprintf(stderr, "Assertion failed: Color mismatch.\n");
+//         exit(EXIT_FAILURE);
+//     }
+// 	else
+// 		printf("A SUCCESS\n");
+// }
 
 
 
@@ -1286,405 +1286,405 @@ void assert_color_equal(t_color3 actual, t_color3 expected) {
 // 	return 0;
 // }
 
-#include <assert.h>
-
-void test_uv_checkers() {
-    t_color3 black = new_color3(0, 0, 0);
-    t_color3 white = new_color3(1, 1, 1);
-
-    t_uv *checkers = uv_checkers(2, 2, black, white);
-
-    assert_color_equal(uv_pattern_at(checkers, 0.0f, 0.0f), black);
-    assert_color_equal(uv_pattern_at(checkers, 0.5f, 0.0f), white);
-    assert_color_equal(uv_pattern_at(checkers, 0.0f, 0.5f), white);
-    assert_color_equal(uv_pattern_at(checkers, 0.5f, 0.5f), black);
-    assert_color_equal(uv_pattern_at(checkers, 1.0f, 1.0f), black);
-
-    free(checkers);
-}
-
-
-
-void assert_uv_equal(t_uv_val actual, t_uv_val expected, const char *test_name) {
-    printf("%s: (u, v) = (%f, %f) | Expected: (%f, %f)\n",
-           test_name, actual.u, actual.v, expected.u, expected.v);
-
-    assert(fabs(actual.u - expected.u) < 1e-6);
-    assert(fabs(actual.v - expected.v) < 1e-6);
-    printf("%s: SUCCESS\n", test_name);
-}
-
-void test_spherical_map() {
-    // Test 1
-    t_point3 p1 = new_point3(0, 0, -1);
-    t_uv_val expected1 = {0.0, 0.5};
-    assert_uv_equal(spherical_map(p1), expected1, "Test 1: point(0, 0, -1)");
-
-    // Test 2
-    t_point3 p2 = new_point3(1, 0, 0);
-    t_uv_val expected2 = {0.25, 0.5};
-    assert_uv_equal(spherical_map(p2), expected2, "Test 2: point(1, 0, 0)");
-
-    // Test 3
-    t_point3 p3 = new_point3(0, 0, 1);
-    t_uv_val expected3 = {0.5, 0.5};
-    assert_uv_equal(spherical_map(p3), expected3, "Test 3: point(0, 0, 1)");
-
-    // Test 4
-    t_point3 p4 = new_point3(-1, 0, 0);
-    t_uv_val expected4 = {0.75, 0.5};
-    assert_uv_equal(spherical_map(p4), expected4, "Test 4: point(-1, 0, 0)");
-
-    // Test 5
-    t_point3 p5 = new_point3(0, 1, 0);
-    t_uv_val expected5 = {0.5, 1.0};
-    assert_uv_equal(spherical_map(p5), expected5, "Test 5: point(0, 1, 0)");
-
-    // Test 6
-    t_point3 p6 = new_point3(0, -1, 0);
-    t_uv_val expected6 = {0.5, 0.0};
-    assert_uv_equal(spherical_map(p6), expected6, "Test 6: point(0, -1, 0)");
-
-    // Test 7
-    t_point3 p7 = new_point3(sqrtf(2) / 2, sqrtf(2) / 2, 0);
-    t_uv_val expected7 = {0.25, 0.75};
-    assert_uv_equal(spherical_map(p7), expected7, "Test 7: point(√2/2, √2/2, 0)");
-}
-
-void test_texture_map() {
-    t_color3 black = new_color3(0, 0, 0);
-    t_color3 white = new_color3(1, 1, 1);
-
-    // Create a UV checkers pattern
-    t_uv *checkers = uv_checkers(16, 8, black, white);
-
-    // Create a texture map pattern with spherical mapping
-    t_pattern *pattern = texture_map(checkers, spherical_map);
-
-    // Define test points and expected colors
-    struct {
-        t_point3 point;
-        t_color3 expected_color;
-    } tests[] = {
-        {new_point3(0.4315, 0.4670, 0.7719), white},
-        {new_point3(-0.9654, 0.2552, -0.0534), black},
-        {new_point3(0.1039, 0.7090, 0.6975), white},
-        {new_point3(-0.4986, -0.7856, -0.3663), black},
-        {new_point3(-0.0317, -0.9395, 0.3411), black},
-        {new_point3(0.4809, -0.7721, 0.4154), black},
-        {new_point3(0.0285, -0.9612, -0.2745), black},
-        {new_point3(-0.5734, -0.2162, -0.7903), white},
-        {new_point3(0.7688, -0.1470, 0.6223), black},
-        {new_point3(-0.7652, 0.2175, 0.6060), black},
-    };
-
-    // Run the tests
-    for (int i = 0; i < 10; i++) {
-        t_color3 *result = pattern_at(pattern, &tests[i].point);
-        assert_color_equal(*result, tests[i].expected_color);
-        printf("Test %d passed!\n", i + 1);
-        free(result);
-    }
-
-    // Clean up
-    free(checkers);
-    free(pattern);
-}
-
-void test_planar_map() {
-    printf("Testing planar_map...\n");
-
-    // Test cases
-    t_point3 p1 = new_point3(0.25, 0, 0.5);
-    t_uv_val expected1 = {0.25, 0.5};
-    assert_uv_equal(planar_map(p1), expected1, "Test 1: point(0.25, 0, 0.5)");
-
-    t_point3 p2 = new_point3(0.25, 0, -0.25);
-    t_uv_val expected2 = {0.25, 0.75};
-    assert_uv_equal(planar_map(p2), expected2, "Test 2: point(0.25, 0, -0.25)");
-
-    t_point3 p3 = new_point3(0.25, 0.5, -0.25);
-    t_uv_val expected3 = {0.25, 0.75};
-    assert_uv_equal(planar_map(p3), expected3, "Test 3: point(0.25, 0.5, -0.25)");
-
-    t_point3 p4 = new_point3(1.25, 0, 0.5);
-    t_uv_val expected4 = {0.25, 0.5};
-    assert_uv_equal(planar_map(p4), expected4, "Test 4: point(1.25, 0, 0.5)");
-
-    t_point3 p5 = new_point3(0.25, 0, -1.75);
-    t_uv_val expected5 = {0.25, 0.25};
-    assert_uv_equal(planar_map(p5), expected5, "Test 5: point(0.25, 0, -1.75)");
-
-    t_point3 p6 = new_point3(1, 0, -1);
-    t_uv_val expected6 = {0.0, 0.0};
-    assert_uv_equal(planar_map(p6), expected6, "Test 6: point(1, 0, -1)");
-
-    t_point3 p7 = new_point3(0, 0, 0);
-    t_uv_val expected7 = {0.0, 0.0};
-    assert_uv_equal(planar_map(p7), expected7, "Test 7: point(0, 0, 0)");
-
-    printf("All planar_map tests passed!\n");
-}
-
-void test_cylindrical_map() {
-    printf("Testing cylindrical_map...\n");
-
-    // Test 1
-    t_point3 p1 = new_point3(0, 0, -1);
-    t_uv_val expected1 = {0.0, 0.0};
-    assert_uv_equal(cylindrical_map(p1), expected1, "Test 1: point(0, 0, -1)");
-
-    // Test 2
-    t_point3 p2 = new_point3(0, 0.5, -1);
-    t_uv_val expected2 = {0.0, 0.5};
-    assert_uv_equal(cylindrical_map(p2), expected2, "Test 2: point(0, 0.5, -1)");
-
-    // Test 3
-    t_point3 p3 = new_point3(0, 1, -1);
-    t_uv_val expected3 = {0.0, 0.0};
-    assert_uv_equal(cylindrical_map(p3), expected3, "Test 3: point(0, 1, -1)");
-
-    // Test 4
-    t_point3 p4 = new_point3(0.70711, 0.5, -0.70711);
-    t_uv_val expected4 = {0.125, 0.5};
-    assert_uv_equal(cylindrical_map(p4), expected4, "Test 4: point(0.70711, 0.5, -0.70711)");
-
-    // Test 5
-    t_point3 p5 = new_point3(1, 0.5, 0);
-    t_uv_val expected5 = {0.25, 0.5};
-    assert_uv_equal(cylindrical_map(p5), expected5, "Test 5: point(1, 0.5, 0)");
-
-    // Test 6
-    t_point3 p6 = new_point3(0.70711, 0.5, 0.70711);
-    t_uv_val expected6 = {0.375, 0.5};
-    assert_uv_equal(cylindrical_map(p6), expected6, "Test 6: point(0.70711, 0.5, 0.70711)");
-
-    // Test 7
-    t_point3 p7 = new_point3(0, -0.25, 1);
-    t_uv_val expected7 = {0.5, 0.75};
-    assert_uv_equal(cylindrical_map(p7), expected7, "Test 7: point(0, -0.25, 1)");
-
-    // Test 8
-    t_point3 p8 = new_point3(-0.70711, 0.5, 0.70711);
-    t_uv_val expected8 = {0.625, 0.5};
-    assert_uv_equal(cylindrical_map(p8), expected8, "Test 8: point(-0.70711, 0.5, 0.70711)");
-
-    // Test 9
-    t_point3 p9 = new_point3(-1, 1.25, 0);
-    t_uv_val expected9 = {0.75, 0.25};
-    assert_uv_equal(cylindrical_map(p9), expected9, "Test 9: point(-1, 1.25, 0)");
-
-    // Test 10
-    t_point3 p10 = new_point3(-0.70711, 0.5, -0.70711);
-    t_uv_val expected10 = {0.875, 0.5};
-    assert_uv_equal(cylindrical_map(p10), expected10, "Test 10: point(-0.70711, 0.5, -0.70711)");
-
-    printf("All cylindrical_map tests passed!\n");
-}
-
-void test_uv_align_check() {
-    printf("Testing uv_align_check...\n");
-
-    t_uv_align_check *pattern = uv_align_check(
-        new_color3(1, 1, 1), // Main (white)
-        new_color3(1, 0, 0), // Upper left (red)
-        new_color3(1, 1, 0), // Upper right (yellow)
-        new_color3(0, 1, 0), // Bottom left (green)
-        new_color3(0, 1, 1)  // Bottom right (cyan)
-    );
-
-    // Test cases
-    assert_color_equal(uv_pattern_at_align_check(pattern, 0.5, 0.5), new_color3(1, 1, 1));
-    assert_color_equal(uv_pattern_at_align_check(pattern, 0.1, 0.9), new_color3(1, 0, 0));
-    assert_color_equal(uv_pattern_at_align_check(pattern, 0.9, 0.9), new_color3(1, 1, 0));
-    assert_color_equal(uv_pattern_at_align_check(pattern, 0.1, 0.1), new_color3(0, 1, 0));
-    assert_color_equal(uv_pattern_at_align_check(pattern, 0.9, 0.1), new_color3(0, 1, 1));
-
-    printf("All uv_align_check tests passed!\n");
-}
-
-void test_face_from_point() {
-    struct {
-        t_point3 point;
-        t_directions expected_face;
-    } test_cases[] = {
-        {new_point3(-1, 0.5, -0.25), LEFT},
-        {new_point3(1.1, -0.75, 0.8), RIGHT},
-        {new_point3(0.1, 0.6, 0.9), FRONT},
-        {new_point3(-0.7, 0, -2), BACK},
-        {new_point3(0.5, 1, 0.9), UP},
-        {new_point3(-0.2, -1.3, 1.1), DOWN}
-    };
-
-    for (int i = 0; (unsigned long)i < sizeof(test_cases) / sizeof(test_cases[0]); ++i) {
-        t_directions result = face_from_point(test_cases[i].point);
-        if (result != test_cases[i].expected_face) {
-            fprintf(stderr, "Test %d failed: Expected %d, got %d\n",
-                    i + 1, test_cases[i].expected_face, result);
-            exit(EXIT_FAILURE);
-        } else {
-            printf("Test %d passed.\n", i + 1);
-        }
-    }
-}
-
-
-#include <assert.h>
-#include <stdio.h>
-
-// Helper function for comparing colors
-int color_equals(t_color3 a, t_color3 b) {
-    float epsilon = 1e-6;  // Adjust as needed
-    return fabs(a.r - b.r) < epsilon && fabs(a.g - b.g) < epsilon && fabs(a.b - b.b) < epsilon;
-}
-
-void test_left_face_uv() {
-    t_point3 points[] = {
-        new_point3(-1, 0, 0),      // Center of left face
-        new_point3(-1, 0.9, -0.9), // Top-left corner
-        new_point3(-1, 0.9, 0.9),  // Top-right corner
-        new_point3(-1, -0.9, -0.9),// Bottom-left corner
-        new_point3(-1, -0.9, 0.9)  // Bottom-right corner
-    };
-
-    t_uv_val expected[] = {
-        {0.5, 0.5}, {0.05, 0.95}, {0.95, 0.95}, {0.05, 0.05}, {0.95, 0.05}
-    };
-
-    for (int i = 0; i < 5; i++) {
-        t_uv_val uv = cube_uv_left(points[i]);
-        printf("Left Face: Point (%f, %f, %f) -> UV: u = %f, v = %f (Expected: u = %f, v = %f)\n",
-               points[i].x, points[i].y, points[i].z, uv.u, uv.v, expected[i].u, expected[i].v);
-        assert(fabs(uv.u - expected[i].u) < 1e-6 && fabs(uv.v - expected[i].v) < 1e-6);
-    }
-}
-
-void test_right_face_uv() {
-    t_point3 points[] = {
-        new_point3(1, 0, 0),       // Center of right face
-        new_point3(1, 0.9, 0.9),   // Top-right corner
-        new_point3(1, 0.9, -0.9),  // Top-left corner
-        new_point3(1, -0.9, 0.9),  // Bottom-right corner
-        new_point3(1, -0.9, -0.9),  // Bottom-left corner
-    };
-
-    t_uv_val expected[] = {
-        {0.5, 0.5}, {0.95, 0.95}, {0.05, 0.95}, {0.95, 0.05}, {0.05, 0.05}
-    };
-
-    for (int i = 0; i < 5; i++) {
-        t_uv_val uv = cube_uv_right(points[i]);
-        printf("Right Face: Point (%f, %f, %f) -> UV: u = %f, v = %f (Expected: u = %f, v = %f)\n",
-               points[i].x, points[i].y, points[i].z, uv.u, uv.v, expected[i].u, expected[i].v);
-        assert(fabs(uv.u - expected[i].u) < 1e-6 && fabs(uv.v - expected[i].v) < 1e-6);
-    }
-}
-
-
-
-void test_cube_mapped_colors() {
-    // Define colors
-    t_color3 red = new_color3(1, 0, 0);
-    t_color3 yellow = new_color3(1, 1, 0);
-    t_color3 brown = new_color3(1, 0.5, 0);
-    t_color3 green = new_color3(0, 1, 0);
-    t_color3 cyan = new_color3(0, 1, 1);
-    t_color3 blue = new_color3(0, 0, 1);
-    t_color3 purple = new_color3(1, 0, 1);
-    t_color3 white = new_color3(1, 1, 1);
-
-    // Create align check patterns for each face
-    t_pattern *left = align_check_map(uv_align_check(yellow, cyan, red, blue, brown), cube_uv_left);
-    t_pattern *front = align_check_map(uv_align_check(cyan, red, yellow, brown, green), cube_uv_front);
-    t_pattern *right = align_check_map(uv_align_check(red, yellow, purple, green, white), cube_uv_right);
-    t_pattern *back = align_check_map(uv_align_check(green, purple, cyan, white, blue), cube_uv_back);
-    t_pattern *up = align_check_map(uv_align_check(brown, cyan, purple, red, yellow), cube_uv_up);
-    t_pattern *down = align_check_map(uv_align_check(purple, brown, green, blue, white), cube_uv_down);
-
-    // Create cube map pattern
-    t_pattern *cube_pattern = new_cube_map(left, front, right, back, up, down);
-
-    // Define test cases
-    typedef struct {
-        t_point3 point;
-        t_color3 expected_color;
-        const char *description;
-    } t_test_case;
-
-    t_test_case test_cases[] = {
-        {new_point3(-1, 0, 0), yellow, "Left face, center"},
-        {new_point3(-1, 0.9, -0.9), cyan, "Left face, top-left"},
-        {new_point3(-1, 0.9, 0.9), red, "Left face, top-right"},
-        {new_point3(-1, -0.9, -0.9), blue, "Left face, bottom-left"},
-        {new_point3(-1, -0.9, 0.9), brown, "Left face, bottom-right"},
-        {new_point3(0, 0, 1), cyan, "Front face, center"},
-        {new_point3(-0.9, 0.9, 1), red, "Front face, top-left"},
-        {new_point3(0.9, 0.9, 1), yellow, "Front face, top-right"},
-        {new_point3(-0.9, -0.9, 1), brown, "Front face, bottom-left"},
-        {new_point3(0.9, -0.9, 1), green, "Front face, bottom-right"},
-        {new_point3(1, 0, 0), red, "Right face, center"},
-        {new_point3(1, 0.9, 0.9), yellow, "Right face, top-left"},
-        {new_point3(1, 0.9, -0.9), purple, "Right face, top-right"},
-        {new_point3(1, -0.9, 0.9), green, "Right face, bottom-left"},
-        {new_point3(1, -0.9, -0.9), white, "Right face, bottom-right"},
-        {new_point3(0, 0, -1), green, "Back face, center"},
-        {new_point3(0.9, 0.9, -1), purple, "Back face, top-left"},
-        {new_point3(-0.9, 0.9, -1), cyan, "Back face, top-right"},
-        {new_point3(0.9, -0.9, -1), white, "Back face, bottom-left"},
-        {new_point3(-0.9, -0.9, -1), blue, "Back face, bottom-right"},
-        {new_point3(0, 1, 0), brown, "Up face, center"},
-        {new_point3(-0.9, 1, -0.9), cyan, "Up face, top-left"},
-        {new_point3(0.9, 1, -0.9), purple, "Up face, top-right"},
-        {new_point3(-0.9, 1, 0.9), red, "Up face, bottom-left"},
-        {new_point3(0.9, 1, 0.9), yellow, "Up face, bottom-right"},
-        {new_point3(0, -1, 0), purple, "Down face, center"},
-        {new_point3(-0.9, -1, 0.9), brown, "Down face, top-left"},
-        {new_point3(0.9, -1, 0.9), green, "Down face, top-right"},
-        {new_point3(-0.9, -1, -0.9), blue, "Down face, bottom-left"},
-        {new_point3(0.9, -1, -0.9), white, "Down face, bottom-right"}
-    };
-
-    // Run test cases
-    for (size_t i = 0; i < sizeof(test_cases) / sizeof(t_test_case); i++) {
-        t_color3 *actual_color = pattern_at(cube_pattern, &test_cases[i].point);
-        printf("%s: Point (%f, %f, %f) -> Expected Color (%f, %f, %f), Actual Color (%f, %f, %f)\n",
-               test_cases[i].description,
-               test_cases[i].point.x, test_cases[i].point.y, test_cases[i].point.z,
-               test_cases[i].expected_color.r, test_cases[i].expected_color.g, test_cases[i].expected_color.b,
-               actual_color->r, actual_color->g, actual_color->b);
-        assert(color_equals(*actual_color, test_cases[i].expected_color) && "Test failed!");
-    }
-}
-void test_uv_image_pattern() {
-    // Create a test canvas
-    t_canvas *canvas = canvas_from_ppm("test.ppm");
-
-    // Create a UV image pattern
-    t_pattern *pattern = uv_image(canvas);
-
-    // Test cases
-    double test_uvs[4][2] = {
-        {0, 0},
-        {0.3, 0},
-        {0.6, 0.3},
-        {1, 1}
-    };
-    t_color3 expected_colors[4] = {
-        new_color3(0.9, 0.9, 0.9),
-        new_color3(0.2, 0.2, 0.2),
-        new_color3(0.1, 0.1, 0.1),
-        new_color3(0.9, 0.9, 0.9)
-    };
-
-    for (int i = 0; i < 4; i++) {
-        double u = test_uvs[i][0];
-        double v = test_uvs[i][1];
-        t_color3 actual = uv_pattern_at_image(pattern, u, v);
-        assert(color_equals(actual, expected_colors[i]) && "UV Image Pattern Test Failed!");
-    }
-
-    printf("All UV image pattern tests passed!\n");
-}
+// #include <assert.h>
+// 
+// void test_uv_checkers() {
+//     t_color3 black = new_color3(0, 0, 0);
+//     t_color3 white = new_color3(1, 1, 1);
+// 
+//     t_uv *checkers = uv_checkers(2, 2, black, white);
+// 
+//     assert_color_equal(uv_pattern_at(checkers, 0.0f, 0.0f), black);
+//     assert_color_equal(uv_pattern_at(checkers, 0.5f, 0.0f), white);
+//     assert_color_equal(uv_pattern_at(checkers, 0.0f, 0.5f), white);
+//     assert_color_equal(uv_pattern_at(checkers, 0.5f, 0.5f), black);
+//     assert_color_equal(uv_pattern_at(checkers, 1.0f, 1.0f), black);
+// 
+//     free(checkers);
+// }
+// 
+// 
+// 
+// void assert_uv_equal(t_uv_val actual, t_uv_val expected, const char *test_name) {
+//     printf("%s: (u, v) = (%f, %f) | Expected: (%f, %f)\n",
+//            test_name, actual.u, actual.v, expected.u, expected.v);
+// 
+//     assert(fabs(actual.u - expected.u) < 1e-6);
+//     assert(fabs(actual.v - expected.v) < 1e-6);
+//     printf("%s: SUCCESS\n", test_name);
+// }
+// 
+// void test_spherical_map() {
+//     // Test 1
+//     t_point3 p1 = new_point3(0, 0, -1);
+//     t_uv_val expected1 = {0.0, 0.5};
+//     assert_uv_equal(spherical_map(p1), expected1, "Test 1: point(0, 0, -1)");
+// 
+//     // Test 2
+//     t_point3 p2 = new_point3(1, 0, 0);
+//     t_uv_val expected2 = {0.25, 0.5};
+//     assert_uv_equal(spherical_map(p2), expected2, "Test 2: point(1, 0, 0)");
+// 
+//     // Test 3
+//     t_point3 p3 = new_point3(0, 0, 1);
+//     t_uv_val expected3 = {0.5, 0.5};
+//     assert_uv_equal(spherical_map(p3), expected3, "Test 3: point(0, 0, 1)");
+// 
+//     // Test 4
+//     t_point3 p4 = new_point3(-1, 0, 0);
+//     t_uv_val expected4 = {0.75, 0.5};
+//     assert_uv_equal(spherical_map(p4), expected4, "Test 4: point(-1, 0, 0)");
+// 
+//     // Test 5
+//     t_point3 p5 = new_point3(0, 1, 0);
+//     t_uv_val expected5 = {0.5, 1.0};
+//     assert_uv_equal(spherical_map(p5), expected5, "Test 5: point(0, 1, 0)");
+// 
+//     // Test 6
+//     t_point3 p6 = new_point3(0, -1, 0);
+//     t_uv_val expected6 = {0.5, 0.0};
+//     assert_uv_equal(spherical_map(p6), expected6, "Test 6: point(0, -1, 0)");
+// 
+//     // Test 7
+//     t_point3 p7 = new_point3(sqrtf(2) / 2, sqrtf(2) / 2, 0);
+//     t_uv_val expected7 = {0.25, 0.75};
+//     assert_uv_equal(spherical_map(p7), expected7, "Test 7: point(√2/2, √2/2, 0)");
+// }
+// 
+// void test_texture_map() {
+//     t_color3 black = new_color3(0, 0, 0);
+//     t_color3 white = new_color3(1, 1, 1);
+// 
+//     // Create a UV checkers pattern
+//     t_uv *checkers = uv_checkers(16, 8, black, white);
+// 
+//     // Create a texture map pattern with spherical mapping
+//     t_pattern *pattern = texture_map(checkers, spherical_map);
+// 
+//     // Define test points and expected colors
+//     struct {
+//         t_point3 point;
+//         t_color3 expected_color;
+//     } tests[] = {
+//         {new_point3(0.4315, 0.4670, 0.7719), white},
+//         {new_point3(-0.9654, 0.2552, -0.0534), black},
+//         {new_point3(0.1039, 0.7090, 0.6975), white},
+//         {new_point3(-0.4986, -0.7856, -0.3663), black},
+//         {new_point3(-0.0317, -0.9395, 0.3411), black},
+//         {new_point3(0.4809, -0.7721, 0.4154), black},
+//         {new_point3(0.0285, -0.9612, -0.2745), black},
+//         {new_point3(-0.5734, -0.2162, -0.7903), white},
+//         {new_point3(0.7688, -0.1470, 0.6223), black},
+//         {new_point3(-0.7652, 0.2175, 0.6060), black},
+//     };
+// 
+//     // Run the tests
+//     for (int i = 0; i < 10; i++) {
+//         t_color3 *result = pattern_at(pattern, &tests[i].point);
+//         assert_color_equal(*result, tests[i].expected_color);
+//         printf("Test %d passed!\n", i + 1);
+//         free(result);
+//     }
+// 
+//     // Clean up
+//     free(checkers);
+//     free(pattern);
+// }
+// 
+// void test_planar_map() {
+//     printf("Testing planar_map...\n");
+// 
+//     // Test cases
+//     t_point3 p1 = new_point3(0.25, 0, 0.5);
+//     t_uv_val expected1 = {0.25, 0.5};
+//     assert_uv_equal(planar_map(p1), expected1, "Test 1: point(0.25, 0, 0.5)");
+// 
+//     t_point3 p2 = new_point3(0.25, 0, -0.25);
+//     t_uv_val expected2 = {0.25, 0.75};
+//     assert_uv_equal(planar_map(p2), expected2, "Test 2: point(0.25, 0, -0.25)");
+// 
+//     t_point3 p3 = new_point3(0.25, 0.5, -0.25);
+//     t_uv_val expected3 = {0.25, 0.75};
+//     assert_uv_equal(planar_map(p3), expected3, "Test 3: point(0.25, 0.5, -0.25)");
+// 
+//     t_point3 p4 = new_point3(1.25, 0, 0.5);
+//     t_uv_val expected4 = {0.25, 0.5};
+//     assert_uv_equal(planar_map(p4), expected4, "Test 4: point(1.25, 0, 0.5)");
+// 
+//     t_point3 p5 = new_point3(0.25, 0, -1.75);
+//     t_uv_val expected5 = {0.25, 0.25};
+//     assert_uv_equal(planar_map(p5), expected5, "Test 5: point(0.25, 0, -1.75)");
+// 
+//     t_point3 p6 = new_point3(1, 0, -1);
+//     t_uv_val expected6 = {0.0, 0.0};
+//     assert_uv_equal(planar_map(p6), expected6, "Test 6: point(1, 0, -1)");
+// 
+//     t_point3 p7 = new_point3(0, 0, 0);
+//     t_uv_val expected7 = {0.0, 0.0};
+//     assert_uv_equal(planar_map(p7), expected7, "Test 7: point(0, 0, 0)");
+// 
+//     printf("All planar_map tests passed!\n");
+// }
+// 
+// void test_cylindrical_map() {
+//     printf("Testing cylindrical_map...\n");
+// 
+//     // Test 1
+//     t_point3 p1 = new_point3(0, 0, -1);
+//     t_uv_val expected1 = {0.0, 0.0};
+//     assert_uv_equal(cylindrical_map(p1), expected1, "Test 1: point(0, 0, -1)");
+// 
+//     // Test 2
+//     t_point3 p2 = new_point3(0, 0.5, -1);
+//     t_uv_val expected2 = {0.0, 0.5};
+//     assert_uv_equal(cylindrical_map(p2), expected2, "Test 2: point(0, 0.5, -1)");
+// 
+//     // Test 3
+//     t_point3 p3 = new_point3(0, 1, -1);
+//     t_uv_val expected3 = {0.0, 0.0};
+//     assert_uv_equal(cylindrical_map(p3), expected3, "Test 3: point(0, 1, -1)");
+// 
+//     // Test 4
+//     t_point3 p4 = new_point3(0.70711, 0.5, -0.70711);
+//     t_uv_val expected4 = {0.125, 0.5};
+//     assert_uv_equal(cylindrical_map(p4), expected4, "Test 4: point(0.70711, 0.5, -0.70711)");
+// 
+//     // Test 5
+//     t_point3 p5 = new_point3(1, 0.5, 0);
+//     t_uv_val expected5 = {0.25, 0.5};
+//     assert_uv_equal(cylindrical_map(p5), expected5, "Test 5: point(1, 0.5, 0)");
+// 
+//     // Test 6
+//     t_point3 p6 = new_point3(0.70711, 0.5, 0.70711);
+//     t_uv_val expected6 = {0.375, 0.5};
+//     assert_uv_equal(cylindrical_map(p6), expected6, "Test 6: point(0.70711, 0.5, 0.70711)");
+// 
+//     // Test 7
+//     t_point3 p7 = new_point3(0, -0.25, 1);
+//     t_uv_val expected7 = {0.5, 0.75};
+//     assert_uv_equal(cylindrical_map(p7), expected7, "Test 7: point(0, -0.25, 1)");
+// 
+//     // Test 8
+//     t_point3 p8 = new_point3(-0.70711, 0.5, 0.70711);
+//     t_uv_val expected8 = {0.625, 0.5};
+//     assert_uv_equal(cylindrical_map(p8), expected8, "Test 8: point(-0.70711, 0.5, 0.70711)");
+// 
+//     // Test 9
+//     t_point3 p9 = new_point3(-1, 1.25, 0);
+//     t_uv_val expected9 = {0.75, 0.25};
+//     assert_uv_equal(cylindrical_map(p9), expected9, "Test 9: point(-1, 1.25, 0)");
+// 
+//     // Test 10
+//     t_point3 p10 = new_point3(-0.70711, 0.5, -0.70711);
+//     t_uv_val expected10 = {0.875, 0.5};
+//     assert_uv_equal(cylindrical_map(p10), expected10, "Test 10: point(-0.70711, 0.5, -0.70711)");
+// 
+//     printf("All cylindrical_map tests passed!\n");
+// }
+// 
+// void test_uv_align_check() {
+//     printf("Testing uv_align_check...\n");
+// 
+//     t_uv_align_check *pattern = uv_align_check(
+//         new_color3(1, 1, 1), // Main (white)
+//         new_color3(1, 0, 0), // Upper left (red)
+//         new_color3(1, 1, 0), // Upper right (yellow)
+//         new_color3(0, 1, 0), // Bottom left (green)
+//         new_color3(0, 1, 1)  // Bottom right (cyan)
+//     );
+// 
+//     // Test cases
+//     assert_color_equal(uv_pattern_at_align_check(pattern, 0.5, 0.5), new_color3(1, 1, 1));
+//     assert_color_equal(uv_pattern_at_align_check(pattern, 0.1, 0.9), new_color3(1, 0, 0));
+//     assert_color_equal(uv_pattern_at_align_check(pattern, 0.9, 0.9), new_color3(1, 1, 0));
+//     assert_color_equal(uv_pattern_at_align_check(pattern, 0.1, 0.1), new_color3(0, 1, 0));
+//     assert_color_equal(uv_pattern_at_align_check(pattern, 0.9, 0.1), new_color3(0, 1, 1));
+// 
+//     printf("All uv_align_check tests passed!\n");
+// }
+// 
+// void test_face_from_point() {
+//     struct {
+//         t_point3 point;
+//         t_directions expected_face;
+//     } test_cases[] = {
+//         {new_point3(-1, 0.5, -0.25), LEFT},
+//         {new_point3(1.1, -0.75, 0.8), RIGHT},
+//         {new_point3(0.1, 0.6, 0.9), FRONT},
+//         {new_point3(-0.7, 0, -2), BACK},
+//         {new_point3(0.5, 1, 0.9), UP},
+//         {new_point3(-0.2, -1.3, 1.1), DOWN}
+//     };
+// 
+//     for (int i = 0; (unsigned long)i < sizeof(test_cases) / sizeof(test_cases[0]); ++i) {
+//         t_directions result = face_from_point(test_cases[i].point);
+//         if (result != test_cases[i].expected_face) {
+//             fprintf(stderr, "Test %d failed: Expected %d, got %d\n",
+//                     i + 1, test_cases[i].expected_face, result);
+//             exit(EXIT_FAILURE);
+//         } else {
+//             printf("Test %d passed.\n", i + 1);
+//         }
+//     }
+// }
+// 
+// 
+// #include <assert.h>
+// #include <stdio.h>
+// 
+// // Helper function for comparing colors
+// int color_equals(t_color3 a, t_color3 b) {
+//     float epsilon = 1e-6;  // Adjust as needed
+//     return fabs(a.r - b.r) < epsilon && fabs(a.g - b.g) < epsilon && fabs(a.b - b.b) < epsilon;
+// }
+// 
+// void test_left_face_uv() {
+//     t_point3 points[] = {
+//         new_point3(-1, 0, 0),      // Center of left face
+//         new_point3(-1, 0.9, -0.9), // Top-left corner
+//         new_point3(-1, 0.9, 0.9),  // Top-right corner
+//         new_point3(-1, -0.9, -0.9),// Bottom-left corner
+//         new_point3(-1, -0.9, 0.9)  // Bottom-right corner
+//     };
+// 
+//     t_uv_val expected[] = {
+//         {0.5, 0.5}, {0.05, 0.95}, {0.95, 0.95}, {0.05, 0.05}, {0.95, 0.05}
+//     };
+// 
+//     for (int i = 0; i < 5; i++) {
+//         t_uv_val uv = cube_uv_left(points[i]);
+//         printf("Left Face: Point (%f, %f, %f) -> UV: u = %f, v = %f (Expected: u = %f, v = %f)\n",
+//                points[i].x, points[i].y, points[i].z, uv.u, uv.v, expected[i].u, expected[i].v);
+//         assert(fabs(uv.u - expected[i].u) < 1e-6 && fabs(uv.v - expected[i].v) < 1e-6);
+//     }
+// }
+// 
+// void test_right_face_uv() {
+//     t_point3 points[] = {
+//         new_point3(1, 0, 0),       // Center of right face
+//         new_point3(1, 0.9, 0.9),   // Top-right corner
+//         new_point3(1, 0.9, -0.9),  // Top-left corner
+//         new_point3(1, -0.9, 0.9),  // Bottom-right corner
+//         new_point3(1, -0.9, -0.9),  // Bottom-left corner
+//     };
+// 
+//     t_uv_val expected[] = {
+//         {0.5, 0.5}, {0.95, 0.95}, {0.05, 0.95}, {0.95, 0.05}, {0.05, 0.05}
+//     };
+// 
+//     for (int i = 0; i < 5; i++) {
+//         t_uv_val uv = cube_uv_right(points[i]);
+//         printf("Right Face: Point (%f, %f, %f) -> UV: u = %f, v = %f (Expected: u = %f, v = %f)\n",
+//                points[i].x, points[i].y, points[i].z, uv.u, uv.v, expected[i].u, expected[i].v);
+//         assert(fabs(uv.u - expected[i].u) < 1e-6 && fabs(uv.v - expected[i].v) < 1e-6);
+//     }
+// }
+// 
+// 
+// 
+// void test_cube_mapped_colors() {
+//     // Define colors
+//     t_color3 red = new_color3(1, 0, 0);
+//     t_color3 yellow = new_color3(1, 1, 0);
+//     t_color3 brown = new_color3(1, 0.5, 0);
+//     t_color3 green = new_color3(0, 1, 0);
+//     t_color3 cyan = new_color3(0, 1, 1);
+//     t_color3 blue = new_color3(0, 0, 1);
+//     t_color3 purple = new_color3(1, 0, 1);
+//     t_color3 white = new_color3(1, 1, 1);
+// 
+//     // Create align check patterns for each face
+//     t_pattern *left = align_check_map(uv_align_check(yellow, cyan, red, blue, brown), cube_uv_left);
+//     t_pattern *front = align_check_map(uv_align_check(cyan, red, yellow, brown, green), cube_uv_front);
+//     t_pattern *right = align_check_map(uv_align_check(red, yellow, purple, green, white), cube_uv_right);
+//     t_pattern *back = align_check_map(uv_align_check(green, purple, cyan, white, blue), cube_uv_back);
+//     t_pattern *up = align_check_map(uv_align_check(brown, cyan, purple, red, yellow), cube_uv_up);
+//     t_pattern *down = align_check_map(uv_align_check(purple, brown, green, blue, white), cube_uv_down);
+// 
+//     // Create cube map pattern
+//     t_pattern *cube_pattern = new_cube_map(left, front, right, back, up, down);
+// 
+//     // Define test cases
+//     typedef struct {
+//         t_point3 point;
+//         t_color3 expected_color;
+//         const char *description;
+//     } t_test_case;
+// 
+//     t_test_case test_cases[] = {
+//         {new_point3(-1, 0, 0), yellow, "Left face, center"},
+//         {new_point3(-1, 0.9, -0.9), cyan, "Left face, top-left"},
+//         {new_point3(-1, 0.9, 0.9), red, "Left face, top-right"},
+//         {new_point3(-1, -0.9, -0.9), blue, "Left face, bottom-left"},
+//         {new_point3(-1, -0.9, 0.9), brown, "Left face, bottom-right"},
+//         {new_point3(0, 0, 1), cyan, "Front face, center"},
+//         {new_point3(-0.9, 0.9, 1), red, "Front face, top-left"},
+//         {new_point3(0.9, 0.9, 1), yellow, "Front face, top-right"},
+//         {new_point3(-0.9, -0.9, 1), brown, "Front face, bottom-left"},
+//         {new_point3(0.9, -0.9, 1), green, "Front face, bottom-right"},
+//         {new_point3(1, 0, 0), red, "Right face, center"},
+//         {new_point3(1, 0.9, 0.9), yellow, "Right face, top-left"},
+//         {new_point3(1, 0.9, -0.9), purple, "Right face, top-right"},
+//         {new_point3(1, -0.9, 0.9), green, "Right face, bottom-left"},
+//         {new_point3(1, -0.9, -0.9), white, "Right face, bottom-right"},
+//         {new_point3(0, 0, -1), green, "Back face, center"},
+//         {new_point3(0.9, 0.9, -1), purple, "Back face, top-left"},
+//         {new_point3(-0.9, 0.9, -1), cyan, "Back face, top-right"},
+//         {new_point3(0.9, -0.9, -1), white, "Back face, bottom-left"},
+//         {new_point3(-0.9, -0.9, -1), blue, "Back face, bottom-right"},
+//         {new_point3(0, 1, 0), brown, "Up face, center"},
+//         {new_point3(-0.9, 1, -0.9), cyan, "Up face, top-left"},
+//         {new_point3(0.9, 1, -0.9), purple, "Up face, top-right"},
+//         {new_point3(-0.9, 1, 0.9), red, "Up face, bottom-left"},
+//         {new_point3(0.9, 1, 0.9), yellow, "Up face, bottom-right"},
+//         {new_point3(0, -1, 0), purple, "Down face, center"},
+//         {new_point3(-0.9, -1, 0.9), brown, "Down face, top-left"},
+//         {new_point3(0.9, -1, 0.9), green, "Down face, top-right"},
+//         {new_point3(-0.9, -1, -0.9), blue, "Down face, bottom-left"},
+//         {new_point3(0.9, -1, -0.9), white, "Down face, bottom-right"}
+//     };
+// 
+//     // Run test cases
+//     for (size_t i = 0; i < sizeof(test_cases) / sizeof(t_test_case); i++) {
+//         t_color3 *actual_color = pattern_at(cube_pattern, &test_cases[i].point);
+//         printf("%s: Point (%f, %f, %f) -> Expected Color (%f, %f, %f), Actual Color (%f, %f, %f)\n",
+//                test_cases[i].description,
+//                test_cases[i].point.x, test_cases[i].point.y, test_cases[i].point.z,
+//                test_cases[i].expected_color.r, test_cases[i].expected_color.g, test_cases[i].expected_color.b,
+//                actual_color->r, actual_color->g, actual_color->b);
+//         assert(color_equals(*actual_color, test_cases[i].expected_color) && "Test failed!");
+//     }
+// }
+// void test_uv_image_pattern() {
+//     // Create a test canvas
+//     t_canvas *canvas = canvas_from_ppm("test.ppm");
+// 
+//     // Create a UV image pattern
+//     t_pattern *pattern = uv_image(canvas);
+// 
+//     // Test cases
+//     double test_uvs[4][2] = {
+//         {0, 0},
+//         {0.3, 0},
+//         {0.6, 0.3},
+//         {1, 1}
+//     };
+//     t_color3 expected_colors[4] = {
+//         new_color3(0.9, 0.9, 0.9),
+//         new_color3(0.2, 0.2, 0.2),
+//         new_color3(0.1, 0.1, 0.1),
+//         new_color3(0.9, 0.9, 0.9)
+//     };
+// 
+//     for (int i = 0; i < 4; i++) {
+//         double u = test_uvs[i][0];
+//         double v = test_uvs[i][1];
+//         t_color3 actual = uv_pattern_at_image(pattern, u, v);
+//         assert(color_equals(actual, expected_colors[i]) && "UV Image Pattern Test Failed!");
+//     }
+// 
+//     printf("All UV image pattern tests passed!\n");
+// }
 
 
 // int main(void)
@@ -1823,10 +1823,10 @@ void test_uv_image_pattern() {
 // }
 
 //print_bounds
-void print_bounds(t_bounds *bounds) {
-    printf("Min: (%f, %f, %f)\n", bounds->min.x, bounds->min.y, bounds->min.z);
-    printf("Max: (%f, %f, %f)\n", bounds->max.x, bounds->max.y, bounds->max.z);
-}
+// void print_bounds(t_bounds *bounds) {
+//     printf("Min: (%f, %f, %f)\n", bounds->min.x, bounds->min.y, bounds->min.z);
+//     printf("Max: (%f, %f, %f)\n", bounds->max.x, bounds->max.y, bounds->max.z);
+// }
 
 // void test_bounds() {
 //     t_shape *sphere1 = sphere();
@@ -1909,49 +1909,49 @@ void print_bounds(t_bounds *bounds) {
 //     return 0;
 // }
 
-void print_ray(t_ray *ray) {
-    printf("Ray:\n");
-    printf("Origin: (%f, %f, %f)\n", ray->orig.x, ray->orig.y, ray->orig.z);
-    printf("Direction: (%f, %f, %f)\n", ray->dir.x, ray->dir.y, ray->dir.z);
-}
-
-void test_ice_cream_spheres() {
-    // Create the ice cream group with only 3 spheres
-    t_shape *cone_scoop = ice_cream_cone();
-
-    // Print the group bounds
-    t_bounds bounds = cone_scoop->bounds(cone_scoop);
-    printf("Ice Cream Bounds:\n");
-    print_bounds(&bounds);
-
-    // Test rays
-    t_ray *rays[3];
-    rays[0] = ray_new(new_point3_p(0, 2, -5), new_vec3_p(0, 0, 1)); // Hits sphere1
-    rays[1] = ray_new(new_point3_p(0, 0, -5), new_vec3_p(0, 0, 1)); // Misses group
-    rays[2] = ray_new(new_point3_p(0, 3, -5), new_vec3_p(0, 0, 1)); // Hits sphere2 and sphere3
-
-    for (int i = 0; i < 3; i++) {
-        printf("\nTesting Ray %d:\n", i);
-        print_ray(rays[i]);
-
-        t_x *xs = intersect_group(cone_scoop, rays[i]);
-        if (xs) {
-            printf("Intersections found: %d\n", xs->count);
-            for (int j = 0; j < xs->count; j++) {
-                printf("t[%d]: %f (shape type: %d)\n", j, xs->i[j].t, xs->i[j].shape->type);
-            }
-            free(xs->i);
-            free(xs);
-        } else {
-            printf("No intersections found.\n");
-        }
-
-        free(rays[i]);
-    }
-
-    // Free memory for group and children
-    free(cone_scoop);
-}
+// void print_ray(t_ray *ray) {
+//     printf("Ray:\n");
+//     printf("Origin: (%f, %f, %f)\n", ray->orig.x, ray->orig.y, ray->orig.z);
+//     printf("Direction: (%f, %f, %f)\n", ray->dir.x, ray->dir.y, ray->dir.z);
+// }
+// 
+// void test_ice_cream_spheres() {
+//     // Create the ice cream group with only 3 spheres
+//     t_shape *cone_scoop = ice_cream_cone();
+// 
+//     // Print the group bounds
+//     t_bounds bounds = cone_scoop->bounds(cone_scoop);
+//     printf("Ice Cream Bounds:\n");
+//     print_bounds(&bounds);
+// 
+//     // Test rays
+//     t_ray *rays[3];
+//     rays[0] = ray_new(new_point3_p(0, 2, -5), new_vec3_p(0, 0, 1)); // Hits sphere1
+//     rays[1] = ray_new(new_point3_p(0, 0, -5), new_vec3_p(0, 0, 1)); // Misses group
+//     rays[2] = ray_new(new_point3_p(0, 3, -5), new_vec3_p(0, 0, 1)); // Hits sphere2 and sphere3
+// 
+//     for (int i = 0; i < 3; i++) {
+//         printf("\nTesting Ray %d:\n", i);
+//         print_ray(rays[i]);
+// 
+//         t_x *xs = intersect_group(cone_scoop, rays[i]);
+//         if (xs) {
+//             printf("Intersections found: %d\n", xs->count);
+//             for (int j = 0; j < xs->count; j++) {
+//                 printf("t[%d]: %f (shape type: %d)\n", j, xs->i[j].t, xs->i[j].shape->type);
+//             }
+//             free(xs->i);
+//             free(xs);
+//         } else {
+//             printf("No intersections found.\n");
+//         }
+// 
+//         free(rays[i]);
+//     }
+// 
+//     // Free memory for group and children
+//     free(cone_scoop);
+// }
 
 // //triangle tests
 // int main(void)
@@ -2092,14 +2092,21 @@ void test_ice_cream_spheres() {
 // }
 
 
-int main (void)
+int main (int ac, char *av[])
 {
-	mlx_t *mlx = mlx_init(800, 400, "test", 1);
-	t_world	*world = triangle_scene();
+	mlx_t *mlx = mlx_init(DEFAULT_WIDTH, DEFAULT_HEIGHT, "MINIrt", 1);
+	// t_world	*world = triangle_scene();
 	// (void)world;
-	t_camera *camera = camera_new(800, 400, 0.8);
-	camera->transform = view_transformation(new_point3(1, 7, -9), new_point3(0, 1.1, 0), new_vec3(0, 1, 0));
-    mlx_image_t *image = render(mlx, camera, world);
+	// t_camera *camera = camera_new(800, 400, 0.8);
+	// camera->transform = view_transformation(new_point3(1, 7, -9), new_point3(0, 1.1, 0), new_vec3(0, 1, 0));
+	t_world	*world;
+
+	world = gc_malloc(sizeof(t_world));
+	world->shapes = NULL;
+	world->light = NULL;
+	if (check_args(ac, av, world) != 0)
+		return (1);
+    mlx_image_t *image = render(mlx, world->camera, world);
 	mlx_image_to_window(mlx, image, 0, 0);
 	printf("done\n");
 	mlx_loop(mlx);

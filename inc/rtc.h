@@ -91,8 +91,8 @@ struct s_intersection
 
 struct s_light_p
 {
-	t_point3			*position;
-	t_color3			*intensity;
+	t_point3			position;
+	t_color3			intensity;
 	struct s_light_p	*next;
 };
 
@@ -100,6 +100,7 @@ struct s_world
 {
 	t_light_p		*light;
 	t_shape			*shapes;
+	t_camera		*camera;
 };
 
 struct s_comp
@@ -154,7 +155,7 @@ struct	s_shape
 	struct s_shape		*children;
 	int					children_count;
 	struct s_shape		*parent;
-	
+
 	struct s_bounds    (*bounds)(struct s_shape *shape);
 	struct s_shape		*next;
 };

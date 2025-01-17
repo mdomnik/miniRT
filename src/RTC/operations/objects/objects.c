@@ -16,7 +16,7 @@ t_shape	*sphere(void)
 {
 	t_shape	*shape;
 
-	shape = malloc(sizeof(t_shape));
+	shape = gc_malloc(sizeof(*shape));
 	shape->type = SPHERE;
 	shape->transform = *init_identity_matrix(4);
 	shape->material = *default_material();
@@ -34,7 +34,7 @@ t_shape *plane(void)
 {
 	t_shape	*shape;
 
-	shape = malloc(sizeof(t_shape));
+	shape = gc_malloc(sizeof(t_shape));
 	shape->type = PLANE;
 	shape->transform = *init_identity_matrix(4);
 	shape->material = *default_material();
@@ -52,7 +52,7 @@ t_shape *cube(void)
 {
 	t_shape	*shape;
 
-	shape = malloc(sizeof(t_shape));
+	shape = gc_malloc(sizeof(t_shape));
 	shape->type = CUBE;
 	shape->transform = *init_identity_matrix(4);
 	shape->material = *default_material();
@@ -70,7 +70,7 @@ t_shape *cylinder(void)
 {
 	t_shape	*shape;
 
-	shape = malloc(sizeof(t_shape));
+	shape = gc_malloc(sizeof(t_shape));
 	shape->type = CYLINDER;
 	shape->transform = *init_identity_matrix(4);
 	shape->material = *default_material();
@@ -89,7 +89,7 @@ t_shape *cone(void)
 {
 	t_shape	*shape;
 
-	shape = malloc(sizeof(t_shape));
+	shape = gc_malloc(sizeof(t_shape));
 	shape->type = CONE;
 	shape->transform = *init_identity_matrix(4);
 	shape->material = *default_material();
@@ -108,7 +108,7 @@ t_shape *group(void)
 {
 	t_shape	*shape;
 
-	shape = malloc(sizeof(t_shape));
+	shape = gc_malloc(sizeof(t_shape));
 	shape->type = GROUP;
 	shape->transform = *init_identity_matrix(4);
 	shape->material = *default_material();
@@ -126,7 +126,7 @@ t_shape *triangle(t_point3 p1, t_point3 p2, t_point3 p3)
 {
 	t_shape	*shape;
 
-	shape = malloc(sizeof(t_shape));
+	shape = gc_malloc(sizeof(t_shape));
 	shape->type = TRIANGLE;
 	shape->material = *default_material();
 	shape->transform = *init_identity_matrix(4);

@@ -55,8 +55,8 @@ t_pattern *align_check_map(void *uv_pattern, t_uv_val (*uv_map)(t_point3))
 	pattern->uv_pattern = uv_pattern;
 	pattern->uv_map = uv_map;
 	pattern->transform = *init_identity_matrix(4); // Default transform
-	pattern->a = NULL; // Not used for texture maps
-	pattern->b = NULL;
+	pattern->a = (t_tuple){0}; // Not used for texture maps
+	pattern->b = (t_tuple){0};
 
 	return pattern;
 }

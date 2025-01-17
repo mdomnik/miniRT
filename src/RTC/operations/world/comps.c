@@ -44,7 +44,7 @@ t_color3 shade_hit(t_world *world, t_comp *comps, int remaining)
 	t_color3 surface = new_color3(0, 0, 0);
 	t_color3 reflected;
 	t_light_p *light_temp;
-	
+
 	light_temp = world->light;
 	bool in_shadow;
 	if (comps->shape->type != NONE)
@@ -89,12 +89,12 @@ t_color3 color_at(t_world *world, t_ray *ray, int remaining)
 	}
 	comps = prepare_computations(&i, ray, xs);
 	color = shade_hit(world, comps, remaining);
-	return (color);	
+	return (color);
 }
 
-bool is_shadowed(t_world *world, t_point3 *light_pos, t_point3 *point)
+bool is_shadowed(t_world *world, t_point3 light_pos, t_point3 *point)
 {
-	t_vec3 v = sub_tuple_p(light_pos, point);
+	t_vec3 v = sub_tuple_p(&light_pos, point);
 	float distance = magnitude(v);
 	t_vec3 direction = normalize(v);
 

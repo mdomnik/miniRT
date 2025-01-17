@@ -18,7 +18,7 @@ t_camera	*camera_new(int hsize, int vsize, float fov)
 {
 	t_camera *camera;
 
-	camera = malloc(sizeof(t_camera));
+	camera = gc_malloc(sizeof(t_camera));
 	camera->hsize = hsize;
 	camera->vsize = vsize;
 	camera->fov = fov;

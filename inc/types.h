@@ -124,8 +124,8 @@ struct s_uv_align_check {
 
 struct s_pattern
 {
-	t_color3		*a;
-	t_color3		*b;
+	t_color3		a;
+	t_color3		b;
 	t_matrix		transform;
 	t_pattern_type	type;
     void            *uv_pattern;
@@ -158,7 +158,7 @@ struct s_bump_map
 
 struct s_material
 {
-	t_color3		*color;
+	t_color3		color;
 	t_pattern		*pattern;
 	float			ambient;
 	float			diffuse;

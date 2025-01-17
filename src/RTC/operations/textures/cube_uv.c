@@ -21,7 +21,7 @@ t_directions face_from_point(t_point3 point)
 
 	if (coord == abs_x)
 	{
-		if (point.x > 0)	
+		if (point.x > 0)
 			return RIGHT;
 		return LEFT;
 	}
@@ -68,8 +68,8 @@ t_pattern *new_cube_map(t_pattern *left, t_pattern *front, t_pattern *right,
     pattern->uv_pattern = cube; // Store the cube map in the UV pattern
     pattern->uv_map = NULL; // Not needed for cube maps
     pattern->transform = *init_identity_matrix(4);
-    pattern->a = NULL;
-    pattern->b = NULL;
+    pattern->a = (t_tuple){0};
+    pattern->b = (t_tuple){0};
 
     return pattern;
 }

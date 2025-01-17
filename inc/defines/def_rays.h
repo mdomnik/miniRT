@@ -19,7 +19,7 @@ t_vec3	local_normal_at(t_shape *shape, t_point3 *local_point);
 
 //operations/rays/ray_reflect.c
 t_vec3 reflect(t_vec3 in, t_vec3 normal);
-t_light_p *new_light(t_point3 *position, t_color3 *intensity);
+t_light_p *new_light(t_point3 position, t_color3 intensity);
 t_color3 lighting(t_material *m, t_shape *shape, t_light_p *light, t_point3 *point, t_vec3 eyev, t_vec3 normalv, bool in_shadow);
 
 //operations/rays/ray.c
