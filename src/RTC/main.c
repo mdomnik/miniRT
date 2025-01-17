@@ -2106,6 +2106,8 @@ int main (int ac, char *av[])
 	world->light = NULL;
 	if (check_args(ac, av, world) != 0)
 		return (1);
+	dprintf(2, "%p, %p\n", (void *)world->shapes, (void *)world->light);
+	print_matrix(world->shapes->transform);
     mlx_image_t *image = render(mlx, world->camera, world);
 	mlx_image_to_window(mlx, image, 0, 0);
 	printf("done\n");

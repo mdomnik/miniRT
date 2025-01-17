@@ -39,7 +39,7 @@ int			create_ambient(t_options *options, char **args);
 // int			create_camera(t_options *options, char **args);
 int			create_camera(t_camera **camera, char **args);
 // int			create_light(t_options *options, char **args);
-int			create_light(t_light_p *lights, char **args);
+int			create_light(t_light_p **lights, char **args);
 
 //scene_file/create_obj.c
 // int			create_sphere(t_options *options, char **args);

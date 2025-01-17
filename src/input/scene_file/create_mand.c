@@ -36,7 +36,7 @@ int create_objects(t_options *options, t_world *world)
 				return (-1);
 		if (ft_strcmp(options->scene.scene_objects[i][0], "L") == 0)
 		{
-			if (create_light(world->light, options->scene.scene_objects[i]) == -1)
+			if (create_light(&world->light, options->scene.scene_objects[i]) == -1)
 				return (-1);
 		}
 		if (check_objects_helper(&options->scene, world, i) == -1)
@@ -133,7 +133,7 @@ int create_camera(t_camera **camera, char **args)
  *             args[3] - The color of the light (r,g,b).
  * @return 0 if the light was successfully created and added
  */
-int create_light(t_light_p *lights, char **args)
+int create_light(t_light_p **lights, char **args)
 {
 	t_light_p *light;
 	char **coords;
@@ -150,6 +150,7 @@ int create_light(t_light_p *lights, char **args)
 	light->intensity = normalize(light->intensity);
 	brightness = ft_atof(args[2]);
 	light->intensity = mult_color(light->intensity, brightness);
-	add_light(&lights, light);
+	//add_light(&lights, light);
+	(*lights) = light;
 	return (0);
 }

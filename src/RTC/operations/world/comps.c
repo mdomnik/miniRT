@@ -70,7 +70,7 @@ t_color3 color_at(t_world *world, t_ray *ray, int remaining)
 	t_i i;
 	t_comp *comps;
 	t_color3 color;
-	
+
 	xs = intersect_world(world, ray);
 	if (xs == NULL) //maybe remove
 		return (new_color3(0, 0, 0));

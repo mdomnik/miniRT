@@ -25,17 +25,22 @@ int	create_sphere(t_world *world, char **args)
 	char		**coords;
 	char		**color;
 	float		radius;
+	t_matrix	*transform;
 
 	sp = sphere();
 	coords = ft_split(args[1], ',');
 	color = ft_split(args[3], ',');
-	set_transform(sp, translation(ft_atof(coords[0]), ft_atof(coords[1]),
+	transform = init_identity_matrix(4);
+	transform = multiply_matrices(transform, translation(ft_atof(coords[0]), ft_atof(coords[1]),
 			ft_atof(coords[2])));
 	radius = ft_atof(args[2]) / 2.0;
-	set_transform(sp, scaling(radius, radius, radius));
+	transform = multiply_matrices(transform, scaling(radius, radius, radius));
+	set_transform(sp, transform);
 	sp->material.color = normalize(new_color3(ft_atof(color[0]), ft_atof(color[1]),
 			ft_atof(color[2])));
-	add_shape(&world->shapes, sp);
+	//add_shape(&world->shapes, sp);
+	world->shapes = sp;
+	print_matrix(sp->transform);
 	return (0);
 }
 

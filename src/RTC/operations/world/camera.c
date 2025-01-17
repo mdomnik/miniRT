@@ -59,7 +59,6 @@ t_ray *ray_for_pixel(t_camera *camera, int px, int py)
 
 	xoffset = (px + 0.5) * camera->pixel_size;
 	yoffset = (py + 0.5) * camera->pixel_size;
-	
 	world_x = camera->half_width - xoffset;
 	world_y = camera->half_height - yoffset;
 
@@ -77,7 +76,7 @@ mlx_image_t *render(mlx_t *mlx, t_camera *camera, t_world *world)
 	int color_int;
 	int y = 0;
 	int x = 0;
-	int total = camera->hsize * camera->vsize;
+	//int total = camera->hsize * camera->vsize;
 
 	image = mlx_new_image(mlx, camera->hsize, camera->vsize);
 
@@ -86,8 +85,8 @@ mlx_image_t *render(mlx_t *mlx, t_camera *camera, t_world *world)
 		x = 0;
 		while(x < camera->hsize)
 		{
-			printf("Rendering %d/%d\n", y * camera->hsize + x, total);
-			ray = ray_for_pixel(camera, x, y);			
+			// printf("Rendering %d/%d\n", y * camera->hsize + x, total);
+			ray = ray_for_pixel(camera, x, y);
 			color = color_at(world, ray, RECURSIVE_DEPTH);
 			color_int = color_to_int(color);
 			mlx_put_pixel(image, x, y, color_int);
