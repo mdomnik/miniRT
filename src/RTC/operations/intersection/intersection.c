@@ -6,23 +6,24 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 05:02:00 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 23:01:13 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 21:39:41 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_x *intersect(t_shape *shape, t_ray *ray)
+t_x	*intersect(t_shape *shape, t_ray *ray)
 {
 	t_ray	*local_ray;
 	t_x		*xs;
+
 	local_ray = ray_transform(ray, inverse(shape->transform));
 	shape->saved_ray = local_ray;
 	xs = local_intersect(shape, local_ray);
-	return(xs);
+	return (xs);
 }
 
-t_x *local_intersect(t_shape *shape, t_ray *ray)
+t_x	*local_intersect(t_shape *shape, t_ray *ray)
 {
 	if (shape->type == SPHERE)
 		return (intersect_sphere(shape, ray));
@@ -51,7 +52,7 @@ t_i	intersection(float t, t_shape *shape)
 	return (i);
 }
 
-t_x *intersections(int num_x, t_x *xs, t_x *temp_xs)
+t_x	*intersections(int num_x, t_x *xs, t_x *temp_xs)
 {
 	t_x		*new_xs;
 	int		i;
@@ -75,15 +76,14 @@ t_x *intersections(int num_x, t_x *xs, t_x *temp_xs)
 		i++;
 		j++;
 	}
-	
 	return (new_xs);
 }
 
-t_i hit(t_x *xs)
+t_i	hit(t_x *xs)
 {
 	t_i	i;
-	int j;
-	int		count;
+	int	j;
+	int	count;
 
 	count = xs->count;
 	i.t = -1;

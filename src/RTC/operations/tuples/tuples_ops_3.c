@@ -6,16 +6,16 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 23:56:53 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 20:07:49 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 20:00:26 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
 //negates a vector
-t_vec3 neg_vec3(t_vec3 a)
+t_vec3	neg_vec3(t_vec3 a)
 {
-	t_tuple result;
+	t_tuple	result;
 
 	result.x = -a.x;
 	result.y = -a.y;
@@ -24,10 +24,10 @@ t_vec3 neg_vec3(t_vec3 a)
 }
 
 //normalize a vector
-t_vec3 normalize(t_vec3 a)
+t_vec3	normalize(t_vec3 a)
 {
-	t_vec3 result;
-	float mag;
+	t_vec3	result;
+	float	mag;
 
 	mag = magnitude(a);
 	result.x = a.x / mag;
@@ -38,9 +38,9 @@ t_vec3 normalize(t_vec3 a)
 }
 
 //cross product of two vectors
-t_vec3 cross_product(t_vec3 a, t_vec3 b)
+t_vec3	cross_product(t_vec3 a, t_vec3 b)
 {
-	t_vec3 result;
+	t_vec3	result;
 
 	result.x = a.y * b.z - a.z * b.y;
 	result.y = a.z * b.x - a.x * b.z;
@@ -48,9 +48,9 @@ t_vec3 cross_product(t_vec3 a, t_vec3 b)
 	return (result);
 }
 
-t_color3 color_mult(t_color3 *a, t_color3 *b)
+t_color3	color_mult(t_color3 *a, t_color3 *b)
 {
-	t_color3 result;
+	t_color3	result;
 
 	result.r = a->r * b->r;
 	result.g = a->g * b->g;
@@ -59,35 +59,32 @@ t_color3 color_mult(t_color3 *a, t_color3 *b)
 	return (result);
 }
 
-t_tuple sub_tuple_p(t_tuple *a, t_tuple *b)
+t_tuple	sub_tuple_p(t_tuple *a, t_tuple *b)
 {
-	t_vec3 result;
+	t_vec3	result;
 
 	result.x = a->x - b->x;
 	result.y = a->y - b->y;
 	result.z = a->z - b->z;
 	result.w = a->w - b->w;
-	if (result.w < 0) //delete later
-		printf("Warning: Tuple w value is less than 0\n");
 	return (result);
 }
 
-t_tuple *add_tuples_p(t_tuple *a, t_tuple *b)
+t_tuple	*add_tuples_p(t_tuple *a, t_tuple *b)
 {
-	t_tuple *result;
+	t_tuple	*result;
 
 	result = malloc(sizeof(t_tuple));
 	result->x = a->x + b->x;
 	result->y = a->y + b->y;
 	result->z = a->z + b->z;
 	result->w = a->w + b->w;
-
 	return (result);
 }
 
-t_color3 *sub_color(t_tuple *a, t_tuple *b)
+t_color3	*sub_color(t_tuple *a, t_tuple *b)
 {
-	t_color3 *result;
+	t_color3	*result;
 
 	result = malloc(sizeof(t_color3));
 	result->x = a->x - b->x;
@@ -97,9 +94,9 @@ t_color3 *sub_color(t_tuple *a, t_tuple *b)
 	return (result);
 }
 
-t_color3 *mult_color(t_color3 *a, float scalar)
+t_color3	*mult_color(t_color3 *a, float scalar)
 {
-	t_color3 *result;
+	t_color3	*result;
 
 	result = malloc(sizeof(t_color3));
 	result->x = a->x * scalar;

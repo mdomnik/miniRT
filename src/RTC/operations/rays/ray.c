@@ -6,13 +6,13 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:54:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/15 16:16:23 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 20:44:39 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_ray		*ray_new(t_point3 *orig, t_vec3 *dir)
+t_ray	*ray_new(t_point3 *orig, t_vec3 *dir)
 {
 	t_ray	*ray;
 
@@ -32,7 +32,7 @@ t_point3	ray_position(t_ray *ray, float t)
 	return (pos);
 }
 
-t_ray		*ray_transform(t_ray *ray, t_matrix *matrix)
+t_ray	*ray_transform(t_ray *ray, t_matrix *matrix)
 {
 	t_ray	*new_ray;
 

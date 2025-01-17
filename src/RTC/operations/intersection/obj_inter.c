@@ -6,15 +6,15 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 16:28:44 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 19:12:14 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 21:44:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_x *intersect_sphere(t_shape *sphere, t_ray *ray)
+t_x	*intersect_sphere(t_shape *sphere, t_ray *ray)
 {
-	t_x	*xs;
+	t_x		*xs;
 	t_vec3	sphere_to_ray;
 	float	a;
 	float	b;
@@ -47,12 +47,12 @@ t_x *intersect_sphere(t_shape *sphere, t_ray *ray)
 	return (xs);
 }
 
-t_x *intersect_plane(t_shape *plane, t_ray *ray)
+t_x	*intersect_plane(t_shape *plane, t_ray *ray)
 {
 	t_x		*xs;
 	t_i		i;
 	float	t;
-	
+
 	xs = malloc(sizeof(t_x));
 	if (fabsf(ray->dir.y) < EPSILON)
 		return (NULL);
@@ -65,7 +65,7 @@ t_x *intersect_plane(t_shape *plane, t_ray *ray)
 }
 
 //AABB axis-alligned bounding box
-t_x *intersect_cube(t_shape *cube, t_ray *ray)
+t_x	*intersect_cube(t_shape *cube, t_ray *ray)
 {
 	float	xtmin;
 	float	xtmax;
@@ -75,9 +75,9 @@ t_x *intersect_cube(t_shape *cube, t_ray *ray)
 	float	ztmax;
 	float	tmin;
 	float	tmax;
-	t_i i1;
-	t_i i2;
-	t_x *xs;
+	t_i 	i1;
+	t_i 	i2;
+	t_x 	*xs;
 
 	xtmin = check_axis(ray->orig.x, ray->dir.x, false, -1, 1);
 	xtmax = check_axis(ray->orig.x, ray->dir.x, true, -1, 1);
@@ -85,14 +85,11 @@ t_x *intersect_cube(t_shape *cube, t_ray *ray)
 	ytmax = check_axis(ray->orig.y, ray->dir.y, true, -1, 1);
 	ztmin = check_axis(ray->orig.z, ray->dir.z, false, -1, 1);
 	ztmax = check_axis(ray->orig.z, ray->dir.z, true, -1, 1);
-	
 	tmin = fmaxf(fmaxf(xtmin, ytmin), ztmin);
 	tmax = fminf(fminf(xtmax, ytmax), ztmax);
-
 	i1 = intersection(tmin, cube);
 	i2 = intersection(tmax, cube);
 	xs = malloc(sizeof(t_x));
-
 	if (tmin > tmax)
 	{
 		xs->count = 0;
@@ -105,16 +102,19 @@ t_x *intersect_cube(t_shape *cube, t_ray *ray)
 	return (xs);
 }
 
-t_x *intersect_cylinder(t_shape *cylinder, t_ray *ray)
+t_x	*intersect_cylinder(t_shape *cylinder, t_ray *ray)
 {
 	float	a;
 	float	b;
 	float	c;
 	float	discriminant;
-	float 	t0;
-	float 	t1;
+	float	t0;
+	float	t1;
 	t_x		*xs;
-	
+	float	temp;
+	float	y0;
+	float	y1;
+
 	a = ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z;
 	if (a < EPSILON && cylinder->size_cap.cap == false)
 		return (NULL);
@@ -127,53 +127,63 @@ t_x *intersect_cylinder(t_shape *cylinder, t_ray *ray)
 	t1 = (-b + sqrt(discriminant)) / (2 * a);
 	if (t0 > t1)
 	{
-		float temp = t0;
+		temp = t0;
 		t0 = t1;
 		t1 = temp;
 	}
 	xs = malloc(sizeof(t_x));
 	xs->count = 0;
 	xs->i = malloc(sizeof(t_i) * 2);
-	float y0 = ray->orig.y + t0 * ray->dir.y;
+	y0 = ray->orig.y + t0 * ray->dir.y;
 	if (cylinder->size_cap.min < y0 && y0 < cylinder->size_cap.max)
 		xs = add_intersection(xs, t0, cylinder);
-	float y1 = ray->orig.y + t1 * ray->dir.y;
-	if(cylinder->size_cap.min < y1 && y1 < cylinder->size_cap.max)
+	y1 = ray->orig.y + t1 * ray->dir.y;
+	if (cylinder->size_cap.min < y1 && y1 < cylinder->size_cap.max)
 		xs = add_intersection(xs, t1, cylinder);
 	xs = intersect_caps(cylinder, ray, xs);
 	return (xs);
 }
 
-t_x *intersect_cone(t_shape *cone, t_ray *ray)
+t_x	*intersect_cone(t_shape *cone, t_ray *ray)
 {
-	float a, b, c, discriminant, t0, t1, temp, y0, y1;
-	t_x *xs = malloc(sizeof(t_x));
+	float	a;
+	float	b;
+	float	c;
+	float	discriminant;
+	float	t0;
+	float	t1;
+	float	temp;
+	float	y0;
+	float	y1;
+	t_x		*xs;
+
+	xs = malloc(sizeof(t_x));
 	xs->count = 0;
 	xs->i = malloc(sizeof(t_i) * 2);
-
-	a = ray->dir.x * ray->dir.x - ray->dir.y * ray->dir.y + ray->dir.z * ray->dir.z;
-	b = 2 * (ray->orig.x * ray->dir.x - ray->orig.y * ray->dir.y + ray->orig.z * ray->dir.z);
-	c = ray->orig.x * ray->orig.x - ray->orig.y * ray->orig.y + ray->orig.z * ray->orig.z;
-
-
+	a = ray->dir.x * ray->dir.x - ray->dir.y
+		* ray->dir.y + ray->dir.z * ray->dir.z;
+	b = 2 * (ray->orig.x * ray->dir.x - ray->orig.y
+			* ray->dir.y + ray->orig.z * ray->dir.z);
+	c = ray->orig.x * ray->orig.x - ray->orig.y
+		* ray->orig.y + ray->orig.z * ray->orig.z;
 	if (fabs(a) < EPSILON)
 	{
 		if (fabs(b) < EPSILON)
 		{
 			free(xs->i);
 			free(xs);
-			return NULL;
+			return (NULL);
 		}
 		t0 = -c / (2 * b);
 		xs = add_intersection(xs, t0, cone);
-		return xs;
+		return (xs);
 	}
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < -EPSILON)
 	{
 		free(xs->i);
 		free(xs);
-		return NULL;
+		return (NULL);
 	}
 	else if (fabs(discriminant) < EPSILON)
 		discriminant = 0.0f;
@@ -201,72 +211,35 @@ t_x *intersect_cone(t_shape *cone, t_ray *ray)
 	return (xs);
 }
 
-// t_x *intersect_group(t_shape *group, t_ray *ray) {
-//     t_bounds group_bounds = group->bounds(group);
-
-//     printf("Group bounds:\n");
-//     print_tuple(group_bounds.min);
-//     print_tuple(group_bounds.max);
-
-//     if (!intersect_bounds(group_bounds, ray)) {
-//         printf("Ray misses group bounds.\n");
-//         return NULL;
-//     }
-
-//     printf("Ray intersects group bounds.\n");
-
-//     t_x *xs = NULL;
-//     t_shape *child = group->children;
-
-//     while (child != NULL) {
-//         printf("Testing child shape of type: %d\n", child->type);
-//         t_x *temp_xs = intersect(child, ray);
-//         if (temp_xs != NULL) {
-//             if (xs == NULL) {
-//                 xs = temp_xs;
-//             } else {
-//                 xs = intersections((xs->count + temp_xs->count), xs, temp_xs);
-//                 free(temp_xs->i);
-//                 free(temp_xs);
-//             }
-//         }
-//         child = child->next;
-//     }
-
-//     return xs;
-// }
-
-t_x *intersect_group(t_shape *group, t_ray *ray)
+t_x	*intersect_group(t_shape *group, t_ray *ray)
 {
-	t_bounds group_bounds = group->bounds(group);
+	t_bounds	group_bounds;
+	t_x			*xs;
+	t_shape		*child;
+	t_x			*temp_xs;
 
+	group_bounds = group->bounds(group);
 	if (!intersect_bounds(group_bounds, ray))
+		return (NULL);
+	xs = NULL;
+	child = group->children;
+	while (child != NULL)
 	{
-		// printf("misses group bounds\n");
-		return NULL;
-	}
-	t_x *xs = NULL;
-	t_shape *child = group->children;
-	while (child != NULL) {
-		t_x *temp_xs = intersect(child, ray);
-		if (temp_xs != NULL) {
-			if (xs == NULL) {
+		temp_xs = intersect(child, ray);
+		if (temp_xs != NULL)
+		{
+			if (xs == NULL)
 				xs = temp_xs;
-			} else {
+			else
+			{
 				xs = intersections((xs->count + temp_xs->count), xs, temp_xs);
 				free(temp_xs->i);
 				free(temp_xs);
 			}
 		}
-		child = child->next; // Move to the next child
+		child = child->next;
 	}
-	if (xs != NULL && xs->count > 1) 
+	if (xs != NULL && xs->count > 1)
 		sort_intersections(xs);
-	return xs; // Return the final list of intersections
+	return (xs);
 }
-
-
-
-
-
-

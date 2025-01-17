@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:31:22 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 18:43:02 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 19:59:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 bool	compare_tuples(t_tuple a, t_tuple b)
 {
-	if (is_equal(a.x, b.x) && is_equal(a.y, b.y) && is_equal(a.z, b.z) && is_equal(a.w, b.w))
+	if (is_equal(a.x, b.x) && is_equal(a.y, b.y)
+		&& is_equal(a.z, b.z) && is_equal(a.w, b.w))
 		return (true);
 	return (false);
 }
 
 //divides a tuple by a scalar
-t_tuple div_tuple(t_tuple a, float scalar)
+t_tuple	div_tuple(t_tuple a, float scalar)
 {
-	t_tuple result;
+	t_tuple	result;
 
 	result.x = a.x / scalar;
 	result.y = a.y / scalar;
@@ -31,13 +32,13 @@ t_tuple div_tuple(t_tuple a, float scalar)
 }
 
 //magnitude of a vector
-float magnitude(t_vec3 a)
+float	magnitude(t_vec3 a)
 {
 	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }
 
 //dot product of two vectors
-float dot_product(t_vec3 a, t_vec3 b)
+float	dot_product(t_vec3 a, t_vec3 b)
 {
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }

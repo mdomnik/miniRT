@@ -5,3 +5,4 @@
 5. make file parsing
 6. norminette
 7. improve efficiency
+8. add camera to world struct

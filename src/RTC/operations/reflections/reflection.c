@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:45:36 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/30 20:33:22 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 20:44:23 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_color3	reflected_color(t_world *world, t_comp *comps, int remaining)
 {
-	t_ray	*reflect_ray;
+	t_ray		*reflect_ray;
 	t_color3	color;
 
 	if (remaining < 1)
@@ -29,14 +29,14 @@ t_color3	reflected_color(t_world *world, t_comp *comps, int remaining)
 //refracted color
 t_color3	refracted_color(t_world *world, t_comp *comps, int remaining)
 {
-	float	n_ratio;
-	float	cos_i;
-	float	sin2_t;
-	float 	cos_t;
-	t_vec3	direction;
-	t_ray	*refract_ray;
-	t_color3 color;
-	
+	float		n_ratio;
+	float		cos_i;
+	float		sin2_t;
+	float		cos_t;
+	t_vec3		direction;
+	t_ray		*refract_ray;
+	t_color3	color;
+
 	if (remaining <= 0)
 		return (new_color3(0, 0, 0));
 	if (comps->shape->material.transparency == 0)
@@ -49,14 +49,10 @@ t_color3	refracted_color(t_world *world, t_comp *comps, int remaining)
 	if (sin2_t > 1.0)
 		return (new_color3(0, 0, 0));
 	cos_t = sqrt(1.0 - sin2_t);
-	direction = add_tuples(mult_tuple(comps->normalv, (n_ratio * cos_i - cos_t)), mult_tuple(comps->eyev, n_ratio));
+	direction = add_tuples(mult_tuple(comps->normalv,
+				(n_ratio * cos_i - cos_t)), mult_tuple(comps->eyev, n_ratio));
 	refract_ray = ray_new(&comps->under_point, &direction);
-	
-	color = mult_tuple(color_at(world, refract_ray, remaining - 1), comps->shape->material.transparency);
-	printf("cos_i: %f\n", cos_i);
-	printf("sin2_t: %f\n", sin2_t);
-	printf("cos_t: %f\n", cos_t);
-	printf("direction: ");
-	print_tuple(direction);
+	color = mult_tuple(color_at(world, refract_ray, remaining - 1),
+			comps->shape->material.transparency);
 	return (color);
 }

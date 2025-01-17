@@ -6,15 +6,15 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:21:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/30 18:22:30 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 19:54:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_shape *last_shape(t_shape *shapes)
+t_shape	*last_shape(t_shape *shapes)
 {
-	t_shape *temp;
+	t_shape	*temp;
 
 	temp = shapes;
 	while (temp->next != NULL)
@@ -23,13 +23,14 @@ t_shape *last_shape(t_shape *shapes)
 }
 
 //add shape
-t_shape *add_shape_con(t_shape *shapes, t_shape *new_shape)
+t_shape	*add_shape_con(t_shape *shapes, t_shape *new_shape)
 {
-	t_shape *temp;
+	t_shape	*temp;
 
 	if (!new_shape)
 		return (shapes);
-	if (shapes == NULL){
+	if (shapes == NULL)
+	{
 		shapes = new_shape;
 		shapes->next = NULL;
 		return (shapes);
@@ -40,10 +41,10 @@ t_shape *add_shape_con(t_shape *shapes, t_shape *new_shape)
 }
 
 //remove shape
-t_shape *remove_shape(t_shape *shapes, t_shape *to_remove)
+t_shape	*remove_shape(t_shape *shapes, t_shape *to_remove)
 {
-	t_shape *temp;
-	t_shape *prev;
+	t_shape	*temp;
+	t_shape	*prev;
 
 	temp = shapes;
 	prev = NULL;
@@ -55,7 +56,7 @@ t_shape *remove_shape(t_shape *shapes, t_shape *to_remove)
 				shapes = temp->next;
 			else
 				prev->next = temp->next;
-			break;
+			break ;
 		}
 		prev = temp;
 		temp = temp->next;
@@ -64,11 +65,10 @@ t_shape *remove_shape(t_shape *shapes, t_shape *to_remove)
 	return (shapes);
 }
 
-
 //contains
-bool contains(t_shape *containers, t_shape *shape)
+bool	contains(t_shape *containers, t_shape *shape)
 {
-	t_shape *temp;
+	t_shape	*temp;
 
 	temp = containers;
 	while (temp != NULL)
@@ -80,14 +80,17 @@ bool contains(t_shape *containers, t_shape *shape)
 	return (false);
 }
 
-void transparency_and_refraction(t_i *hit, t_comp *comp, t_x *xs)
+void	transparency_and_refraction(t_i *hit, t_comp *comp, t_x *xs)
 {
-	t_shape *containers = NULL;
+	t_shape	*containers;
+	int		i;
+	t_i		*x;
 
-	for (int i = 0; i < xs->count; i++)
+	containers = NULL;
+	i = 0;
+	while (i < xs->count)
 	{
-		t_i *x = &xs->i[i];
-
+		x = &xs->i[i];
 		if (x->t == hit->t)
 		{
 			if (containers == NULL)
@@ -105,8 +108,8 @@ void transparency_and_refraction(t_i *hit, t_comp *comp, t_x *xs)
 				comp->n2 = 1.0;
 			else
 				comp->n2 = last_shape(containers)->material.refractive_index;
-			break;
+			break ;
 		}
+		i++;
 	}
-	// free(containers);
 }

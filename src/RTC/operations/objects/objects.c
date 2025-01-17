@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:17:22 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 18:13:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 21:20:34 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_shape	*sphere(void)
 	return (shape);
 }
 
-t_shape *plane(void)
+t_shape	*plane(void)
 {
 	t_shape	*shape;
 
@@ -48,7 +48,7 @@ t_shape *plane(void)
 	return (shape);
 }
 
-t_shape *cube(void)
+t_shape	*cube(void)
 {
 	t_shape	*shape;
 
@@ -66,7 +66,7 @@ t_shape *cube(void)
 	return (shape);
 }
 
-t_shape *cylinder(void)
+t_shape	*cylinder(void)
 {
 	t_shape	*shape;
 
@@ -85,7 +85,7 @@ t_shape *cylinder(void)
 	return (shape);
 }
 
-t_shape *cone(void)
+t_shape	*cone(void)
 {
 	t_shape	*shape;
 
@@ -104,7 +104,7 @@ t_shape *cone(void)
 	return (shape);
 }
 
-t_shape *group(void)
+t_shape	*group(void)
 {
 	t_shape	*shape;
 
@@ -122,7 +122,7 @@ t_shape *group(void)
 	return (shape);
 }
 
-t_shape *triangle(t_point3 p1, t_point3 p2, t_point3 p3)
+t_shape	*triangle(t_point3 p1, t_point3 p2, t_point3 p3)
 {
 	t_shape	*shape;
 

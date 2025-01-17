@@ -6,16 +6,16 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:06:47 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/16 20:05:52 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 19:57:47 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_tuple		*new_tuple_p(float x, float y, float z, float w)
+t_tuple	*new_tuple_p(float x, float y, float z, float w)
 {
 	t_tuple	*tuple;
-	
+
 	tuple = malloc(sizeof(t_tuple));
 	tuple->x = x;
 	tuple->y = y;
@@ -48,9 +48,9 @@ t_vec3	*new_vec3_p(float x, float y, float z)
 	return (vec);
 }
 
-t_color3 *new_color3_p(float r, float g, float b)
+t_color3	*new_color3_p(float r, float g, float b)
 {
-	t_color3 *color;
+	t_color3	*color;
 
 	color = malloc(sizeof(t_color3));
 	color->r = r;

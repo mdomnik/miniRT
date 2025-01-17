@@ -6,13 +6,13 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 03:08:40 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/15 23:00:03 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 21:36:12 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_matrix *shearing_x(float y, float z)
+t_matrix	*shearing_x(float y, float z)
 {
 	t_matrix	*transform;
 
@@ -21,7 +21,8 @@ t_matrix *shearing_x(float y, float z)
 	transform->a[0][2] = z;
 	return (transform);
 }
-t_matrix *shearing_y(float x, float z)
+
+t_matrix	*shearing_y(float x, float z)
 {
 	t_matrix	*transform;
 
@@ -31,7 +32,7 @@ t_matrix *shearing_y(float x, float z)
 	return (transform);
 }
 
-t_matrix *shearing_z(float x, float y)
+t_matrix	*shearing_z(float x, float y)
 {
 	t_matrix	*transform;
 
@@ -44,9 +45,9 @@ t_matrix *shearing_z(float x, float y)
 //set transform
 void	set_transform(t_shape *shape, t_matrix *new_transform)
 {
-	int	i;
-	int	j;
-	t_matrix *transform;
+	int			i;
+	int			j;
+	t_matrix	*transform;
 
 	transform = &shape->transform;
 	i = 0;
@@ -61,8 +62,5 @@ void	set_transform(t_shape *shape, t_matrix *new_transform)
 		i++;
 	}
 	if (shape->type == CONE || shape->type == CYLINDER)
-	{
 		shape->transform.a[1][3] += 1;
-		// apply_cap_transformation(shape, new_transform);
-	}
 }

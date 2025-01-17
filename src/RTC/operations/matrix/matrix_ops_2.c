@@ -6,12 +6,11 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:15:19 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/11 20:27:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 21:34:00 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
-
 
 float	cofactor(t_matrix mat, int row, int col)
 {
@@ -36,15 +35,14 @@ float	minor(t_matrix mat, int row, int col)
 	return (det);
 }
 
-t_matrix *transpose_matrix(t_matrix *mat)
+t_matrix	*transpose_matrix(t_matrix *mat)
 {
-	int i;
-	int j;
-	t_matrix *result = malloc(sizeof(t_matrix));
-		
-	if (result == NULL)
-		return NULL; // Handle memory allocation failure
+	int			i;
+	int			j;
+	t_matrix	*result;
 
+	result = malloc(sizeof(t_matrix));
+	result = malloc(sizeof(t_matrix));
 	result->size = mat->size;
 	i = 0;
 	while (i < mat->size)
@@ -57,14 +55,14 @@ t_matrix *transpose_matrix(t_matrix *mat)
 		}
 		i++;
 	}
-	return result;
+	return (result);
 }
 
 // Function to compare two matrices
-bool compare_matrices(t_matrix mat1, t_matrix mat2)
+bool	compare_matrices(t_matrix mat1, t_matrix mat2)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < mat1.size)
@@ -73,10 +71,10 @@ bool compare_matrices(t_matrix mat1, t_matrix mat2)
 		while (j < mat1.size)
 		{
 			if (!is_equal(mat1.a[i][j], mat2.a[i][j]))
-				return false; // Matrices are not equal
+				return (false);
 			j++;
 		}
 		i++;
 	}
-	return true; // Matrices are equal
+	return (true);
 }

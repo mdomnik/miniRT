@@ -6,13 +6,13 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:09:47 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/12 15:13:53 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 19:58:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_tuple		new_tuple(float x, float y, float z, float w)
+t_tuple	new_tuple(float x, float y, float z, float w)
 {
 	t_tuple	tuple;
 
@@ -45,9 +45,9 @@ t_vec3	new_vec3(float x, float y, float z)
 	return (vec);
 }
 
-t_color3 new_color3(float r, float g, float b)
+t_color3	new_color3(float r, float g, float b)
 {
-	t_color3 color;
+	t_color3	color;
 
 	color.r = r;
 	color.g = g;

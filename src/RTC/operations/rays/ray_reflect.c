@@ -6,13 +6,13 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 20:33:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/14 01:46:44 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 20:45:52 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_vec3 reflect(t_vec3 in, t_vec3 normal)
+t_vec3	reflect(t_vec3 in, t_vec3 normal)
 {
 	float	dot;
 	t_vec3	reflect;
@@ -22,9 +22,9 @@ t_vec3 reflect(t_vec3 in, t_vec3 normal)
 	return (reflect);
 }
 
-t_light_p *new_light(t_point3 *position, t_color3 *intensity)
+t_light_p	*new_light(t_point3 *position, t_color3 *intensity)
 {
-	t_light_p *light;
+	t_light_p	*light;
 
 	light = malloc(sizeof(t_light));
 	if (!light)
@@ -35,12 +35,13 @@ t_light_p *new_light(t_point3 *position, t_color3 *intensity)
 	return (light);
 }
 
-t_color3 lighting(t_material *m, t_shape *shape, t_light_p *light, t_point3 *point, t_vec3 eyev, t_vec3 normalv, bool in_shadow)
+t_color3	lighting(t_material *m, t_shape *shape, t_light_p *light,
+	t_point3 *point, t_vec3 eyev, t_vec3 normalv, bool in_shadow)
 {
 	t_color3	effective_color;
-	t_vec3 		lightv;
-	t_vec3 		ambient;
-	float	light_dot_normal;
+	t_vec3		lightv;
+	t_vec3		ambient;
+	float		light_dot_normal;
 	t_color3	diffuse;
 	t_color3	specular;
 	t_vec3		reflectv;
@@ -71,7 +72,6 @@ t_color3 lighting(t_material *m, t_shape *shape, t_light_p *light, t_point3 *poi
 		{
 			factor = powf(reflect_dot_eye, m->shininess);
 			specular = mult_tuple(*light->intensity, (m->specular * factor));
-			
 		}
 	}
 	if (in_shadow == true)
@@ -80,4 +80,3 @@ t_color3 lighting(t_material *m, t_shape *shape, t_light_p *light, t_point3 *poi
 		result = add_tuples(add_tuples(ambient, diffuse), specular);
 	return (result);
 }
-
