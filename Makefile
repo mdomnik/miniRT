@@ -99,7 +99,7 @@ SRC_FILES		+= RTC/operations/tuples/tuples_ops_2.c
 SRC_FILES		+= RTC/operations/tuples/tuples_ops_3.c
 
 #UTILS
-SRC_FILES		+= RTC/operations/utils/default.c
+SRC_FILES		+= RTC/default.c
 SRC_FILES		+= RTC/operations/utils/utils_1.c
 
 #WORLD

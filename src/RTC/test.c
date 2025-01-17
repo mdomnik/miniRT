@@ -6,18 +6,28 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:41:10 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 16:59:35 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 22:49:49 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 //print 4x4 matrix
-void	print_matrix(t_matrix mat) {
-	for (int i = 0; i < mat.size; i++) {
-		for (int j = 0; j < mat.size; j++) {
+void	print_matrix(t_matrix mat)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < mat.size)
+	{
+		j = 0;
+		while (j < mat.size)
+		{
 			printf("%f ", mat.a[i][j]);
+			j++;
 		}
 		printf("\n");
+		i++;
 	}
 }
 
