@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 21:01:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 18:29:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -580,7 +580,7 @@ t_world *test_groups_scene(void)
 
 t_world *try_hexagon_scene(void)
 {
-		t_world	*world;
+	t_world	*world;
 
 	world = malloc(sizeof(t_world));
 	world->shapes = NULL;
@@ -599,6 +599,8 @@ t_world *try_hexagon_scene(void)
 	floor->material.specular = 0;
     floor->material.ambient = 0.5;
 
+	t_shape *s = sphere();
+
 	t_shape *hex = hexagon();
 	set_transform(hex, multiply_matrices(translation(0, 2, 0), scaling(3, 3, 3)));
     hex->material.diffuse = 0.4;
@@ -608,12 +610,44 @@ t_world *try_hexagon_scene(void)
     hex->material.ambient = 0;
 	inherit_material(hex);
 	add_shape(&floor, hex);
-
+	add_shape(&floor, s);
 	world->shapes = floor;
 	return (world);
 }
 
-t_world *try_huge_scene(void)
+// t_world *try_huge_scene(void)
+// {
+// 		t_world	*world;
+
+// 	world = malloc(sizeof(t_world));
+// 	world->shapes = NULL;
+// 	world->light = NULL;
+
+// 	t_light_p *l1 = new_light(new_point3_p(-5, 10, -5), new_color3_p(1, 1, 1));
+// 	world->light = l1;
+
+
+// 	t_shape  *floor = plane();
+//     t_pattern *wood_floor = texture_map(uv_image(canvas_from_ppm("textures/planks.ppm")), planar_map);
+//     set_pattern_transform(wood_floor, scaling(10, 10, 10));
+// 	floor->material.color = new_color3_p(1, 0.9, 0.9);
+//     floor->material.pattern = wood_floor;
+//     floor->material.bump_map = bump_map_from_ppm("textures/planks_bump.ppm", 10, planar_map);
+// 	floor->material.specular = 0;
+//     floor->material.ambient = 0.5;
+
+// 	for(int i = 0; i < 50; i++)
+// 	{
+// 		t_shape *s = sphere();
+// 		set_transform(s, translation(0, (1 + (0.1 * i)), 0));
+// 		add_shape(&floor, s);
+// 	}
+	
+// 	world->shapes = floor;
+// 	return (world);
+// }
+
+t_world *triangle_scene(void)
 {
 		t_world	*world;
 
@@ -634,12 +668,27 @@ t_world *try_huge_scene(void)
 	floor->material.specular = 0;
     floor->material.ambient = 0.5;
 
-	for(int i = 0; i < 50; i++)
-	{
-		t_shape *s = sphere();
-		set_transform(s, translation(0, (1 + (0.1 * i)), 0));
-		add_shape(&floor, s);
-	}
+	t_obj_file *obj = parse_obj_file("teapot.obj");
+    t_group *g = obj->default_group;
+	// int i = 0;
+	// while(g)
+	// {
+	// 	printf("group_name = %s\n", g->name);
+	// 	printf("group->children->count = %d\n", g->group->children_count);
+	// 	i = 0;
+	// 	while(i < g->group->children_count)
+	// 	{
+	// 		printf("Triangle\n");
+	// 		print_tuple(g->group->children->triangle->p1);
+	// 		print_tuple(g->group->children->triangle->p2);
+	// 		print_tuple(g->group->children->triangle->p3);
+	// 		g->group->children = g->group->children->next;
+	// 		i++;
+	// 	}
+	// 	g = g->next;
+	// }
+	t_shape *gr = objgroups_to_group(g);
+	add_shape(&floor, gr);
 	
 	world->shapes = floor;
 	return (world);

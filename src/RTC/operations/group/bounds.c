@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 16:41:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 19:03:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 18:37:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_bounds group_bounds(t_shape *group)
 
         child = child->next;
     }
-
     return group_bounds;
 }
 
@@ -114,6 +113,27 @@ t_bounds bounds_cap(struct s_shape *shape)
 	return bounds;
 }
 
+t_bounds bounds_triangle(struct s_shape *shape)
+{
+    t_bounds bounds;
+    t_point3 p1 = shape->triangle->p1;
+    t_point3 p2 = shape->triangle->p2;
+    t_point3 p3 = shape->triangle->p3;
+
+    // Calculate min bounds
+    bounds.min.x = fmin(fmin(p1.x, p2.x), p3.x);
+    bounds.min.y = fmin(fmin(p1.y, p2.y), p3.y);
+    bounds.min.z = fmin(fmin(p1.z, p2.z), p3.z);
+
+    // Calculate max bounds
+    bounds.max.x = fmax(fmax(p1.x, p2.x), p3.x);
+    bounds.max.y = fmax(fmax(p1.y, p2.y), p3.y);
+    bounds.max.z = fmax(fmax(p1.z, p2.z), p3.z);
+
+    return bounds;
+}
+
+
 bool intersect_bounds(t_bounds bounds, t_ray *ray)
 {
 	float t_min = -INFINITY;
@@ -136,6 +156,8 @@ bool intersect_bounds(t_bounds bounds, t_ray *ray)
 	}
 	return true;
 }
+
+
 
 
 

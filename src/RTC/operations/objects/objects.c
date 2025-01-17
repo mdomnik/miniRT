@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:17:22 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 20:51:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 18:13:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_shape	*sphere(void)
 	shape->children = NULL;
 	shape->children_count = 0;
 	shape->parent = NULL;
+	shape->triangle = NULL;
 	shape->bounds = bounds_unit;
 	shape->next = NULL;
 	return (shape);
@@ -41,6 +42,7 @@ t_shape *plane(void)
 	shape->children = NULL;
 	shape->children_count = 0;
 	shape->parent = NULL;
+	shape->triangle = NULL;
 	shape->bounds = bounds_inf;
 	shape->next = NULL;
 	return (shape);
@@ -58,6 +60,7 @@ t_shape *cube(void)
 	shape->children = NULL;
 	shape->children_count = 0;
 	shape->parent = NULL;
+	shape->triangle = NULL;
 	shape->bounds = bounds_unit;
 	shape->next = NULL;
 	return (shape);
@@ -76,6 +79,7 @@ t_shape *cylinder(void)
 	shape->children = NULL;
 	shape->children_count = 0;
 	shape->parent = NULL;
+	shape->triangle = NULL;
 	shape->bounds = bounds_cap;
 	shape->next = NULL;
 	return (shape);
@@ -94,6 +98,7 @@ t_shape *cone(void)
 	shape->children = NULL;
 	shape->children_count = 0;
 	shape->parent = NULL;
+	shape->triangle = NULL;
 	shape->bounds = bounds_cap;
 	shape->next = NULL;
 	return (shape);
@@ -111,7 +116,26 @@ t_shape *group(void)
 	shape->children = NULL;
 	shape->children_count = 0;
 	shape->parent = NULL;
+	shape->triangle = NULL;
 	shape->bounds = group_bounds;
+	shape->next = NULL;
+	return (shape);
+}
+
+t_shape *triangle(t_point3 p1, t_point3 p2, t_point3 p3)
+{
+	t_shape	*shape;
+
+	shape = malloc(sizeof(t_shape));
+	shape->type = TRIANGLE;
+	shape->material = *default_material();
+	shape->transform = *init_identity_matrix(4);
+	shape->saved_ray = NULL;
+	shape->children = NULL;
+	shape->children_count = 0;
+	shape->parent = NULL;
+	shape->triangle = triangle_new(p1, p2, p3);
+	shape->bounds = bounds_triangle;
 	shape->next = NULL;
 	return (shape);
 }

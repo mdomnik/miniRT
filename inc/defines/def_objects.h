@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:52:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/15 22:00:48 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 22:02:23 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,10 @@ t_shape *cube(void);
 t_shape *cylinder(void);
 t_shape *cone(void);
 t_shape *group(void);
+
+t_shape *triangle(t_point3 p1, t_point3 p2, t_point3 p3);
+t_triangle *triangle_new(t_point3 p1, t_point3 p2, t_point3 p3);
+t_x *intersect_triangle(t_shape *shape, t_ray *ray);
+
 
 #endif

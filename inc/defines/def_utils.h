@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:45:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 19:48:53 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 23:50:56 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ t_world *create_skybox_scene(void);
 t_world *create_bump_map_scene(void);
 t_world *test_groups_scene(void);
 t_world *try_hexagon_scene(void);
-t_world *try_huge_scene(void);
+t_world *triangle_scene(void);
+
 
 //operations/utils/utils_1.c
 bool		is_equal(float a, float b);
 float		deg_to_rad(float deg);
 int			color_to_int(t_color3 color);
+int isspace(int c);
 
 #endif

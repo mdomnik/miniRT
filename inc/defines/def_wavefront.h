@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   def_wavefront.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 15:37:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 18:18:02 by mdomnik          ###   ########.fr       */
+/*   Created: 2025/01/16 22:54:48 by mdomnik           #+#    #+#             */
+/*   Updated: 2025/01/16 23:42:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
+#ifndef DEF_WAVEFRONT_H
+# define DEF_WAVEFRONT_H
 
-#define EPSILON 0.001
-#define RECURSIVE_DEPTH 5
+t_obj_file *parse_obj_file(const char *filename);
 
-#define MAX_VERTEX_COUNT 300
-#define MAX_FACE_COUNT 300
-#define MAX_GROUP_COUNT 300
-
-#define GLASS_REFRACTION 1.5
-#define AIR_REFRACTION 1.0
-#define WATER_REFRACTION 1.333
-#define DIAMOND_REFRACTION 2.417
 
 #endif

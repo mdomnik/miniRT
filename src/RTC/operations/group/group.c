@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:36:39 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 17:32:34 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 18:08:00 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,16 @@ t_vec3 normal_to_world(t_shape *shape, t_vec3 *normal)
         transformed_normal = normal_to_world(shape->parent, &transformed_normal);
 
     return transformed_normal;
+}
+
+t_shape *objgroups_to_group(t_group *g)
+{
+    t_shape *shape = group();
+    t_group *current = g;
+    while (current)
+    {
+        add_shape_to_group(shape, current->group);
+        current = current->next;
+    }
+    return shape;
 }

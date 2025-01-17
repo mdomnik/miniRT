@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/14 22:23:12 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 23:17:51 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ typedef struct s_tuple	t_tuple;
 typedef struct s_tuple	t_point3;
 typedef struct s_tuple	t_vec3;
 typedef struct s_tuple	t_color3;
+typedef struct s_tuple	t_vertex;
 
 typedef struct s_matrix	t_matrix;
 

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 19:19:48 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/15 22:54:11 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 21:58:23 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,7 @@ t_vec3	local_normal_at(t_shape *shape, t_point3 *local_point)
 		local_normal = cyl_normal_at(local_point, shape);
 	else if (shape->type == CONE)
 		local_normal = cone_normal_at(local_point, shape);
+	else if (shape->type == TRIANGLE)
+		local_normal = shape->triangle->normal;
 	return (local_normal);
 }

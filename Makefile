@@ -77,6 +77,7 @@ SRC_FILES		+= RTC/operations/matrix/matrix_transform_2.c
 SRC_FILES		+= RTC/operations/objects/object_struct.c
 SRC_FILES		+= RTC/operations/objects/shapes.c
 SRC_FILES		+= RTC/operations/objects/objects.c
+SRC_FILES		+= RTC/operations/objects/triangle.c
 
 #PATTERNS
 SRC_FILES		+= RTC/operations/patterns/patterns.c
@@ -128,6 +129,8 @@ SRC_FILES		+= RTC/operations/group/inherit.c
 SRC_FILES		+= RTC/operations/group/group.c
 SRC_FILES		+= RTC/operations/group/group_objs.c
 SRC_FILES		+= RTC/operations/group/bounds.c
+
+SRC_FILES		+= RTC/operations/wavefront_obj/parser.c
 
 SRC_FILES		+= RTC/test.c
 

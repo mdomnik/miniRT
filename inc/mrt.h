@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2025/01/15 15:48:11 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/16 23:24:19 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # include "defines/def_texture.h"
 # include "defines/def_image.h"
 # include "defines/def_group.h"
+# include "defines/def_wavefront.h"
 
 # define VP_WIDTH  960
 # define VP_HEIGHT 540

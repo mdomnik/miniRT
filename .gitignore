@@ -1,4 +1,5 @@
 # additional
+*.obj
 *.tif
 *.ppm
 *.bmp

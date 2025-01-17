@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 20:51:17 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 17:52:51 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ typedef struct s_comp		t_comp;
 typedef struct s_size_cap	t_size_cap;
 
 typedef struct s_bounds		t_bounds;
+
+typedef struct s_triangle	t_triangle;
+
+typedef struct s_obj_file		t_obj_file;
+
+typedef struct s_group		t_group;
 
 struct s_scene
 {
@@ -142,13 +148,42 @@ struct	s_shape
 	t_material			material;
 	t_size_cap			size_cap;
 	t_ray				*saved_ray;	
-	
+
+	t_triangle			*triangle;
+
 	struct s_shape		*children;
 	int					children_count;
 	struct s_shape		*parent;
 	
 	struct s_bounds    (*bounds)(struct s_shape *shape);
 	struct s_shape		*next;
+};
+
+struct s_triangle
+{
+	t_point3		p1;
+	t_point3		p2;
+	t_point3		p3;
+	t_vec3			e1;
+	t_vec3			e2;
+	t_vec3			normal;
+};
+
+struct s_group
+{
+	char				*name;
+	t_shape				*group;
+	int					faces_count;
+	struct s_group		*next;
+};
+
+struct s_obj_file
+{
+	t_vertex		vertices[MAX_VERTEX_COUNT + 1];
+	t_triangle		faces[MAX_FACE_COUNT];
+	t_group			*default_group;
+	int				vertex_count;
+	int				face_count;
 };
 
 //test TO REMOVE !!!!!!!!!!!!!
