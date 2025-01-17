@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 22:54:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 22:53:39 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 22:56:59 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static void	fan_triangulation(t_group *group,
 	int			v1;
 	int			v2;
 	int			v3;
-
 
 	if (count < 3)
 	{

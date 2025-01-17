@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 22:48:19 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 23:42:24 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,13 +160,25 @@ int	main(void)
 	mlx_image_t	*image;
 
 	mlx = mlx_init(800, 400, "test", 1);
-	world = create_skybox_scene();
+	world = default_world();
 	camera = camera_new(800, 400, 0.8);
-	camera->transform = view_transformation(new_point3(1, 7, -9),
-			new_point3(0, 1.1, 0), new_vec3(0, 1, 0));
+	camera->transform = view_transformation(new_point3(0, 0, 0),
+			new_point3(0, 2, 0), new_vec3(0, 1, 0));
 	image = render(mlx, camera, world);
 	mlx_image_to_window(mlx, image, 0, 0);
 	printf("done\n");
 	mlx_loop(mlx);
 	return (0);
 }
+
+
+// int main (void)
+// {
+// 	t_shape *shape = sphere();
+// 	t_matrix *m = init_identity_matrix(4);
+	
+// 	m = multiply_matrices(m, translation(2, 3, 4));
+// 	m = multiply_matrices(m, scaling(2, 2, 2));
+// 	set_transform(shape, m);
+// 	print_matrix(shape->transform);
+// }

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 19:55:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 19:55:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/17 23:45:34 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,32 @@
 
 static void	fill_row(t_matrix *orientation, t_tuple input, int row);
 
-t_matrix	view_transformation(t_point3 from, t_point3 to, t_vec3 up)
+t_matrix view_transformation(t_point3 from, t_point3 to, t_vec3 up)
 {
-	t_vec3		forward;
-	t_vec3		left;
-	t_vec3		true_up;
-	t_matrix	orientation;
+	t_vec3 forward;
+	t_vec3 upn;
+	t_vec3 left;
+	t_vec3 true_up;
+	t_matrix orientation;
+	t_matrix *translation_matrix;
 
 	forward = normalize(sub_tuple_p(&to, &from));
-	left = cross_product(forward, normalize(up));
+	upn = normalize(up);
+	left = cross_product(forward, upn);
+	if (magnitude(left) < EPSILON)
+	{
+		upn = normalize(new_vec3(1, 0, 0));
+		left = cross_product(forward, upn);
+	}
 	true_up = cross_product(left, forward);
-	orientation.size = 4;
 	orientation = *init_identity_matrix(4);
 	fill_row(&orientation, left, 0);
 	fill_row(&orientation, true_up, 1);
 	fill_row(&orientation, neg_vec3(forward), 2);
-	orientation = *multiply_matrices
-		(&orientation, translation(-from.x, -from.y, -from.z));
-	return (orientation);
+	translation_matrix = translation(-from.x, -from.y, -from.z);
+	return (*multiply_matrices(&orientation, translation_matrix));
 }
+
 
 static void	fill_row(t_matrix *orientation, t_tuple input, int row)
 {
