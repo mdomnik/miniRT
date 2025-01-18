@@ -51,13 +51,13 @@ t_point3 world_to_object(t_shape *shape, t_point3 *point)
     t_point3 transformed_point = *point;
     if (shape->parent)
         transformed_point = world_to_object(shape->parent, &transformed_point);
-    return multiply_matrix_tuple(inverse(shape->transform), &transformed_point);
+    return multiply_matrix_tuple(inverse(shape->transform), transformed_point);
 }
 
 
 t_vec3 normal_to_world(t_shape *shape, t_vec3 *normal)
 {
-    t_vec3 transformed_normal = multiply_matrix_tuple(transpose_matrix(inverse(shape->transform)), normal);
+    t_vec3 transformed_normal = multiply_matrix_tuple(transpose_matrix(inverse(shape->transform)), *normal);
     transformed_normal.w = 0;
     transformed_normal = normalize(transformed_normal);
 

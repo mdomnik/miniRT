@@ -63,8 +63,8 @@ t_pattern	*new_cube_map(t_pattern *left, t_pattern *front, t_pattern *right,
 	pattern->uv_pattern = cube;
 	pattern->uv_map = NULL;
 	pattern->transform = *init_identity_matrix(4);
-	pattern->a = NULL;
-	pattern->b = NULL;
+	pattern->a = (t_color3){0};
+	pattern->b = (t_color3){0};
 	return (pattern);
 }
 

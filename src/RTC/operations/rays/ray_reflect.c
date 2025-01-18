@@ -22,11 +22,11 @@ t_vec3	reflect(t_vec3 in, t_vec3 normal)
 	return (reflect);
 }
 
-t_light_p	*new_light(t_point3 *position, t_color3 *intensity)
+t_light_p	*new_light(t_point3 position, t_color3 intensity)
 {
 	t_light_p	*light;
 
-	light = malloc(sizeof(t_light));
+	light = gc_malloc(sizeof(t_light));
 	if (!light)
 		return (NULL);
 	light->position = position;
@@ -53,7 +53,7 @@ t_color3	lighting(t_material *m, t_shape *shape, t_light_p *light,
 		effective_color = color_mult(pattern_at_object(m->pattern, shape, point), light->intensity);
 	else
 		effective_color = color_mult(m->color, light->intensity);
-	lightv = normalize(sub_tuple_p(light->position, point));
+	lightv = normalize(sub_tuple_p(&light->position, point));
 	ambient = mult_tuple(effective_color, m->ambient);
 	light_dot_normal = dot_product(lightv, normalv);
 	if (light_dot_normal < 0)
@@ -71,7 +71,7 @@ t_color3	lighting(t_material *m, t_shape *shape, t_light_p *light,
 		else
 		{
 			factor = powf(reflect_dot_eye, m->shininess);
-			specular = mult_tuple(*light->intensity, (m->specular * factor));
+			specular = mult_tuple(light->intensity, (m->specular * factor));
 		}
 	}
 	if (in_shadow == true)

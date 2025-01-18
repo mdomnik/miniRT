@@ -61,8 +61,8 @@ t_ray	*ray_for_pixel(t_camera *camera, int px, int py)
 	yoffset = (py + 0.5) * camera->pixel_size;
 	world_x = camera->half_width - xoffset;
 	world_y = camera->half_height - yoffset;
-	pixel = multiply_matrix_tuple(inverse(camera->transform), new_point3_p(world_x, world_y, -1));
-	origin = multiply_matrix_tuple(inverse(camera->transform), new_point3_p(0, 0, 0));
+	pixel = multiply_matrix_tuple(inverse(camera->transform), new_point3(world_x, world_y, -1));
+	origin = multiply_matrix_tuple(inverse(camera->transform), new_point3(0, 0, 0));
 	direction = normalize(sub_tuple(pixel, origin));
 	return (ray_new(&origin, &direction));
 }

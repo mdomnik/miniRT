@@ -92,7 +92,6 @@ SRC_FILES		+= RTC/operations/rays/ray.c
 SRC_FILES		+= RTC/operations/reflections/reflection.c
 
 #TUPLES
-SRC_FILES		+= RTC/operations/tuples/tuples_init_p.c
 SRC_FILES		+= RTC/operations/tuples/tuples_init.c
 SRC_FILES		+= RTC/operations/tuples/tuples_ops_1.c
 SRC_FILES		+= RTC/operations/tuples/tuples_ops_2.c

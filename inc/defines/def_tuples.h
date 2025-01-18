@@ -41,9 +41,9 @@ float		dot_product(t_vec3 a, t_vec3 b);
 t_vec3		neg_vec3(t_vec3 a);
 t_vec3		normalize(t_vec3 a);
 t_vec3		cross_product(t_vec3 a, t_vec3 b);
-t_color3 	color_mult(t_color3 *a, t_color3 *b);
+t_color3 	color_mult(t_color3 a, t_color3 b);
 t_tuple		sub_tuple_p(t_tuple *a, t_tuple *b);
 t_tuple 	*add_tuples_p(t_tuple *a, t_tuple *b);
-t_color3 *sub_color(t_tuple *a, t_tuple *b);
-t_color3 *mult_color(t_color3 *a, float scalar);
+t_color3	sub_color(t_tuple a, t_tuple b);
+t_color3	mult_color(t_color3 a, float scalar);
 #endif

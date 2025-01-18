@@ -35,22 +35,20 @@ float	minor(t_matrix mat, int row, int col)
 	return (det);
 }
 
-t_matrix	*transpose_matrix(t_matrix *mat)
+t_matrix	transpose_matrix(t_matrix mat)
 {
 	int			i;
 	int			j;
-	t_matrix	*result;
+	t_matrix	result;
 
-	result = malloc(sizeof(t_matrix));
-	result = malloc(sizeof(t_matrix));
-	result->size = mat->size;
+	result.size = mat.size;
 	i = 0;
-	while (i < mat->size)
+	while (i < mat.size)
 	{
 		j = 0;
-		while (j < mat->size)
+		while (j < mat.size)
 		{
-			result->a[i][j] = mat->a[j][i];
+			result.a[i][j] = mat.a[j][i];
 			j++;
 		}
 		i++;

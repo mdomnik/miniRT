@@ -91,8 +91,8 @@ struct s_intersection
 
 struct s_light_p
 {
-	t_point3			*position;
-	t_color3			*intensity;
+	t_point3			position;
+	t_color3			intensity;
 	struct s_light_p	*next;
 };
 

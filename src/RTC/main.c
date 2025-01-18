@@ -151,6 +151,20 @@
 // 		g = g->next;
 // 	}
 // }
+t_world *benchmark_1(void)
+{
+	t_world	*world;
+
+	world = malloc(sizeof(t_world));
+	world->shapes = NULL;
+	world->light = NULL;
+	t_light_p *l1 = new_light(new_point3(0, 2, -2), new_color3(1, 1, 1));
+	t_shape  *s1 = sphere();
+	s1->material.color = new_color3(1, 0, 0);
+	add_shape(&world->shapes, s1);
+	add_light(&world->light, l1);
+	return (world);
+}
 
 int	main(void)
 {
@@ -160,9 +174,9 @@ int	main(void)
 	mlx_image_t	*image;
 
 	mlx = mlx_init(800, 400, "test", 1);
-	world = night_box();
+	world = benchmark_1();
 	camera = camera_new(800, 400, 0.8);
-	camera->transform = view_transformation(new_point3(-20, 20, 40),
+	camera->transform = view_transformation(new_point3(0, 0, -5),
 			new_point3(0, 0, 0), new_vec3(0, 1, 0));
 	image = render(mlx, camera, world);
 	mlx_image_to_window(mlx, image, 0, 0);

@@ -51,7 +51,7 @@ t_color3	shade_hit(t_world *world, t_comp *comps, int remaining)
 	{
 		while (world->light != NULL)
 		{
-			in_shadow = is_shadowed(world, world->light->position, &comps->over_point);
+			in_shadow = is_shadowed(world, &world->light->position, &comps->over_point);
 			surface = add_tuples(lighting(&comps->shape->material, comps->shape, world->light, &comps->over_point, comps->eyev, comps->normalv, in_shadow), surface);
 			world->light = world->light->next;
 		}

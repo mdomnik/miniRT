@@ -68,11 +68,11 @@ static void	divide_matrix(t_matrix *mat, float det)
 	}
 }
 
-t_matrix	*inverse(t_matrix mat)
+t_matrix	inverse(t_matrix mat)
 {
 	int			i;
 	int			j;
-	t_matrix	*result;
+	t_matrix	result;
 
 	i = 0;
 	if (determinant(mat) == 0)
@@ -80,19 +80,18 @@ t_matrix	*inverse(t_matrix mat)
 		printf("Error: Matrix is not invertible\n");
 		exit(1);
 	}
-	result = init_identity_matrix(mat.size);
 	while (i < mat.size)
 	{
 		j = 0;
 		while (j < mat.size)
 		{
-			result->a[i][j] = cofactor(mat, i, j);
+			result.a[i][j] = cofactor(mat, i, j);
 			j++;
 		}
 		i++;
 	}
-	result->size = mat.size;
+	result.size = mat.size;
 	result = transpose_matrix(result);
-	divide_matrix(result, determinant(mat));
+	divide_matrix(&result, determinant(mat));
 	return (result);
 }

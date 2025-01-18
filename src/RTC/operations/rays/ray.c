@@ -32,14 +32,14 @@ t_point3	ray_position(t_ray *ray, float t)
 	return (pos);
 }
 
-t_ray	*ray_transform(t_ray *ray, t_matrix *matrix)
+t_ray	*ray_transform(t_ray *ray, t_matrix matrix)
 {
 	t_ray	*new_ray;
 
 	new_ray = malloc(sizeof(t_ray));
 	if (!new_ray)
 		return (NULL);
-	new_ray->orig = multiply_matrix_tuple(matrix, &ray->orig);
-	new_ray->dir = multiply_matrix_tuple(matrix, &ray->dir);
+	new_ray->orig = multiply_matrix_tuple(matrix, ray->orig);
+	new_ray->dir = multiply_matrix_tuple(matrix, ray->dir);
 	return (new_ray);
 }

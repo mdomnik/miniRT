@@ -64,7 +64,7 @@ t_bounds	transform_bounds(t_bounds bounds, t_matrix *transform)
 	i = 0;
 	while (i < 8)
 	{
-		transformed = multiply_matrix_tuple(transform, &corners[i]);
+		transformed = multiply_matrix_tuple(*transform, corners[i]);
 		if (isnan(transformed.x)
 			|| isnan(transformed.y) || isnan(transformed.z))
 		{
