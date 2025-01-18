@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:45:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 23:50:56 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/18 17:57:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ t_world *test_groups_scene(void);
 t_world *try_hexagon_scene(void);
 t_world *triangle_scene(void);
 
+t_world *benchmark_1(void);
+t_world *benchmark_2(void);
+t_world *benchmark_3(void);
+t_world *benchmark_4(void);
+t_world *benchmark_5(void);
 
 //operations/utils/utils_1.c
 bool		is_equal(float a, float b);

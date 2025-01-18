@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 23:43:50 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/18 18:50:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -693,6 +693,227 @@ t_world *triangle_scene(void)
 	t_shape *gr = objgroups_to_group(g);
 	add_shape(&floor, gr);
 	
+	world->shapes = floor;
+	return (world);
+}
+
+
+t_world *benchmark_1(void)
+{
+	t_world	*world;
+
+	world = malloc(sizeof(t_world));
+	world->shapes = NULL;
+	world->light = NULL;
+	t_light_p *l1 = new_light(new_point3_p(0, 2, -2), new_color3_p(1, 1, 1));
+	t_shape  *s1 = sphere();
+	s1->material.color = new_color3_p(1, 0, 0);
+	add_shape(&world->shapes, s1);
+	add_light(&world->light, l1);
+	return (world);
+}
+
+t_world *benchmark_2(void)
+{
+    t_world	*world;
+
+	world = malloc(sizeof(t_world));
+	world->shapes = NULL;
+	world->light = NULL;
+	t_light_p *l1 = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
+	t_shape  *floor = sphere();
+	set_transform(floor, scaling(10, 0.01, 10));
+	floor->material.color = new_color3_p(1, 0.9, 0.9);
+	floor->material.specular = 0;
+	t_shape  *left_wall = sphere();
+	set_transform(left_wall, multiply_matrices(multiply_matrices(translation(0, 0, 5), rotation_y(-M_PI / 4)), multiply_matrices(rotation_x(M_PI / 2), scaling(10, 0.3, 10))));
+	left_wall->material = floor->material;
+	t_shape  *right_wall = sphere();
+	set_transform(right_wall, multiply_matrices(multiply_matrices(translation(0, 0, 5), rotation_y(M_PI / 4)), multiply_matrices(rotation_x(M_PI / 2), scaling(10, 0.3, 10))));
+	right_wall->material = floor->material;
+	t_shape  *middle = sphere();
+	set_transform(middle, translation(-0.5, 1, 0.5));
+	middle->material.color = new_color3_p(0.1, 1, 0.5);
+	middle->material.diffuse = 0.7;
+	middle->material.specular = 0.3;
+	t_shape  *right = sphere();
+	set_transform(right, multiply_matrices(translation(1.5, 0.5, -0.5), scaling(0.5, 0.5, 0.5)));
+	right->material.color = new_color3_p(0.5, 1, 0.1);
+	right->material.diffuse = 0.7;
+	right->material.specular = 0.3;
+	t_shape  *left = sphere();
+	set_transform(left, multiply_matrices(translation(-1.5, 0.33, -0.75), scaling(0.33, 0.33, 0.33)));
+	left->material.color = new_color3_p(1, 0.8, 0.1);
+	left->material.diffuse = 0.7;
+	left->material.specular = 0.3;
+	add_shape(&floor, left_wall);
+	add_shape(&floor, right_wall);
+	add_shape(&floor, middle);
+	add_shape(&floor, right);
+	add_shape(&floor, left);
+	world->shapes = floor;
+	add_light(&world->light, l1);
+	return (world);
+}
+
+t_world *benchmark_3(void)
+{
+    t_world	*world;
+
+    world = malloc(sizeof(t_world));
+    world->shapes = NULL;
+    world->light = NULL;
+    t_light_p *l1 = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 0.5, 1));
+    t_light_p *l2 = new_light(new_point3_p(10, 10, -10), new_color3_p(0.5, 0.8, 0.3));
+    t_shape  *floor = plane();
+    floor->material.color = new_color3_p(1, 0.9, 0.9);
+    floor->material.diffuse = 0.4;
+    floor->material.specular = 0.6;
+    floor->material.shininess = 20;
+    floor->material.reflective = 0.6;
+    floor->material.ambient = 0;
+
+    t_shape *wall = plane();
+    set_transform(wall, multiply_matrices(translation(0, 0, 3), rotation_x(M_PI / 2)));
+    wall->material.color = new_color3_p(1, 0.9, 0.9);
+    wall->material.specular = 0;
+    t_shape  *middle = sphere();
+    set_transform(middle, translation(-0.5, 1, 0.5));
+    t_uv *sphere_checkers = uv_checkers(20, 10, new_color3(0, 0.5, 0), new_color3(1, 1, 1));
+    t_pattern *sphere_texture = texture_map(sphere_checkers, spherical_map);
+    middle->material.pattern = sphere_texture;
+    middle->material.color = new_color3_p(0.1, 1, 0.5);
+    middle->material.diffuse = 0.7;
+    middle->material.specular = 0.3;
+    t_shape  *right = cylinder();
+    set_transform(right, multiply_matrices(translation(1, 0.5, -0.5), rotation_z(M_PI / 2)));
+    t_pattern *tile = texture_map(uv_image(canvas_from_ppm("Tile.ppm")), cylindrical_map);
+    set_pattern_transform(tile, scaling(3, 3, 3));
+    right->material.pattern = tile;
+    right->material.color = new_color3_p(0.5, 1, 0.1);
+    right->material.diffuse = 0.7;
+    right->material.specular = 0.3;
+    t_shape  *left = cube();
+    set_transform(left, multiply_matrices(translation(-1.5, 0.33, -0.75), scaling(0.33, 0.33, 0.33)));
+	t_pattern *uv_left = texture_map(uv_image(canvas_from_ppm("z_hdri/negx.ppm")), planar_map);
+	t_pattern *uv_front = texture_map(uv_image(canvas_from_ppm("z_hdri/posz.ppm")), planar_map);
+	t_pattern *uv_right = texture_map(uv_image(canvas_from_ppm("z_hdri/posx.ppm")), planar_map);
+	t_pattern *uv_back = texture_map(uv_image(canvas_from_ppm("z_hdri/negz.ppm")), planar_map);
+	t_pattern *uv_up = texture_map(uv_image(canvas_from_ppm("z_hdri/posy.ppm")), planar_map);
+	t_pattern *uv_down = texture_map(uv_image(canvas_from_ppm("z_hdri/negy.ppm")), planar_map);
+
+	t_pattern *cube_map = new_cube_map(uv_left, uv_front, uv_right, uv_back, uv_up, uv_down);
+    // Cube map pattern
+    left->material.pattern = cube_map;
+    left->material.color = new_color3_p(1, 0.8, 0.1);
+    left->material.diffuse = 0.7;
+    left->material.specular = 0.3;
+    t_shape *con = cone();
+    set_transform(con, multiply_matrices(translation(0, 0.8, -0.75), scaling(0.5, 0.5, 0.5)));
+    con->material.color = new_color3_p(0.5, 1, 0.1);
+    add_shape(&floor, wall);
+    add_shape(&floor, middle);
+    add_shape(&floor, right);
+    add_shape(&floor, left);
+    add_shape(&floor, con);
+    world->shapes = floor;
+    add_light(&world->light, l1);
+    add_light(&world->light, l2);
+    return (world);
+}
+
+t_world *benchmark_4(void)
+{
+	t_world	*world;
+
+	world = malloc(sizeof(t_world));
+	world->shapes = NULL;
+	world->light = NULL;
+
+	t_light_p *l1 = new_light(new_point3_p(-5, 10, -5), new_color3_p(1, 1, 1));
+	world->light = l1;
+
+	t_shape  *floor = plane();
+    t_pattern *wood_floor = texture_map(uv_image(canvas_from_ppm("textures/planks.ppm")), planar_map);
+    set_pattern_transform(wood_floor, scaling(10, 10, 10));
+	floor->material.color = new_color3_p(1, 0.9, 0.9);
+    floor->material.pattern = wood_floor;
+    floor->material.bump_map = bump_map_from_ppm("textures/planks_bump.ppm", 10, planar_map);
+	floor->material.specular = 0;
+    floor->material.ambient = 0.5;
+
+	t_shape *s = sphere();
+
+	t_shape *hex = hexagon();
+	set_transform(hex, multiply_matrices(translation(-0.5, 2, -0.5), scaling(2, 2, 2)));
+    hex->material.color = new_color3_p(0.9, 0.5, 0.5);
+    hex->material.diffuse = 0.4;
+    hex->material.specular = 0.6;
+    hex->material.shininess = 20;
+    hex->material.reflective = 0.6;
+    hex->material.ambient = 0;
+	inherit_material(hex);
+    t_shape *hex2 = hexagon();
+    set_transform(hex2, multiply_matrices(translation(0.1, 2, 0.1), scaling(2, 2, 2)));
+    hex2->material.color = new_color3_p(0.5, 0.9, 0.5);
+    hex2->material.diffuse = 0.4;
+    hex2->material.specular = 0.6;
+    hex2->material.shininess = 20;
+    hex2->material.reflective = 0.6;
+    hex2->material.ambient = 0;
+    inherit_material(hex2);
+	add_shape(&floor, hex);
+    add_shape(&floor, hex2);
+	add_shape(&floor, s);
+	world->shapes = floor;
+	return (world);
+}
+
+t_world *benchmark_5(void)
+{
+	t_world	*world;
+
+	world = malloc(sizeof(t_world));
+	world->shapes = NULL;
+	world->light = NULL;
+
+	t_light_p *l1 = new_light(new_point3_p(-5, 10, -5), new_color3_p(1, 0.8, 0.8));
+    t_light_p *l2 = new_light(new_point3_p(5, 10, -5), new_color3_p(0.8, 0.8, 1));
+    add_light(&world->light, l1);
+    add_light(&world->light, l2);
+
+	t_shape  *floor = plane();
+    t_pattern *wood_floor = texture_map(uv_image(canvas_from_ppm("textures/planks.ppm")), planar_map);
+    set_pattern_transform(wood_floor, scaling(10, 10, 10));
+	floor->material.color = new_color3_p(1, 0.9, 0.9);
+    floor->material.pattern = wood_floor;
+    floor->material.bump_map = bump_map_from_ppm("textures/planks_bump.ppm", 10, planar_map);
+	floor->material.specular = 0;
+    floor->material.ambient = 0.5;
+
+	t_shape *s = sphere();
+
+	t_shape *hex = hexagon();
+	set_transform(hex, multiply_matrices(translation(0, 2, 0), scaling(0.5, 0.5, 0.5)));
+    hex->material.color = new_color3_p(0.9, 0.5, 0.5);
+    hex->material.diffuse = 0.4;
+    hex->material.specular = 0.6;
+    hex->material.shininess = 20;
+    hex->material.reflective = 0.6;
+    hex->material.ambient = 0;
+	inherit_material(hex);
+    t_shape *hex2 = hexagon();
+    set_transform(hex2, multiply_matrices(translation(1, 2, 1), scaling(0.25, 0.25, 0.25)));
+    hex2->material.color = new_color3_p(0.5, 0.9, 0.5);
+    hex2->material.diffuse = 0.4;
+    hex2->material.specular = 0.6;
+    hex2->material.shininess = 20;
+    hex2->material.reflective = 0.6;
+    hex2->material.ambient = 0;
+    inherit_material(hex2);
+	add_shape(&floor, hex);
+    add_shape(&floor, hex2);
+	add_shape(&floor, s);
 	world->shapes = floor;
 	return (world);
 }
