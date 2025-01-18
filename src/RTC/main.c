@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/18 18:49:57 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/18 20:17:12 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,9 +160,9 @@ int	main(void)
 	mlx_image_t	*image;
 
 	mlx = mlx_init(800, 400, "test", 1);
-	world = benchmark_5();
+	world = night_box();
 	camera = camera_new(800, 400, 0.8);
-	camera->transform = view_transformation(new_point3(0, 5, -10),
+	camera->transform = view_transformation(new_point3(-20, 20, 40),
 			new_point3(0, 0, 0), new_vec3(0, 1, 0));
 	image = render(mlx, camera, world);
 	mlx_image_to_window(mlx, image, 0, 0);

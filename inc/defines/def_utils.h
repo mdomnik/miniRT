@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:45:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/18 17:57:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/18 19:29:35 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_world *create_bump_map_scene(void);
 t_world *test_groups_scene(void);
 t_world *try_hexagon_scene(void);
 t_world *triangle_scene(void);
+t_world *night_box(void);
 
 t_world *benchmark_1(void);
 t_world *benchmark_2(void);
