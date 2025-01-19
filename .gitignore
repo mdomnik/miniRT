@@ -12,6 +12,11 @@ earthmap1k.ppm
 .cache/
 compile_commands.json
 *.txt
+*.aux
+*.log
+*.pdf
+*.fls
+*.fdb_latexmk
 
 # Main binary
 minirt
