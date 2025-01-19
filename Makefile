@@ -131,6 +131,8 @@ SRC_FILES		+= RTC/operations/group/bounds.c
 
 SRC_FILES		+= RTC/operations/wavefront_obj/parser.c
 
+SRC_FILES		+= RTC/operations/control/control.c
+
 SRC_FILES		+= RTC/test.c
 
 

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/18 20:17:12 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/19 18:28:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ t_world *benchmark_1(void)
 	world->light = NULL;
 	t_light_p *l1 = new_light(new_point3(0, 2, -2), new_color3(1, 1, 1));
 	t_shape  *s1 = sphere();
+	s1->material.reflective = 0.9;
 	s1->material.color = new_color3(1, 0, 0);
 	add_shape(&world->shapes, s1);
 	add_light(&world->light, l1);
@@ -213,6 +214,53 @@ t_world *benchmark_4(void)
 	return (world);
 }
 
+t_world *triangle_scene(void)
+{
+		t_world	*world;
+
+	world = malloc(sizeof(t_world));
+	world->shapes = NULL;
+	world->light = NULL;
+
+	t_light_p *l1 = new_light(new_point3(-5, 10, -5), new_color3(1, 1, 1));
+	world->light = l1;
+
+
+	t_shape  *floor = plane();
+    t_pattern *wood_floor = texture_map(uv_image(canvas_from_ppm("textures/planks.ppm")), planar_map);
+    set_pattern_transform(wood_floor, scaling(10, 10, 10));
+	floor->material.color = new_color3(1, 0.9, 0.9);
+    floor->material.pattern = wood_floor;
+    floor->material.bump_map = bump_map_from_ppm("textures/planks_bump.ppm", 10, planar_map);
+	floor->material.specular = 0;
+    floor->material.ambient = 0.5;
+
+	t_obj_file *obj = parse_obj_file("teapot.obj");
+    t_group *g = obj->default_group;
+	// int i = 0;
+	// while(g)
+	// {
+	// 	printf("group_name = %s\n", g->name);
+	// 	printf("group->children->count = %d\n", g->group->children_count);
+	// 	i = 0;
+	// 	while(i < g->group->children_count)
+	// 	{
+	// 		printf("Triangle\n");
+	// 		print_tuple(g->group->children->triangle->p1);
+	// 		print_tuple(g->group->children->triangle->p2);
+	// 		print_tuple(g->group->children->triangle->p3);
+	// 		g->group->children = g->group->children->next;
+	// 		i++;
+	// 	}
+	// 	g = g->next;
+	// }
+	t_shape *gr = objgroups_to_group(g);
+	add_shape(&floor, gr);
+	
+	world->shapes = floor;
+	return (world);
+}
+
 int	main(void)
 {
 	mlx_t		*mlx;
@@ -222,8 +270,10 @@ int	main(void)
 
 	mlx = mlx_init(800, 400, "test", 1);
 	world = benchmark_1();
+	int e = quality(1, MEDIUM);
+	(void)e;
 	camera = camera_new(800, 400, 0.8);
-	camera->transform = view_transformation(new_point3(0, 5, -10),
+	camera->transform = view_transformation(new_point3(0, 7, -5),
 			new_point3(0, 0, 0), new_vec3(0, 1, 0));
 	image = render(mlx, camera, world);
 	mlx_image_to_window(mlx, image, 0, 0);
