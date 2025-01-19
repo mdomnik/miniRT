@@ -159,7 +159,7 @@ MV				:= /bin/mv
 all: ## Build this project
 	@$(MAKE) mlx
 	@$(MAKE) libft
-	@$(MAKE) $(NAME)
+	@$(MAKE) -j $(NAME)
 
 libft: ## Build libft
 	$(MAKE) -C $(LFT_DIR)
@@ -190,7 +190,7 @@ $(OBJ_DIR):
 
 # Rule for linking the target executable
 $(NAME): $(OBJ_FILES) $(LFT_A) $(MLX_A)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(INCLUDES) $(LIBS)
+	$(CC) $(CFLAGS) -pg -o $(NAME) $(OBJ_FILES) $(INCLUDES) $(LIBS)
 	-@echo -n "🚀 $(MAGENTA)" && ls -lah $(NAME) && echo -n "$(RESET)"
 
 c clean: ## Clean objects and dependencies

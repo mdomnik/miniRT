@@ -166,6 +166,53 @@ t_world *benchmark_1(void)
 	return (world);
 }
 
+t_world *benchmark_4(void)
+{
+	t_world	*world;
+
+	world = malloc(sizeof(t_world));
+	world->shapes = NULL;
+	world->light = NULL;
+
+	t_light_p *l1 = new_light(new_point3(-5, 10, -5), new_color3(1, 1, 1));
+	world->light = l1;
+
+	t_shape  *floor = plane();
+	t_pattern *wood_floor = texture_map(uv_image(canvas_from_ppm("textures/planks.ppm")), planar_map);
+	set_pattern_transform(wood_floor, scaling(10, 10, 10));
+	floor->material.color = new_color3(1, 0.9, 0.9);
+	floor->material.pattern = wood_floor;
+	floor->material.bump_map = bump_map_from_ppm("textures/planks_bump.ppm", 10, planar_map);
+	floor->material.specular = 0;
+	floor->material.ambient = 0.5;
+
+	t_shape *s = sphere();
+
+	t_shape *hex = hexagon();
+	set_transform(hex, multiply_matrices(translation(-0.5, 2, -0.5), scaling(2, 2, 2)));
+	hex->material.color = new_color3(0.9, 0.5, 0.5);
+	hex->material.diffuse = 0.4;
+	hex->material.specular = 0.6;
+	hex->material.shininess = 20;
+	hex->material.reflective = 0.6;
+	hex->material.ambient = 0;
+	inherit_material(hex);
+	t_shape *hex2 = hexagon();
+	set_transform(hex2, multiply_matrices(translation(0.1, 2, 0.1), scaling(2, 2, 2)));
+	hex2->material.color = new_color3(0.5, 0.9, 0.5);
+	hex2->material.diffuse = 0.4;
+	hex2->material.specular = 0.6;
+	hex2->material.shininess = 20;
+	hex2->material.reflective = 0.6;
+	hex2->material.ambient = 0;
+	inherit_material(hex2);
+	add_shape(&floor, hex);
+	add_shape(&floor, hex2);
+	add_shape(&floor, s);
+	world->shapes = floor;
+	return (world);
+}
+
 int	main(void)
 {
 	mlx_t		*mlx;
@@ -176,7 +223,7 @@ int	main(void)
 	mlx = mlx_init(800, 400, "test", 1);
 	world = benchmark_1();
 	camera = camera_new(800, 400, 0.8);
-	camera->transform = view_transformation(new_point3(0, 0, -5),
+	camera->transform = view_transformation(new_point3(0, 5, -10),
 			new_point3(0, 0, 0), new_vec3(0, 1, 0));
 	image = render(mlx, camera, world);
 	mlx_image_to_window(mlx, image, 0, 0);
