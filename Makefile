@@ -107,6 +107,7 @@ SRC_FILES		+= RTC/operations/world/intersect.c
 SRC_FILES		+= RTC/operations/world/transparency.c
 SRC_FILES		+= RTC/operations/world/view.c
 SRC_FILES		+= RTC/operations/world/camera.c
+SRC_FILES		+= RTC/operations/world/render.c
 
 SRC_FILES		+= RTC/operations/intersection/intersection.c
 SRC_FILES		+= RTC/operations/intersection/obj_inter.c
@@ -132,6 +133,8 @@ SRC_FILES		+= RTC/operations/group/bounds.c
 SRC_FILES		+= RTC/operations/wavefront_obj/parser.c
 
 SRC_FILES		+= RTC/operations/control/control.c
+SRC_FILES		+= RTC/operations/control/downscale.c
+SRC_FILES		+= RTC/operations/control/super_sampling.c
 
 SRC_FILES		+= RTC/test.c
 

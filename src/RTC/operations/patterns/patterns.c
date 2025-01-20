@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:11:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/19 18:37:07 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/19 20:25:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ t_color3	pattern_at_object(t_pattern *pattern,
 	t_point3	pattern_space;
 	t_color3	c;
 
-	object_space = multiply_matrix_tuple(inverse(shape->transform), point);
+	object_space = multiply_matrix_tuple(inverse(shape->transform), *point);
 	pattern_space = multiply_matrix_tuple
-		(inverse(pattern->transform), &object_space);
+		(inverse(pattern->transform), object_space);
 	c = pattern_at(pattern, &pattern_space);
 	return (c);
 }

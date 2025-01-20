@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 20:47:15 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/19 20:15:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_project	t_project;
 typedef struct s_x	t_x;
 
 typedef struct s_intersection		t_i;
+
+typedef struct s_loop		t_loop;
 
 typedef struct s_light_p	t_light_p;
 
@@ -100,6 +102,14 @@ struct s_world
 {
 	t_light_p		*light;
 	t_shape			*shapes;
+};
+
+struct	s_loop
+{
+	mlx_t		*mlx;
+	mlx_image_t	*image;
+	t_world		*world;
+	t_camera	*camera;
 };
 
 struct s_comp

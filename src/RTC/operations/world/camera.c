@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:52:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/19 18:32:31 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/19 20:21:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,33 +67,33 @@ t_ray	*ray_for_pixel(t_camera *camera, int px, int py)
 	return (ray_new(&origin, &direction));
 }
 
-mlx_image_t	*render(mlx_t *mlx, t_camera *camera, t_world *world)
-{
-	mlx_image_t	*image;
-	t_ray		*ray;
-	t_color3	color;
-	int			color_int;
-	int			x;
-	int			y;
-	// int			total;
+// mlx_image_t	*render(mlx_t *mlx, t_camera *camera, t_world *world)
+// {
+// 	mlx_image_t	*image;
+// 	t_ray		*ray;
+// 	t_color3	color;
+// 	int			color_int;
+// 	int			x;
+// 	int			y;
+// 	// int			total;
 
-	x = 0;
-	y = 0;
-	// total = camera->hsize * camera->vsize;
-	image = mlx_new_image(mlx, camera->hsize, camera->vsize);
-	while (y < camera->vsize)
-	{
-		x = 0;
-		while (x < camera->hsize)
-		{
-			// printf("Rendering %d/%d\n", y * camera->hsize + x, total);
-			ray = ray_for_pixel(camera, x, y);
-			color = color_at(world, ray, quality(0, RECURSIVE_DEPTH));
-			color_int = color_to_int(color);
-			mlx_put_pixel(image, x, y, color_int);
-			x++;
-		}
-		y++;
-	}
-	return (image);
-}
+// 	x = 0;
+// 	y = 0;
+// 	// total = camera->hsize * camera->vsize;
+// 	image = mlx_new_image(mlx, camera->hsize, camera->vsize);
+// 	while (y < camera->vsize)
+// 	{
+// 		x = 0;
+// 		while (x < camera->hsize)
+// 		{
+// 			// printf("Rendering %d/%d\n", y * camera->hsize + x, total);
+// 			ray = ray_for_pixel(camera, x, y);
+// 			color = color_at(world, ray, quality(0, RECURSIVE_DEPTH));
+// 			color_int = color_to_int(color);
+// 			mlx_put_pixel(image, x, y, color_int);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	return (image);
+// }

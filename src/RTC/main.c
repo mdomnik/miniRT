@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/19 18:28:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/20 20:57:02 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,7 @@ t_world *triangle_scene(void)
 	world->shapes = NULL;
 	world->light = NULL;
 
-	t_light_p *l1 = new_light(new_point3(-5, 10, -5), new_color3(1, 1, 1));
+	t_light_p *l1 = new_light(new_point3(-10, 20, -10), new_color3(1, 1, 1));
 	world->light = l1;
 
 
@@ -255,30 +255,65 @@ t_world *triangle_scene(void)
 	// 	g = g->next;
 	// }
 	t_shape *gr = objgroups_to_group(g);
+	t_matrix *m = rotation_x(-(M_PI / 2));
+	multiply_matrices(m, scaling(0.1, 0.1, 0.1));
+	set_transform(gr, m);
 	add_shape(&floor, gr);
 	
 	world->shapes = floor;
 	return (world);
 }
 
+void my_keyhook(mlx_key_data_t keydata, void* param)
+{
+	t_loop	*loop;
+
+	loop = (t_loop *)param;
+	// If we PRESS the 'J' key, print "Hello".
+	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
+		loop->camera->transform.a[0][3] += 0.1;
+	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
+		loop->camera->transform.a[0][3] -= 0.1;
+	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
+		loop->camera->transform.a[2][3] -= 0.1;
+	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+		loop->camera->transform.a[2][3] += 0.1;
+	if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)
+		quality(1, LOW);
+	if (keydata.key == MLX_KEY_2 && keydata.action == MLX_PRESS)
+		quality(1, MEDIUM);
+	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
+		downscale_setting(1, FULL);
+	if (keydata.key == MLX_KEY_O && keydata.action == MLX_PRESS)
+		downscale_setting(1, HALF);
+	if (keydata.key == MLX_KEY_P && keydata.action == MLX_PRESS)
+		downscale_setting(1, QUARTER);
+	if (keydata.key == MLX_KEY_L && keydata.action == MLX_PRESS)
+		downscale_setting(1, EIGHTH);
+	if (keydata.key == MLX_KEY_K && keydata.action == MLX_PRESS)
+		downscale_setting(1, SIXTEENTH);
+	if (keydata.key == MLX_KEY_V && keydata.action == MLX_PRESS)
+		supersampling_setting(1, SS_OFF);
+	if (keydata.key == MLX_KEY_B && keydata.action == MLX_PRESS)
+		supersampling_setting(1, SS_2X);
+	if (keydata.key == MLX_KEY_N && keydata.action == MLX_PRESS)
+		supersampling_setting(1, SS_4X);
+	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
+		supersampling_setting(1, SS_8X);
+	if (keydata.key == MLX_KEY_COMMA && keydata.action == MLX_PRESS)
+		supersampling_setting(1, SS_16X);
+	
+}
+
 int	main(void)
 {
-	mlx_t		*mlx;
-	t_world		*world;
-	t_camera	*camera;
-	mlx_image_t	*image;
+	t_loop	*loop;
 
-	mlx = mlx_init(800, 400, "test", 1);
-	world = benchmark_1();
-	int e = quality(1, MEDIUM);
-	(void)e;
-	camera = camera_new(800, 400, 0.8);
-	camera->transform = view_transformation(new_point3(0, 7, -5),
-			new_point3(0, 0, 0), new_vec3(0, 1, 0));
-	image = render(mlx, camera, world);
-	mlx_image_to_window(mlx, image, 0, 0);
-	printf("done\n");
-	mlx_loop(mlx);
+	// downscale_setting(1, SIXTEENTH);
+	loop = loop_init();
+	mlx_key_hook(loop->mlx, &my_keyhook, loop);
+	mlx_loop_hook(loop->mlx, render_loop, loop);
+	mlx_loop(loop->mlx);
 	return (0);
 }
 
