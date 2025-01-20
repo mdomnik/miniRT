@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/20 20:57:02 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/20 23:39:55 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,47 +264,6 @@ t_world *triangle_scene(void)
 	return (world);
 }
 
-void my_keyhook(mlx_key_data_t keydata, void* param)
-{
-	t_loop	*loop;
-
-	loop = (t_loop *)param;
-	// If we PRESS the 'J' key, print "Hello".
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		loop->camera->transform.a[0][3] += 0.1;
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		loop->camera->transform.a[0][3] -= 0.1;
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		loop->camera->transform.a[2][3] -= 0.1;
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		loop->camera->transform.a[2][3] += 0.1;
-	if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)
-		quality(1, LOW);
-	if (keydata.key == MLX_KEY_2 && keydata.action == MLX_PRESS)
-		quality(1, MEDIUM);
-	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
-		downscale_setting(1, FULL);
-	if (keydata.key == MLX_KEY_O && keydata.action == MLX_PRESS)
-		downscale_setting(1, HALF);
-	if (keydata.key == MLX_KEY_P && keydata.action == MLX_PRESS)
-		downscale_setting(1, QUARTER);
-	if (keydata.key == MLX_KEY_L && keydata.action == MLX_PRESS)
-		downscale_setting(1, EIGHTH);
-	if (keydata.key == MLX_KEY_K && keydata.action == MLX_PRESS)
-		downscale_setting(1, SIXTEENTH);
-	if (keydata.key == MLX_KEY_V && keydata.action == MLX_PRESS)
-		supersampling_setting(1, SS_OFF);
-	if (keydata.key == MLX_KEY_B && keydata.action == MLX_PRESS)
-		supersampling_setting(1, SS_2X);
-	if (keydata.key == MLX_KEY_N && keydata.action == MLX_PRESS)
-		supersampling_setting(1, SS_4X);
-	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
-		supersampling_setting(1, SS_8X);
-	if (keydata.key == MLX_KEY_COMMA && keydata.action == MLX_PRESS)
-		supersampling_setting(1, SS_16X);
-	
-}
-
 int	main(void)
 {
 	t_loop	*loop;
@@ -312,6 +271,8 @@ int	main(void)
 	// downscale_setting(1, SIXTEENTH);
 	loop = loop_init();
 	mlx_key_hook(loop->mlx, &my_keyhook, loop);
+	mlx_scroll_hook(loop->mlx, &my_scrollhook, loop);
+	// mlx_mouse_hook(loop->mlx, &my_mousehook, loop);
 	mlx_loop_hook(loop->mlx, render_loop, loop);
 	mlx_loop(loop->mlx);
 	return (0);

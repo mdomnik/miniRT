@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 19:55:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 23:45:34 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/21 00:53:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ t_matrix view_transformation(t_point3 from, t_point3 to, t_vec3 up)
 	t_vec3 true_up;
 	t_matrix orientation;
 	t_matrix *translation_matrix;
-
+	
+	// to = new_point3((from.x + to.x),(from.y + to.y), (from.z + to.z));
 	forward = normalize(sub_tuple_p(&to, &from));
 	upn = normalize(up);
 	left = cross_product(forward, upn);

@@ -135,6 +135,7 @@ SRC_FILES		+= RTC/operations/wavefront_obj/parser.c
 SRC_FILES		+= RTC/operations/control/control.c
 SRC_FILES		+= RTC/operations/control/downscale.c
 SRC_FILES		+= RTC/operations/control/super_sampling.c
+SRC_FILES		+= RTC/operations/control/hooks.c
 
 SRC_FILES		+= RTC/test.c
 

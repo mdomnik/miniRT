@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/20 20:06:00 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/20 21:56:59 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -843,8 +843,7 @@ t_world *benchmark_2(void)
 	world->shapes = NULL;
 	world->light = NULL;
 	t_light_p *l1 = new_light(new_point3(-10, 10, -10), new_color3(1, 1, 1));
-	t_shape  *floor = sphere();
-	set_transform(floor, scaling(10, 0.01, 10));
+	t_shape  *floor = plane();
 	floor->material.color = new_color3(1, 0.9, 0.9);
 	floor->material.specular = 0;
 	t_shape  *left_wall = sphere();

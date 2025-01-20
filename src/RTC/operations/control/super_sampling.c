@@ -57,45 +57,45 @@ t_ray	*ray_for_pixel_with_offset(t_camera *camera, float x_offset, float y_offse
 }
 
 
-mlx_image_t	*render(mlx_t *mlx, t_camera *camera, t_world *world)
-{
-	mlx_image_t	*image;
-	t_color3	color, sample_color;
-	int			color_int;
-	int			x, y;
-	int			sample_x, sample_y;
-	int			supersample = supersampling_setting(0, 0); // Get current supersampling setting
-	int			samples_per_side = (int)sqrt(supersample);
-	float		step = 1.0f / samples_per_side;
+// mlx_image_t	*render(mlx_t *mlx, t_camera *camera, t_world *world)
+// {
+// 	mlx_image_t	*image;
+// 	t_color3	color, sample_color;
+// 	int			color_int;
+// 	int			x, y;
+// 	int			sample_x, sample_y;
+// 	int			supersample = supersampling_setting(0, 0); // Get current supersampling setting
+// 	int			samples_per_side = (int)sqrt(supersample);
+// 	float		step = 1.0f / samples_per_side;
 
-	image = mlx_new_image(mlx, camera->hsize, camera->vsize);
-	y = 0;
-	while (y < camera->vsize)
-	{
-		x = 0;
-		while (x < camera->hsize)
-		{
-			color = new_color3(0, 0, 0); // Initialize color to black
-			// Supersampling loop
-			for (sample_y = 0; sample_y < samples_per_side; sample_y++)
-			{
-				for (sample_x = 0; sample_x < samples_per_side; sample_x++)
-				{
-					float offset_x = (sample_x + 0.5f) * step;
-					float offset_y = (sample_y + 0.5f) * step;
-					t_ray *ray = ray_for_pixel_with_offset(camera, x + offset_x, y + offset_y);
-					sample_color = color_at(world, ray, quality(0, RECURSIVE_DEPTH));
-					color = add_tuples(color, sample_color);
-					free(ray); // Clean up dynamically allocated memory if applicable
-				}
-			}
-			// Average the color by dividing by the number of samples
-			color = mult_color(color, 1.0f / (samples_per_side * samples_per_side));
-			color_int = color_to_int(color);
-			mlx_put_pixel(image, x, y, color_int);
-			x++;
-		}
-		y++;
-	}
-	return (image);
-}
+// 	image = mlx_new_image(mlx, camera->hsize, camera->vsize);
+// 	y = 0;
+// 	while (y < camera->vsize)
+// 	{
+// 		x = 0;
+// 		while (x < camera->hsize)
+// 		{
+// 			color = new_color3(0, 0, 0); // Initialize color to black
+// 			// Supersampling loop
+// 			for (sample_y = 0; sample_y < samples_per_side; sample_y++)
+// 			{
+// 				for (sample_x = 0; sample_x < samples_per_side; sample_x++)
+// 				{
+// 					float offset_x = (sample_x + 0.5f) * step;
+// 					float offset_y = (sample_y + 0.5f) * step;
+// 					t_ray *ray = ray_for_pixel_with_offset(camera, x + offset_x, y + offset_y);
+// 					sample_color = color_at(world, ray, quality(0, RECURSIVE_DEPTH));
+// 					color = add_tuples(color, sample_color);
+// 					free(ray); // Clean up dynamically allocated memory if applicable
+// 				}
+// 			}
+// 			// Average the color by dividing by the number of samples
+// 			color = mult_color(color, 1.0f / (samples_per_side * samples_per_side));
+// 			color_int = color_to_int(color);
+// 			mlx_put_pixel(image, x, y, color_int);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	return (image);
+// }

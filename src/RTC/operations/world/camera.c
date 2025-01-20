@@ -6,13 +6,13 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:52:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/19 20:21:50 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/20 21:59:42 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-static void	get_pixel_size(t_camera *camera);
+void	get_pixel_size(t_camera *camera);
 
 t_camera	*camera_new(int hsize, int vsize, float fov)
 {
@@ -27,7 +27,7 @@ t_camera	*camera_new(int hsize, int vsize, float fov)
 	return (camera);
 }
 
-static void	get_pixel_size(t_camera *camera)
+void	get_pixel_size(t_camera *camera)
 {
 	float	half_view;
 	float	aspect;
