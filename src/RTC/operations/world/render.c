@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 20:10:41 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/21 00:52:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/21 18:01:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,53 +25,29 @@ t_loop *loop_init(void)
 	loop->camera = camera_new(800, 400, 0.8);
 	loop->camera->transform = view_transformation(new_point3(0, 7, -7),
 			new_point3(0, 0, 1), new_vec3(0, 1, 0));
+	loop->camera_mode = CAMERA_MODE;
 	return (loop);
 }
-
-
-mlx_image_t	*render(mlx_t *mlx, t_camera *camera, t_world *world)
+mlx_image_t *render_tooltip(mlx_t *mlx, t_camera *camera)
 {
 	mlx_image_t	*image;
-	t_ray		*ray;
-	t_color3	color;
-	int			color_int;
-	int			x;
-	int			y;
-	int			downscale;
+	int			x, y;
 
-	downscale = downscale_setting(0, 0); // Get the current downscale factor
 	image = mlx_new_image(mlx, camera->hsize, camera->vsize);
-
 	y = 0;
-	while (y < camera->vsize)
+	while (y < (camera->vsize / 3))
 	{
 		x = 0;
-		while (x < camera->hsize)
+		while (x < (camera->hsize / 8))
 		{
-			// Render every pixel based on the downscale factor
-			if (x % downscale == 0 && y % downscale == 0)
-			{
-				ray = ray_for_pixel(camera, x, y);
-				color = color_at(world, ray, quality(0, RECURSIVE_DEPTH));
-				color_int = color_to_int(color);
-
-				// Fill in the downscaled grid
-				for (int dy = 0; dy < downscale; dy++)
-				{
-					for (int dx = 0; dx < downscale; dx++)
-					{
-						if ((x + dx) < camera->hsize && (y + dy) < camera->vsize)
-							mlx_put_pixel(image, x + dx, y + dy, color_int);
-					}
-				}
-			}
-			x += downscale;
+			mlx_put_pixel(image, x, y, 0x06397088);
+			x++;
 		}
-		y += downscale;
+		y++;
 	}
+
 	return (image);
 }
-
 
 
 void	render_loop(void *param)
@@ -79,6 +55,24 @@ void	render_loop(void *param)
 	t_loop *loop;
 
 	loop = (t_loop *)param;
-	loop->image = render(loop->mlx, loop->camera, loop->world);
+	if (program_state(0, 0) == EDIT_MODE)
+	{
+		mlx_set_window_title(loop->mlx, "EDIT MODE");
+	}
+	else if (program_state(0, 0) == CAMERA_MODE)
+	{
+		mlx_set_window_title(loop->mlx, "CAMERA MODE");
+	}
+	else
+	{
+		mlx_set_window_title(loop->mlx, "RENDER MODE");
+	}
+	downscale_setting(1, SIXTEENTH);
+	if (render_max(0, 0) == 0)
+		loop->image = render_downscale(loop->mlx, loop->camera, loop->world);
+	else
+		loop->image = render_supersampling(loop->mlx, loop->camera, loop->world);
+	// mlx_image_t *image_tooptip = render_tooltip(loop->mlx, loop->camera);
 	mlx_image_to_window(loop->mlx, loop->image, 0, 0);
+	// mlx_image_to_window(loop->mlx, image_tooptip, 5, 5);
 }

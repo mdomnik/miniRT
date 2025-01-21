@@ -6,11 +6,45 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 18:05:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/19 20:35:21 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/21 17:36:38 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
+
+int program_state(bool set, int variable)
+{
+	static int state = CAMERA_MODE;
+
+	if (set)
+	{
+		state = variable;
+		return (state);
+	}
+	if (state == CAMERA_MODE)
+		return (CAMERA_MODE);
+	if (state == EDIT_MODE)
+		return (EDIT_MODE);
+	return (RENDER_MODE);
+}
+
+int tooltip_state(bool set, int variable)
+{
+	static int state = TOOLTIP_OFF;
+
+	if (set)
+	{
+		state = variable;
+		return (state);
+	}
+	if (state == TOOLTIP_OFF)
+		return (TOOLTIP_OFF);
+	if (state == TOOLTIP_ON)
+		return (TOOLTIP_ON);
+	return (TOOLTIP_OFF);
+}
+
+
 
 int	quality(bool set, int variable)
 {
@@ -44,4 +78,16 @@ int	quality(bool set, int variable)
 			return (1);
 	}
 	return (quality);
+}
+
+int	render_max(bool set, int variable)
+{
+	static int max = 0;
+
+	if (set)
+	{
+		max = variable;
+		return (max);
+	}
+	return (max);
 }

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 21:27:33 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/21 00:53:05 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/21 18:05:08 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,32 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	t_loop	*loop;
 
 	loop = (t_loop *)param;
-	int state = 0;
+	
 
 	movement_hooks(keydata, loop);
-	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS && state == 0)
-		state = 1;
-	else if (keydata.key == MLX_KEY_LEFT_SHIFT && keydata.action == MLX_PRESS)
-		state = 0;
-	if (state == 1)
-		mlx_cursor_hook(loop->mlx, &my_cursorhook, loop);
+	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
+	{
+		program_state(1, RENDER_MODE);
+		loop->camera_mode = RENDER_MODE;
+	}
+	if (keydata.key == MLX_KEY_Q && keydata.action == MLX_PRESS)
+	{
+		program_state(1, CAMERA_MODE);
+		loop->camera_mode = CAMERA_MODE;
+	}
+	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
+	{
+		if (loop->camera_mode == CAMERA_MODE)
+		{
+			program_state(1, EDIT_MODE);
+			loop->camera_mode = EDIT_MODE;
+		}
+		else if (loop->camera_mode == EDIT_MODE)
+		{
+			loop->camera_mode = CAMERA_MODE;
+			program_state(1, CAMERA_MODE);
+		}
+	}
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		exit(0);
 	if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)

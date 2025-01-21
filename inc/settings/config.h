@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:37:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/20 20:48:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/21 17:13:07 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 
 #define LIGHTING 4
 #define RECURSIVE_DEPTH 5
+
+//PROGRAM STATES
+#define EDIT_MODE 0
+#define CAMERA_MODE 1
+#define RENDER_MODE 2
+
+//TOOLTIP STATES
+#define TOOLTIP_OFF 0
+#define TOOLTIP_ON 1
+
 
 #define ON 1
 #define OFF 0
@@ -49,7 +59,12 @@
 #define WATER_REFRACTION 1.333
 #define DIAMOND_REFRACTION 2.417
 
+
+int program_state(bool set, int variable);
+int tooltip_state(bool set, int variable);
+
 int	quality(bool set, int variable);
+int	render_max(bool set, int variable);
 
 
 #endif
