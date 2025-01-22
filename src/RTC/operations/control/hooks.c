@@ -6,13 +6,12 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 21:27:33 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/21 18:05:08 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/22 17:44:46 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-static void	movement_hooks(mlx_key_data_t keydata, t_loop *loop);
 
 void my_keyhook(mlx_key_data_t keydata, void* param)
 {
@@ -22,29 +21,9 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	
 
 	movement_hooks(keydata, loop);
-	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
-	{
-		program_state(1, RENDER_MODE);
-		loop->camera_mode = RENDER_MODE;
-	}
-	if (keydata.key == MLX_KEY_Q && keydata.action == MLX_PRESS)
-	{
-		program_state(1, CAMERA_MODE);
-		loop->camera_mode = CAMERA_MODE;
-	}
-	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
-	{
-		if (loop->camera_mode == CAMERA_MODE)
-		{
-			program_state(1, EDIT_MODE);
-			loop->camera_mode = EDIT_MODE;
-		}
-		else if (loop->camera_mode == EDIT_MODE)
-		{
-			loop->camera_mode = CAMERA_MODE;
-			program_state(1, CAMERA_MODE);
-		}
-	}
+	state_hooks(keydata, loop);
+	downscale_hooks(keydata, loop);
+	camera_movement_hooks(keydata, loop);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		exit(0);
 	if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)
@@ -156,16 +135,5 @@ void my_mousehook(mouse_key_t button, action_t action, modifier_key_t mods, void
 	// (void)action;
 	(void)mods;
 	(void)param;
-}
-static void	movement_hooks(mlx_key_data_t keydata, t_loop *loop)
-{
-	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		loop->camera->transform.a[0][3] += 0.1;
-	if (keydata.key == MLX_KEY_A && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		loop->camera->transform.a[0][3] -= 0.1;
-	if (keydata.key == MLX_KEY_S && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		loop->camera->transform.a[2][3] -= 0.1;
-	if (keydata.key == MLX_KEY_W && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
-		loop->camera->transform.a[2][3] += 0.1;
 }
 

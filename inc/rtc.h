@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/21 18:00:25 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/22 18:11:49 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,9 @@ struct	s_loop
 	mlx_image_t	*image;
 	t_world		*world;
 	t_camera	*camera;
-	int camera_mode;
+	int			camera_mode;
+	int			downscale;
+	int			supersample;
 };
 
 struct s_comp
@@ -136,6 +138,7 @@ struct s_camera
 	float			pixel_size;
 	float			half_width;
 	float			half_height;
+	float			y_angle;
 	t_matrix		transform;
 };
 

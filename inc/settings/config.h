@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:37:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/21 17:13:07 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/21 22:32:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@
 #define MAX 3
 
 //resolution downscaling
-#define FULL 0
-#define HALF 1
+#define FULL 4
+#define HALF 3
 #define QUARTER 2
-#define EIGHTH 3
-#define SIXTEENTH 4
+#define EIGHTH 1
+#define SIXTEENTH 0
 
 //supersampling
 #define SS_OFF 0

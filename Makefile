@@ -136,6 +136,7 @@ SRC_FILES		+= RTC/operations/control/control.c
 SRC_FILES		+= RTC/operations/control/downscale.c
 SRC_FILES		+= RTC/operations/control/super_sampling.c
 SRC_FILES		+= RTC/operations/control/hooks.c
+SRC_FILES		+= RTC/operations/control/hooks_helper.c
 
 SRC_FILES		+= RTC/test.c
 

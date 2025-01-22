@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 19:55:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/21 00:53:28 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/22 18:23:59 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ t_matrix view_transformation(t_point3 from, t_point3 to, t_vec3 up)
 	translation_matrix = translation(-from.x, -from.y, -from.z);
 	return (*multiply_matrices(&orientation, translation_matrix));
 }
-
 
 static void	fill_row(t_matrix *orientation, t_tuple input, int row)
 {

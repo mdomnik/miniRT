@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 20:10:41 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/21 18:01:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/21 22:31:52 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_loop *loop_init(void)
 	loop->camera->transform = view_transformation(new_point3(0, 7, -7),
 			new_point3(0, 0, 1), new_vec3(0, 1, 0));
 	loop->camera_mode = CAMERA_MODE;
+	loop->downscale = 0;
 	return (loop);
 }
 mlx_image_t *render_tooltip(mlx_t *mlx, t_camera *camera)
@@ -67,7 +68,6 @@ void	render_loop(void *param)
 	{
 		mlx_set_window_title(loop->mlx, "RENDER MODE");
 	}
-	downscale_setting(1, SIXTEENTH);
 	if (render_max(0, 0) == 0)
 		loop->image = render_downscale(loop->mlx, loop->camera, loop->world);
 	else

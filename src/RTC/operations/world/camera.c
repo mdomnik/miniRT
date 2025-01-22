@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:52:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/20 21:59:42 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/22 18:12:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_camera	*camera_new(int hsize, int vsize, float fov)
 	camera->vsize = vsize;
 	camera->fov = fov;
 	camera->transform = *init_identity_matrix(4);
+	camera->y_angle = 0;
 	get_pixel_size(camera);
 	return (camera);
 }
@@ -66,6 +67,46 @@ t_ray	*ray_for_pixel(t_camera *camera, int px, int py)
 	direction = normalize(sub_tuple(pixel, origin));
 	return (ray_new(&origin, &direction));
 }
+
+// t_matrix pivot_camera(t_matrix orientation, double angle, char axis)
+// {
+//     t_matrix rotation_matrix;
+//     t_matrix result;
+
+//     // Initialize the rotation matrix as an identity matrix
+//     rotation_matrix = *init_identity_matrix(4);
+
+//     // Determine the axis of rotation and populate the rotation matrix
+//     if (axis == 'x')
+//     {
+//         rotation_matrix.a[1][1] = cos(angle);
+//         rotation_matrix.a[1][2] = -sin(angle);
+//         rotation_matrix.a[2][1] = sin(angle);
+//         rotation_matrix.a[2][2] = cos(angle);
+//     }
+//     else if (axis == 'y')
+//     {
+//         rotation_matrix.a[0][0] = cos(angle);
+//         rotation_matrix.a[0][2] = sin(angle);
+//         rotation_matrix.a[2][0] = -sin(angle);
+//         rotation_matrix.a[2][2] = cos(angle);
+//     }
+//     else if (axis == 'z')
+//     {
+//         rotation_matrix.a[0][0] = cos(angle);
+//         rotation_matrix.a[0][1] = -sin(angle);
+//         rotation_matrix.a[1][0] = sin(angle);
+//         rotation_matrix.a[1][1] = cos(angle);
+//     }
+//     else
+//     {
+//         return orientation;
+//     }
+
+//     result = *multiply_matrices(&orientation, &rotation_matrix);
+
+//     return result;
+// }
 
 // mlx_image_t	*render(mlx_t *mlx, t_camera *camera, t_world *world)
 // {

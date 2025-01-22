@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 19:54:46 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/21 16:18:32 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/21 22:36:56 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	downscale_setting(int set, int quality)
 {
-	static int downscale = 1;
+	static int downscale = 0;
 	if (set)
 	{
 		downscale = quality;

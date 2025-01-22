@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/20 23:39:55 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/21 22:36:02 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,8 +268,8 @@ int	main(void)
 {
 	t_loop	*loop;
 
-	// downscale_setting(1, SIXTEENTH);
 	loop = loop_init();
+	downscale_setting(1, loop->downscale);
 	mlx_key_hook(loop->mlx, &my_keyhook, loop);
 	mlx_scroll_hook(loop->mlx, &my_scrollhook, loop);
 	// mlx_mouse_hook(loop->mlx, &my_mousehook, loop);

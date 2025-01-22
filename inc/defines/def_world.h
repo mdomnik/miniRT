@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:40:41 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/21 00:36:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/01/22 18:04:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ t_color3 color_at(t_world *world, t_ray *ray, int remaining);
 t_matrix view_transformation(t_point3 from, t_point3 to, t_vec3 up);
 t_camera	*camera_new(int hsize, int vsize, float fov);
 t_ray *ray_for_pixel(t_camera *camera, int px, int py);
+t_matrix pivot_camera(t_matrix orientation, double angle, char axis);
+
 bool is_shadowed(t_world *world, t_point3 *light_pos, t_point3 *point);
 #endif
