@@ -14,7 +14,7 @@
 # define FILE_H
 
 //input.c
-int	check_args(int argc, char **argv, t_project *project);
+int	check_args(int argc, char **argv, t_world *world);
 
 //find_scene_file.c
 int		validate_file_name(char **argv, t_options *options);

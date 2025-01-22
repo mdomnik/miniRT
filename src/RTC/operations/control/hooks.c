@@ -23,7 +23,7 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	movement_hooks(keydata, loop);
 	state_hooks(keydata, loop);
 	downscale_hooks(keydata, loop);
-	camera_movement_hooks(keydata, loop);
+	// camera_movement_hooks(keydata, loop);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		exit(0);
 	if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)

@@ -21,6 +21,9 @@
 #define MAT3 3
 #define MAT4 4
 
+#define DEFAULT_WIDTH 800
+#define DEFAULT_HEIGHT 600
+
 typedef struct s_scene	t_scene;
 
 typedef struct s_options	t_options;
@@ -102,6 +105,7 @@ struct s_world
 {
 	t_light_p		*light;
 	t_shape			*shapes;
+	t_camera		*camera;
 };
 
 struct	s_loop

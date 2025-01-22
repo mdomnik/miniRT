@@ -33,10 +33,16 @@ int	get_scene_data(t_options *options)
 	char	*line;
 
 	fd = open(options->scene.scene_file, O_RDONLY);
-	line = gnl(fd);
 	if (fd == -1)
 	{
 		ft_dprintf(2, "%s\n", ERR_OPEN_FILE);
+		return (-1);
+	}
+	line = gnl(fd);
+	if (line == NULL)
+	{
+		ft_dprintf(2, "%s\n", ERR_EMPTY_FILE);
+		close(fd);
 		return (-1);
 	}
 	while (line != NULL)
@@ -44,8 +50,6 @@ int	get_scene_data(t_options *options)
 		if (append_object_nodes(options, line) == -1)
 			return (ret_message(ERR_FAIL_LINE, line));
 		line = gnl(fd);
-		if (line == NULL)
-			break ;
 	}
 	close(fd);
 	return (0);

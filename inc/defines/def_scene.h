@@ -20,23 +20,23 @@ t_plane		*append_plane_list(t_plane *list, t_plane *new);
 t_cylinder	*append_cylinder_list(t_cylinder *list, t_cylinder *new);
 
 //scene_file/check_data.c
-int			check_scene_data(t_options *options);
+int			check_scene_data(t_options *options, t_world *world);
 int			check_mandatory_objects(t_options *options);
 int			check_dup_objects(t_options *options, int binary);
 int			check_object_data(char **args);
 int			determine_object(char **args);
 
 //scene_file/create_mand.c
-int			create_objects(t_options *options);
-int			check_objects_helper(t_options *options, int i);
+int			create_objects(t_options *options, t_world *world);
+int			check_objects_helper(t_scene *scene, t_world *world, int i);
 int			create_ambient(t_options *options, char **args);
-int			create_camera(t_options *options, char **args);
-int			create_light(t_options *options, char **args);
+int			create_camera(t_camera **camera, char **args);
+int			create_light(t_light_p **lights, char **args);
 
 //scene_file/create_obj.c
-int			create_sphere(t_options *options, char **args);
-int			create_plane(t_options *options, char **args);
-int			create_cylinder(t_options *options, char **args);
+int			create_sphere(t_world *world, char **args);
+int			create_plane(t_world *world, char **args);
+int			create_cylinder(t_world *world, char **args);
 
 //scene_file/file_data.c
 int			get_scene_data(t_options *options);

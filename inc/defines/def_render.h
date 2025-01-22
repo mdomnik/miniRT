@@ -13,7 +13,7 @@
 #ifndef DEF_RENDER_H
 # define DEF_RENDER_H
 
-t_loop		*loop_init(void);
+t_loop	*loop_init(int ac, char *av[]);
 mlx_image_t	*render_supersampling(mlx_t *mlx, t_camera *camera, t_world *world);
 mlx_image_t	*render_downscale(mlx_t *mlx, t_camera *camera, t_world *world);
 void	render_loop(void *param);

@@ -19,7 +19,7 @@ t_material *default_material(void)
 	material = gc_malloc(sizeof(t_material));
 	material->color = new_color3(1, 1, 1);
 	material->pattern = NULL;
-	material->ambient = 0.1;
+	material->ambient = 0.3;
 	material->diffuse = 0.9;
 	material->specular = 0.9;
 	material->shininess = 200.0;

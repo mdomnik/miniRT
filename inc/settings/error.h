@@ -29,6 +29,7 @@
 # define ERR_NO_SCENE "Error: No scene file provided"
 # define ERR_ARGS "Error: Invalid number of arguments"
 # define ERR_NO_NAME "Error: No file name provided with '.rt' extension"
+# define ERR_EMPTY_FILE "Error: Empty file"
 
 //FILE READING
 # define ERR_OPEN_FILE "Error: Failed to open file"

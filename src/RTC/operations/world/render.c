@@ -12,13 +12,17 @@
 
 #include "mrt.h"
 
-t_loop *loop_init(void)
+t_loop *loop_init(int ac, char *av[])
 {
 	t_loop *loop;
 
 	loop = malloc(sizeof(t_loop));
 	loop->mlx = mlx_init(800, 400, "test", 1);
-	loop->world = benchmark_2();
+	loop->world = malloc(sizeof(t_world));
+	loop->world->shapes = NULL;
+	loop->world->light = NULL;
+	if (check_args(ac, av, loop->world))
+		exit(42);
 	// downscale_setting(1, SIXTEENTH);
 	int e = quality(1, MEDIUM);
 	(void)e;

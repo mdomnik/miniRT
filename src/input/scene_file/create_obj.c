@@ -19,23 +19,28 @@
  * @param args The arguments for creating the sphere.
  * @return 0 if successful.
  */
-int	create_sphere(t_options *options, char **args)
+int	create_sphere(t_world *world, char **args)
 {
-	t_sphere	*sphere;
+	t_shape		*sp;
 	char		**coords;
 	char		**color;
+	float		radius;
+	t_matrix	*transform;
 
-	sphere = gc_malloc(sizeof(t_sphere));
+	sp = sphere();
 	coords = ft_split(args[1], ',');
 	color = ft_split(args[3], ',');
-	sphere->coords = new_point3(ft_atof(coords[0]), ft_atof(coords[1]),
-			ft_atof(coords[2]));
-	sphere->radius = ft_atof(args[2]) / 2.0;
-	sphere->color = new_tuple(ft_atoi(color[0]), ft_atoi(color[1]),
-			ft_atoi(color[2]), 1);
-	sphere->transform = *init_identity_matrix(4);
-	options->objects.sphere
-		= append_sphere_list(options->objects.sphere, sphere);
+	transform = init_identity_matrix(4);
+	transform = multiply_matrices(transform, translation(ft_atof(coords[0]), ft_atof(coords[1]),
+			ft_atof(coords[2])));
+	radius = ft_atof(args[2]) / 2.0;
+	transform = multiply_matrices(transform, scaling(radius, radius, radius));
+	set_transform(sp, transform);
+	sp->material.color = normalize(new_color3(ft_atof(color[0]), ft_atof(color[1]),
+			ft_atof(color[2])));
+	add_shape(&world->shapes, sp);
+	//world->shapes = sp;
+	//print_matrix(sp->transform);
 	return (0);
 }
 
@@ -47,24 +52,28 @@ int	create_sphere(t_options *options, char **args)
  * @param args The arguments for creating the plane.
  * @return 0 if successful.
  */
-int	create_plane(t_options *options, char **args)
+int	create_plane(t_world *world, char **args)
 {
-	t_plane		*plane;
+	t_shape		*pl;
 	char		**coords;
 	char		**normal;
 	char		**color;
+	t_matrix	*transform;
 
-	plane = gc_malloc(sizeof(t_plane));
+	pl = plane();
 	coords = ft_split(args[1], ',');
 	normal = ft_split(args[2], ',');
 	color = ft_split(args[3], ',');
-	plane->coords = new_point3(ft_atof(coords[0]), ft_atof(coords[1]),
-			ft_atof(coords[2]));
-	plane->normal = new_vec3(ft_atof(normal[0]), ft_atof(normal[1]),
-			ft_atof(normal[2]));
-	plane->color = new_tuple(ft_atoi(color[0]), ft_atoi(color[1]),
-			ft_atoi(color[2]), 1);
-	options->objects.plane = append_plane_list(options->objects.plane, plane);
+	transform = init_identity_matrix(4);
+	transform = multiply_matrices(transform, translation(ft_atof(coords[0]), ft_atof(coords[1]),
+			ft_atof(coords[2])));
+	transform = multiply_matrices(transform, rotation_x(deg_to_rad(ft_atof(normal[0])*180)));
+	transform = multiply_matrices(transform, rotation_y(deg_to_rad(ft_atof(normal[1])*180)));
+	transform = multiply_matrices(transform, rotation_z(deg_to_rad(ft_atof(normal[2])*180)));
+	set_transform(pl, transform);
+	pl->material.color = normalize(new_color3(ft_atof(color[0]), ft_atof(color[1]),
+			ft_atof(color[2])));
+	add_shape(&world->shapes, pl);
 	return (0);
 }
 
@@ -76,26 +85,26 @@ int	create_plane(t_options *options, char **args)
  * @param args The arguments for creating the cylinder.
  * @return 0 on success.
  */
-int	create_cylinder(t_options *options, char **args)
+int	create_cylinder(t_world *world, char **args)
 {
-	t_cylinder	*cylinder;
+	t_shape		*cy;
 	char		**coords;
 	char		**normal;
 	char		**color;
 
-	cylinder = gc_malloc(sizeof(t_cylinder));
+	cy = cylinder();
 	coords = ft_split(args[1], ',');
 	normal = ft_split(args[2], ',');
 	color = ft_split(args[5], ',');
-	cylinder->coords = new_point3(ft_atof(coords[0]), ft_atof(coords[1]),
-			ft_atof(coords[2]));
-	cylinder->normal = new_vec3(ft_atof(normal[0]), ft_atof(normal[1]),
-			ft_atof(normal[2]));
-	cylinder->radius = ft_atof(args[2]) / 2.0;
-	cylinder->height = ft_atof(args[3]);
-	cylinder->color = new_tuple(ft_atoi(color[0]), ft_atoi(color[1]),
-			ft_atoi(color[2]), 1);
-	options->objects.cylinder
-		= append_cylinder_list(options->objects.cylinder, cylinder);
+	set_transform(cy, translation(ft_atof(coords[0]), ft_atof(coords[1]),
+			ft_atof(coords[2])));
+	set_transform(cy, rotation_x(deg_to_rad(ft_atof(normal[0])*180)));
+	set_transform(cy, rotation_y(deg_to_rad(ft_atof(normal[1])*180)));
+	set_transform(cy, rotation_z(deg_to_rad(ft_atof(normal[2])*180)));
+	set_transform(cy, scaling(ft_atof(args[3]) / 2.0, ft_atof(args[4]) / 2.0,
+			ft_atof(args[3]) / 2.0));
+	cy->material.color = normalize(new_color3(ft_atof(color[0]), ft_atof(color[1]),
+			ft_atof(color[2])));
+	add_shape(&world->shapes, cy);
 	return (0);
 }

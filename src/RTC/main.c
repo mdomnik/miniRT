@@ -264,11 +264,11 @@ t_world *triangle_scene(void)
 	return (world);
 }
 
-int	main(void)
+int	main(int ac, char *av[])
 {
 	t_loop	*loop;
 
-	loop = loop_init();
+	loop = loop_init(ac, av);
 	downscale_setting(1, loop->downscale);
 	mlx_key_hook(loop->mlx, &my_keyhook, loop);
 	mlx_scroll_hook(loop->mlx, &my_scrollhook, loop);

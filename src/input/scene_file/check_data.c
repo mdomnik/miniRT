@@ -21,7 +21,7 @@
  * @param options A pointer to the options struct containing the scene data.
  * @return Returns 0 if the scene data is valid, -1 otherwise.
  */
-int	check_scene_data(t_options *options)
+int	check_scene_data(t_options *options, t_world *world)
 {
 	int	i;
 
@@ -36,7 +36,7 @@ int	check_scene_data(t_options *options)
 			return (-1);
 		i++;
 	}
-	if (create_objects(options) == -1)
+	if (create_objects(options, world) == -1)
 		return (-1);
 	return (0);
 }
