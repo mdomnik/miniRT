@@ -21,39 +21,39 @@ It’s the secret sauce behind those jaw-dropping visuals in movies and games, m
 ### Mandatory part
 
 - 🟥 Window management (resizing?, exiting)
-- 🟥 3 Simple geometric objects
-    * 🟨 Plane
-    * 🟨 Sphere
-    * 🟥 Cylinder
-- 🟥 Objects intersections
-- 🟥 Inside of the object
-- 🟥 Change object's (unique) properties (diameter, height)
-- 🟥 Translation of an object
-- 🟥 Rotation of an object
-- 🟥 Light management
-    * 🟥 Spot brightness
-    * 🟥 Hard shadows
-    * 🟥 Ambiance lightning
-    * 🟥 Diffuse lightning
-- 🟥 `.rt` files
+- 🟩 3 Simple geometric objects
+    * 🟩 Plane
+    * 🟩 Sphere
+    * 🟩 Cylinder
+- 🟩 Objects intersections
+- 🟩 Inside of the object
+- 🟩 Change object's (unique) properties (diameter, height)
+- 🟩 Translation of an object
+- 🟩 Rotation of an object
+- 🟩 Light management
+    * 🟩 Spot brightness
+    * 🟩 Hard shadows
+    * 🟩 Ambiance lightning
+    * 🟩 Diffuse lightning
+- 🟨 `.rt` files
 
 ### Bonus part
 
-- 🟥 Specular reflection (Phong reflection model)
-- 🟥 Color disruption
-- 🟥 Colored light
-- 🟥 Multi-spot light
-- 🟥 2nd degree object(s) (Cone, Hyperboloid)
-- 🟥 Bump mapping
+- 🟩 Specular reflection (Phong reflection model)
+- 🟩 Color disruption
+- 🟩 Colored light
+- 🟩 Multi-spot light
+- 🟩 2nd degree object(s) (Cone, Hyperboloid)
+- 🟩 Bump mapping
 
 ### Extras
 
-- 🟥 Skybox (lightning?)
-- 🟥 Materials
-- 🟥 `.obj` files
-- 🟥 Complex objects
+- 🟩 Skybox (lightning?)
+- 🟩 Materials
+- 🟩 `.obj` files
+- 🟩 Complex objects
 - 🟥 Soft shadows
-- 🟥 Refraction
+- 🟨 Refraction
 - 🟥 Global illumination
 - 🟥 Caustic
-- 🟥 Multi-threading
+- 🟨 Multi-threading
