@@ -15,6 +15,8 @@
 
 //operations/utils/default.c
 t_material *default_material(void);
+float	current_ambient(int flag, float value);
+t_color3	global_color(int flag, t_color3 color);
 t_size_cap *default_size_cap(void);
 t_world	*default_world(void);
 t_world *test_world(void);

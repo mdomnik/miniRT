@@ -28,9 +28,9 @@ int create_objects(t_options *options, t_world *world)
 	i = 0;
 	while (options->scene.scene_objects[i] != NULL)
 	{
-		// if (ft_strcmp(options->scene.scene_objects[i][0], "A") == 0)
-		// 	if (create_ambient(options, options->scene.scene_objects[i]) == -1)
-		// 		return (-1);
+		if (ft_strcmp(options->scene.scene_objects[i][0], "A") == 0)
+			if (create_ambient(options, options->scene.scene_objects[i]) == -1)
+				return (-1);
 		if (ft_strcmp(options->scene.scene_objects[i][0], "C") == 0)
 			if (create_camera(&world->camera, options->scene.scene_objects[i]) == -1)
 				return (-1);
@@ -85,15 +85,17 @@ int		check_objects_helper(t_scene *scene, t_world *world, int i)
  */
 int create_ambient(t_options *options, char **args)
 {
-	t_ambient *ambient;
-	char **colors;
+	float		ambient;
+	char		**colors;
+	t_color3	color;
 
-	ambient = gc_malloc(sizeof(t_ambient));
+	(void)options;
 	colors = ft_split(args[2], ',');
-	ambient->light_ratio = ft_atof(args[1]);
-	ambient->color = new_tuple(ft_atof(colors[0]), ft_atof(colors[1]),
+	ambient = ft_atof(args[1]);
+	color = new_tuple(ft_atof(colors[0]), ft_atof(colors[1]),
 							   ft_atof(colors[2]), 1);
-	options->objects.ambient = ambient;
+	current_ambient('s', ambient);
+	global_color('s', color);
 	return (0);
 }
 

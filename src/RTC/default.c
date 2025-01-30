@@ -17,9 +17,9 @@ t_material *default_material(void)
 	t_material *material;
 
 	material = gc_malloc(sizeof(t_material));
-	material->color = new_color3(1, 1, 1);
+	material->color = add_tuples(new_color3(1, 1, 1), global_color('g', new_color3(0, 0, 0)));
 	material->pattern = NULL;
-	material->ambient = 0.3;
+	material->ambient = current_ambient('g', 0);
 	material->diffuse = 0.9;
 	material->specular = 0.9;
 	material->shininess = 200.0;
@@ -28,6 +28,24 @@ t_material *default_material(void)
 	material->refractive_index = 1.0;
     material->bump_map = NULL;
 	return (material);
+}
+
+float	current_ambient(int flag, float value)
+{
+	static float	ambient = 0.3;
+
+	if (flag == 's')
+		ambient = value;
+	return (ambient);
+}
+
+t_color3	global_color(int flag, t_color3 color)
+{
+	static t_color3	global;
+
+	if (flag == 's')
+		global = color;
+	return (global);
 }
 
 t_size_cap *default_size_cap(void)
