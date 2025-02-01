@@ -61,17 +61,11 @@ void	render_loop(void *param)
 
 	loop = (t_loop *)param;
 	if (program_state(0, 0) == EDIT_MODE)
-	{
 		mlx_set_window_title(loop->mlx, "EDIT MODE");
-	}
 	else if (program_state(0, 0) == CAMERA_MODE)
-	{
 		mlx_set_window_title(loop->mlx, "CAMERA MODE");
-	}
 	else
-	{
 		mlx_set_window_title(loop->mlx, "RENDER MODE");
-	}
 	if (render_max(0, 0) == 0)
 		loop->image = render_downscale(loop->mlx, loop->camera, loop->world);
 	else

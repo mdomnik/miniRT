@@ -45,7 +45,6 @@ mlx_image_t	*render_downscale(mlx_t *mlx, t_camera *camera, t_world *world)
 
 	downscale = downscale_setting(0, 0); // Get the current downscale factor
 	image = mlx_new_image(mlx, camera->hsize, camera->vsize);
-
 	y = 0;
 	while (y < camera->vsize)
 	{
@@ -58,7 +57,6 @@ mlx_image_t	*render_downscale(mlx_t *mlx, t_camera *camera, t_world *world)
 				ray = ray_for_pixel(camera, x, y);
 				color = color_at(world, ray, quality(0, RECURSIVE_DEPTH));
 				color_int = color_to_int(color);
-
 				// Fill in the downscaled grid
 				for (int dy = 0; dy < downscale; dy++)
 				{

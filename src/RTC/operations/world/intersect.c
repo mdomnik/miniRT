@@ -41,8 +41,6 @@ t_x	*intersect_world(t_world *world, t_ray *ray)
 	shape_temp = world->shapes;
 	xs->count = 0;
 	xs = intersect(world->shapes, ray);
-	// if (xs == NULL) // maybe remove
-	// 	return (NULL);
 	world->shapes = world->shapes->next;
 	while (world->shapes)
 	{

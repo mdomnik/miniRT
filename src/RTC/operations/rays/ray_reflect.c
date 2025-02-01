@@ -26,7 +26,7 @@ t_light_p	*new_light(t_point3 position, t_color3 intensity)
 {
 	t_light_p	*light;
 
-	light = gc_malloc(sizeof(t_light));
+	light = malloc(sizeof(t_light));
 	if (!light)
 		return (NULL);
 	light->position = position;

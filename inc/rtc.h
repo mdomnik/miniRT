@@ -165,14 +165,14 @@ struct	s_shape
 	t_matrix			transform;
 	t_material			material;
 	t_size_cap			size_cap;
-	t_ray				*saved_ray;	
+	t_ray				*saved_ray;
 
 	t_triangle			*triangle;
 
 	struct s_shape		*children;
 	int					children_count;
 	struct s_shape		*parent;
-	
+
 	struct s_bounds    (*bounds)(struct s_shape *shape);
 	struct s_shape		*next;
 };

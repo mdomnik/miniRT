@@ -144,7 +144,7 @@ int create_light(t_light_p **lights, char **args)
 
 	coords = ft_split(args[1], ',');
 	colors = ft_split(args[3], ',');
-	light = gc_malloc(sizeof(*light));
+	light = malloc(sizeof(*light));
 	light->position = new_point3(ft_atof(coords[0]), ft_atof(coords[1]),
 								 ft_atof(coords[2]));
 	light->intensity = new_tuple(ft_atof(colors[0]), ft_atof(colors[1]),

@@ -18,7 +18,6 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	t_loop	*loop;
 
 	loop = (t_loop *)param;
-	
 
 	movement_hooks(keydata, loop);
 	state_hooks(keydata, loop);
@@ -50,7 +49,6 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		supersampling_setting(1, SS_8X);
 	if (keydata.key == MLX_KEY_COMMA && keydata.action == MLX_PRESS)
 		supersampling_setting(1, SS_16X);
-	
 }
 
 void my_scrollhook(double xdelta, double ydelta, void* param)

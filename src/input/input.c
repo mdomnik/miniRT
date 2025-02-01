@@ -28,6 +28,7 @@ int	check_args(int argc, char **argv, t_world *world)
 		return (1);
 	if (check_scene_data(options, world) == -1)
 		return (1);
+	gc_free_gc(gc_set_storage('g'));
 	//t_obj objects = project->options->objects;
 	//project->objects = populate_object_struct(&objects);
 	return(0);

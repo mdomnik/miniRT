@@ -16,7 +16,7 @@ t_material *default_material(void)
 {
 	t_material *material;
 
-	material = gc_malloc(sizeof(t_material));
+	material = malloc(sizeof(t_material));
 	material->color = add_tuples(new_color3(1, 1, 1), global_color('g', new_color3(0, 0, 0)));
 	material->pattern = NULL;
 	material->ambient = current_ambient('g', 0);
@@ -52,7 +52,7 @@ t_size_cap *default_size_cap(void)
 {
     t_size_cap *size_cap;
 
-    size_cap = gc_malloc(sizeof(t_size_cap));
+    size_cap = malloc(sizeof(t_size_cap));
     size_cap->min = -1;
     size_cap->max = 0;
     size_cap->cap = 1;
