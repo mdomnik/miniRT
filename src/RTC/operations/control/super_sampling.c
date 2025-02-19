@@ -85,12 +85,12 @@ mlx_image_t	*render_supersampling(mlx_t *mlx, t_camera *camera, t_world *world)
 					float offset_y = (sample_y + 0.5f) * step;
 					t_ray *ray = ray_for_pixel_with_offset(camera, x + offset_x, y + offset_y);
 					sample_color = color_at(world, ray, quality(0, RECURSIVE_DEPTH));
-					color = add_tuples(color, sample_color);
+					color = add_tuple(color, sample_color);
 					free(ray); // Clean up dynamically allocated memory if applicable
 				}
 			}
 			// Average the color by dividing by the number of samples
-			color = mult_color(color, 1.0f / (samples_per_side * samples_per_side));
+			color = mult_color_scalar(color, 1.0f / (samples_per_side * samples_per_side));
 			color_int = color_to_int(color);
 			mlx_put_pixel(image, x, y, color_int);
 			x++;

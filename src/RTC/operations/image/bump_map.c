@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 20:09:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 22:12:06 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:02:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ t_vec3	perturb_normal(t_shape *shape,
 	dV = (h_down - h_up) * bump_map->scale;
 	tangent = new_vec3(1, 0, dU);
 	bitangent = new_vec3(0, 1, dV);
-	perturbed_normal = add_tuples(local_normal, add_tuples(tangent, bitangent));
+	perturbed_normal = add_tuple(local_normal, add_tuple(tangent, bitangent));
 	return (normalize(perturbed_normal));
 }

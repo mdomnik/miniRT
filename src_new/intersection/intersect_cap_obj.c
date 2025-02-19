@@ -1,64 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inter_helper.c                                     :+:      :+:    :+:   */
+/*   intersect_caps.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 16:43:14 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 21:38:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 14:06:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-float	check_axis(float origin, float direction, bool ret, int min, int max)
-{
-	float	tmin_numerator;
-	float	tmax_numerator;
-	float	tmin;
-	float	tmax;
-	float	temp;
 
-	tmin_numerator = (min - origin);
-	tmax_numerator = (max - origin);
-	if (fabsf(direction) >= EPSILON)
-	{
-		tmin = tmin_numerator / direction;
-		tmax = tmax_numerator / direction;
-	}
-	else
-	{
-		tmin = tmin_numerator * INFINITY;
-		tmax = tmax_numerator * INFINITY;
-	}
-	if (tmin > tmax)
-	{
-		temp = tmin;
-		tmin = tmax;
-		tmax = temp;
-	}
-	if (ret == false)
-		return (tmin);
-	else
-		return (tmax);
-}
-
-t_x	*add_intersection(t_x *xs, float t, t_shape *shape)
-{
-	t_x		*xs_temp;
-	t_i		i;
-
-	xs_temp = malloc(sizeof(t_x));
-	xs_temp->count = 1;
-	xs_temp->i = malloc(sizeof(t_i));
-	i = intersection(t, shape);
-	xs_temp->i[0] = i;
-	xs = intersections(xs->count + 1, xs, xs_temp);
-	return (xs);
-}
-
-//check cap
+// Checks if the intersection point of a ray with a plane lies within a unit disk.
 static bool	check_cap(t_ray *ray, float t)
 {
 	float	x;
@@ -69,16 +24,7 @@ static bool	check_cap(t_ray *ray, float t)
 	return (x * x + z * z <= 1);
 }
 
-bool	check_cap_cone(t_ray *ray, float t, float cap_radius)
-{
-	float	x;
-	float	z;
-
-	x = ray->orig.x + t * ray->dir.x;
-	z = ray->orig.z + t * ray->dir.z;
-	return (x * x + z * z <= cap_radius * cap_radius);
-}
-
+// Finds the intersections between ray and caps of a cylinder
 t_x	*intersect_caps(t_shape *cylinder, t_ray *ray, t_x *xs)
 {
 	float	t;
@@ -94,6 +40,19 @@ t_x	*intersect_caps(t_shape *cylinder, t_ray *ray, t_x *xs)
 	return (xs);
 }
 
+// Checks of the intersection point of a ray with a plane lies within the scope of caps of a cone
+static bool	check_cap_cone(t_ray *ray, float t, float cap_radius)
+{
+	float	x;
+	float	z;
+
+	x = ray->orig.x + t * ray->dir.x;
+	z = ray->orig.z + t * ray->dir.z;
+	return (x * x + z * z <= cap_radius * cap_radius);
+}
+
+
+// Finds the intersections between ray and caps of a cone
 t_x	*intersect_caps_cone(t_shape *cone, t_ray *ray, t_x *xs)
 {
 	float	t;

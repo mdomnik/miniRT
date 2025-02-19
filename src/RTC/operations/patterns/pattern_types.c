@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:20:31 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 20:52:54 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:02:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_color3	gradient_at(t_pattern *pattern, t_point3 *point)
 	t_color3	result;
 
 	distance = sub_color(pattern->b, pattern->a);
-	fraction = mult_color(distance, (point->x - floor(point->x)));
-	result = add_tuples(pattern->a, fraction);
+	fraction = mult_color_scalar(distance, (point->x - floor(point->x)));
+	result = add_tuple(pattern->a, fraction);
 	return (result);
 }
 

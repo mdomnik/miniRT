@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:36:41 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 19:50:44 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 14:15:27 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_x	*intersect_world(t_world *world, t_ray *ray)
 			if (xs == NULL)
 				xs = xs_temp;
 			else
-				xs = intersections((xs->count + xs_temp->count), xs, xs_temp);
+				xs =join_intersections((xs->count + xs_temp->count), xs, xs_temp);
 		}
 		world->shapes = world->shapes->next;
 	}

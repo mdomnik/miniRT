@@ -1,17 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_ops_1.c                                     :+:      :+:    :+:   */
+/*   matrix_basic_op.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 20:41:37 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 21:31:57 by mdomnik          ###   ########.fr       */
+/*   Created: 2025/02/19 13:09:16 by mdomnik           #+#    #+#             */
+/*   Updated: 2025/02/19 13:21:26 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
+//init identity matrix
+t_matrix	*init_identity_matrix(int size)
+{
+	int			i;
+	int			j;
+	t_matrix	*result;
+
+	i = 0;
+	result = malloc(sizeof(t_matrix));
+	while (i < size)
+	{
+		j = 0;
+		while (j < size)
+		{
+			if (i == j)
+				result->a[i][j] = 1;
+			else
+				result->a[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+	result->size = size;
+	return (result);
+}
+
+//multiplies two matrices and returns the result
 t_matrix	*multiply_matrices(t_matrix *mat1, t_matrix *mat2)
 {
 	int			i;
@@ -41,7 +68,7 @@ t_matrix	*multiply_matrices(t_matrix *mat1, t_matrix *mat2)
 	return (result);
 }
 
-//multiply 4x4 matrix by tuple
+//multiply matrix by a tuple
 t_tuple	multiply_matrix_tuple(t_matrix mat, t_tuple tuple)
 {
 	int		i;
@@ -57,70 +84,24 @@ t_tuple	multiply_matrix_tuple(t_matrix mat, t_tuple tuple)
 	return (result);
 }
 
-//init identity matrix
-t_matrix	*init_identity_matrix(int size)
+// transposes the matrix (rows become columns)
+t_matrix	transpose_matrix(t_matrix mat)
 {
 	int			i;
 	int			j;
-	t_matrix	*result;
+	t_matrix	result;
 
+	result.size = mat.size;
 	i = 0;
-	result = malloc(sizeof(t_matrix));
-	while (i < size)
+	while (i < mat.size)
 	{
 		j = 0;
-		while (j < size)
+		while (j < mat.size)
 		{
-			if (i == j)
-				result->a[i][j] = 1;
-			else
-				result->a[i][j] = 0;
+			result.a[i][j] = mat.a[j][i];
 			j++;
 		}
 		i++;
 	}
-	result->size = size;
-	return (result);
-}
-
-t_matrix	submatrix(t_matrix mat, int ex_row, int ex_col)
-{
-	int			row;
-	int			col;
-	int			r_idx;
-	int			c_idx;
-	t_matrix	result;
-
-	row = 0;
-	r_idx = 0;
-	if (ex_row < 0 || ex_row >= mat.size || ex_col < 0 || ex_col >= mat.size)
-	{
-		printf("Error: Invalid row or column index\n");
-		exit(1);
-	}
-	while (row < mat.size)
-	{
-		if (row == ex_row)
-		{
-			row++;
-			continue ;
-		}
-		col = 0;
-		c_idx = 0;
-		while (col < mat.size)
-		{
-			if (col == ex_col)
-			{
-				col++;
-				continue ;
-			}
-			result.a[r_idx][c_idx] = mat.a[row][col];
-			c_idx++;
-			col++;
-		}
-		r_idx++;
-		row++;
-	}
-	result.size = mat.size - 1;
 	return (result);
 }

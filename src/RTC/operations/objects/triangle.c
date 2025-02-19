@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 21:15:13 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 21:30:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 14:13:25 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ t_x	*intersect_triangle(t_shape *shape, t_ray *ray)
 	xs = malloc(sizeof(t_x));
 	xs->count = 1;
 	xs->i = malloc(sizeof(t_i));
-	xs->i[0] = intersection(t, shape);
+	xs->i[0] = create_intersection(t, shape);
 	return (xs);
 }

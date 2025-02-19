@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersection.c                                     :+:      :+:    :+:   */
+/*   intersect_and_hit.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 05:02:00 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 21:39:41 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 14:21:35 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
+// Finds all intersections between a ray and a given shape
 t_x	*intersect(t_shape *shape, t_ray *ray)
 {
 	t_ray	*local_ray;
@@ -23,6 +24,7 @@ t_x	*intersect(t_shape *shape, t_ray *ray)
 	return (xs);
 }
 
+// Function router based on object type
 t_x	*local_intersect(t_shape *shape, t_ray *ray)
 {
 	if (shape->type == SPHERE)
@@ -42,43 +44,7 @@ t_x	*local_intersect(t_shape *shape, t_ray *ray)
 	return (NULL);
 }
 
-//intersect a ray with an object
-t_i	intersection(float t, t_shape *shape)
-{
-	t_i	i;
-
-	i.t = t;
-	i.shape = shape;
-	return (i);
-}
-
-t_x	*intersections(int num_x, t_x *xs, t_x *temp_xs)
-{
-	t_x		*new_xs;
-	int		i;
-	int		j;
-
-	new_xs = malloc(sizeof(t_x));
-	new_xs->count = num_x;
-	new_xs->i = malloc(sizeof(t_i) * num_x);
-	i = 0;
-	while (i < xs->count)
-	{
-		new_xs->i[i].t = xs->i[i].t;
-		new_xs->i[i].shape = xs->i[i].shape;
-		i++;
-	}
-	j = 0;
-	while (j < temp_xs->count)
-	{
-		new_xs->i[i].t = temp_xs->i[j].t;
-		new_xs->i[i].shape = temp_xs->i[j].shape;
-		i++;
-		j++;
-	}
-	return (new_xs);
-}
-
+// Determines the 'hit'; lowest positive distance in intersections
 t_i	hit(t_x *xs)
 {
 	t_i	i;

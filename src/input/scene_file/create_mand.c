@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:43:25 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 15:59:11 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:02:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int create_camera(t_camera **camera, char **args)
 	pos = new_point3(ft_atof(coords[0]),
 		ft_atof(coords[1]), ft_atof(coords[2]));
 	(*camera)->transform = view_transformation(pos,
-		add_tuples(pos, new_point3(ft_atof(vector[0]), ft_atof(vector[1]),
+		add_tuple(pos, new_point3(ft_atof(vector[0]), ft_atof(vector[1]),
 				   ft_atof(vector[2]))),
 		new_vec3(0, 1, 0));
 	return (0);
@@ -151,7 +151,7 @@ int create_light(t_light_p **lights, char **args)
 								 ft_atof(colors[2]), 1);
 	light->intensity = normalize(light->intensity);
 	brightness = ft_atof(args[2]);
-	light->intensity = mult_color(light->intensity, brightness);
+	light->intensity = mult_color_scalar(light->intensity, brightness);
 	//add_light(&lights, light);
 	(*lights) = light;
 	return (0);

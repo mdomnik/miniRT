@@ -6,13 +6,13 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 19:22:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/27 20:49:19 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 12:56:11 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_color mult_color(t_color a, t_color b)
+t_color mult_color_scalar(t_color a, t_color b)
 {
 	t_color result;
 

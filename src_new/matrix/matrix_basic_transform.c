@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_transform_1.c                               :+:      :+:    :+:   */
+/*   matrix_basic_transform.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 00:08:24 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/11 18:40:49 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:07:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
+
+//moves the unit object to a point in the scene
 t_matrix	*translation(float x, float y, float z)
 {
 	t_matrix	*transform;
@@ -23,6 +25,7 @@ t_matrix	*translation(float x, float y, float z)
 	return (transform);
 }
 
+//scales unit object by a factor
 t_matrix	*scaling(float x, float y, float z)
 {
 	t_matrix	*transform;
@@ -34,6 +37,7 @@ t_matrix	*scaling(float x, float y, float z)
 	return (transform);
 }
 
+//rotates object on x axis
 t_matrix	*rotation_x(float rad)
 {
 	t_matrix	*transform;
@@ -46,6 +50,7 @@ t_matrix	*rotation_x(float rad)
 	return (transform);
 }
 
+//rotates object on y axis
 t_matrix	*rotation_y(float rad)
 {
 	t_matrix	*transform;
@@ -58,6 +63,7 @@ t_matrix	*rotation_y(float rad)
 	return (transform);
 }
 
+//rotates object on z axis
 t_matrix	*rotation_z(float rad)
 {
 	t_matrix	*transform;

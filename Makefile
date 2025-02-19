@@ -67,12 +67,6 @@ SRC_FILES		+= input/tests.c #remove
 
 SRC_FILES		+= RTC/main.c
 
-#MATRIX
-SRC_FILES		+= RTC/operations/matrix/matrix_ops_1.c
-SRC_FILES		+= RTC/operations/matrix/matrix_ops_2.c
-SRC_FILES		+= RTC/operations/matrix/matrix_ops_3.c
-SRC_FILES		+= RTC/operations/matrix/matrix_transform_1.c
-SRC_FILES		+= RTC/operations/matrix/matrix_transform_2.c
 
 #OBJECTS
 SRC_FILES		+= RTC/operations/objects/object_struct.c
@@ -92,11 +86,7 @@ SRC_FILES		+= RTC/operations/rays/ray.c
 #REFLECTIONS
 SRC_FILES		+= RTC/operations/reflections/reflection.c
 
-#TUPLES
-SRC_FILES		+= RTC/operations/tuples/tuples_init.c
-SRC_FILES		+= RTC/operations/tuples/tuples_ops_1.c
-SRC_FILES		+= RTC/operations/tuples/tuples_ops_2.c
-SRC_FILES		+= RTC/operations/tuples/tuples_ops_3.c
+
 
 #UTILS
 SRC_FILES		+= RTC/default.c
@@ -109,10 +99,6 @@ SRC_FILES		+= RTC/operations/world/transparency.c
 SRC_FILES		+= RTC/operations/world/view.c
 SRC_FILES		+= RTC/operations/world/camera.c
 SRC_FILES		+= RTC/operations/world/render.c
-
-SRC_FILES		+= RTC/operations/intersection/intersection.c
-SRC_FILES		+= RTC/operations/intersection/obj_inter.c
-SRC_FILES		+= RTC/operations/intersection/inter_helper.c
 
 #TEXTURES
 SRC_FILES		+= RTC/operations/textures/align_check.c
@@ -140,6 +126,28 @@ SRC_FILES		+= RTC/operations/control/hooks.c
 SRC_FILES		+= RTC/operations/control/hooks_helper.c
 
 SRC_FILES		+= RTC/test.c
+
+#------------------------------------------------------------
+
+#INTERSECTION
+SRC_FILES		+= RTC/src_new/intersection/intersect_and_hit.c
+SRC_FILES		+= RTC/src_new/intersection/intersect_basic_obj.c
+SRC_FILES		+= RTC/src_new/intersection/intersect_cap_obj.c
+SRC_FILES		+= RTC/src_new/intersection/intersect_complex_obj.c
+SRC_FILES		+= RTC/src_new/intersection/intersect_op.c
+
+#MATRIX
+SRC_FILES		+= RTC/src_new/matrix/matrix_basic_op.c
+SRC_FILES		+= RTC/src_new/matrix/matrix_basic_transform.c
+SRC_FILES		+= RTC/src_new/matrix/matrix_inverse.c
+SRC_FILES		+= RTC/src_new/matrix/matrix_shear_transform.c
+
+#TUPLES
+SRC_FILES		+= RTC/src_new/tuple/tuple_basic_op.c
+SRC_FILES		+= RTC/src_new/tuple/tuple_init.c
+SRC_FILES		+= RTC/src_new/tuple/tuple_color.c
+SRC_FILES		+= RTC/src_new/tuple/tuple_product_op.c
+#------------------------------------------------------------
 
 
 # Object files directory

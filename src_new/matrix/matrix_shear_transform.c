@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_transform_2.c                               :+:      :+:    :+:   */
+/*   matrix_shear_transform.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 03:08:40 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/22 18:37:58 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:08:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
+//stretches the object on the x axis
 t_matrix	*shearing_x(float y, float z)
 {
 	t_matrix	*transform;
@@ -22,6 +23,7 @@ t_matrix	*shearing_x(float y, float z)
 	return (transform);
 }
 
+//stretches the object on the y axis
 t_matrix	*shearing_y(float x, float z)
 {
 	t_matrix	*transform;
@@ -32,6 +34,7 @@ t_matrix	*shearing_y(float x, float z)
 	return (transform);
 }
 
+//stretches the object on the z axis
 t_matrix	*shearing_z(float x, float y)
 {
 	t_matrix	*transform;
@@ -42,7 +45,7 @@ t_matrix	*shearing_z(float x, float y)
 	return (transform);
 }
 
-//set transform
+//sets the transformation to the object
 void	set_transform(t_shape *shape, t_matrix *new_transform)
 {
 	int			i;

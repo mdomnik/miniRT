@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/20 21:56:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:02:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_material *default_material(void)
 	t_material *material;
 
 	material = malloc(sizeof(t_material));
-	material->color = add_tuples(new_color3(1, 1, 1), global_color('g', new_color3(0, 0, 0)));
+	material->color = add_tuple(new_color3(1, 1, 1), global_color('g', new_color3(0, 0, 0)));
 	material->pattern = NULL;
 	material->ambient = current_ambient('g', 0);
 	material->diffuse = 0.9;

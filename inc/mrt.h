@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2025/01/20 21:31:11 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 14:33:47 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 # include "defines/def_wavefront.h"
 # include "defines/def_render.h"
 # include "defines/def_control.h"
+
+# include "define/intersection.h"
 
 # define VP_WIDTH  960
 # define VP_HEIGHT 540

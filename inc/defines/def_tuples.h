@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:40:48 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 20:08:00 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:03:33 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_vec3		new_vec3(float x, float y, float z);
 t_color3	new_color3(float r, float g, float b);
 
 //operations/tuples/tuples_ops_1.c
-t_tuple		add_tuples(t_tuple a, t_tuple b);
+t_tuple		add_tuple(t_tuple a, t_tuple b);
 t_tuple		sub_tuple(t_tuple a, t_tuple b);
 t_tuple		neg_tuple(t_tuple a);
 t_tuple		mult_tuple(t_tuple a, float scalar);
@@ -41,9 +41,9 @@ float		dot_product(t_vec3 a, t_vec3 b);
 t_vec3		neg_vec3(t_vec3 a);
 t_vec3		normalize(t_vec3 a);
 t_vec3		cross_product(t_vec3 a, t_vec3 b);
-t_color3 	color_mult(t_color3 a, t_color3 b);
+t_color3 	mult_color(t_color3 a, t_color3 b);
 t_tuple		sub_tuple_p(t_tuple *a, t_tuple *b);
-t_tuple 	*add_tuples_p(t_tuple *a, t_tuple *b);
+t_tuple 	*add_tuple_p(t_tuple *a, t_tuple *b);
 t_color3	sub_color(t_tuple a, t_tuple b);
-t_color3	mult_color(t_color3 a, float scalar);
+t_color3	mult_color_scalar(t_color3 a, float scalar);
 #endif

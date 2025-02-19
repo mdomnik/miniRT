@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:45:36 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 20:44:23 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:02:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_color3	refracted_color(t_world *world, t_comp *comps, int remaining)
 	if (sin2_t > 1.0)
 		return (new_color3(0, 0, 0));
 	cos_t = sqrt(1.0 - sin2_t);
-	direction = add_tuples(mult_tuple(comps->normalv,
+	direction = add_tuple(mult_tuple(comps->normalv,
 				(n_ratio * cos_i - cos_t)), mult_tuple(comps->eyev, n_ratio));
 	refract_ray = ray_new(&comps->under_point, &direction);
 	color = mult_tuple(color_at(world, refract_ray, remaining - 1),

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/21 16:15:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:02:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_comp	*prepare_computations(t_i *i, t_ray *ray, t_x *xs)
 	}
 	else
 		comps->inside = false;
-	comps->over_point = add_tuples(comps->point, mult_tuple(comps->normalv, EPSILON));
+	comps->over_point = add_tuple(comps->point, mult_tuple(comps->normalv, EPSILON));
 	comps->under_point = sub_tuple(comps->point, mult_tuple(comps->normalv, EPSILON));
 	comps->reflectv = reflect(ray->dir, comps->normalv);
 	// transparency_and_refraction(i, comps, xs); reflection broken
@@ -52,12 +52,12 @@ t_color3	shade_hit(t_world *world, t_comp *comps, int remaining)
 		while (world->light != NULL)
 		{
 			in_shadow = is_shadowed(world, &world->light->position, &comps->over_point);
-			surface = add_tuples(lighting(&comps->shape->material, comps->shape, world->light, &comps->over_point, comps->eyev, comps->normalv, in_shadow), surface);
+			surface = add_tuple(lighting(&comps->shape->material, comps->shape, world->light, &comps->over_point, comps->eyev, comps->normalv, in_shadow), surface);
 			world->light = world->light->next;
 		}
 		world->light = light_temp;
 		reflected = reflected_color(world, comps, remaining);
-		return (add_tuples(surface, reflected));
+		return (add_tuple(surface, reflected));
 	}
 	return (new_color3(0, 0, 0));
 }

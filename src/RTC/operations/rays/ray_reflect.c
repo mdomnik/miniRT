@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 20:33:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 20:45:52 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:03:33 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ t_color3	lighting(t_material *m, t_shape *shape, t_light_p *light,
 	t_color3	result;
 
 	if (m->pattern)
-		effective_color = color_mult(pattern_at_object(m->pattern, shape, point), light->intensity);
+		effective_color = mult_color(pattern_at_object(m->pattern, shape, point), light->intensity);
 	else
-		effective_color = color_mult(m->color, light->intensity);
+		effective_color = mult_color(m->color, light->intensity);
 	lightv = normalize(sub_tuple_p(&light->position, point));
 	ambient = mult_tuple(effective_color, m->ambient);
 	light_dot_normal = dot_product(lightv, normalv);
@@ -77,6 +77,6 @@ t_color3	lighting(t_material *m, t_shape *shape, t_light_p *light,
 	if (in_shadow == true)
 		result = ambient;
 	else
-		result = add_tuples(add_tuples(ambient, diffuse), specular);
+		result = add_tuple(add_tuple(ambient, diffuse), specular);
 	return (result);
 }
