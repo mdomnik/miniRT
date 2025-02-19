@@ -130,23 +130,24 @@ SRC_FILES		+= RTC/test.c
 #------------------------------------------------------------
 
 #INTERSECTION
-SRC_FILES		+= RTC/src_new/intersection/intersect_and_hit.c
-SRC_FILES		+= RTC/src_new/intersection/intersect_basic_obj.c
-SRC_FILES		+= RTC/src_new/intersection/intersect_cap_obj.c
-SRC_FILES		+= RTC/src_new/intersection/intersect_complex_obj.c
-SRC_FILES		+= RTC/src_new/intersection/intersect_op.c
+SRC_FILES		+= src_new/intersection/intersect_and_hit.c
+SRC_FILES		+= src_new/intersection/intersect_basic_obj.c
+SRC_FILES		+= src_new/intersection/intersect_cap_obj.c
+SRC_FILES		+= src_new/intersection/intersect_complex_obj.c
+SRC_FILES		+= src_new/intersection/intersect_op.c
 
 #MATRIX
-SRC_FILES		+= RTC/src_new/matrix/matrix_basic_op.c
-SRC_FILES		+= RTC/src_new/matrix/matrix_basic_transform.c
-SRC_FILES		+= RTC/src_new/matrix/matrix_inverse.c
-SRC_FILES		+= RTC/src_new/matrix/matrix_shear_transform.c
+SRC_FILES		+= src_new/matrix/matrix_basic_op.c
+SRC_FILES		+= src_new/matrix/matrix_basic_transform.c
+SRC_FILES		+= src_new/matrix/matrix_inverse.c
+SRC_FILES		+= src_new/matrix/matrix_shear_transform.c
 
 #TUPLES
-SRC_FILES		+= RTC/src_new/tuple/tuple_basic_op.c
-SRC_FILES		+= RTC/src_new/tuple/tuple_init.c
-SRC_FILES		+= RTC/src_new/tuple/tuple_color.c
-SRC_FILES		+= RTC/src_new/tuple/tuple_product_op.c
+SRC_FILES		+= src_new/tuple/tuple_basic_op.c
+SRC_FILES		+= src_new/tuple/tuple_init.c
+SRC_FILES		+= src_new/tuple/tuple_color.c
+SRC_FILES		+= src_new/tuple/tuple_product_op.c
+
 #------------------------------------------------------------
 
 
