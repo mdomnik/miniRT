@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:45:01 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 14:50:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 18:29:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_color3	mult_color(t_color3 a, t_color3 b);
 t_color3	sub_color(t_tuple a, t_tuple b);
 t_color3	mult_color_scalar(t_color3 a, float scalar);
 t_tuple		sub_tuple_p(t_tuple *a, t_tuple *b); //replace
+int			color_to_int(t_color3 color);
 
 //tuple_init.c
 t_tuple		new_tuple(float x, float y, float z, float w);
@@ -38,5 +39,9 @@ float		dot_product(t_vec3 a, t_vec3 b);
 t_vec3		cross_product(t_vec3 a, t_vec3 b);
 t_vec3		normalize(t_vec3 a);
 t_vec3		neg_vec3(t_vec3 a);
+
+//tuple_utils.c
+bool	is_equal(float a, float b);
+float	deg_to_rad(float deg);
 
 #endif

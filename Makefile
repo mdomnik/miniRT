@@ -42,114 +42,112 @@ NAME			:= minirt
 # Source files directory
 SRC_DIR			:= src
 
+# CONTROL
+SRC_FILES	+=	control/control.c
+SRC_FILES	+=	control/hooks_helper.c
+SRC_FILES	+=	control/hooks.c
+SRC_FILES	+=	control/downscale.c
+SRC_FILES	+=	control/super_sampling.c
+
+# DEBUG
+SRC_FILES	+=	debug/debug_methods.c
+
+# GROUPS
+SRC_FILES	+=	groups/group_op.c
+SRC_FILES	+=	groups/inherit.c
+SRC_FILES	+=	groups/bound_op.c
+SRC_FILES	+=	groups/bound_types.c
+
+# INITIALIZE
+SRC_FILES	+=	initialize/init_else.c
+SRC_FILES	+=	initialize/init_complex_obj.c
+SRC_FILES	+=	initialize/struct_op.c
+SRC_FILES	+=	initialize/init_basic_obj.c
+
+# INTERSECTION
+SRC_FILES	+=	intersection/intersect_complex_obj.c
+SRC_FILES	+=	intersection/intersect_op.c
+SRC_FILES	+=	intersection/intersect_and_hit.c
+SRC_FILES	+=	intersection/intersect_basic_obj.c
+SRC_FILES	+=	intersection/intersect_cap_obj.c
+
+# LIGHTING
+SRC_FILES	+=	lighting/transparency.c
+SRC_FILES	+=	lighting/find_normal.c
+SRC_FILES	+=	lighting/light_and_reflect.c
+SRC_FILES	+=	lighting/shadows_and_computations.c
+SRC_FILES	+=	lighting/reflection_and_refraction.c
+SRC_FILES	+=	lighting/ray_op.c
+SRC_FILES	+=	lighting/ambient.c
+
+# MATRIX
+SRC_FILES	+=	matrix/matrix_inverse.c
+SRC_FILES	+=	matrix/matrix_basic_op.c
+SRC_FILES	+=	matrix/matrix_basic_transform.c
+SRC_FILES	+=	matrix/matrix_shear_transform.c
+
+# PARSE/OBJ
+SRC_FILES	+=	parse/obj/obj_to_faces.c
+
+# PARSE/PPM
+SRC_FILES	+=	parse/ppm/write_to_ppm.c
+SRC_FILES	+=	parse/ppm/canvas_utils.c
+SRC_FILES	+=	parse/ppm/canvas_from_ppm.c
+
+# PARSE/RT
+SRC_FILES	+=	parse/rt/tests.c
+SRC_FILES	+=	parse/rt/find_scene_file.c
+SRC_FILES	+=	parse/rt/input.c
+SRC_FILES	+=	parse/rt/canvas_colors.c
+
+# PARSE/RT/FLAGS
+SRC_FILES	+=	parse/rt/flags/handle_values.c
+SRC_FILES	+=	parse/rt/flags/flag_formatting.c
+SRC_FILES	+=	parse/rt/flags/check_value_format.c
+SRC_FILES	+=	parse/rt/flags/flag_utils.c
+SRC_FILES	+=	parse/rt/flags/create_flag_nodes.c
+
+# PARSE/RT/SCENE_FILE
+SRC_FILES	+=	parse/rt/scene_file/create_mand.c
+SRC_FILES	+=	parse/rt/scene_file/file_data.c
+SRC_FILES	+=	parse/rt/scene_file/check_data.c
+SRC_FILES	+=	parse/rt/scene_file/to_object.c
+SRC_FILES	+=	parse/rt/scene_file/append.c
+SRC_FILES	+=	parse/rt/scene_file/ruleset.c
+SRC_FILES	+=	parse/rt/scene_file/file_utils.c
+SRC_FILES	+=	parse/rt/scene_file/create_obj.c
+
+# TEMPLATE_OBJ
+SRC_FILES	+=	template_obj/hexagon.c
+SRC_FILES	+=	template_obj/ice_cream.c
+
+# TEXTURES
+SRC_FILES	+=	textures/texture_init.c
+SRC_FILES	+=	textures/cube_obj.c
+SRC_FILES	+=	textures/map_basic_obj.c
+SRC_FILES	+=	textures/pattern_lib.c
+SRC_FILES	+=	textures/cube_side_align_2.c
+SRC_FILES	+=	textures/uv.c
+SRC_FILES	+=	textures/pattern.c
+SRC_FILES	+=	textures/align_check.c
+SRC_FILES	+=	textures/bump_map.c
+SRC_FILES	+=	textures/cube_side_align_1.c
+SRC_FILES	+=	textures/mapped_cube.c
+
+# TUPLE
+SRC_FILES	+=	tuple/tuple_basic_op.c
+SRC_FILES	+=	tuple/tuple_utils.c
+SRC_FILES	+=	tuple/tuple_init.c
+SRC_FILES	+=	tuple/tuple_color.c
+SRC_FILES	+=	tuple/tuple_product_op.c
+
+# VIEW
+SRC_FILES	+=	view/camera_op.c
+SRC_FILES	+=	view/view_transformation.c
+SRC_FILES	+=	view/render_loop.c
+
 # MAIN
-#SRC_FILES		+= tempmain.c
-
-# INPUT Sources
-SRC_FILES		+= input/flags/check_value_format.c
-SRC_FILES		+= input/flags/create_flag_nodes.c
-SRC_FILES		+= input/flags/flag_formatting.c
-SRC_FILES		+= input/flags/flag_utils.c
-SRC_FILES		+= input/flags/handle_values.c
-
-SRC_FILES		+= input/scene_file/append.c
-SRC_FILES		+= input/scene_file/check_data.c
-SRC_FILES		+= input/scene_file/create_mand.c
-SRC_FILES		+= input/scene_file/create_obj.c
-SRC_FILES		+= input/scene_file/file_data.c
-SRC_FILES		+= input/scene_file/file_utils.c
-SRC_FILES		+= input/scene_file/ruleset.c
-SRC_FILES		+= input/scene_file/to_object.c
-
-SRC_FILES		+= input/input.c
-SRC_FILES		+= input/find_scene_file.c
-SRC_FILES		+= input/tests.c #remove
-
-SRC_FILES		+= RTC/main.c
-
-
-#OBJECTS
-SRC_FILES		+= RTC/operations/objects/object_struct.c
-SRC_FILES		+= RTC/operations/objects/shapes.c
-SRC_FILES		+= RTC/operations/objects/objects.c
-SRC_FILES		+= RTC/operations/objects/triangle.c
-
-#PATTERNS
-SRC_FILES		+= RTC/operations/patterns/patterns.c
-SRC_FILES		+= RTC/operations/patterns/pattern_types.c
-
-#RAY
-SRC_FILES		+= RTC/operations/rays/ray_normal.c
-SRC_FILES		+= RTC/operations/rays/ray_reflect.c
-SRC_FILES		+= RTC/operations/rays/ray.c
-
-#REFLECTIONS
-SRC_FILES		+= RTC/operations/reflections/reflection.c
-
-
-
-#UTILS
-SRC_FILES		+= RTC/default.c
-SRC_FILES		+= RTC/operations/utils/utils_1.c
-
-#WORLD
-SRC_FILES		+= RTC/operations/world/comps.c
-SRC_FILES		+= RTC/operations/world/intersect.c
-SRC_FILES		+= RTC/operations/world/transparency.c
-SRC_FILES		+= RTC/operations/world/view.c
-SRC_FILES		+= RTC/operations/world/camera.c
-SRC_FILES		+= RTC/operations/world/render.c
-
-#TEXTURES
-SRC_FILES		+= RTC/operations/textures/align_check.c
-SRC_FILES		+= RTC/operations/textures/cube_uv_dir.c
-SRC_FILES		+= RTC/operations/textures/cube_uv.c
-SRC_FILES		+= RTC/operations/textures/uv.c
-SRC_FILES		+= RTC/operations/textures/map.c
-
-#IMAGE
-SRC_FILES		+= RTC/operations/image/bump_map.c
-SRC_FILES		+= RTC/operations/image/write_ppm.c
-SRC_FILES		+= RTC/operations/image/read_ppm.c
-
-SRC_FILES		+= RTC/operations/group/inherit.c
-SRC_FILES		+= RTC/operations/group/group.c
-SRC_FILES		+= RTC/operations/group/group_objs.c
-SRC_FILES		+= RTC/operations/group/bounds.c
-
-SRC_FILES		+= RTC/operations/wavefront_obj/parser.c
-
-SRC_FILES		+= RTC/operations/control/control.c
-SRC_FILES		+= RTC/operations/control/downscale.c
-SRC_FILES		+= RTC/operations/control/super_sampling.c
-SRC_FILES		+= RTC/operations/control/hooks.c
-SRC_FILES		+= RTC/operations/control/hooks_helper.c
-
-SRC_FILES		+= RTC/test.c
-
-#------------------------------------------------------------
-
-#INTERSECTION
-SRC_FILES		+= src_new/intersection/intersect_and_hit.c
-SRC_FILES		+= src_new/intersection/intersect_basic_obj.c
-SRC_FILES		+= src_new/intersection/intersect_cap_obj.c
-SRC_FILES		+= src_new/intersection/intersect_complex_obj.c
-SRC_FILES		+= src_new/intersection/intersect_op.c
-
-#MATRIX
-SRC_FILES		+= src_new/matrix/matrix_basic_op.c
-SRC_FILES		+= src_new/matrix/matrix_basic_transform.c
-SRC_FILES		+= src_new/matrix/matrix_inverse.c
-SRC_FILES		+= src_new/matrix/matrix_shear_transform.c
-
-#TUPLES
-SRC_FILES		+= src_new/tuple/tuple_basic_op.c
-SRC_FILES		+= src_new/tuple/tuple_init.c
-SRC_FILES		+= src_new/tuple/tuple_color.c
-SRC_FILES		+= src_new/tuple/tuple_product_op.c
-
-#------------------------------------------------------------
-
+SRC_FILES	+=	main.c
 
 # Object files directory
 OBJ_DIR			:= .obj

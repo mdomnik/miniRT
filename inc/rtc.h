@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/22 18:11:49 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 18:56:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,4 @@ struct s_obj_file
 	int				face_count;
 };
 
-//test TO REMOVE !!!!!!!!!!!!!
-void		print_matrix(t_matrix mat);
-void		print_tuple(t_tuple tuple);
 #endif

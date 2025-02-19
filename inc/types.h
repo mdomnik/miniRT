@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/16 23:17:51 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 18:56:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,4 +169,3 @@ struct s_material
 	float			refractive_index;
 	t_bump_map		*bump_map;
 };
-
