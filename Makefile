@@ -27,7 +27,8 @@ LIBS			+= -ldl -lglfw -pthread -lm
 MLX_DIR			:= lib/MLX42
 MLX_BUILD_DIR	:= $(MLX_DIR)/build
 MLX_A			:= $(MLX_BUILD_DIR)/libmlx42.a
-MLX_LIB_LINK	:= https://github.com/codam-coding-college/MLX42/archive/refs/tags/v2.3.4.tar.gz
+# MLX_LIB_LINK	:= https://github.com/codam-coding-college/MLX42/archive/refs/tags/v2.3.4.tar.gz
+MLX_LIB_LINK	:= https://github.com/tesla33io/MLX42/releases/download/0.0.1/mlx42.pre-eval.tar.gz
 
 LFT_DIR			:= lib/libft
 LFT_A			:= $(LFT_DIR)/libft.a
