@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:43:25 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 13:02:28 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 20:58:13 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,6 @@ int create_light(t_light_p **lights, char **args)
 	light->intensity = normalize(light->intensity);
 	brightness = ft_atof(args[2]);
 	light->intensity = mult_color_scalar(light->intensity, brightness);
-	//add_light(&lights, light);
-	(*lights) = light;
+	add_light(lights, light);
 	return (0);
 }

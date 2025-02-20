@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:53:38 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 18:57:37 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/20 10:01:24 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_color3	reflected_color(t_world *world, t_comp *comps, int remaining)
 	if (comps->shape->material.reflective == 0) //maybe should be world
 		return (new_color3(0, 0, 0));
 	reflect_ray = ray_new(&comps->over_point, &comps->reflectv);
-	color = color_at(world, reflect_ray, remaining - 1);
+	color = color_at(world, reflect_ray, comps, remaining - 1);
 	return (mult_tuple(color, comps->shape->material.reflective));
 }
 
@@ -52,7 +52,7 @@ t_color3	refracted_color(t_world *world, t_comp *comps, int remaining)
 	direction = add_tuple(mult_tuple(comps->normalv,
 				(n_ratio * cos_i - cos_t)), mult_tuple(comps->eyev, n_ratio));
 	refract_ray = ray_new(&comps->under_point, &direction);
-	color = mult_tuple(color_at(world, refract_ray, remaining - 1),
+	color = mult_tuple(color_at(world, refract_ray, comps, remaining - 1),
 			comps->shape->material.transparency);
 	return (color);
 }

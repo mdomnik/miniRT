@@ -44,10 +44,10 @@ SRC_DIR			:= src
 
 # CONTROL
 SRC_FILES	+=	control/control.c
-SRC_FILES	+=	control/hooks_helper.c
-SRC_FILES	+=	control/hooks.c
-SRC_FILES	+=	control/downscale.c
-SRC_FILES	+=	control/super_sampling.c
+# SRC_FILES	+=	control/hooks_helper.c
+# SRC_FILES	+=	control/hooks.c
+# SRC_FILES	+=	control/downscale.c
+# SRC_FILES	+=	control/super_sampling.c
 
 # DEBUG
 SRC_FILES	+=	debug/debug_methods.c

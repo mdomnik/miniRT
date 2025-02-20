@@ -6,18 +6,15 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 18:57:41 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/20 10:01:33 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
 //prepare computations
-t_comp	*prepare_computations(t_i *i, t_ray *ray, t_x *xs)
+void	prepare_computations(t_i *i, t_ray *ray, t_x *xs, t_comp *comps)
 {
-	t_comp	*comps;
-
-	comps = malloc(sizeof(t_comp));
 	comps->t = i->t;
 	comps->shape = i->shape;
 	comps->point = ray_position(ray, comps->t);
@@ -35,7 +32,6 @@ t_comp	*prepare_computations(t_i *i, t_ray *ray, t_x *xs)
 	comps->reflectv = reflect(ray->dir, comps->normalv);
 	// transparency_and_refraction(i, comps, xs); reflection broken
 	(void)xs; // needs to stay when we add reflection
-	return (comps);
 }
 
 t_color3	shade_hit(t_world *world, t_comp *comps, int remaining)
@@ -62,11 +58,10 @@ t_color3	shade_hit(t_world *world, t_comp *comps, int remaining)
 	return (new_color3(0, 0, 0));
 }
 
-t_color3	color_at(t_world *world, t_ray *ray, int remaining)
+t_color3	color_at(t_world *world, t_ray *ray, t_comp *comp, int remaining)
 {
 	t_x			*xs;
 	t_i			i;
-	t_comp		*comps;
 	t_color3	color;
 
 	xs = intersect_world(world, ray);
@@ -85,8 +80,8 @@ t_color3	color_at(t_world *world, t_ray *ray, int remaining)
 		free(xs);
 		return (new_color3(0, 0, 0));
 	}
-	comps = prepare_computations(&i, ray, xs);
-	color = shade_hit(world, comps, remaining);
+	prepare_computations(&i, ray, xs, comp);
+	color = shade_hit(world, comp, remaining);
 	return (color);
 }
 

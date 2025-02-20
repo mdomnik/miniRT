@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   view1.h                                            :+:      :+:    :+:   */
+/*   view.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:32:19 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 19:03:56 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/19 20:11:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //camera_op.c
 void		get_pixel_size(t_camera *camera);
 t_camera	*camera_new(int hsize, int vsize, float fov);
-t_ray		*ray_for_pixel(t_camera *camera, int px, int py);
+void		ray_for_pixel(t_camera *camera, int px, int py, t_ray *ray);
 
 //render_loop.c
 t_loop 		*loop_init(int ac, char *av[]);

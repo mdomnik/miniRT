@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:07:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 18:55:29 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/20 10:00:00 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ t_color3	reflected_color(t_world *world, t_comp *comps, int remaining);
 t_color3	refracted_color(t_world *world, t_comp *comps, int remaining);
 
 //shadows_and_computations.c
-t_comp		*prepare_computations(t_i *i, t_ray *ray, t_x *xs);
+void	prepare_computations(t_i *i, t_ray *ray, t_x *xs, t_comp *comps);
 t_color3	shade_hit(t_world *world, t_comp *comps, int remaining);
-t_color3	color_at(t_world *world, t_ray *ray, int remaining);
+t_color3	color_at(t_world *world, t_ray *ray, t_comp *comp, int remaining);
 bool		is_shadowed(t_world *world, t_point3 *light_pos, t_point3 *point);
 
 //transparency.c
