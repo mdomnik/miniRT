@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:49:12 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 18:58:47 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:10:00 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_pattern	*new_pattern(t_pattern_type pattern, t_color3 a, t_color3 b)
 	p->type = pattern;
 	p->a = a;
 	p->b = b;
-	p->transform = *init_identity_matrix(4);
+	p->transform = init_identity_matrix(4);
 	return (p);
 }
 

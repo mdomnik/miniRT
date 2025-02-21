@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:05:26 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 18:59:11 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:30:35 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_matrix view_transformation(t_point3 from, t_point3 to, t_vec3 up)
 		left = cross_product(forward, upn);
 	}
 	true_up = cross_product(left, forward);
-	orientation = *init_identity_matrix(4);
+	orientation = init_identity_matrix(4);
 	fill_row(&orientation, left, 0);
 	fill_row(&orientation, true_up, 1);
 	fill_row(&orientation, neg_vec3(forward), 2);

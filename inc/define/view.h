@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:32:19 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 20:11:15 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/20 10:25:46 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		ray_for_pixel(t_camera *camera, int px, int py, t_ray *ray);
 //render_loop.c
 t_loop 		*loop_init(int ac, char *av[]);
 mlx_image_t	*render_tooltip(mlx_t *mlx, t_camera *camera);
+mlx_image_t *render(mlx_t *mlx, t_camera *camera, t_world *world);
 void		render_loop(void *param);
 
 //view_transformation.c

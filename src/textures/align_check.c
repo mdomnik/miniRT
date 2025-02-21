@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 20:16:01 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/17 20:05:19 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:10:46 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_pattern	*align_check_map(void *uv_pattern, t_uv_val (*uv_map)(t_point3))
 	pattern->type = ALIGN_CHECK;
 	pattern->uv_pattern = uv_pattern;
 	pattern->uv_map = uv_map;
-	pattern->transform = *init_identity_matrix(4);
+	pattern->transform = init_identity_matrix(4);
 	pattern->a = (t_color3){0};
 	pattern->b = (t_color3){0};
 	return (pattern);

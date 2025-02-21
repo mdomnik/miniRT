@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:25:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/20 10:09:08 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/20 10:28:46 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ t_loop *loop_init(int ac, char *av[])
 	loop->world->light = NULL;
 	if (check_args(ac, av, loop->world))
 		exit(42);
-	// downscale_setting(1, SIXTEENTH);
-	int e = quality(1, MEDIUM);
-	(void)e;
 	loop->camera = camera_new(800, 400, 0.8);
 	loop->camera->transform = view_transformation(new_point3(0, 30, -50),
 			new_point3(0, 0, 1), new_vec3(0, 1, 0));
@@ -85,8 +82,7 @@ mlx_image_t *render(mlx_t *mlx, t_camera *camera, t_world *world)
 		{
 			ray_for_pixel(camera, x, y, ray);
 			memset(comp, 0, sizeof(t_comp));
-			
-			color = color_at(world, ray, comp, RECURSIVE_DEPTH);
+			color = color_at(world, ray, comp, 0); //should be recursive_depth
 			color_int = color_to_int(color);
 			mlx_put_pixel(image, x, y, color_int);
 			x++;

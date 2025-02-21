@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/20 10:01:33 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/20 10:13:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,9 @@ t_color3	color_at(t_world *world, t_ray *ray, t_comp *comp, int remaining)
 		return (new_color3(0, 0, 0));
 	}
 	prepare_computations(&i, ray, xs, comp);
-	color = shade_hit(world, comp, remaining);
+	free(xs->i);
+	free(xs);
+	color = shade_hit(world, comp, remaining);	
 	return (color);
 }
 

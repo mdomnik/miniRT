@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:07:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 22:23:36 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:03:33 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_camera	*camera_new(int hsize, int vsize, float fov)
 	camera->hsize = hsize;
 	camera->vsize = vsize;
 	camera->fov = fov;
-	camera->transform = *init_identity_matrix(4);
+	camera->transform = init_identity_matrix(4);
 	camera->y_angle = 0;
 	get_pixel_size(camera);
 	return (camera);

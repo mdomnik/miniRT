@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:35:20 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 18:56:57 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:02:23 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_shape	*cube(void)
 
 	shape = malloc(sizeof(t_shape));
 	shape->type = CUBE;
-	shape->transform = *init_identity_matrix(4);
-	shape->material = *default_material();
+	shape->transform = init_identity_matrix(4);
+	shape->material = default_material();
 	shape->saved_ray = NULL;
 	shape->children = NULL;
 	shape->children_count = 0;
@@ -36,9 +36,9 @@ t_shape	*cone(void)
 
 	shape = malloc(sizeof(t_shape));
 	shape->type = CONE;
-	shape->transform = *init_identity_matrix(4);
-	shape->material = *default_material();
-	shape->size_cap = *default_size_cap();
+	shape->transform = init_identity_matrix(4);
+	shape->material = default_material();
+	shape->size_cap = default_size_cap();
 	shape->saved_ray = NULL;
 	shape->children = NULL;
 	shape->children_count = 0;
@@ -55,8 +55,8 @@ t_shape	*triangle(t_point3 p1, t_point3 p2, t_point3 p3)
 
 	shape = malloc(sizeof(t_shape));
 	shape->type = TRIANGLE;
-	shape->material = *default_material();
-	shape->transform = *init_identity_matrix(4);
+	shape->material = default_material();
+	shape->transform = init_identity_matrix(4);
 	shape->saved_ray = NULL;
 	shape->children = NULL;
 	shape->children_count = 0;
@@ -73,8 +73,8 @@ t_shape	*group(void)
 
 	shape = malloc(sizeof(t_shape));
 	shape->type = GROUP;
-	shape->transform = *init_identity_matrix(4);
-	shape->material = *default_material();
+	shape->transform = init_identity_matrix(4);
+	shape->material = default_material();
 	shape->saved_ray = NULL;
 	shape->children = NULL;
 	shape->children_count = 0;

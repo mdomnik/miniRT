@@ -6,14 +6,38 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:09:16 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 15:07:43 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:07:04 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
 //init identity matrix
-t_matrix	*init_identity_matrix(int size)
+t_matrix	init_identity_matrix(int size)
+{
+	int			i;
+	int			j;
+	t_matrix	result;
+
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (j < size)
+		{
+			if (i == j)
+				result.a[i][j] = 1;
+			else
+				result.a[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+	result.size = size;
+	return (result);
+}
+
+t_matrix	*init_identity_matrix_p(int size)
 {
 	int			i;
 	int			j;

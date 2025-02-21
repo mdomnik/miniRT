@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:43:25 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 20:58:13 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 16:43:17 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ int create_light(t_light_p **lights, char **args)
 
 	coords = ft_split(args[1], ',');
 	colors = ft_split(args[3], ',');
-	light = malloc(sizeof(*light));
+	light = malloc(sizeof(t_light_p));
 	light->position = new_point3(ft_atof(coords[0]), ft_atof(coords[1]),
 								 ft_atof(coords[2]));
 	light->intensity = new_tuple(ft_atof(colors[0]), ft_atof(colors[1]),
@@ -152,6 +152,7 @@ int create_light(t_light_p **lights, char **args)
 	light->intensity = normalize(light->intensity);
 	brightness = ft_atof(args[2]);
 	light->intensity = mult_color_scalar(light->intensity, brightness);
+	light->next = NULL;
 	add_light(lights, light);
 	return (0);
 }

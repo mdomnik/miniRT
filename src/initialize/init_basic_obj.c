@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:34:15 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 18:56:55 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:02:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_shape	*sphere(void)
 
 	shape = malloc(sizeof(t_shape));
 	shape->type = SPHERE;
-	shape->transform = *init_identity_matrix(4);
-	shape->material = *default_material();
+	shape->transform = init_identity_matrix(4);
+	shape->material = default_material();
 	shape->saved_ray = NULL;
 	shape->children = NULL;
 	shape->children_count = 0;
@@ -36,8 +36,8 @@ t_shape	*plane(void)
 
 	shape = malloc(sizeof(t_shape));
 	shape->type = PLANE;
-	shape->transform = *init_identity_matrix(4);
-	shape->material = *default_material();
+	shape->transform = init_identity_matrix(4);
+	shape->material = default_material();
 	shape->saved_ray = NULL;
 	shape->children = NULL;
 	shape->children_count = 0;
@@ -54,9 +54,9 @@ t_shape	*cylinder(void)
 
 	shape = malloc(sizeof(t_shape));
 	shape->type = CYLINDER;
-	shape->transform = *init_identity_matrix(4);
-	shape->material = *default_material();
-	shape->size_cap = *default_size_cap();
+	shape->transform = init_identity_matrix(4);
+	shape->material = default_material();
+	shape->size_cap = default_size_cap();
 	shape->saved_ray = NULL;
 	shape->children = NULL;
 	shape->children_count = 0;

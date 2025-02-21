@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:02:16 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 19:01:50 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 16:44:32 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_shape		*triangle(t_point3 p1, t_point3 p2, t_point3 p3);
 t_shape		*group(void);
 
 //init_else.c
-t_material	*default_material(void);
-t_size_cap	*default_size_cap(void);
+t_material	default_material(void);
+t_size_cap	default_size_cap(void);
 
 //struct_op.c
 void		add_light(t_light_p **lights, t_light_p *new_light);

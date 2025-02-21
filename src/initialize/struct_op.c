@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:57:37 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 17:29:20 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 16:43:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,15 @@ void	add_shape(t_shape **shapes, t_shape *new_shape)
 {
 	t_shape	*temp;
 
-	if (!new_shape)
-		return ;
 	if (!*shapes)
 	{
+		if (!new_shape)
+			return ;
 		*shapes = new_shape;
 		return ;
 	}
+	if (!new_shape)
+		return ;
 	temp = *shapes;
 	while (temp->next != NULL)
 		temp = temp->next;

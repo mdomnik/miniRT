@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:27:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 18:58:31 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:09:11 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ pattern = malloc(sizeof(t_pattern));
 pattern->type = CUBE_MAP;
 pattern->uv_pattern = cube;
 pattern->uv_map = NULL;
-pattern->transform = *init_identity_matrix(4);
+pattern->transform = init_identity_matrix(4);
 pattern->a = (t_color3){0};
 pattern->b = (t_color3){0};
 return (pattern);

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:38:49 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 14:51:20 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:07:19 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define MATRIX_H
 
 //matrix_basic_op.c
-t_matrix	*init_identity_matrix(int size);
+t_matrix	init_identity_matrix(int size);
+t_matrix	*init_identity_matrix_p(int size);
 t_matrix	*multiply_matrices(t_matrix *mat1, t_matrix *mat2);
 t_tuple		multiply_matrix_tuple(t_matrix mat, t_tuple tuple);
 t_matrix	transpose_matrix(t_matrix mat);

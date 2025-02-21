@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:49:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/09 17:22:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/20 11:39:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief Validates the file name from the command line arguments and 
- * assigns itto the scene file in the options structure.
+ * assigns into the scene file in the options structure.
  *
  * This function iterates through the command line arguments and checks
  * if each argument is a valid scene file. If a valid scene file is found,
