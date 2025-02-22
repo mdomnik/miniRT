@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:54:28 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 15:07:45 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 01:05:22 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,31 @@ t_x	*intersect_sphere(t_shape *sphere, t_ray *ray)
 }
 
 // Determines if given ray hit a plane object
-t_x	*intersect_plane(t_shape *plane, t_ray *ray)
+t_x *intersect_plane(t_shape *plane, t_ray *ray)
 {
-	t_x		*xs;
-	t_i		i;
-	float	t;
+    t_x *xs = malloc(sizeof(t_x));
+    if (!xs) return NULL; // Handle memory allocation failure
 
-	xs = malloc(sizeof(t_x));
-	if (fabsf(ray->dir.y) < EPSILON)
-		return (NULL);
-	t = -ray->orig.y / ray->dir.y;
-	i = create_intersection(t, plane);
-	xs->count = 1;
-	xs->i = malloc(sizeof(t_i));
-	xs->i[0] = i;
-	return (xs);
+    xs->i = malloc(sizeof(t_i));
+    if (!xs->i) {
+        free(xs);
+        return NULL;
+    }
+
+    xs->count = 0;
+    if (fabs(ray->dir.y) < EPSILON) {
+        free(xs->i);
+        free(xs);
+        return NULL; // Return NULL instead of empty allocation
+    }
+
+    xs->count = 1;
+    xs->i[0].t = -ray->orig.y / ray->dir.y;
+    xs->i[0].shape = plane;
+
+    return xs;
 }
+
 
 // Determines if given ray hit a cylinder object
 t_x	*intersect_cylinder(t_shape *cylinder, t_ray *ray)

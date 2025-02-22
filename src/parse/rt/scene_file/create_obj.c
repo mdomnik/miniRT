@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/21 18:10:21 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:41:27 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	create_sphere(t_world *world, char **args)
 	char		**coords;
 	char		**color;
 	float		radius;
-	t_matrix	*transform;
+	t_matrix	transform;
 
 	sp = sphere();
 	coords = ft_split(args[1], ',');
 	color = ft_split(args[3], ',');
-	transform = init_identity_matrix_p(4);
+	transform = init_identity_matrix(4);
 	transform = multiply_matrices(transform, translation(ft_atof(coords[0]), ft_atof(coords[1]),
 			ft_atof(coords[2])));
 	radius = ft_atof(args[2]) / 2.0;
@@ -58,13 +58,13 @@ int	create_plane(t_world *world, char **args)
 	char		**coords;
 	char		**normal;
 	char		**color;
-	t_matrix	*transform;
+	t_matrix	transform;
 
 	pl = plane();
 	coords = ft_split(args[1], ',');
 	normal = ft_split(args[2], ',');
 	color = ft_split(args[3], ',');
-	transform = init_identity_matrix_p(4);
+	transform = init_identity_matrix(4);
 	transform = multiply_matrices(transform, translation(ft_atof(coords[0]), ft_atof(coords[1]),
 			ft_atof(coords[2])));
 	transform = multiply_matrices(transform, rotation_x(deg_to_rad(ft_atof(normal[0])*180)));

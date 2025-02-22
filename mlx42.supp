@@ -1,22 +1,20 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    supressions.supp                                   :+:      :+:    :+:    #
+#    mlx42.supp                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/16 16:58:12 by mdomnik           #+#    #+#              #
-#    Updated: 2025/02/19 19:42:08 by mdomnik          ###   ########.fr        #
+#    Created: 2025/02/21 23:44:55 by mdomnik           #+#    #+#              #
+#    Updated: 2025/02/22 00:31:30 by mdomnik          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# This is a suppression file for Valgrind
-
-# Suppress leaks from the readline library
 {
-		Memcheck:Leak
-		match-leak-kinds: all
-		...
-		fun:???
-		...
+   ignore_gmon
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:monstartup
+   fun:__gmon_start__
 }

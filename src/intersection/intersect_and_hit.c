@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 05:02:00 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 15:56:51 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 01:00:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_x	*intersect(t_shape *shape, t_ray *ray)
 	local_ray = ray_transform(ray, inverse(shape->transform));
 	shape->saved_ray = local_ray;
 	xs = local_intersect(shape, local_ray);
+	free(local_ray);
 	return (xs);
 }
 
@@ -74,9 +75,7 @@ t_x	*intersect_world(t_world *world, t_ray *ray)
 	t_x		*xs_temp;
 	t_shape	*shape_temp;
 
-	xs = malloc(sizeof(t_x));
 	shape_temp = world->shapes;
-	xs->count = 0;
 	xs = intersect(world->shapes, ray);
 	world->shapes = world->shapes->next;
 	while (world->shapes)

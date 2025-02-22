@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:15:05 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 19:02:55 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:38:32 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_color3			checkers_at(t_pattern *pattern, t_point3 *point);
 
 //pattern.c
 t_pattern			*new_pattern(t_pattern_type pattern, t_color3 a, t_color3 b);
-void				set_pattern_transform(t_pattern *pattern, t_matrix *new_transform);
+void				set_pattern_transform(t_pattern *pattern, t_matrix new_transform);
 t_color3			pattern_at_object(t_pattern *pattern,
 	t_shape *shape, t_point3 *point);
 t_color3			pattern_at(t_pattern *pattern, t_point3 *point);

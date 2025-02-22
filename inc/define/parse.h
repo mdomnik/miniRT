@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:29:54 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 19:03:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 00:28:08 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int			check_vector_range_format(char *str);
 t_toremove	*populate_object_struct(t_obj *obj);
 
 //rt/input.c
-int	check_args(int argc, char **argv, t_world *world);
+int		check_args(int argc, char **argv, t_world *world);
 
 //rt/find_scene_file.c
 int		validate_file_name(char **argv, t_options *options);

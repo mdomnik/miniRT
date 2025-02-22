@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2025/02/19 18:55:58 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 20:24:32 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <string.h>
 # include <errno.h>
 # include <math.h>
-# include <MLX42/MLX42.h>
+# include <../lib/MLX42/mlx.h>
 # include "../lib/libft/libft.h"
 
 # include "settings/config.h"

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:17:34 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 18:57:18 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 00:59:41 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,12 @@ t_x	*join_intersections(int num_x, t_x *xs, t_x *temp_xs)
 		i++;
 		j++;
 	}
+
+	free(xs->i);
+	free(xs);
+	free(temp_xs->i);
+	free(temp_xs);
+
 	return (new_xs);
 }
 

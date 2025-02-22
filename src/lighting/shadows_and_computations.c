@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/20 10:13:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 01:03:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,27 +65,31 @@ t_color3	color_at(t_world *world, t_ray *ray, t_comp *comp, int remaining)
 	t_color3	color;
 
 	xs = intersect_world(world, ray);
-	if (xs == NULL) //maybe remove
-		return (new_color3(0, 0, 0));
+	if (!xs) return new_color3(0, 0, 0);
+
 	if (xs->count == 0)
 	{
 		free(xs->i);
 		free(xs);
-		return (new_color3(0, 0, 0));
+		return new_color3(0, 0, 0);
 	}
+
 	i = hit(xs);
 	if (i.shape == NULL)
 	{
 		free(xs->i);
 		free(xs);
-		return (new_color3(0, 0, 0));
+		return new_color3(0, 0, 0);
 	}
+
 	prepare_computations(&i, ray, xs, comp);
 	free(xs->i);
 	free(xs);
-	color = shade_hit(world, comp, remaining);	
-	return (color);
+
+	color = shade_hit(world, comp, remaining);
+	return color;
 }
+
 
 bool	is_shadowed(t_world *world, t_point3 *light_pos, t_point3 *point)
 {

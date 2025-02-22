@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:49:12 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/21 18:10:00 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:38:17 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_pattern	*new_pattern(t_pattern_type pattern, t_color3 a, t_color3 b)
 	return (p);
 }
 
-void	set_pattern_transform(t_pattern *pattern, t_matrix *new_transform)
+void	set_pattern_transform(t_pattern *pattern, t_matrix new_transform)
 {
 	int			i;
 	int			j;
@@ -37,7 +37,7 @@ void	set_pattern_transform(t_pattern *pattern, t_matrix *new_transform)
 		j = 0;
 		while (j < 4)
 		{
-			transform->a[i][j] = new_transform->a[i][j];
+			transform->a[i][j] = new_transform.a[i][j];
 			j++;
 		}
 		i++;

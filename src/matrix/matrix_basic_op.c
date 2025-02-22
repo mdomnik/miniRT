@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:09:16 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/21 18:07:04 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:44:04 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,32 +63,32 @@ t_matrix	*init_identity_matrix_p(int size)
 }
 
 //multiplies two matrices and returns the result
-t_matrix	*multiply_matrices(t_matrix *mat1, t_matrix *mat2)
+t_matrix	multiply_matrices(t_matrix mat1, t_matrix mat2)
 {
 	int			i;
 	int			j;
 	int			k;
-	t_matrix	*result;
+	t_matrix	result;
 
 	i = 0;
-	result = malloc(sizeof(t_matrix));
-	while (i < mat1->size)
+	result = init_identity_matrix(mat1.size);
+	while (i < mat1.size)
 	{
 		j = 0;
-		while (j < mat1->size)
+		while (j < mat1.size)
 		{
-			result->a[i][j] = 0;
+			result.a[i][j] = 0;
 			k = 0;
-			while (k < mat1->size)
+			while (k < mat1.size)
 			{
-				result->a[i][j] += mat1->a[i][k] * mat2->a[k][j];
+				result.a[i][j] += mat1.a[i][k] * mat2.a[k][j];
 				k++;
 			}
 			j++;
 		}
 		i++;
 	}
-	result->size = mat1->size;
+	result.size = mat1.size;
 	return (result);
 }
 

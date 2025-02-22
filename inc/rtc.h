@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/20 10:40:23 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 00:14:41 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 typedef struct s_scene	t_scene;
 
 typedef struct s_options	t_options;
-
-typedef struct s_project	t_project;
 
 typedef struct s_x	t_x;
 
@@ -73,15 +71,6 @@ struct s_options
 	t_obj		objects;
 };
 
-struct s_project
-{
-	mlx_t		*window;
-	mlx_image_t	*image;
-	t_options	*options;
-	t_toremove	*objects;
-	t_canvas	canvas;
-};
-
 struct s_x
 {
 	int			count;
@@ -110,13 +99,11 @@ struct s_world
 
 struct	s_loop
 {
-	mlx_t		*mlx;
-	mlx_image_t	*image;
+	void		*mlx;
+	void		*win;
+	void		*image;
 	t_world		*world;
 	t_camera	*camera;
-	int			camera_mode;
-	int			downscale;
-	int			supersample;
 };
 
 struct s_comp
