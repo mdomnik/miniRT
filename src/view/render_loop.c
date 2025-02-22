@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 17:37:19 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:20:27 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,11 @@ t_loop *loop_init(int ac, char *av[])
 	}
 	loop->world->shapes = NULL;
 	loop->world->light = NULL;
-	loop->world->camera = NULL;
 
 	if (check_args(ac, av, loop->world))
 		exit(42);
 
-	// Initialize camera
-	loop->camera = camera_new(800, 400, 0.8);
-	loop->camera->transform = view_transformation(new_point3(0, 0, -15),
-												  new_point3(0, 0, 1),
-												  new_vec3(0, 1, 0));
-
+	loop->camera = loop->world->camera;
 	return loop;
 }
 

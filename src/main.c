@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:26:20 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 00:21:42 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:14:30 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,12 @@ void free_world(t_world *world)
 		world->light = world->light->next;
 		free(light);
 	}
-	if (world->camera)
-		free(world->camera);
 	free(world);
 }
 
 void free_loop(t_loop *loop)
 {
 	free_world(loop->world);
-	free(loop->camera);
 	free(loop);
 }
 
@@ -63,6 +60,7 @@ int	main(int ac, char *av[])
 	t_loop	*loop;
 
 	loop = loop_init(ac, av);
+	print_matrix(loop->camera->transform);
 	render(loop);
 	mlx_key_hook(loop->win, key_hook, &loop);
 	mlx_loop(loop->mlx);

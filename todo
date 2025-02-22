@@ -8,3 +8,13 @@
 8. add camera to world struct
 
 the scene has to have a sphere
+make camera work
+implement cube and cone
+make cone work
+make mat parser
+norminette
+ambient light fix
+minor memory leaks
+
+
+siv mat mat mat mat texuture,color,pattern img 6img

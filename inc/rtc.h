@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 13:31:18 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:12:46 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_intersection		t_i;
 
 typedef struct s_image		t_image;
 
+typedef struct s_camera		t_camera;
+
 typedef struct s_loop		t_loop;
 
 typedef struct s_light_p	t_light_p;
@@ -42,7 +44,6 @@ typedef struct s_world		t_world;
 
 //-----------------------------------------
 
-typedef struct s_camera		t_camera;
 
 typedef struct s_shape		t_shape;
 
@@ -92,6 +93,18 @@ struct s_light_p
 	struct s_light_p	*next;
 };
 
+struct s_camera
+{
+	int				hsize;
+	int				vsize;
+	float			fov;
+	float			pixel_size;
+	float			half_width;
+	float			half_height;
+	float			y_angle;
+	t_matrix		transform;
+};
+
 struct s_world
 {
 	t_light_p		*light;
@@ -109,6 +122,7 @@ struct s_image
     int width;
     int height;
 };
+
 
 struct	s_loop
 {
@@ -134,17 +148,6 @@ struct s_comp
 	float			n2;
 };
 
-struct s_camera
-{
-	int				hsize;
-	int				vsize;
-	float			fov;
-	float			pixel_size;
-	float			half_width;
-	float			half_height;
-	float			y_angle;
-	t_matrix		transform;
-};
 
 struct s_size_cap
 {

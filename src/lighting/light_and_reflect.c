@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:52:36 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 18:57:32 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 19:02:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_color3	lighting(t_material *m, t_shape *shape, t_light_p *light,
 	else
 		effective_color = mult_color(m->color, light->intensity);
 	lightv = normalize(sub_tuple_p(&light->position, point));
-	ambient = mult_tuple(effective_color, m->ambient);
+	ambient = mult_color(effective_color, mult_color_scalar(global_color('g', (t_color3){0}), current_ambient('g', 0)));
 	light_dot_normal = dot_product(lightv, normalv);
 	if (light_dot_normal < 0)
 	{

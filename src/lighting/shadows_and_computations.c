@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 15:34:03 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 18:38:57 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_color3	shade_hit(t_world *world, t_comp *comps, t_ray **ray, int remaining)
 	{
 		while (world->light != NULL)
 		{
-			in_shadow = is_shadowed(world, &world->light->position, &comps->over_point);
+			in_shadow = is_shadowed(world, &comps->over_point);
 			surface = add_tuple(lighting(&comps->shape->material, comps->shape, world->light, &comps->over_point, comps->eyev, comps->normalv, in_shadow), surface);
 			world->light = world->light->next;
 		}
@@ -91,7 +91,7 @@ t_color3 color_at(t_world *world, t_ray **ray, t_comp *comp, int remaining)
 }
 
 
-bool	is_shadowed(t_world *world, t_point3 *light_pos, t_point3 *point)
+bool	is_shadowed(t_world *world, t_point3 *point)
 {
 	t_vec3		v;
 	float		distance;
@@ -100,13 +100,13 @@ bool	is_shadowed(t_world *world, t_point3 *light_pos, t_point3 *point)
 	t_x			*xs;
 	t_i			h;
 
-	v = sub_tuple_p(light_pos, point);
+	v = sub_tuple_p(&world->light->position, point);
 	distance = magnitude(v);
 	direction = normalize(v);
 	r = ray_new(point, &direction);
 	xs = intersect_world(world, r);
 	h = hit(xs);
-	if (h.t > 0 && h.t < distance)
+	if (h.t > EPSILON && h.t < distance)
 	{
 		free(xs->i);
 		free(xs);
