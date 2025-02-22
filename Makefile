@@ -16,7 +16,7 @@ CFLAGS          += -pedantic -Wunreachable-code
 CFLAGS          += -Wshadow
 
 ifeq ($(DEBUG), 1)
-    CFLAGS      += -gdwarf-2 -ggdb3
+    CFLAGS      += -gdwarf-2 -ggdb3 -g
 endif
 
 # Libraries to be linked

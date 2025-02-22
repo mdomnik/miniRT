@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:29:09 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/21 16:43:51 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 01:09:48 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_material default_material(void)
 	material.diffuse = 0.9;
 	material.specular = 0.9;
 	material.shininess = 200.0;
-	material.reflective = 0.0;
+	material.reflective = 0.1;
 	material.transparency = 0.0;
 	material.refractive_index = 1.0;
     material.bump_map = NULL;

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:45:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 18:58:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 13:15:36 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ t_vec3	new_vec3(float x, float y, float z)
 }
 
 //Creates new t_color3(t_tuple) color
-t_color3	new_color3(float r, float g, float b)
+t_color3 new_color3(float r, float g, float b)
 {
-	t_color3	color;
-
-	color.r = r;
-	color.g = g;
-	color.b = b;
-	color.al = 1;
-	return (color);
+	t_color3 c;
+	c.r = fmin(fmax(r, 0.0), 1.0);
+	c.g = fmin(fmax(g, 0.0), 1.0);
+	c.b = fmin(fmax(b, 0.0), 1.0);
+	c.al = 0;
+	return c;
 }
+

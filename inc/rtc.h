@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 00:14:41 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 13:31:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_options	t_options;
 typedef struct s_x	t_x;
 
 typedef struct s_intersection		t_i;
+
+typedef struct s_image		t_image;
 
 typedef struct s_loop		t_loop;
 
@@ -97,11 +99,22 @@ struct s_world
 	t_camera		*camera;
 };
 
+struct s_image
+{
+	void *img;
+    char *buffer;
+    int bits_per_pixel;
+    int size_line;
+    int endian;
+    int width;
+    int height;
+};
+
 struct	s_loop
 {
 	void		*mlx;
 	void		*win;
-	void		*image;
+	t_image		*img;
 	t_world		*world;
 	t_camera	*camera;
 };

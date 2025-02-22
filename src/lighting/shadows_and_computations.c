@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 01:03:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 15:34:03 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	prepare_computations(t_i *i, t_ray *ray, t_x *xs, t_comp *comps)
 	(void)xs; // needs to stay when we add reflection
 }
 
-t_color3	shade_hit(t_world *world, t_comp *comps, int remaining)
+t_color3	shade_hit(t_world *world, t_comp *comps, t_ray **ray, int remaining)
 {
 	t_color3	surface;
 	t_color3	reflected;
@@ -52,19 +52,19 @@ t_color3	shade_hit(t_world *world, t_comp *comps, int remaining)
 			world->light = world->light->next;
 		}
 		world->light = light_temp;
-		reflected = reflected_color(world, comps, remaining);
+		reflected = reflected_color(world, comps, ray, remaining);
 		return (add_tuple(surface, reflected));
 	}
 	return (new_color3(0, 0, 0));
 }
 
-t_color3	color_at(t_world *world, t_ray *ray, t_comp *comp, int remaining)
+t_color3 color_at(t_world *world, t_ray **ray, t_comp *comp, int remaining)
 {
 	t_x			*xs;
 	t_i			i;
 	t_color3	color;
 
-	xs = intersect_world(world, ray);
+	xs = intersect_world(world, ray[RECURSIVE_DEPTH - remaining]);
 	if (!xs) return new_color3(0, 0, 0);
 
 	if (xs->count == 0)
@@ -82,11 +82,11 @@ t_color3	color_at(t_world *world, t_ray *ray, t_comp *comp, int remaining)
 		return new_color3(0, 0, 0);
 	}
 
-	prepare_computations(&i, ray, xs, comp);
+	prepare_computations(&i, ray[RECURSIVE_DEPTH - remaining], xs, comp);
 	free(xs->i);
 	free(xs);
 
-	color = shade_hit(world, comp, remaining);
+	color = shade_hit(world, comp, ray, remaining);
 	return color;
 }
 
