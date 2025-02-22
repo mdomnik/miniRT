@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 15:45:53 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 17:37:19 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_loop *loop_init(int ac, char *av[])
 
 	// Initialize camera
 	loop->camera = camera_new(800, 400, 0.8);
-	loop->camera->transform = view_transformation(new_point3(0, 30, -50),
+	loop->camera->transform = view_transformation(new_point3(0, 0, -15),
 												  new_point3(0, 0, 1),
 												  new_vec3(0, 1, 0));
 
@@ -135,10 +135,12 @@ void render(t_loop *loop)
 			color_int = color_to_int(color);
 			put_pixel_to_img(loop->img, x, y, color_int);
 		}
+		if (y % 10 == 0)
+			mlx_put_image_to_window(loop->mlx, loop->win, loop->img->img, 0, 0);
 	}
 	// Display the rendered image
 	mlx_put_image_to_window(loop->mlx, loop->win, loop->img->img, 0, 0);
-
+	printf("done\n");
 	// Free memory
 	for (int i = 0; i < (RECURSIVE_DEPTH + 1); i++)
 		free(ray[i]);

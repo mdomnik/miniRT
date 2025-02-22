@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:54:28 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 01:05:22 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 18:10:23 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,42 +78,36 @@ t_x *intersect_plane(t_shape *plane, t_ray *ray)
 // Determines if given ray hit a cylinder object
 t_x	*intersect_cylinder(t_shape *cylinder, t_ray *ray)
 {
-	float	a;
-	float	b;
-	float	c;
-	float	discriminant;
-	float	t0;
-	float	t1;
+	float	a, b, c, discriminant, t0, t1, temp, y0, y1;
 	t_x		*xs;
-	float	temp;
-	float	y0;
-	float	y1;
 
 	a = ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z;
-	if (a < EPSILON && cylinder->size_cap.cap == false)
+	if (fabsf(a) < EPSILON && cylinder->size_cap.cap == false)
 		return (NULL);
-	b = (2 * ray->orig.x * ray->dir.x) + (2 * ray->orig.z * ray->dir.z);
+	b = 2 * (ray->orig.x * ray->dir.x + ray->orig.z * ray->dir.z);
 	c = ray->orig.x * ray->orig.x + ray->orig.z * ray->orig.z - 1;
+
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 		return (NULL);
-	t0 = (-b - sqrt(discriminant)) / (2 * a);
-	t1 = (-b + sqrt(discriminant)) / (2 * a);
-	if (t0 > t1)
-	{
-		temp = t0;
-		t0 = t1;
-		t1 = temp;
-	}
+
+	t0 = (-b - sqrtf(discriminant)) / (2 * a);
+	t1 = (-b + sqrtf(discriminant)) / (2 * a);
+	if (t0 > t1) { temp = t0; t0 = t1; t1 = temp; }
+
 	xs = malloc(sizeof(t_x));
 	xs->count = 0;
 	xs->i = malloc(sizeof(t_i) * 2);
+
 	y0 = ray->orig.y + t0 * ray->dir.y;
-	if (cylinder->size_cap.min < y0 && y0 < cylinder->size_cap.max)
-		xs = add_intersection(xs, t0, cylinder);
 	y1 = ray->orig.y + t1 * ray->dir.y;
-	if (cylinder->size_cap.min < y1 && y1 < cylinder->size_cap.max)
+
+	// Correct bounds check
+	if (cylinder->size_cap.min <= y0 && y0 <= cylinder->size_cap.max)
+		xs = add_intersection(xs, t0, cylinder);
+	if (cylinder->size_cap.min <= y1 && y1 <= cylinder->size_cap.max)
 		xs = add_intersection(xs, t1, cylinder);
+
 	xs = intersect_caps(cylinder, ray, xs);
 	return (xs);
 }

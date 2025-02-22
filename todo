@@ -6,3 +6,5 @@
 6. norminette
 7. improve efficiency
 8. add camera to world struct
+
+the scene has to have a sphere

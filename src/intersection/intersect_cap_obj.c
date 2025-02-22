@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 16:43:14 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 17:28:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 18:10:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,19 @@ static bool	check_cap(t_ray *ray, float t)
 // Finds the intersections between ray and caps of a cylinder
 t_x	*intersect_caps(t_shape *cylinder, t_ray *ray, t_x *xs)
 {
-	float	t;
+	float t;
 
-	if (cylinder->size_cap.cap == false || fabsf(ray->dir.y) < EPSILON)
-		return (xs);
-	t = (cylinder->size_cap.min - ray->orig.y) / ray->dir.y;
-	if (check_cap(ray, t) == true)
-		xs = add_intersection(xs, t, cylinder);
-	t = (cylinder->size_cap.max - ray->orig.y) / ray->dir.y;
-	if (check_cap(ray, t) == true)
-		xs = add_intersection(xs, t, cylinder);
-	return (xs);
+	if (!cylinder->size_cap.cap) return xs;
+
+	if (fabsf(ray->dir.y) > EPSILON) // Allow near-horizontal rays
+	{
+		t = (cylinder->size_cap.min - ray->orig.y) / ray->dir.y;
+		if (check_cap(ray, t)) xs = add_intersection(xs, t, cylinder);
+
+		t = (cylinder->size_cap.max - ray->orig.y) / ray->dir.y;
+		if (check_cap(ray, t)) xs = add_intersection(xs, t, cylinder);
+	}
+	return xs;
 }
 
 // Checks of the intersection point of a ray with a plane lies within the scope of caps of a cone

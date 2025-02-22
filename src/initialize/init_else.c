@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:29:09 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 01:09:48 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 17:52:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ t_size_cap default_size_cap(void)
 {
 	t_size_cap size_cap;
 
-	size_cap.min = -1;
-	size_cap.max = 0;
+	size_cap.min = -0.5;
+	size_cap.max = 0.5;
 	size_cap.cap = 1;
 	return (size_cap);
 }

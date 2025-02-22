@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/21 18:41:27 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 18:14:33 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,26 +85,34 @@ int	create_plane(t_world *world, char **args)
  * @param args The arguments for creating the cylinder.
  * @return 0 on success.
  */
+
 int	create_cylinder(t_world *world, char **args)
 {
 	t_shape		*cy;
 	char		**coords;
 	char		**normal;
 	char		**color;
+	t_matrix	transform;
 
 	cy = cylinder();
 	coords = ft_split(args[1], ',');
 	normal = ft_split(args[2], ',');
 	color = ft_split(args[5], ',');
-	set_transform(cy, translation(ft_atof(coords[0]), ft_atof(coords[1]),
-			ft_atof(coords[2])));
-	set_transform(cy, rotation_x(deg_to_rad(ft_atof(normal[0])*180)));
-	set_transform(cy, rotation_y(deg_to_rad(ft_atof(normal[1])*180)));
-	set_transform(cy, rotation_z(deg_to_rad(ft_atof(normal[2])*180)));
-	set_transform(cy, scaling(ft_atof(args[3]) / 2.0, ft_atof(args[4]) / 2.0,
-			ft_atof(args[3]) / 2.0));
+	printf("xyz: %s %s %s\n", coords[0], coords[1], coords[2]);
+	transform = init_identity_matrix(4);
+	transform = multiply_matrices(transform, translation(ft_atof(coords[0]), (ft_atof(coords[1]) - 1.0), ft_atof(coords[2])));
+	transform = multiply_matrices(transform, rotation_x(deg_to_rad(ft_atof(normal[0])*180)));
+	transform = multiply_matrices(transform, rotation_y(deg_to_rad(ft_atof(normal[1])*180)));
+	transform = multiply_matrices(transform, rotation_z(deg_to_rad(ft_atof(normal[2])*180)));
+	transform = multiply_matrices(transform, scaling(ft_atof(args[3]) / 2.0, ft_atof(args[4]), ft_atof(args[3]) / 2.0));
+	
+	cy->size_cap.min = -0.5;
+	cy->size_cap.max = 0.5;
+	cy->size_cap.cap = true;
+	printf("size_cap: %f %f\n", cy->size_cap.min, cy->size_cap.max);
 	cy->material.color = normalize(new_color3(ft_atof(color[0]), ft_atof(color[1]),
 			ft_atof(color[2])));
+	set_transform(cy, transform);
 	add_shape(&world->shapes, cy);
 	return (0);
 }
