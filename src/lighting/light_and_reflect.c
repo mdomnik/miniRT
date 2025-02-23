@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:52:36 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 19:02:06 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/23 02:02:46 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@ t_color3	lighting(t_material *m, t_shape *shape, t_light_p *light,
 	float		reflect_dot_eye;
 	float		factor;
 	t_color3	result;
+	t_color3	ambient_product;
 
 	if (m->pattern)
 		effective_color = mult_color(pattern_at_object(m->pattern, shape, point), light->intensity);
 	else
 		effective_color = mult_color(m->color, light->intensity);
 	lightv = normalize(sub_tuple_p(&light->position, point));
-	ambient = mult_color(effective_color, mult_color_scalar(global_color('g', (t_color3){0}), current_ambient('g', 0)));
+	ambient_product = mult_color_scalar(global_color('a', (t_color3){0}), m->ambient);
+	ambient = mult_tuple(add_tuple(effective_color, ambient_product), m->ambient);
 	light_dot_normal = dot_product(lightv, normalv);
 	if (light_dot_normal < 0)
 	{
