@@ -24,7 +24,7 @@ LIBS            += -L$(LFT_DIR) -lft
 LIBS            += -L$(MLX_BUILD_DIR) -lmlx_Linux
 LIBS            += -L/usr/lib -I$(MLX_DIR) -lXext -lX11 -lm -lz
 
-MLX_DIR         := lib/MLX42
+MLX_DIR         := lib/minilibx-linux
 MLX_BUILD_DIR   := $(MLX_DIR)
 MLX_A           := $(MLX_BUILD_DIR)/libmlx_Linux.a
 

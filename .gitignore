@@ -17,6 +17,7 @@ compile_commands.json
 *.pdf
 *.fls
 *.fdb_latexmk
+lib/minilibx-linux
 
 # Main binary
 minirt

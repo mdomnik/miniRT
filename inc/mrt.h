@@ -22,7 +22,7 @@
 # include <string.h>
 # include <errno.h>
 # include <math.h>
-# include <../lib/MLX42/mlx.h>
+# include <../lib/minilibx-linux/mlx.h>
 # include "../lib/libft/libft.h"
 
 # include "settings/config.h"
