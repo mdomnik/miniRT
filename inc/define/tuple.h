@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:45:01 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 22:24:35 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/23 16:27:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ t_vec3		neg_vec3(t_vec3 a);
 bool	is_equal(float a, float b);
 float	deg_to_rad(float deg);
 bool	is_near_zero(t_tuple v);
+t_color3 div_color(t_color3 c);
 
 #endif

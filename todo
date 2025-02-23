@@ -18,3 +18,6 @@ minor memory leaks
 
 
 siv mat mat mat mat texuture,color,pattern img 6img
+
+
+artefacting found when plane goes through 0,0,0

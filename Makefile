@@ -109,6 +109,7 @@ SRC_FILES	+=	parse/rt/flags/create_flag_nodes.c
 SRC_FILES	+=	parse/rt/scene_file/create_mand.c
 SRC_FILES	+=	parse/rt/scene_file/file_data.c
 SRC_FILES	+=	parse/rt/scene_file/check_data.c
+SRC_FILES	+=	parse/rt/scene_file/create_bonus.c
 SRC_FILES	+=	parse/rt/scene_file/to_object.c
 SRC_FILES	+=	parse/rt/scene_file/append.c
 SRC_FILES	+=	parse/rt/scene_file/ruleset.c

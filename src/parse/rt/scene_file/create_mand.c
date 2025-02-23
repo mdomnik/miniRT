@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:43:25 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 21:41:04 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/23 16:47:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int create_objects(t_options *options, t_world *world)
 				return (-1);
 		}
 		if (check_objects_helper(&options->scene, world, i) == -1)
+			return (-1);
+		if (check_bonus_objects(&options->scene, world, i) == -1)
 			return (-1);
 		i++;
 	}

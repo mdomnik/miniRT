@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:26:20 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 20:14:30 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/23 18:35:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	main(int ac, char *av[])
 	t_loop	*loop;
 
 	loop = loop_init(ac, av);
-	print_matrix(loop->camera->transform);
 	render(loop);
 	mlx_key_hook(loop->win, key_hook, &loop);
 	mlx_loop(loop->mlx);

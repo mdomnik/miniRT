@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:45:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 13:15:36 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/23 16:33:36 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ t_vec3	new_vec3(float x, float y, float z)
 t_color3 new_color3(float r, float g, float b)
 {
 	t_color3 c;
-	c.r = fmin(fmax(r, 0.0), 1.0);
-	c.g = fmin(fmax(g, 0.0), 1.0);
-	c.b = fmin(fmax(b, 0.0), 1.0);
+	c.r = r;
+	c.g = g;
+	c.b = b;
 	c.al = 0;
 	return c;
 }

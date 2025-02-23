@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:29:54 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 20:17:02 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/23 16:50:21 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ int			check_objects_helper(t_scene *scene, t_world *world, int i);
 int			create_ambient(t_options *options, char **args);
 int			create_camera(t_camera **camera, char **args);
 int			create_light(t_light_p **lights, char **args);
+
+//rt/scene_file/create_bonus.c
+int		check_bonus_objects(t_scene *scene, t_world *world, int i);
+int		create_cone(t_world *world, char **args);
 
 //rt/scene_file/create_obj.c
 int			create_sphere(t_world *world, char **args);

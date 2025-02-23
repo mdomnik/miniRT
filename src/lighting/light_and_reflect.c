@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:52:36 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/23 02:10:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/23 16:31:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,15 @@ t_color3	lighting(t_material *m, t_shape *shape, t_light_p *light,
 // 		effective_color = mult_color(pattern_at_object(m->pattern, shape, point), light->intensity);
 // 	else
 // 		effective_color = mult_color(m->color, light->intensity);
+// 	if (shape->type == SPHERE)
+// 	{
+// 		printf("light: ");
+// 		print_tuple(light->intensity);
+// 		printf("color: ");
+// 		print_tuple(m->color);
+// 		printf("effective: ");
+// 		print_tuple(effective_color);
+// 	}
 // 	lightv = normalize(sub_tuple_p(&light->position, point));
 // 	ambient = mult_tuple(effective_color, m->ambient);
 // 	light_dot_normal = dot_product(lightv, normalv);

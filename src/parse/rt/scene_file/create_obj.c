@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 18:14:33 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/23 19:05:36 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ int	create_sphere(t_world *world, char **args)
 	coords = ft_split(args[1], ',');
 	color = ft_split(args[3], ',');
 	transform = init_identity_matrix(4);
-	transform = multiply_matrices(transform, translation(ft_atof(coords[0]), ft_atof(coords[1]),
-			ft_atof(coords[2])));
 	radius = ft_atof(args[2]) / 2.0;
-	transform = multiply_matrices(transform, scaling(radius, radius, radius));
+	transform = multiply_matrices(translation(ft_atof(coords[0]), ft_atof(coords[1]), ft_atof(coords[2])), scaling(radius, radius, radius));
 	set_transform(sp, transform);
-	sp->material.color = normalize(new_color3(ft_atof(color[0]), ft_atof(color[1]),
-			ft_atof(color[2])));
+	sp->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
+			ft_atof(color[2]));
+	sp->material.color = div_color(sp->material.color);
 	add_shape(&world->shapes, sp);
 	//world->shapes = sp;
 	//print_matrix(sp->transform);
@@ -71,8 +70,9 @@ int	create_plane(t_world *world, char **args)
 	transform = multiply_matrices(transform, rotation_y(deg_to_rad(ft_atof(normal[1])*180)));
 	transform = multiply_matrices(transform, rotation_z(deg_to_rad(ft_atof(normal[2])*180)));
 	set_transform(pl, transform);
-	pl->material.color = normalize(new_color3(ft_atof(color[0]), ft_atof(color[1]),
-			ft_atof(color[2])));
+	pl->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
+			ft_atof(color[2]));
+	pl->material.color = div_color(pl->material.color);
 	add_shape(&world->shapes, pl);
 	return (0);
 }
@@ -86,33 +86,32 @@ int	create_plane(t_world *world, char **args)
  * @return 0 on success.
  */
 
-int	create_cylinder(t_world *world, char **args)
-{
-	t_shape		*cy;
-	char		**coords;
-	char		**normal;
-	char		**color;
-	t_matrix	transform;
+	int	create_cylinder(t_world *world, char **args)
+	{
+		t_shape		*cy;
+		char		**coords;
+		char		**normal;
+		char		**color;
+		t_matrix	transform;
 
-	cy = cylinder();
-	coords = ft_split(args[1], ',');
-	normal = ft_split(args[2], ',');
-	color = ft_split(args[5], ',');
-	printf("xyz: %s %s %s\n", coords[0], coords[1], coords[2]);
-	transform = init_identity_matrix(4);
-	transform = multiply_matrices(transform, translation(ft_atof(coords[0]), (ft_atof(coords[1]) - 1.0), ft_atof(coords[2])));
-	transform = multiply_matrices(transform, rotation_x(deg_to_rad(ft_atof(normal[0])*180)));
-	transform = multiply_matrices(transform, rotation_y(deg_to_rad(ft_atof(normal[1])*180)));
-	transform = multiply_matrices(transform, rotation_z(deg_to_rad(ft_atof(normal[2])*180)));
-	transform = multiply_matrices(transform, scaling(ft_atof(args[3]) / 2.0, ft_atof(args[4]), ft_atof(args[3]) / 2.0));
-	
-	cy->size_cap.min = -0.5;
-	cy->size_cap.max = 0.5;
-	cy->size_cap.cap = true;
-	printf("size_cap: %f %f\n", cy->size_cap.min, cy->size_cap.max);
-	cy->material.color = normalize(new_color3(ft_atof(color[0]), ft_atof(color[1]),
-			ft_atof(color[2])));
-	set_transform(cy, transform);
-	add_shape(&world->shapes, cy);
-	return (0);
+		cy = cylinder();
+		coords = ft_split(args[1], ',');
+		normal = ft_split(args[2], ',');
+		color = ft_split(args[5], ',');
+		transform = init_identity_matrix(4);
+		transform = multiply_matrices(transform, translation(ft_atof(coords[0]), (ft_atof(coords[1]) - 1.0), ft_atof(coords[2])));
+		transform = multiply_matrices(transform, rotation_x(deg_to_rad(ft_atof(normal[0])*180)));
+		transform = multiply_matrices(transform, rotation_y(deg_to_rad(ft_atof(normal[1])*180)));
+		transform = multiply_matrices(transform, rotation_z(deg_to_rad(ft_atof(normal[2])*180)));
+		transform = multiply_matrices(transform, scaling(ft_atof(args[3]) / 2.0, ft_atof(args[4]), ft_atof(args[3]) / 2.0));
+		
+		cy->size_cap.min = -0.5;
+		cy->size_cap.max = 0.5;
+		cy->size_cap.cap = true;
+		cy->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
+				ft_atof(color[2]));
+		cy->material.color = div_color(cy->material.color);
+		set_transform(cy, transform);
+		add_shape(&world->shapes, cy);
+		return (0);
 }

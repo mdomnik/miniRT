@@ -6,14 +6,14 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 20:33:15 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/23 16:45:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-# define SCENE_OBJECTS	"A,C,L,sp,pl,cy"
+# define SCENE_OBJECTS	"A,C,L,sp,pl,cy,co"
 
 # define UNIQUE_OBJECTS	"A,C"
 # define MANDATORY_OBJECTS	"A,C,L"
@@ -24,7 +24,8 @@ C,VECTOR,VRANGE,FOV;\
 L,VECTOR,FLOAT,COLOR;\
 sp,VECTOR,FLOAT,COLOR;\
 pl,VECTOR,VRANGE,COLOR;\
-cy,VECTOR,VRANGE,FLOAT,FLOAT,COLOR"
+cy,VECTOR,VRANGE,FLOAT,FLOAT,COLOR;\
+co,VECTOR,VRANGE,FLOAT,FLOAT,COLOR;"
 
 
 typedef struct s_ambient	t_ambient;

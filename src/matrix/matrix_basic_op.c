@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:09:16 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/21 18:44:04 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/23 21:25:44 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ t_matrix	multiply_matrices(t_matrix mat1, t_matrix mat2)
 	t_matrix	result;
 
 	i = 0;
-	result = init_identity_matrix(mat1.size);
 	while (i < mat1.size)
 	{
 		j = 0;

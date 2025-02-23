@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 16:43:14 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 18:10:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/23 18:18:45 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,27 @@ static bool	check_cap_cone(t_ray *ray, float t, float cap_radius)
 
 
 // Finds the intersections between ray and caps of a cone
-t_x	*intersect_caps_cone(t_shape *cone, t_ray *ray, t_x *xs)
+t_x *intersect_caps_cone(t_shape *cone, t_ray *ray, t_x *xs)
 {
-	float	t;
+    float t;
 
-	if (!cone->size_cap.cap || fabsf(ray->dir.y) < EPSILON)
-		return (xs);
-	t = (cone->size_cap.min - ray->orig.y) / ray->dir.y;
-	if (check_cap_cone(ray, t, fabsf(cone->size_cap.min)))
-		xs = add_intersection(xs, t, cone);
-	t = (cone->size_cap.max - ray->orig.y) / ray->dir.y;
-	if (check_cap_cone(ray, t, fabsf(cone->size_cap.max)))
-		xs = add_intersection(xs, t, cone);
-	return (xs);
+    // If the cone has no caps, return immediately
+    if (!cone->size_cap.cap || fabsf(ray->dir.y) < EPSILON)
+        return xs;
+
+    // **Fix: Use correct radius for min/max caps**
+    t = (cone->size_cap.min - ray->orig.y) / ray->dir.y;
+    if (check_cap_cone(ray, t, fabsf(cone->size_cap.max)))  // Fix: should check max radius
+        xs = add_intersection(xs, t, cone);
+
+    t = (cone->size_cap.max - ray->orig.y) / ray->dir.y;
+    if (check_cap_cone(ray, t, fabsf(cone->size_cap.max)))  // Fix: should check max radius
+        xs = add_intersection(xs, t, cone);
+
+    return xs;
 }
+
+
 
 //makes ends of the cylinder
 void	apply_cap_transformation(t_shape *cone, t_matrix *transform)
