@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:21:04 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 16:08:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/23 02:09:58 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	check_mandatory_objects(t_options *options)
 		}
 		i++;
 	}
-	if (count != 0)
+	if (count > 0)
 	{
 		ft_dprintf(2, "%s '%s'\n", ERR_MISS_OBJ, MANDATORY_OBJECTS);
 		return (-1);
