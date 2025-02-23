@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:32:19 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 20:13:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:53:39 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ t_loop		*loop_init(int ac, char *av[]);
 void		render(t_loop *loop);
 
 //view_transformation.c
-t_matrix	view_transformation(t_point3 from, t_point3 to, t_vec3 up);
+t_matrix view_transformation(t_point3 from, t_vec3 orientation);
 
 #endif

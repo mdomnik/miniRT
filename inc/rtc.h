@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 20:12:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 21:05:27 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #define MAT4 4
 
 #define DEFAULT_WIDTH 800
-#define DEFAULT_HEIGHT 600
+#define DEFAULT_HEIGHT 400
 
 typedef struct s_scene	t_scene;
 

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 20:20:27 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 21:05:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_loop *loop_init(int ac, char *av[])
 		fprintf(stderr, "Failed to initialize MLX\n");
 		exit(EXIT_FAILURE);
 	}
-	loop->win = mlx_new_window(loop->mlx, 800, 400, "test");
+	loop->win = mlx_new_window(loop->mlx, DEFAULT_WIDTH, DEFAULT_HEIGHT, "test");
 
 	// Allocate memory for t_image
 	loop->img = malloc(sizeof(t_image));
@@ -42,7 +42,7 @@ t_loop *loop_init(int ac, char *av[])
 	}
 
 	// Create an image and get its buffer
-	loop->img->img = mlx_new_image(loop->mlx, 800, 400);
+	loop->img->img = mlx_new_image(loop->mlx, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	if (!loop->img->img)
 	{
 		fprintf(stderr, "Failed to create MLX image\n");
@@ -56,8 +56,8 @@ t_loop *loop_init(int ac, char *av[])
 										  &loop->img->endian);
 
 	// Set width and height for easy access
-	loop->img->width = 800;
-	loop->img->height = 400;
+	loop->img->width = DEFAULT_WIDTH;
+	loop->img->height = DEFAULT_HEIGHT;
 
 	// Debugging: Print values to confirm they are initialized
 	printf("Image initialized: bpp=%d, size_line=%d, endian=%d\n", 

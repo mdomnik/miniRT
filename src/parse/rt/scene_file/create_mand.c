@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:43:25 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/22 21:41:04 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,18 +112,22 @@ int create_camera(t_camera **camera, char **args)
 	char **coords;
 	char **vector;
 	t_point3 pos;
+	t_vec3 orientation;
 
-	*camera = camera_new(DEFAULT_WIDTH, DEFAULT_HEIGHT, ft_atof(args[3]));
+	(*camera) = camera_new(DEFAULT_WIDTH, DEFAULT_HEIGHT, ft_atof(args[3]));
+
 	coords = ft_split(args[1], ',');
+	pos = new_point3(ft_atof(coords[0]), ft_atof(coords[1]), ft_atof(coords[2]));
+
 	vector = ft_split(args[2], ',');
-	pos = new_point3(ft_atof(coords[0]),
-		ft_atof(coords[1]), ft_atof(coords[2]));
-	(*camera)->transform = view_transformation(pos,
-		add_tuple(pos, new_point3(ft_atof(vector[0]), ft_atof(vector[1]),
-				   ft_atof(vector[2]))),
-		new_vec3(0, 1, 0));
+	orientation = new_vec3(ft_atof(vector[0]), ft_atof(vector[1]), ft_atof(vector[2]));
+	(*camera)->transform = view_transformation(pos, orientation);
+
 	return (0);
 }
+
+
+
 
 /**
  * Creates a light object and adds it to the options object.
