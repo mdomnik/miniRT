@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 21:05:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 17:56:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,10 @@ void render(t_loop *loop)
 			put_pixel_to_img(loop->img, x, y, color_int);
 		}
 		if (y % 10 == 0)
+		{
+			printf("rendered %d lines\n", y);
 			mlx_put_image_to_window(loop->mlx, loop->win, loop->img->img, 0, 0);
+		}
 	}
 	// Display the rendered image
 	mlx_put_image_to_window(loop->mlx, loop->win, loop->img->img, 0, 0);

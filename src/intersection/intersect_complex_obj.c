@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:56:28 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/23 18:18:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 20:22:39 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,13 +153,11 @@ t_x	*intersect_cube(t_shape *cube, t_ray *ray)
 // Determines if given ray hit a group bounding box object
 t_x	*intersect_group(t_shape *group, t_ray *ray)
 {
-	t_bounds	group_bounds;
 	t_x			*xs;
 	t_shape		*child;
 	t_x			*temp_xs;
 
-	group_bounds = group->bounds(group);
-	if (!intersect_bounds(group_bounds, ray))
+	if (!intersect_bounds(group->bounds_cache, ray))
 		return (NULL);
 	xs = NULL;
 	child = group->children;
@@ -173,8 +171,8 @@ t_x	*intersect_group(t_shape *group, t_ray *ray)
 			else
 			{
 				xs =join_intersections((xs->count + temp_xs->count), xs, temp_xs);
-				free(temp_xs->i);
-				free(temp_xs);
+				// free(temp_xs->i);
+				// free(temp_xs);
 			}
 		}
 		child = child->next;

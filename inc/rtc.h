@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 17:38:35 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 20:24:07 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ struct s_bounds
 {
 	t_point3		min;
 	t_point3		max;
+	bool			initialized;
 };
 
 struct	s_shape
@@ -177,6 +178,8 @@ struct	s_shape
 	struct s_shape		*parent;
 
 	struct s_bounds    (*bounds)(struct s_shape *shape);
+	t_bounds			bounds_cache;
+	t_bounds			transformed_bounds_cache;
 	struct s_shape		*next;
 };
 

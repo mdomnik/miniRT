@@ -1,47 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bounds.c                                           :+:      :+:    :+:   */
+/*   bound_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 16:41:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 16:59:42 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 20:27:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_bounds	group_bounds(t_shape *group)
+t_bounds    group_bounds(t_shape *group)
 {
-	t_bounds	group_bounds;
-	t_shape		*child;
-	t_bounds	child_bounds;
-	t_bounds	transformed_bounds;
+    t_bounds    group_bounds;
+    t_shape     *child;
 
-	group_bounds.min = new_point3(INFINITY, INFINITY, INFINITY);
-	group_bounds.max = new_point3(-INFINITY, -INFINITY, -INFINITY);
-	child = group->children;
-	while (child != NULL)
-	{
-		child_bounds = child->bounds(child);
-		transformed_bounds = transform_bounds(child_bounds, &child->transform);
-		group_bounds.min.x = fminf(group_bounds.min.x,
-				transformed_bounds.min.x);
-		group_bounds.min.y = fminf(group_bounds.min.y,
-				transformed_bounds.min.y);
-		group_bounds.min.z = fminf(group_bounds.min.z,
-				transformed_bounds.min.z);
-		group_bounds.max.x = fmaxf(group_bounds.max.x,
-				transformed_bounds.max.x);
-		group_bounds.max.y = fmaxf(group_bounds.max.y,
-				transformed_bounds.max.y);
-		group_bounds.max.z = fmaxf(group_bounds.max.z,
-				transformed_bounds.max.z);
-		child = child->next;
-	}
-	return (group_bounds);
+    group_bounds.min = new_point3(INFINITY, INFINITY, INFINITY);
+    group_bounds.max = new_point3(-INFINITY, -INFINITY, -INFINITY);
+    child = group->children;
+    while (child != NULL)
+    {
+        // Use cached bounds if available, otherwise compute and cache them
+        if (!child->bounds_cache.initialized)
+        {
+            child->bounds_cache = child->bounds(child);
+			child->transformed_bounds_cache = transform_bounds(child->bounds_cache, &child->transform);
+            child->bounds_cache.initialized = true;
+			group_bounds.min.x = fminf(group_bounds.min.x, child->transformed_bounds_cache.min.x);
+			group_bounds.min.y = fminf(group_bounds.min.y, child->transformed_bounds_cache.min.y);
+			group_bounds.min.z = fminf(group_bounds.min.z, child->transformed_bounds_cache.min.z);
+			group_bounds.max.x = fmaxf(group_bounds.max.x, child->transformed_bounds_cache.max.x);
+			group_bounds.max.y = fmaxf(group_bounds.max.y, child->transformed_bounds_cache.max.y);
+			group_bounds.max.z = fmaxf(group_bounds.max.z, child->transformed_bounds_cache.max.z);
+        }
+        child = child->next;
+    }
+    return (group_bounds);
 }
+
 
 t_bounds	transform_bounds(t_bounds bounds, t_matrix *transform)
 {

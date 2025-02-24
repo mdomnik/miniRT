@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:32:39 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/16 03:12:55 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 18:16:04 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int	check_object_rules(char **args, char **rules)
 				return (-1);
 		if (ft_strcmp(rules[i], "FOV") == 0)
 			if (check_ratio_format(args[i], 0, 180) == -1)
+				return (-1);
+		if (ft_strcmp(rules[i], "STRING") == 0)
+			if (check_string_format(args[i]) == -1)
 				return (-1);
 	}
 	return (0);
