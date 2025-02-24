@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:37:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 20:07:12 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 17:37:23 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,8 @@
 #define SS_8X 3
 #define SS_16X 4
 
-
-// ray types
-#define ORIGIN_R	0
-#define EYE_R		1
-#define LIGHT_R		2
-#define NORMAL_R	3
-#define REFLECT_R	4
-#define REFRACT_R	5
-
-
-#define MAX_VERTEX_COUNT 300
-#define MAX_FACE_COUNT 300
+#define MAX_VERTEX_COUNT 5000
+#define MAX_FACE_COUNT 5000
 #define MAX_GROUP_COUNT 300
 
 #define GLASS_REFRACTION 1.5

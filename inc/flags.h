@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:11:31 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/16 03:30:27 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 17:14:37 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  * "STRING", "FLOAT", "VECTOR" (all with optional argument setting).*/
 
 // FULL FLAG STRINGS
-# define OPTS_FULL "--save,--reflection,--test,--help, \
+# define OPTS_FULL "--save,--reflection, --test,--help, \
 					--testy,--vector,--noargvector,--added,--skybox,--what" 
 // SHORT FLAG STRINGS
 # define OPTS_SHORT "-s,-r,-t,-h,-y,-v,-n,-a,-k,-w"

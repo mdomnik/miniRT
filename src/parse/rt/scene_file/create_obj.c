@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/23 19:05:36 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 16:51:47 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	create_plane(t_world *world, char **args)
 		normal = ft_split(args[2], ',');
 		color = ft_split(args[5], ',');
 		transform = init_identity_matrix(4);
-		transform = multiply_matrices(transform, translation(ft_atof(coords[0]), (ft_atof(coords[1]) - 1.0), ft_atof(coords[2])));
+		transform = multiply_matrices(transform, translation(ft_atof(coords[0]), ft_atof(coords[1]), ft_atof(coords[2])));
 		transform = multiply_matrices(transform, rotation_x(deg_to_rad(ft_atof(normal[0])*180)));
 		transform = multiply_matrices(transform, rotation_y(deg_to_rad(ft_atof(normal[1])*180)));
 		transform = multiply_matrices(transform, rotation_z(deg_to_rad(ft_atof(normal[2])*180)));

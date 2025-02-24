@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   normal.c                                           :+:      :+:    :+:   */
+/*   find_normal.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:32:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 15:47:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 16:49:04 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static t_vec3	local_normal_at(t_shape *shape, t_point3 *local_point)
 		local_normal = cube_normal_at(local_point);
 	else if (shape->type == CYLINDER)
 		local_normal = cyl_normal_at(local_point, shape);
-	else if (shape->type == CONE)
+	else if (shape->type == CONE || shape->type == HOURGLASS)
 		local_normal = cone_normal_at(local_point, shape);
 	else if (shape->type == TRIANGLE)
 		local_normal = shape->triangle->normal;

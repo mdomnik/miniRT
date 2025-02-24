@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 03:08:40 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/21 18:39:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 16:49:34 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,4 @@ void	set_transform(t_shape *shape, t_matrix new_transform)
 		}
 		i++;
 	}
-	if (shape->type == CONE || shape->type == CYLINDER)
-		shape->transform.a[1][3] += 1;
 }

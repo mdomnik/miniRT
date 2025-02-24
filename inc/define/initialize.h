@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:02:16 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/21 16:44:32 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 16:47:02 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_light_p	*light(t_point3 position, t_color3 intensity);
 //init_complex_obj.c
 t_shape		*cube(void);
 t_shape		*cone(void);
+t_shape		*hourglass(void);
 t_shape		*triangle(t_point3 p1, t_point3 p2, t_point3 p3);
 t_shape		*group(void);
 

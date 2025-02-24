@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 21:05:27 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 17:38:35 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,8 +200,8 @@ struct s_group
 
 struct s_obj_file
 {
-	t_vertex		vertices[MAX_VERTEX_COUNT + 1];
-	t_triangle		faces[MAX_FACE_COUNT];
+	t_vertex		*vertices;
+	t_triangle		*faces;
 	t_group			*default_group;
 	int				vertex_count;
 	int				face_count;

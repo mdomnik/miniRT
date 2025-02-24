@@ -6,14 +6,14 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/23 16:45:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 17:22:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-# define SCENE_OBJECTS	"A,C,L,sp,pl,cy,co"
+# define SCENE_OBJECTS	"A,C,L,sp,pl,cy,co,hg,cb,obj"
 
 # define UNIQUE_OBJECTS	"A,C"
 # define MANDATORY_OBJECTS	"A,C,L"
@@ -25,7 +25,10 @@ L,VECTOR,FLOAT,COLOR;\
 sp,VECTOR,FLOAT,COLOR;\
 pl,VECTOR,VRANGE,COLOR;\
 cy,VECTOR,VRANGE,FLOAT,FLOAT,COLOR;\
-co,VECTOR,VRANGE,FLOAT,FLOAT,COLOR;"
+co,VECTOR,VRANGE,FLOAT,FLOAT,COLOR;\
+hg,VECTOR,VRANGE,FLOAT,FLOAT,COLOR;\
+cb,VECTOR,VRANGE,FLOAT,COLOR;\
+obj,STRING,VECTOR,VRANGE,FLOAT,COLOR;"
 
 
 typedef struct s_ambient	t_ambient;
@@ -54,7 +57,8 @@ typedef enum e_type
 	CYLINDER = 6,
 	CONE = 7,
 	GROUP = 8,
-	TRIANGLE = 9
+	TRIANGLE = 9,
+	HOURGLASS = 10
 }	t_type;
 
 //REQUIRED OBJECT STRUCTS
