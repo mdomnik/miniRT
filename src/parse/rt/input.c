@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:33:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/20 11:53:35 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:39:25 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,10 @@ void free_options(t_options *options)
 	free(options);
 }
 
-int	check_args(int argc, char **argv, t_world *world)
+int check_args(int argc, char **argv, t_options *options)
 {
-	t_options	*options;
-
 	(void)argc;
-	options = malloc(sizeof(t_options));
-	options->scene.scene_objects = NULL;
-	options->scene.scene_file = NULL;
-	options->values = NULL;
+
 	if (validate_file_name(argv, options) == -1)
 	{
 		free_options(options);
@@ -89,15 +84,23 @@ int	check_args(int argc, char **argv, t_world *world)
 	}
 	if (get_scene_data(options) == -1)
 	{
+		fprintf(stderr, "Error: Failed to load scene data\n");
+		free_options(options);
+		return (1);  // ✅ Stop execution if scene data is missing
+	}
+	if (check_scene_data(options) == -1)
+	{
+		fprintf(stderr, "Error: Invalid scene data\n");
 		free_options(options);
 		return (1);
 	}
-	if (check_scene_data(options, world) == -1)
-		return (1);
-	// gc_free_gc(gc_set_storage('g'));
-	//t_obj objects = project->options->objects;
-	//project->objects = populate_object_struct(&objects);
-	free_options(options);
+	return (0);
+}
+
+int	make_world(t_options *options, t_world *world)
+{
+	if (create_objects(options, world) == -1)
+		return (-1);
 	(void)world;
 	return(0);
 }

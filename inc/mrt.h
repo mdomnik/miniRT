@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2025/02/21 20:24:32 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 21:00:11 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <string.h>
+#include <pthread.h>
 # include <errno.h>
 # include <math.h>
 # include <../lib/minilibx-linux/mlx.h>

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:32:19 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 20:53:39 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/24 21:40:21 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_camera	*camera_new(int hsize, int vsize, float fov);
 void		ray_for_pixel(t_camera *camera, int px, int py, t_ray *ray);
 
 //render_loop.c
-t_loop		*loop_init(int ac, char *av[]);
-void		render(t_loop *loop);
+t_loop		*loop_init(void);
+void render(t_loop *loop, int ac, char *av[]);
 
 //view_transformation.c
 t_matrix view_transformation(t_point3 from, t_vec3 orientation);

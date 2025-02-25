@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:29:54 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 17:34:37 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:35:24 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_plane		*append_plane_list(t_plane *list, t_plane *new);
 t_cylinder	*append_cylinder_list(t_cylinder *list, t_cylinder *new);
 
 //rt/scene_file/check_data.c
-int			check_scene_data(t_options *options, t_world *world);
+int			check_scene_data(t_options *options);
 int			check_mandatory_objects(t_options *options);
 int			check_dup_objects(t_options *options, int binary);
 int			check_object_data(char **args);
@@ -120,7 +120,8 @@ int			check_vector_range_format(char *str);
 t_toremove	*populate_object_struct(t_obj *obj);
 
 //rt/input.c
-int		check_args(int argc, char **argv, t_world *world);
+int		check_args(int argc, char **argv, t_options *options);
+int		make_world(t_options *options, t_world *world);
 
 //rt/find_scene_file.c
 int		validate_file_name(char **argv, t_options *options);

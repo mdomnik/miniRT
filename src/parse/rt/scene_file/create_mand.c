@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:43:25 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/23 16:47:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:41:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ int create_objects(t_options *options, t_world *world)
 	int			i;
 
 	i = 0;
+	if (!options->scene.scene_objects)
+	{
+		fprintf(stderr, "Error: Scene objects are NULL\n");
+		return -1;
+	}
 	while (options->scene.scene_objects[i] != NULL)
 	{
 		if (ft_strcmp(options->scene.scene_objects[i][0], "A") == 0)

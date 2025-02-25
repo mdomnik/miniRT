@@ -6,79 +6,31 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 17:56:31 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:43:08 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_loop *loop_init(int ac, char *av[])
+t_loop *loop_init(void)
 {
 	t_loop *loop;
 
-	// Allocate memory for t_loop
 	loop = malloc(sizeof(t_loop));
-	if (!loop)
-	{
-		fprintf(stderr, "Failed to allocate t_loop\n");
-		exit(EXIT_FAILURE);
-	}
-
-	// Initialize MLX and create a window
 	loop->mlx = mlx_init();
-	if (!loop->mlx)
-	{
-		fprintf(stderr, "Failed to initialize MLX\n");
-		exit(EXIT_FAILURE);
-	}
 	loop->win = mlx_new_window(loop->mlx, DEFAULT_WIDTH, DEFAULT_HEIGHT, "test");
-
-	// Allocate memory for t_image
 	loop->img = malloc(sizeof(t_image));
-	if (!loop->img)
-	{
-		fprintf(stderr, "Failed to allocate t_image\n");
-		exit(EXIT_FAILURE);
-	}
-
-	// Create an image and get its buffer
 	loop->img->img = mlx_new_image(loop->mlx, DEFAULT_WIDTH, DEFAULT_HEIGHT);
-	if (!loop->img->img)
-	{
-		fprintf(stderr, "Failed to create MLX image\n");
-		exit(EXIT_FAILURE);
-	}
-
-	// Get image buffer information (this function assigns values automatically)
 	loop->img->buffer = mlx_get_data_addr(loop->img->img, 
 										  &loop->img->bits_per_pixel, 
 										  &loop->img->size_line, 
 										  &loop->img->endian);
-
-	// Set width and height for easy access
 	loop->img->width = DEFAULT_WIDTH;
 	loop->img->height = DEFAULT_HEIGHT;
-
-	// Debugging: Print values to confirm they are initialized
-	printf("Image initialized: bpp=%d, size_line=%d, endian=%d\n", 
-		   loop->img->bits_per_pixel, 
-		   loop->img->size_line, 
-		   loop->img->endian);
-
-	// Allocate memory for t_world
-	loop->world = malloc(sizeof(t_world));
-	if (!loop->world)
-	{
-		fprintf(stderr, "Failed to allocate t_world\n");
-		exit(EXIT_FAILURE);
-	}
-	loop->world->shapes = NULL;
-	loop->world->light = NULL;
-
-	if (check_args(ac, av, loop->world))
-		exit(42);
-
-	loop->camera = loop->world->camera;
+	loop->opts = malloc(sizeof(t_options));
+	loop->opts->scene.scene_objects = NULL;
+	loop->opts->scene.scene_file = NULL;
+	loop->opts->values = NULL;
 	return loop;
 }
 
@@ -92,8 +44,43 @@ void put_pixel_to_img(t_image *img, int x, int y, int color)
 	*(int *)(img->buffer + pixel_index) = color;
 }
 
-void render(t_loop *loop)
+#define NUM_THREADS 12  // Adjust as needed
+
+
+pthread_mutex_t check_args_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+pthread_mutex_t mlx_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+pthread_mutex_t printf_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+void *render_worker(void *arg)
 {
+	t_thread_data *data = (t_thread_data *)arg;
+	t_loop *loop = data->loop;
+	int thread_id = data->thread_id;
+	t_camera *camera;
+
+	// Create a new world for this thread
+	t_world *local_world = malloc(sizeof(t_world));
+	if (!local_world)
+	{
+		fprintf(stderr, "Thread %d: Failed to allocate world\n", thread_id);
+		pthread_exit(NULL);
+	}
+
+	// Lock check_args to prevent race conditions
+	pthread_mutex_lock(&check_args_mutex);
+	if (make_world(loop->opts, local_world) == -1)
+	{
+		pthread_mutex_unlock(&check_args_mutex);
+		fprintf(stderr, "Thread %d: Failed to initialize world\n", thread_id);
+		free(local_world);
+		pthread_exit(NULL);
+	}
+	pthread_mutex_unlock(&check_args_mutex);
+
+	camera = local_world->camera;
+
 	t_ray *ray[RECURSIVE_DEPTH + 1];
 	t_comp *comp;
 	t_color3 color;
@@ -105,8 +92,9 @@ void render(t_loop *loop)
 		ray[i] = malloc(sizeof(t_ray));
 		if (!ray[i])
 		{
-			fprintf(stderr, "Failed to allocate ray[%d]\n", i);
-			exit(EXIT_FAILURE);
+			fprintf(stderr, "Thread %d: Failed to allocate ray[%d]\n", thread_id, i);
+			free(local_world);
+			pthread_exit(NULL);
 		}
 	}
 
@@ -114,33 +102,86 @@ void render(t_loop *loop)
 	comp = malloc(sizeof(t_comp));
 	if (!comp)
 	{
-		fprintf(stderr, "Memory allocation failed for comp\n");
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "Thread %d: Memory allocation failed for comp\n", thread_id);
+		free(local_world);
+		pthread_exit(NULL);
 	}
 
-	// Iterate through pixels
-	for (int y = 0; y < loop->camera->vsize; y++)
+	// Progress tracking
+	int last_printed_percent = -1;
+	int total_rows = camera->vsize;
+		
+	// Iterate through assigned pixels
+	for (int y = 0; y < total_rows; y++)
 	{
-		for (int x = 0; x < loop->camera->hsize; x++)
+		for (int x = thread_id; x < camera->hsize; x += NUM_THREADS)
 		{
-			ray_for_pixel(loop->camera, x, y, ray[0]);
+			ray_for_pixel(camera, x, y, ray[0]);
 			memset(comp, 0, sizeof(t_comp));
-			color = color_at(loop->world, ray, comp, RECURSIVE_DEPTH);
+			color = color_at(local_world, ray, comp, RECURSIVE_DEPTH);
 			color_int = color_to_int(color);
 			put_pixel_to_img(loop->img, x, y, color_int);
 		}
-		if (y % 10 == 0)
+
+		// 🔒 Lock before updating the window
+		pthread_mutex_lock(&mlx_mutex);
+		mlx_put_image_to_window(loop->mlx, loop->win, loop->img->img, 0, 0);
+		pthread_mutex_unlock(&mlx_mutex);  // 🔓 Unlock after update
+
+		// Calculate and print progress
+		int percent_complete = (y * 100) / total_rows;
+		if (percent_complete != last_printed_percent) // Avoid duplicate prints
 		{
-			printf("rendered %d lines\n", y);
-			mlx_put_image_to_window(loop->mlx, loop->win, loop->img->img, 0, 0);
+			last_printed_percent = percent_complete;
+			pthread_mutex_lock(&printf_mutex);
+			printf("Thread %d: %d%% complete\n", thread_id, percent_complete);
+			pthread_mutex_unlock(&printf_mutex);
 		}
 	}
-	// Display the rendered image
-	mlx_put_image_to_window(loop->mlx, loop->win, loop->img->img, 0, 0);
-	printf("done\n");
-	// Free memory
+
+	// Free allocated memory
 	for (int i = 0; i < (RECURSIVE_DEPTH + 1); i++)
 		free(ray[i]);
 	free(comp);
+
+	// Free the new world safely
+	free(local_world->camera);
+	free(local_world->shapes);
+	free(local_world->light);
+	free(local_world);
+
+	pthread_exit(NULL);
 }
 
+
+
+void render(t_loop *loop, int ac, char *av[])
+{
+    pthread_t threads[NUM_THREADS];
+    t_thread_data thread_data[NUM_THREADS];
+
+    // Create threads
+    for (int i = 0; i < NUM_THREADS; i++)
+    {
+        thread_data[i].loop = loop;
+        thread_data[i].thread_id = i;
+        thread_data[i].ac = ac;
+        thread_data[i].av = av;
+
+        if (pthread_create(&threads[i], NULL, render_worker, &thread_data[i]) != 0)
+        {
+            fprintf(stderr, "Failed to create thread %d\n", i);
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    // Wait for threads to complete
+    for (int i = 0; i < NUM_THREADS; i++)
+    {
+        pthread_join(threads[i], NULL);
+    }
+
+    // Display the rendered image after all threads finish
+    mlx_put_image_to_window(loop->mlx, loop->win, loop->img->img, 0, 0);
+    printf("Rendering done\n");
+}

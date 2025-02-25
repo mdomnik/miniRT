@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:40:48 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 19:17:24 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:45:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,11 @@ int	check_string_format(char *str)
 	while (str[i])
 	{
 		if ((str[i] < 65 || str[i] > 90)
-			&& (str[i] < 97 || str[i] > 122) && str[i] != '_' && str[i] != '.')
+			&& (str[i] < 97 || str[i] > 122) && (str[i] < '0' || str[i] > '9') && str[i] != '_' && str[i] != '.' && str[i] != '/')
 		{
-			if (str[i] != '_')
-			{
 				printf("str: %s\n", str);
 				printf("str[i]: %c\n", str[i]);
 				ft_dprintf(2, "%s '%c'\n", ERR_INVALID_CHAR, str[i]);
-			}
 			return (-1);
 		}
 		i++;

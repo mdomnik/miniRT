@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:21:04 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/23 02:09:58 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:35:41 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @param options A pointer to the options struct containing the scene data.
  * @return Returns 0 if the scene data is valid, -1 otherwise.
  */
-int	check_scene_data(t_options *options, t_world *world)
+int	check_scene_data(t_options *options)
 {
 	int	i;
 
@@ -36,8 +36,6 @@ int	check_scene_data(t_options *options, t_world *world)
 			return (-1);
 		i++;
 	}
-	if (create_objects(options, world) == -1)
-		return (-1);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 20:24:07 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:35:11 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ typedef struct s_triangle	t_triangle;
 typedef struct s_obj_file		t_obj_file;
 
 typedef struct s_group		t_group;
+
+
+typedef struct s_thread_data {
+    t_loop *loop;
+    int thread_id;
+    int ac;
+    char **av;
+} t_thread_data;
 
 struct s_scene
 {
@@ -129,8 +137,7 @@ struct	s_loop
 	void		*mlx;
 	void		*win;
 	t_image		*img;
-	t_world		*world;
-	t_camera	*camera;
+	t_options	*opts;
 };
 
 struct s_comp
