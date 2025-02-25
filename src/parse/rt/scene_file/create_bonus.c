@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 16:47:33 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 20:14:45 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 19:45:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	create_cone(t_world *world, char **args)
 	co->size_cap.min = -1;
 	co->size_cap.max = 0;
 	co->size_cap.cap = true;
+	if (args[6])
+		get_material(args[6], &co->material);
 	co->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 			ft_atof(color[2]));
 	co->material.color = div_color(co->material.color);
@@ -90,6 +92,8 @@ int	create_hourglass(t_world *world, char **args)
 	hg->size_cap.min = -0.5;
 	hg->size_cap.max = 0.5;
 	hg->size_cap.cap = true;
+	if (args[6])
+		get_material(args[6], &hg->material);
 	hg->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 			ft_atof(color[2]));
 	hg->material.color = div_color(hg->material.color);
@@ -117,6 +121,8 @@ int	create_cube(t_world *world, char **args)
 	transform = multiply_matrices(transform, rotation_z(deg_to_rad(ft_atof(normal[2])*180)));
 	transform = multiply_matrices(transform, scaling(ft_atof(args[3]) / 2.0, ft_atof(args[3]) / 2.0, ft_atof(args[3]) / 2.0));
 	
+	if (args[5])
+		get_material(args[5], &cb->material);
 	cb->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 			ft_atof(color[2]));
 	cb->material.color = div_color(cb->material.color);
@@ -148,6 +154,8 @@ int	create_obj(t_world *world, char **args)
 	transform = multiply_matrices(transform, rotation_z(deg_to_rad(ft_atof(normal[2])*180)));
 	transform = multiply_matrices(transform, scaling(ft_atof(args[4]) / 2.0, ft_atof(args[4]) / 2.0, ft_atof(args[4]) / 2.0));
 	
+	if (args[6])
+		get_material(args[6], &obj->material);
 	obj->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 	ft_atof(color[2]));
 	obj->material.color = div_color(obj->material.color);

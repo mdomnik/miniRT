@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/23 16:14:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 20:40:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	prepare_computations(t_i *i, t_ray *ray, t_x *xs, t_comp *comps)
 	(void)xs; // needs to stay when we add reflection
 }
 
-t_color3	shade_hit(t_world *world, t_comp *comps, t_ray **ray, int remaining)
+t_color3	shade_hit(t_world *world, t_comp **comps, t_ray **ray, int remaining)
 {
 	t_color3	surface;
 	t_color3	reflected;
@@ -43,12 +43,12 @@ t_color3	shade_hit(t_world *world, t_comp *comps, t_ray **ray, int remaining)
 
 	light_temp = world->light;
 	surface = new_color3(0, 0, 0);
-	if (comps->shape->type != NONE)
+	if (comps[RECURSIVE_DEPTH-remaining]->shape->type != NONE)
 	{
 		while (world->light != NULL)
 		{
-			in_shadow = is_shadowed(world, &comps->over_point);
-			surface = add_tuple(lighting(&comps->shape->material, comps->shape, world->light, &comps->over_point, comps->eyev, comps->normalv, in_shadow), surface);
+			in_shadow = is_shadowed(world, &comps[RECURSIVE_DEPTH-remaining]->over_point);
+			surface = add_tuple(lighting(&comps[RECURSIVE_DEPTH-remaining]->shape->material, comps[RECURSIVE_DEPTH-remaining]->shape, world->light, &comps[RECURSIVE_DEPTH-remaining]->over_point, comps[RECURSIVE_DEPTH-remaining]->eyev, comps[RECURSIVE_DEPTH-remaining]->normalv, in_shadow), surface);
 			world->light = world->light->next;
 		}
 		world->light = light_temp;
@@ -58,15 +58,15 @@ t_color3	shade_hit(t_world *world, t_comp *comps, t_ray **ray, int remaining)
 	return (new_color3(0, 0, 0));
 }
 
-t_color3 color_at(t_world *world, t_ray **ray, t_comp *comp, int remaining)
+t_color3 color_at(t_world *world, t_ray **ray, t_comp **comp, int remaining)
 {
 	t_x			*xs;
 	t_i			i;
 	t_color3	color;
 
 	xs = intersect_world(world, ray[RECURSIVE_DEPTH - remaining]);
-	if (!xs) return new_color3(0, 0, 0);
-
+	if (!xs)
+		return new_color3(0, 0, 0);
 	if (xs->count == 0)
 	{
 		free(xs->i);
@@ -81,8 +81,7 @@ t_color3 color_at(t_world *world, t_ray **ray, t_comp *comp, int remaining)
 		free(xs);
 		return new_color3(0, 0, 0);
 	}
-
-	prepare_computations(&i, ray[RECURSIVE_DEPTH - remaining], xs, comp);
+	prepare_computations(&i, ray[RECURSIVE_DEPTH - remaining], xs, comp[RECURSIVE_DEPTH - remaining]);
 	free(xs->i);
 	free(xs);
 

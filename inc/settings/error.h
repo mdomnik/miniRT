@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:30:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 18:55:49 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 18:36:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define ERR_COLOR_NUM "ERROR: Colors take 3 arguments 'r,g,b'"
 # define ERR_COLOR_RANGE "ERROR: Color values must be between 0 and 255"
 # define ERR_INV_CHAR "ERROR: Invalid character in value"
-# define ERR_RANGE "ERROR: Value out of range"
+# define ERR_RANGE "ERROR: of range"
 # define ERR_VEC_NUM "ERROR: Vector range takes 3 float arguments"
 
 #define ERR_SPLIT "Error: Failed to split string"

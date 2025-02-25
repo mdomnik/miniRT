@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 17:22:18 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 17:55:33 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@
 # define OBJECT_RULES	"A,RATIO,COLOR;\
 C,VECTOR,VRANGE,FOV;\
 L,VECTOR,FLOAT,COLOR;\
-sp,VECTOR,FLOAT,COLOR;\
-pl,VECTOR,VRANGE,COLOR;\
-cy,VECTOR,VRANGE,FLOAT,FLOAT,COLOR;\
-co,VECTOR,VRANGE,FLOAT,FLOAT,COLOR;\
-hg,VECTOR,VRANGE,FLOAT,FLOAT,COLOR;\
-cb,VECTOR,VRANGE,FLOAT,COLOR;\
-obj,STRING,VECTOR,VRANGE,FLOAT,COLOR;"
-
+sp,VECTOR,FLOAT,COLOR,FILE;\
+pl,VECTOR,VRANGE,COLOR,FILE;\
+cy,VECTOR,VRANGE,FLOAT,FLOAT,COLOR,FILE;\
+co,VECTOR,VRANGE,FLOAT,FLOAT,COLOR,FILE;\
+hg,VECTOR,VRANGE,FLOAT,FLOAT,COLOR,FILE;\
+cb,VECTOR,VRANGE,FLOAT,COLOR,FILE;\
+obj,FILE,VECTOR,VRANGE,FLOAT,COLOR,FILE;"
 
 typedef struct s_ambient	t_ambient;
 // typedef struct s_camera		t_camera;

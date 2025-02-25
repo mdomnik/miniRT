@@ -1,5 +1,7 @@
 # miniRT
 
+![alt text](image.png)
+
 ## About
 
 Welcome to **MiniRT**, where we mix pixels and mathematics to create something that resembles a ray tracer!

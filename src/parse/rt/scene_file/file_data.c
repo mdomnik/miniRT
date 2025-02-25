@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:51:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 16:12:00 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 17:56:25 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,5 +158,23 @@ int	append_to_triple(t_options *options, char **args)
 	new_triple[i] = args;
 	new_triple[i + 1] = NULL;
 	options->scene.scene_objects = new_triple;
+	return (0);
+}
+
+int	check_file_open_format(char *str)
+{
+	int		fd;
+
+	if (str == NULL)
+	{
+		return (0);
+	}
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
+	{
+		perror(ERR_OPEN_FILE);
+		return (-1);
+	}
+	close(fd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 15:43:08 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 20:42:56 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void *render_worker(void *arg)
 	camera = local_world->camera;
 
 	t_ray *ray[RECURSIVE_DEPTH + 1];
-	t_comp *comp;
+	t_comp *comp[RECURSIVE_DEPTH + 1];
 	t_color3 color;
 	int color_int;
 
@@ -98,13 +98,16 @@ void *render_worker(void *arg)
 		}
 	}
 
-	// Allocate t_comp struct
-	comp = malloc(sizeof(t_comp));
-	if (!comp)
+	// Allocate rays
+	for (int i = 0; i < (RECURSIVE_DEPTH + 1); i++)
 	{
-		fprintf(stderr, "Thread %d: Memory allocation failed for comp\n", thread_id);
-		free(local_world);
-		pthread_exit(NULL);
+		comp[i] = malloc(sizeof(t_comp));
+		if (!comp[i])
+		{
+			fprintf(stderr, "Thread %d: Failed to allocate comp[%d]\n", thread_id, i);
+			free(local_world);
+			pthread_exit(NULL);
+		}
 	}
 
 	// Progress tracking
@@ -117,7 +120,8 @@ void *render_worker(void *arg)
 		for (int x = thread_id; x < camera->hsize; x += NUM_THREADS)
 		{
 			ray_for_pixel(camera, x, y, ray[0]);
-			memset(comp, 0, sizeof(t_comp));
+			for (int i = 0; i < (RECURSIVE_DEPTH + 1); i++)
+				memset(comp[i], 0, sizeof(t_comp));
 			color = color_at(local_world, ray, comp, RECURSIVE_DEPTH);
 			color_int = color_to_int(color);
 			put_pixel_to_img(loop->img, x, y, color_int);
@@ -133,16 +137,18 @@ void *render_worker(void *arg)
 		if (percent_complete != last_printed_percent) // Avoid duplicate prints
 		{
 			last_printed_percent = percent_complete;
-			pthread_mutex_lock(&printf_mutex);
-			printf("Thread %d: %d%% complete\n", thread_id, percent_complete);
-			pthread_mutex_unlock(&printf_mutex);
+			// pthread_mutex_lock(&printf_mutex);
+			// printf("Thread %d: %d%% complete\n", thread_id, percent_complete);
+			// pthread_mutex_unlock(&printf_mutex);
 		}
 	}
 
 	// Free allocated memory
 	for (int i = 0; i < (RECURSIVE_DEPTH + 1); i++)
 		free(ray[i]);
-	free(comp);
+	for (int i = 0; i < (RECURSIVE_DEPTH + 1); i++)
+		free(comp[i]);
+	
 
 	// Free the new world safely
 	free(local_world->camera);

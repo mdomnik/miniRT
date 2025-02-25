@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 16:51:47 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 19:46:59 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int	create_sphere(t_world *world, char **args)
 	radius = ft_atof(args[2]) / 2.0;
 	transform = multiply_matrices(translation(ft_atof(coords[0]), ft_atof(coords[1]), ft_atof(coords[2])), scaling(radius, radius, radius));
 	set_transform(sp, transform);
+	if (args[4])
+		get_material(args[4], &sp->material);
 	sp->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 			ft_atof(color[2]));
 	sp->material.color = div_color(sp->material.color);
 	add_shape(&world->shapes, sp);
-	//world->shapes = sp;
-	//print_matrix(sp->transform);
 	return (0);
 }
 
@@ -70,6 +70,8 @@ int	create_plane(t_world *world, char **args)
 	transform = multiply_matrices(transform, rotation_y(deg_to_rad(ft_atof(normal[1])*180)));
 	transform = multiply_matrices(transform, rotation_z(deg_to_rad(ft_atof(normal[2])*180)));
 	set_transform(pl, transform);
+	if (args[4])
+		get_material(args[4], &pl->material);
 	pl->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 			ft_atof(color[2]));
 	pl->material.color = div_color(pl->material.color);
@@ -108,6 +110,8 @@ int	create_plane(t_world *world, char **args)
 		cy->size_cap.min = -0.5;
 		cy->size_cap.max = 0.5;
 		cy->size_cap.cap = true;
+		if (args[6])
+			get_material(args[4], &cy->material);
 		cy->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 				ft_atof(color[2]));
 		cy->material.color = div_color(cy->material.color);

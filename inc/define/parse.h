@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:29:54 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 15:35:24 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 17:02:51 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int			get_scene_data(t_options *options);
 int			append_object_nodes(t_options *options, char *line);
 char		**append_to_double(char **args, char *temp);
 int			append_to_triple(t_options *options, char **args);
+int			check_file_open_format(char *str);
 
 //rt/scene_file/file_utils.c
 int			omit_whitespaces(char *str, int i);

@@ -6,24 +6,26 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:53:38 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 13:02:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 20:41:44 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_color3	reflected_color(t_world *world, t_comp *comps, t_ray **ray, int remaining)
+t_color3	reflected_color(t_world *world, t_comp **comps, t_ray **ray, int remaining)
 {
 	t_color3	color;
 
 	if (remaining < 1)
 		return (new_color3(0, 0, 0));
-	if (comps->shape->material.reflective == 0) //maybe should be world
+	if (comps[RECURSIVE_DEPTH - remaining]->shape->material.reflective == 0) //maybe should be world
+	{
 		return (new_color3(0, 0, 0));
-	ray[(RECURSIVE_DEPTH + 1) - remaining]->orig = comps->over_point;
-	ray[(RECURSIVE_DEPTH + 1) - remaining]->dir = comps->reflectv;
+	}
+	ray[(RECURSIVE_DEPTH + 1) - remaining]->orig = comps[RECURSIVE_DEPTH-remaining]->over_point;
+	ray[(RECURSIVE_DEPTH + 1) - remaining]->dir = comps[RECURSIVE_DEPTH-remaining]->reflectv;
 	color = color_at(world, ray, comps, remaining - 1);
-	return (mult_tuple(color, comps->shape->material.reflective));
+	return (mult_tuple(color, comps[RECURSIVE_DEPTH-remaining]->shape->material.reflective));
 }
 
 //refracted color

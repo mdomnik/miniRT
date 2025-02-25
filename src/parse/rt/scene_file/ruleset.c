@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:32:39 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 18:16:04 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 17:56:48 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ int	check_object_rules(char **args, char **rules)
 				return (-1);
 		if (ft_strcmp(rules[i], "STRING") == 0)
 			if (check_string_format(args[i]) == -1)
+				return (-1);
+		if (ft_strcmp(rules[i], "FILE") == 0)
+			if (check_file_open_format(args[i]) == -1)
 				return (-1);
 	}
 	return (0);
