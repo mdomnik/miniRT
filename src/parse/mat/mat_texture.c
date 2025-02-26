@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:29:18 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 15:26:06 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/26 19:25:36 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	check_texture_args(char *str, t_material *mat)
 		set_material_pattern(input[1], input[2], input[3], mat);
 	// if (ft_strncmp(input[0], "texture:", ft_strlen(input[0])) == 0)
 	// 	set_material_texture(input[1], input[2], mat);
-	// if (ft_strncmp(input[0], "skybox:", ft_strlen(input[0])) == 0)
-	// 	set_material_skybox(input[1], input[2], mat);
 	// if (ft_strncmp(input[0], "bump_map:", ft_strlen(input[0])) == 0)
 	// 	set_material_bumpmap(input[1], mat);
 	free_double(input);
