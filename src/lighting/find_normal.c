@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:32:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 16:49:04 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/26 18:13:23 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static t_vec3	local_normal_at(t_shape *shape, t_point3 *local_point)
 		local_normal = sub_tuple(*local_point, new_point3(0, 0, 0));
 	else if (shape->type == PLANE)
 		local_normal = new_vec3(0, 1, 0);
-	else if (shape->type == CUBE)
+	else if (shape->type == CUBE || shape->type == SKYBOX)
 		local_normal = cube_normal_at(local_point);
 	else if (shape->type == CYLINDER)
 		local_normal = cyl_normal_at(local_point, shape);

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 16:47:33 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 17:59:00 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/26 18:16:38 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		check_bonus_objects(t_scene *scene, t_world *world, int i)
 		if (create_obj(world, scene->scene_objects[i]) == -1)
 			return (-1);
 	}
-	if (ft_strcmp(scene->scene_objects[i][0], "obj") == 0)
+	if (ft_strcmp(scene->scene_objects[i][0], "sb") == 0)
 	{
 		if (create_skybox(world, scene->scene_objects[i]) == -1)
 			return (-1);
@@ -188,9 +188,10 @@ int	create_skybox(t_world *world, char **args)
 	t_matrix	transform;
 
 	sb = cube();
+	sb->type = SKYBOX;
 	color = ft_split(args[1], ',');
 	transform = init_identity_matrix(4);
-	transform = scaling(100, 100, 100);
+	transform = scaling(500, 500, 500);
     sb->material.diffuse = 0;
     sb->material.specular = 0;
 	sb->material.reflective = 0;
@@ -198,8 +199,8 @@ int	create_skybox(t_world *world, char **args)
 	sb->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 	ft_atof(color[2]));
 	sb->material.color = div_color(sb->material.color);
-	// if (args[1])
-	// get_skybox(args[1], &sb->material);
+	if (args[1])
+		get_skybox(args[1], &sb->material);
 	set_transform(sb, transform);
 	add_shape(&world->shapes, sb);
 	return (0);

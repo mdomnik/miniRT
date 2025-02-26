@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:41:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 17:50:50 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/26 18:17:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	get_skybox(char *str, t_material *mat)
 {
-	// char *filename;
+	char *filename;
 
 	printf("str: [%s]\n", str);
 	(void)mat;
