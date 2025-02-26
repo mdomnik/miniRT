@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:29:54 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 17:02:51 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/26 17:50:25 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int		create_cone(t_world *world, char **args);
 int	create_hourglass(t_world *world, char **args);
 int	create_cube(t_world *world, char **args);
 int	create_obj(t_world *world, char **args);
+int	create_skybox(t_world *world, char **args);
 
 //rt/scene_file/create_obj.c
 int			create_sphere(t_world *world, char **args);

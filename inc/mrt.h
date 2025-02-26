@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2025/02/25 16:31:58 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/26 14:40:01 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # include "types.h"
 # include "objects.h"
 # include "flags.h"
-# include "materials.h"
 # include "rtc.h"
+# include "materials.h"
 
 # include "define/control.h"
 # include "define/debug.h"

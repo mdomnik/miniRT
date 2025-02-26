@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 19:46:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/26 15:46:35 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ int	create_sphere(t_world *world, char **args)
 	sp->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 			ft_atof(color[2]));
 	sp->material.color = div_color(sp->material.color);
+	if (sp->material.pattern)
+	{
+		set_uv_pattern(sp);
+		if (sp->material.pattern->type == CHECKERS)
+		{
+			t_uv *uv = uv_checkers(10, 10, sp->material.pattern->a, sp->material.pattern->b);
+			free(sp->material.pattern);
+			sp->material.pattern = texture_map(uv, spherical_map);
+		}
+	}
 	add_shape(&world->shapes, sp);
 	return (0);
 }
@@ -88,7 +98,7 @@ int	create_plane(t_world *world, char **args)
  * @return 0 on success.
  */
 
-	int	create_cylinder(t_world *world, char **args)
+int	create_cylinder(t_world *world, char **args)
 	{
 		t_shape		*cy;
 		char		**coords;
@@ -111,11 +121,21 @@ int	create_plane(t_world *world, char **args)
 		cy->size_cap.max = 0.5;
 		cy->size_cap.cap = true;
 		if (args[6])
-			get_material(args[4], &cy->material);
+			get_material(args[6], &cy->material);
 		cy->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 				ft_atof(color[2]));
 		cy->material.color = div_color(cy->material.color);
 		set_transform(cy, transform);
+		if (cy->material.pattern)
+		{
+			set_uv_pattern(cy);
+			if (cy->material.pattern->type == CHECKERS)
+			{
+				t_uv *uv = uv_checkers(10, 10, cy->material.pattern->a, cy->material.pattern->b);
+				free(cy->material.pattern);
+				cy->material.pattern = texture_map(uv, cylindrical_map);
+			}
+		}
 		add_shape(&world->shapes, cy);
 		return (0);
 }

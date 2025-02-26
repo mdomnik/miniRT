@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 16:47:33 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 19:45:50 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/26 17:59:00 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ int		check_bonus_objects(t_scene *scene, t_world *world, int i)
 	if (ft_strcmp(scene->scene_objects[i][0], "obj") == 0)
 	{
 		if (create_obj(world, scene->scene_objects[i]) == -1)
+			return (-1);
+	}
+	if (ft_strcmp(scene->scene_objects[i][0], "obj") == 0)
+	{
+		if (create_skybox(world, scene->scene_objects[i]) == -1)
 			return (-1);
 	}
 	return (0);
@@ -126,6 +131,16 @@ int	create_cube(t_world *world, char **args)
 	cb->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 			ft_atof(color[2]));
 	cb->material.color = div_color(cb->material.color);
+	if (cb->material.pattern)
+	{
+		set_uv_pattern(cb);
+		if (cb->material.pattern->type == CHECKERS)
+		{
+			t_uv *uv = uv_checkers(10, 10, cb->material.pattern->a, cb->material.pattern->b);
+			free(cb->material.pattern);
+			cb->material.pattern = texture_map(uv, spherical_map);
+		}
+	}
 	set_transform(cb, transform);
 	add_shape(&world->shapes, cb);
 	return (0);
@@ -166,3 +181,26 @@ int	create_obj(t_world *world, char **args)
 	return (0);
 }
 
+int	create_skybox(t_world *world, char **args)
+{
+	t_shape		*sb;
+	char		**color;
+	t_matrix	transform;
+
+	sb = cube();
+	color = ft_split(args[1], ',');
+	transform = init_identity_matrix(4);
+	transform = scaling(100, 100, 100);
+    sb->material.diffuse = 0;
+    sb->material.specular = 0;
+	sb->material.reflective = 0;
+    sb->material.ambient = 1;
+	sb->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
+	ft_atof(color[2]));
+	sb->material.color = div_color(sb->material.color);
+	// if (args[1])
+	// get_skybox(args[1], &sb->material);
+	set_transform(sb, transform);
+	add_shape(&world->shapes, sb);
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:58:12 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 11:39:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/26 17:43:42 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,22 @@
 #define PARAM_COUNT 8
 #define FILE_PARAM_COUNT 2
 
+//mat_format_op.c
+int pattern_get_type(char *type, t_pattern *pattern);
+int pattern_get_color(char *colors, t_pattern *pattern);
+int	pattern_get_transform(char *transforms, t_pattern *pattern);
+
+//mat_texture.c
+int	check_texture_args(char *str, t_material *mat);
+
 //mat_format.c
 int	get_material(char *str, t_material *mat);
+
+//mat_skybox.c
+int	get_skybox(char *str, t_material *mat);
+
+
+//mat_uv_set.c
+void	set_uv_pattern(t_shape *shape);
 
 #endif

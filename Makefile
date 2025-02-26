@@ -85,7 +85,12 @@ SRC_FILES	+=	matrix/matrix_basic_transform.c
 SRC_FILES	+=	matrix/matrix_shear_transform.c
 
 # PARSE/MAT
+SRC_FILES	+=	parse/mat/mat_format_op.c
 SRC_FILES	+=	parse/mat/mat_format.c
+SRC_FILES	+=	parse/mat/mat_texture.c
+SRC_FILES	+=	parse/mat/mat_uv_set.c
+SRC_FILES	+= parse/mat/mat_skybox.c
+
 # PARSE/OBJ
 SRC_FILES	+=	parse/obj/obj_to_faces.c
 

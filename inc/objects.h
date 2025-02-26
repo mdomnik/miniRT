@@ -6,14 +6,14 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 17:55:33 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/26 17:53:53 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-# define SCENE_OBJECTS	"A,C,L,sp,pl,cy,co,hg,cb,obj"
+# define SCENE_OBJECTS	"A,C,L,sp,pl,cy,co,hg,cb,obj,sb"
 
 # define UNIQUE_OBJECTS	"A,C"
 # define MANDATORY_OBJECTS	"A,C,L"
@@ -28,7 +28,8 @@ cy,VECTOR,VRANGE,FLOAT,FLOAT,COLOR,FILE;\
 co,VECTOR,VRANGE,FLOAT,FLOAT,COLOR,FILE;\
 hg,VECTOR,VRANGE,FLOAT,FLOAT,COLOR,FILE;\
 cb,VECTOR,VRANGE,FLOAT,COLOR,FILE;\
-obj,FILE,VECTOR,VRANGE,FLOAT,COLOR,FILE;"
+obj,FILE,VECTOR,VRANGE,FLOAT,COLOR,FILE;\
+sb,COLOR,FILE;"
 
 typedef struct s_ambient	t_ambient;
 // typedef struct s_camera		t_camera;
@@ -57,7 +58,8 @@ typedef enum e_type
 	CONE = 7,
 	GROUP = 8,
 	TRIANGLE = 9,
-	HOURGLASS = 10
+	HOURGLASS = 10,
+	SKYBOX = 11,
 }	t_type;
 
 //REQUIRED OBJECT STRUCTS
