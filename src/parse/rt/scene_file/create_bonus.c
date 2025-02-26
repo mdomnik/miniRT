@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 16:47:33 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 18:16:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/26 19:21:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,21 @@ int	create_obj(t_world *world, char **args)
 	add_shape(&world->shapes, obj);
 	return (0);
 }
+void print_material(t_material *mat)
+{
+    printf("Color: %f, %f, %f\n", mat->color.r, mat->color.g, mat->color.b);
+    printf("Pattern: %p\n", (void *)mat->pattern);
+    printf("Ambient: %f\n", mat->ambient);
+    printf("Diffuse: %f\n", mat->diffuse);
+    printf("Specular: %f\n", mat->specular);
+    printf("Shininess: %f\n", mat->shininess);
+    printf("Reflective: %f\n", mat->reflective);
+    printf("Transparency: %f\n", mat->transparency);
+    printf("Refractive index: %f\n", mat->refractive_index);
+    printf("Bump map: %p\n", (void *)mat->bump_map);
+    if (mat->bump_map)
+        printf("bump_map intensity %f\n", mat->bump_map->scale);
+}
 
 int	create_skybox(t_world *world, char **args)
 {
@@ -187,11 +202,11 @@ int	create_skybox(t_world *world, char **args)
 	char		**color;
 	t_matrix	transform;
 
-	sb = cube();
+	sb = create_mapped_cube();
 	sb->type = SKYBOX;
 	color = ft_split(args[1], ',');
 	transform = init_identity_matrix(4);
-	transform = scaling(500, 500, 500);
+	transform = scaling(100, 100, 100);
     sb->material.diffuse = 0;
     sb->material.specular = 0;
 	sb->material.reflective = 0;
@@ -199,8 +214,9 @@ int	create_skybox(t_world *world, char **args)
 	sb->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 	ft_atof(color[2]));
 	sb->material.color = div_color(sb->material.color);
-	if (args[1])
-		get_skybox(args[1], &sb->material);
+	if (args[2])
+		get_skybox(args[2], &sb->material);
+	print_material(&sb->material);
 	set_transform(sb, transform);
 	add_shape(&world->shapes, sb);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 20:42:56 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/26 19:01:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void put_pixel_to_img(t_image *img, int x, int y, int color)
 	*(int *)(img->buffer + pixel_index) = color;
 }
 
-#define NUM_THREADS 12  // Adjust as needed
+#define NUM_THREADS 1  // Adjust as needed
 
 
 pthread_mutex_t check_args_mutex = PTHREAD_MUTEX_INITIALIZER;
