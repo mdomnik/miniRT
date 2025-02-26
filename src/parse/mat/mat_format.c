@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:17:29 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 19:29:14 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/26 11:28:52 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	get_material(char *str, t_material *mat)
 		{
 			i = 0;
 			line = ft_substr(line, 0, ft_strlen(line) - 1);
-			if (check_mat_args(line, mat, params) == -1)
+			if (check_mat_args(line, mat, params) == -1 || check_texture_args(line, mat) == -1)
 			{
 				close(fd);
 				free_double(params);
