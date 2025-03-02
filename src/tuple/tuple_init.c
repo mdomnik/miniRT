@@ -49,13 +49,13 @@ t_vec3	new_vec3(float x, float y, float z)
 }
 
 //Creates new t_color3(t_tuple) color
-t_color3 new_color3(float r, float g, float b)
+t_color3	new_color3(float r, float g, float b)
 {
-	t_color3 c;
+	t_color3	c;
+
 	c.r = r;
 	c.g = g;
 	c.b = b;
 	c.al = 0;
-	return c;
+	return (c);
 }
-

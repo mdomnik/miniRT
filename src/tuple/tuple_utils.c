@@ -24,16 +24,16 @@ float	deg_to_rad(float deg)
 	return (deg * M_PI / 180);
 }
 
-bool is_near_zero(t_tuple v)
+bool	is_near_zero(t_tuple v)
 {
-	return (fabs(v.x) < EPSILON &&
-			fabs(v.y) < EPSILON &&
-			fabs(v.z) < EPSILON);
+	return (fabs(v.x) < EPSILON
+		&& fabs(v.y) < EPSILON
+		&& fabs(v.z) < EPSILON);
 }
 
-t_color3 div_color(t_color3 c)
+t_color3	div_color(t_color3 c)
 {
-	t_color3 result;
+	t_color3	result;
 
 	result.r = c.r / 255;
 	result.g = c.g / 255;

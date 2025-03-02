@@ -43,7 +43,7 @@ t_tuple	sub_tuple(t_tuple a, t_tuple b)
 t_tuple	mult_tuple(t_tuple a, float scalar)
 {
 	t_tuple	result;
-	
+
 	result.x = a.x * scalar;
 	result.y = a.y * scalar;
 	result.z = a.z * scalar;

@@ -28,7 +28,7 @@ t_color3	mult_color(t_color3 a, t_color3 b)
 t_color3	sub_color(t_tuple a, t_tuple b)
 {
 	t_color3	result;
-	
+
 	result.x = a.x - b.x;
 	result.y = a.y - b.y;
 	result.z = a.z - b.z;
@@ -40,7 +40,7 @@ t_color3	sub_color(t_tuple a, t_tuple b)
 t_color3	mult_color_scalar(t_color3 a, float scalar)
 {
 	t_color3	result;
-	
+
 	result.x = a.x * scalar;
 	result.y = a.y * scalar;
 	result.z = a.z * scalar;
@@ -75,6 +75,7 @@ int	color_to_int(t_color3 color)
 		color.g = 0;
 	if (color.b < 0)
 		color.b = 0;
-	return (0xFF << 24 |
-	(int)(color.r * 255) << 16 | (int)(color.g * 255) << 8 | (int)(color.b * 255));
+	return (0xFF << 24
+		| (int)(color.r * 255) << 16 | (int)(color.g * 255) << 8
+		| (int)(color.b * 255));
 }
