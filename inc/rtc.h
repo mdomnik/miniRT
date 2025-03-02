@@ -36,8 +36,6 @@ typedef struct s_image		t_image;
 
 typedef struct s_camera		t_camera;
 
-typedef struct s_loop		t_loop;
-
 typedef struct s_light_p	t_light_p;
 
 typedef struct s_world		t_world;
@@ -46,8 +44,6 @@ typedef struct s_world		t_world;
 
 
 typedef struct s_shape		t_shape;
-
-typedef struct s_comp		t_comp;
 
 typedef struct s_size_cap	t_size_cap;
 
@@ -58,14 +54,6 @@ typedef struct s_triangle	t_triangle;
 typedef struct s_obj_file		t_obj_file;
 
 typedef struct s_group		t_group;
-
-
-typedef struct s_thread_data {
-    t_loop *loop;
-    int thread_id;
-    int ac;
-    char **av;
-} t_thread_data;
 
 struct s_scene
 {
@@ -130,31 +118,6 @@ struct s_image
     int width;
     int height;
 };
-
-
-struct	s_loop
-{
-	void		*mlx;
-	void		*win;
-	t_image		*img;
-	t_options	*opts;
-};
-
-struct s_comp
-{
-	float			t;
-	t_shape			*shape;
-	t_point3		point;
-	t_vec3			eyev;
-	t_vec3			normalv;
-	t_vec3			reflectv;
-	int				inside;
-	t_point3		over_point;
-	t_point3		under_point;
-	float			n1;
-	float			n2;
-};
-
 
 struct s_size_cap
 {

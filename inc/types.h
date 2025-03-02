@@ -22,6 +22,10 @@ typedef struct s_matrix	t_matrix;
 
 typedef struct s_ray	t_ray;
 
+typedef struct s_comp	t_comp;
+
+typedef struct s_loop	t_loop;
+
 typedef struct s_pattern	t_pattern;
 
 typedef struct s_material	t_material;
@@ -99,6 +103,28 @@ struct s_ray
 	t_vec3		dir;
 };
 
+struct s_comp
+{
+	float			t;
+	t_shape			*shape;
+	t_point3		point;
+	t_vec3			eyev;
+	t_vec3			normalv;
+	t_vec3			reflectv;
+	int				inside;
+	t_point3		over_point;
+	t_point3		under_point;
+	float			n1;
+	float			n2;
+};
+
+struct	s_loop
+{
+	void		*mlx;
+	void		*win;
+	t_image		*img;
+	t_options	*opts;
+};
 
 struct s_uv_val
 {
@@ -169,3 +195,28 @@ struct s_material
 	float			refractive_index;
 	t_bump_map		*bump_map;
 };
+
+typedef struct s_pixel
+{
+	int	x;
+	int	y;
+	int	color;
+}	t_pixel;
+
+typedef struct s_thread_data
+{
+	t_loop	*loop;
+	int		thread_id;
+	int		ac;
+	char	**av;
+	int		current_y;
+}	t_thread_data;
+
+typedef struct s_render_data
+{
+	t_thread_data	*data;
+	t_world			*world;
+	t_ray			**ray;
+	t_comp			**comp;
+	int				coords[2];
+}	t_render_data;

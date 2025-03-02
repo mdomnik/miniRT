@@ -19,42 +19,46 @@
 // 	orientation->a[row][2] = input.z;
 // }
 
-t_matrix view_transformation(t_point3 from, t_vec3 orientation)
+static void	set_vertical_up(t_vec3 *up, float y_val)
 {
-    if (fabs(orientation.x) < 0.0001 && fabs(orientation.y) < 0.0001 && fabs(orientation.z) < 0.0001)
-        orientation = new_vec3(0, 0, 1);
-
-    t_vec3 forward = normalize(orientation);
-    t_vec3 up = new_vec3(0, 1, 0);
-
-    // Ensure up vector correction when forward is vertical
-    if (fabs(forward.x) < 0.0001 && fabs(forward.z) < 0.0001)
-        up = new_vec3(0, 0, (forward.y > 0) ? 1 : -1);
-
-    // **FIX: Correct cross product order for left**
-    t_vec3 left = normalize(cross_product(forward, up));  // Correct order
-
-    t_vec3 true_up = cross_product(left, forward);
-
-    // Create the orientation matrix
-    t_matrix orientation_matrix = init_identity_matrix(4);
-
-    orientation_matrix.a[0][0] = left.x;
-    orientation_matrix.a[0][1] = left.y;
-    orientation_matrix.a[0][2] = left.z;
-
-    orientation_matrix.a[1][0] = true_up.x;
-    orientation_matrix.a[1][1] = true_up.y;
-    orientation_matrix.a[1][2] = true_up.z;
-
-    orientation_matrix.a[2][0] = -forward.x;
-    orientation_matrix.a[2][1] = -forward.y;
-    orientation_matrix.a[2][2] = -forward.z;
-
-    // Apply translation to move the world relative to the camera
-    t_matrix translation_matrix = translation(-from.x, -from.y, -from.z);
-
-    return multiply_matrices(orientation_matrix, translation_matrix);
+	if (y_val > 0)
+		*up = new_vec3(0, 0, 1);
+	else
+		*up = new_vec3(0, 0, -1);
 }
 
+static void	fill_orientation_matrix(t_matrix *m, t_vec3 l, t_vec3 u, t_vec3 f)
+{
+	m->a[0][0] = l.x;
+	m->a[0][1] = l.y;
+	m->a[0][2] = l.z;
+	m->a[1][0] = u.x;
+	m->a[1][1] = u.y;
+	m->a[1][2] = u.z;
+	m->a[2][0] = -f.x;
+	m->a[2][1] = -f.y;
+	m->a[2][2] = -f.z;
+}
 
+t_matrix	view_transformation(t_point3 from, t_vec3 orientation)
+{
+	t_matrix	orientation_matrix;
+	t_matrix	translation_matrix;
+	t_vec3		forward;
+	t_vec3		up;
+	t_vec3		left;
+
+	if (fabs(orientation.x) < 0.0001 && fabs(orientation.y) < 0.0001
+		&& fabs(orientation.z) < 0.0001)
+		orientation = new_vec3(0, 0, 1);
+	forward = normalize(orientation);
+	up = new_vec3(0, 1, 0);
+	if (fabs(forward.x) < 0.0001 && fabs(forward.z) < 0.0001)
+		set_vertical_up(&up, forward.y);
+	left = normalize(cross_product(forward, up));
+	up = cross_product(left, forward);
+	orientation_matrix = init_identity_matrix(4);
+	fill_orientation_matrix(&orientation_matrix, left, up, forward);
+	translation_matrix = translation(-from.x, -from.y, -from.z);
+	return (multiply_matrices(orientation_matrix, translation_matrix));
+}

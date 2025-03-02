@@ -46,31 +46,25 @@ t_camera	*camera_new(int hsize, int vsize, float fov)
 	return (camera);
 }
 
-
-void ray_for_pixel(t_camera *camera, int px, int py, t_ray *ray)
+void	ray_for_pixel(t_camera *camera, int px, int py, t_ray *ray)
 {
-	float xoffset, yoffset, world_x, world_y;
-	t_tuple pixel, origin, direction;
-	t_matrix inv_transform;
+	float		xoffset;
+	float		yoffset;
+	float		world_x;
+	float		world_y;
+	t_matrix	inv_transform;
 
-	// Precompute inverse transformation to avoid redundant calculations
 	inv_transform = inverse(camera->transform);
-
-	// Compute pixel position in world space
 	xoffset = (px + 0.5f) * camera->pixel_size;
 	yoffset = (py + 0.5f) * camera->pixel_size;
 	world_x = camera->half_width - xoffset;
 	world_y = camera->half_height - yoffset;
-
-	pixel = multiply_matrix_tuple(inv_transform, new_point3(world_x, world_y, -1.0f));
-	origin = multiply_matrix_tuple(inv_transform, new_point3(0.0f, 0.0f, 0.0f));
-
-	direction = sub_tuple(pixel, origin);
-	if (!is_near_zero(direction))
-		direction = normalize(direction);
+	ray->orig = multiply_matrix_tuple(inv_transform, new_point3(0, 0, 0));
+	ray->dir = multiply_matrix_tuple(inv_transform, new_point3(world_x,
+				world_y, -1));
+	ray->dir = sub_tuple(ray->dir, ray->orig);
+	if (!is_near_zero(ray->dir))
+		ray->dir = normalize(ray->dir);
 	else
-		direction = new_vec3(0.0f, 0.0f, -1.0f);
-	ray->orig = origin;
-	ray->dir = direction;
+		ray->dir = new_vec3(0, 0, -1);
 }
-

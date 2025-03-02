@@ -13,6 +13,7 @@
 #ifndef MRT_H
 # define MRT_H
 
+// System includes first
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
@@ -20,21 +21,31 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <string.h>
-#include <pthread.h>
+# include <pthread.h>
 # include <errno.h>
 # include <math.h>
-# include <../lib/minilibx-linux/mlx.h>
+
+// External libraries
+# include "../lib/minilibx-linux/mlx.h"
 # include "../lib/libft/libft.h"
 
+// Project settings
 # include "settings/config.h"
 # include "settings/error.h"
 
+// Forward declarations
+# include "forward.h"
+
+// Basic types and structures
 # include "types.h"
 # include "objects.h"
+
+// Feature-specific headers
 # include "flags.h"
 # include "rtc.h"
 # include "materials.h"
 
+// Implementation headers
 # include "define/control.h"
 # include "define/debug.h"
 # include "define/groups.h"
@@ -54,6 +65,7 @@
 # define ASPECT_R 1.77777777777
 # define IWIDTH 400
 
+# define NUM_THREADS 12
 // Define the DEBUG macro
 // Define the DEBUG macro
 #define DEBUG(fmt, ...) \

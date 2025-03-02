@@ -12,7 +12,7 @@ CC              := cc
 
 # Compiler flags
 CFLAGS          += -Wall -Wextra -Werror
-CFLAGS          += -pedantic -Wunreachable-code
+CFLAGS          +=  -Wunreachable-code
 CFLAGS          += -Wshadow
 
 ifeq ($(DEBUG), 1)
@@ -151,6 +151,9 @@ SRC_FILES	+=	tuple/tuple_product_op.c
 SRC_FILES	+=	view/camera_op.c
 SRC_FILES	+=	view/view_transformation.c
 SRC_FILES	+=	view/render_loop.c
+SRC_FILES	+=	view/render_loop_init.c
+SRC_FILES	+=	view/render_worker.c
+SRC_FILES	+=	view/render_worker_utils.c
 
 # MAIN
 SRC_FILES	+=	main.c
