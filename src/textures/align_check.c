@@ -12,17 +12,22 @@
 
 #include "mrt.h"
 
-t_uv_align_check	*uv_align_check(t_color3 main, t_color3 ul,
-	t_color3 ur, t_color3 bl, t_color3 br)
+#define MAIN 0
+#define UL 1
+#define UR 2
+#define BL 3
+#define BR 4
+
+t_uv_align_check	*uv_align_check(t_color3 colors[5])
 {
 	t_uv_align_check	*pattern;
 
 	pattern = malloc(sizeof(t_uv_align_check));
-	pattern->main = main;
-	pattern->ul = ul;
-	pattern->ur = ur;
-	pattern->bl = bl;
-	pattern->br = br;
+	pattern->main = colors[MAIN];
+	pattern->ul = colors[UL];
+	pattern->ur = colors[UR];
+	pattern->bl = colors[BL];
+	pattern->br = colors[BR];
 	return (pattern);
 }
 

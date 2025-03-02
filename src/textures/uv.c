@@ -12,7 +12,6 @@
 
 #include "mrt.h"
 
-
 t_color3	uv_pattern_at(t_uv *pattern, float u, float v)
 {
 	int	u2;

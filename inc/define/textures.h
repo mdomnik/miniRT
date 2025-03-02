@@ -14,8 +14,7 @@
 # define TEXTURES_H
 
 //align_check.c
-t_uv_align_check	*uv_align_check(t_color3 main, t_color3 ul,
-	t_color3 ur, t_color3 bl, t_color3 br);
+t_uv_align_check	*uv_align_check(t_color3 colors[5]);
 t_color3			uv_pattern_at_align_check(t_uv_align_check *pattern,
 		float u, float v);
 t_pattern			*align_check_map(void *uv_pattern, t_uv_val (*uv_map)(t_point3));
@@ -27,8 +26,7 @@ t_vec3				perturb_normal(t_shape *shape,
 	t_point3 *local_point, t_vec3 local_normal);
 
 //cube_obj.c
-t_pattern			*new_cube_map(t_pattern *left, t_pattern *front, t_pattern *right,
-	t_pattern *back, t_pattern *up, t_pattern *down);
+t_pattern			*new_cube_map(t_pattern *faces[6]);
 t_directions		face_from_point(t_point3 point);
 t_color3			pattern_at_cube_map(t_pattern *pattern, t_point3 point);
 

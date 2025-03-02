@@ -59,12 +59,28 @@ t_color3	pattern_at_object(t_pattern *pattern,
 	return (c);
 }
 
-//pattern at
+static t_color3	handle_texture_map(t_pattern *pattern, t_point3 *point)
+{
+	t_uv_val	uv;
+	t_color3	color;
+	t_uv		*uv_pattern;
+
+	uv = pattern->uv_map(*point);
+	if (((t_pattern *)pattern->uv_pattern)->type == UV_IMAGE)
+	{
+		color = uv_pattern_at_image((t_pattern *)pattern->uv_pattern,
+				uv.u, uv.v);
+		return (new_color3(color.r, color.g, color.b));
+	}
+	uv_pattern = (t_uv *)pattern->uv_pattern;
+	color = uv_pattern_at(uv_pattern, uv.u, uv.v);
+	return (new_color3(color.r, color.g, color.b));
+}
+
 t_color3	pattern_at(t_pattern *pattern, t_point3 *point)
 {
 	t_uv_val			uv;
 	t_color3			color;
-	t_uv				*uv_pattern;
 	t_uv_align_check	*uv_pattern_a;
 
 	if (pattern->type == STRIPE)
@@ -76,21 +92,7 @@ t_color3	pattern_at(t_pattern *pattern, t_point3 *point)
 	if (pattern->type == CHECKERS)
 		return (checkers_at(pattern, point));
 	if (pattern->type == TEXTURE_MAP)
-	{
-		uv = pattern->uv_map(*point);
-		if (((t_pattern *)pattern->uv_pattern)->type == UV_IMAGE)
-		{
-			color = uv_pattern_at_image
-				((t_pattern *)pattern->uv_pattern, uv.u, uv.v);
-			return (new_color3(color.r, color.g, color.b));
-		}
-		else
-		{
-			uv_pattern = (t_uv *)pattern->uv_pattern;
-			color = uv_pattern_at(uv_pattern, uv.u, uv.v);
-			return (new_color3(color.r, color.g, color.b));
-		}
-	}
+		return (handle_texture_map(pattern, point));
 	if (pattern->type == ALIGN_CHECK)
 	{
 		uv = pattern->uv_map(*point);
@@ -99,10 +101,7 @@ t_color3	pattern_at(t_pattern *pattern, t_point3 *point)
 		return (new_color3(color.r, color.g, color.b));
 	}
 	if (pattern->type == CUBE_MAP)
-	{
-		color = pattern_at_cube_map(pattern, *point);
-		return (new_color3(color.r, color.g, color.b));
-	}
+		return (pattern_at_cube_map(pattern, *point));
 	ft_dprintf(2, "Error: Unsupported pattern type.\n");
 	exit(EXIT_FAILURE);
 }

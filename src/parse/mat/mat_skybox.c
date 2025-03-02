@@ -46,7 +46,7 @@ int	get_skybox(char *str, t_material *mat)
 	side[5] = texture_map(uv_image(canvas_from_ppm(filename)), planar_map);
 	free(filename);
 
-	cube_map = new_cube_map(side[0], side[1], side[2], side[3], side[4], side[5]);
+	cube_map = new_cube_map(side);
 	mat->pattern = cube_map;
 	return (0);
 }
