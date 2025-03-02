@@ -27,36 +27,30 @@
 int	check_object_rules(char **args, char **rules)
 {
 	int	i;
+	int	status;
 
 	i = 0;
-	while (rules[++i] != NULL)
+	status = 0;
+	while (rules[++i] != NULL && status == 0)
 	{
 		if (ft_strcmp(rules[i], "COLOR") == 0)
-			if (check_color_format(args[i]) == -1)
-				return (-1);
+			status |= check_color_format(args[i]);
 		if (ft_strcmp(rules[i], "RATIO") == 0)
-			if (check_ratio_format(args[i], 0, 1) == -1)
-				return (-1);
+			status |= check_ratio_format(args[i], 0, 1);
 		if (ft_strcmp(rules[i], "VECTOR") == 0)
-			if (check_vector_format(args[i]) == -1)
-				return (-1);
+			status |= check_vector_format(args[i]);
 		if (ft_strcmp(rules[i], "VRANGE") == 0)
-			if (check_vector_range_format(args[i]) == -1)
-				return (-1);
+			status |= check_vector_range_format(args[i]);
 		if (ft_strcmp(rules[i], "FLOAT") == 0)
-			if (check_float_format(args[i]) == -1)
-				return (-1);
+			status |= check_float_format(args[i]);
 		if (ft_strcmp(rules[i], "FOV") == 0)
-			if (check_ratio_format(args[i], 0, 180) == -1)
-				return (-1);
+			status |= check_ratio_format(args[i], 0, 180);
 		if (ft_strcmp(rules[i], "STRING") == 0)
-			if (check_string_format(args[i]) == -1)
-				return (-1);
+			status |= check_string_format(args[i]);
 		if (ft_strcmp(rules[i], "FILE") == 0)
-			if (check_file_open_format(args[i]) == -1)
-				return (-1);
+			status |= check_file_open_format(args[i]);
 	}
-	return (0);
+	return (status);
 }
 
 /**

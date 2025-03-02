@@ -66,24 +66,23 @@ int	check_mandatory_objects(t_options *options)
 		j = 0;
 		while (options->scene.scene_objects[j] != NULL)
 		{
-			if (ft_strcmp(options->scene.scene_objects[j][0], mandatory[i]) == 0)
+			if (ft_strcmp(
+					options->scene.scene_objects[j][0], mandatory[i]) == 0)
 				count--;
 			j++;
 		}
 		i++;
 	}
 	if (count > 0)
-	{
-		ft_dprintf(2, "%s '%s'\n", ERR_MISS_OBJ, MANDATORY_OBJECTS);
-		return (-1);
-	}
+		return (ft_dprintf(
+				2, "%s '%s'\n", ERR_MISS_OBJ, MANDATORY_OBJECTS), -1);
 	return (0);
 }
 
 /**
  * @brief Checks for duplicate objects in the scene.
  *
- * This function checks if there are any duplicate objects in the scene 
+ * This function checks if there are any duplicate objects in the scene
  * by comparing them with a list of unique objects from the objects.h header.
  * It takes a pointer to the options struct and a binary value
  * as parameters.

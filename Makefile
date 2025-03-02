@@ -102,7 +102,6 @@ SRC_FILES	+=	parse/ppm/canvas_utils.c
 SRC_FILES	+=	parse/ppm/canvas_from_ppm.c
 
 # PARSE/RT
-SRC_FILES	+=	parse/rt/tests.c
 SRC_FILES	+=	parse/rt/find_scene_file.c
 SRC_FILES	+=	parse/rt/input.c
 SRC_FILES	+=	parse/rt/canvas_colors.c
@@ -116,6 +115,10 @@ SRC_FILES	+=	parse/rt/flags/create_flag_nodes.c
 
 # PARSE/RT/SCENE_FILE
 SRC_FILES	+=	parse/rt/scene_file/create_mand.c
+SRC_FILES	+=	parse/rt/scene_file/create_complex.c
+SRC_FILES	+=	parse/rt/scene_file/create_cone.c
+SRC_FILES	+=	parse/rt/scene_file/create_cylinder.c
+SRC_FILES	+=	parse/rt/scene_file/create_shapes.c
 SRC_FILES	+=	parse/rt/scene_file/file_data.c
 SRC_FILES	+=	parse/rt/scene_file/check_data.c
 SRC_FILES	+=	parse/rt/scene_file/create_bonus.c
@@ -124,6 +127,7 @@ SRC_FILES	+=	parse/rt/scene_file/append.c
 SRC_FILES	+=	parse/rt/scene_file/ruleset.c
 SRC_FILES	+=	parse/rt/scene_file/file_utils.c
 SRC_FILES	+=	parse/rt/scene_file/create_obj.c
+SRC_FILES	+=	parse/rt/scene_file/check_objects.c
 
 # TEMPLATE_OBJ
 SRC_FILES	+=	template_obj/hexagon.c

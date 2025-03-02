@@ -17,12 +17,12 @@ static float	parse_frac(const char *str, int *i, float frac_div);
 
 /**
  * @brief Checks if the given string is of 'flag' format.
- * 
+ *
  * This function checks if the given string has a valid format for a flag.
  * it also considers negative numbers with the (-) sign, to be ignored.
  * If the string is a valid option, it is duplicated and returned.
  * Otherwise, NULL is returned.
- * 
+ *
  * @param str The string to be checked.
  * @return A pointer to the duplicated string
  * if it is a valid option, otherwise NULL.
@@ -165,4 +165,3 @@ static float	parse_frac(const char *str, int *i, float frac_div)
 	}
 	return (frac);
 }
-

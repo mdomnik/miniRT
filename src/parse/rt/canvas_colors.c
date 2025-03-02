@@ -12,34 +12,38 @@
 
 #include "mrt.h"
 
-t_canvas new_canvas(int width, int height)
+t_canvas	new_canvas(int width, int height)
 {
-	t_canvas canvas;
+	t_canvas	canvas;
+	int			i;
+	int			j;
 
 	canvas.width = width;
 	canvas.height = height;
 	canvas.pixels = (t_color3 **)malloc(sizeof(t_color3 *) * canvas.height);
-	for (int i = 0; i < canvas.height; i++)
+	i = 0;
+	while (i < canvas.height)
 	{
 		canvas.pixels[i] = (t_color3 *)malloc(sizeof(t_color3) * canvas.width);
-		for (int j = 0; j < canvas.width; j++)
+		j = 0;
+		while (j < canvas.width)
 		{
 			canvas.pixels[i][j] = new_tuple(0, 0, 0, 1);
+			j++;
 		}
+		i++;
 	}
-	return(canvas);
+	return (canvas);
 }
 
-//pixel_at
-t_color3 pixel_at(t_canvas *canvas, int x, int y)
+t_color3	pixel_at(t_canvas *canvas, int x, int y)
 {
 	return (canvas->pixels[y][x]);
 }
 
-//color to uint32_t
-int color_to_uint32(t_color3 color)
+int	color_to_uint32(t_color3 color)
 {
-	int result;
+	int	result;
 
 	result = 0;
 	result |= (int)(color.r * 255) << 24;

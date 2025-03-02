@@ -12,35 +12,27 @@
 
 #include "mrt.h"
 
-static int count_toremoves(t_obj *source)
+static int	count_toremoves(t_obj *source)
 {
-	int count;
-	 t_light *temp_light = source->light;
-    t_sphere *temp_sphere = source->sphere;
-    t_plane *temp_plane = source->plane;
-    t_cylinder *temp_cylinder = source->cylinder;
-	
+	int			count;
+	t_light		*temp_light;
+	t_sphere	*temp_sphere;
+	t_plane		*temp_plane;
+	t_cylinder	*temp_cylinder;
+
 	count = 2;
-	while(temp_light)
-	{
-		count++;
+	temp_light = source->light;
+	temp_sphere = source->sphere;
+	temp_plane = source->plane;
+	temp_cylinder = source->cylinder;
+	while (temp_light && count++ != 0)
 		temp_light = temp_light->next;
-	}
-	while (temp_sphere)
-	{
-		count++;
+	while (temp_sphere && count++ != 0)
 		temp_sphere = temp_sphere->next;
-	}
-	while (temp_plane)
-	{
-		count++;
+	while (temp_plane && count++ != 0)
 		temp_plane = temp_plane->next;
-	}
-	while (temp_cylinder)
-	{
-		count++;
+	while (temp_cylinder && count++ != 0)
 		temp_cylinder = temp_cylinder->next;
-	}
 	return (count);
 }
 
@@ -68,10 +60,10 @@ static int	populate_mandatory(t_toremove *object, t_obj *obj)
 		index++;
 		obj->light = obj->light->next;
 	}
-	return(index);
+	return (index);
 }
 
-static void populate_optional(t_toremove *object, t_obj *obj, int index)
+static void	populate_optional(t_toremove *object, t_obj *obj, int index)
 {
 	while (obj->sphere)
 	{
@@ -100,12 +92,11 @@ static void populate_optional(t_toremove *object, t_obj *obj, int index)
 
 t_toremove	*populate_object_struct(t_obj *obj)
 {
-	t_toremove *object;
-	int count;
-	int	index;
+	t_toremove	*object;
+	int			count;
+	int			index;
 
 	count = count_toremoves(obj);
-
 	object = gc_malloc(sizeof(t_toremove) * (count + 1));
 	index = populate_mandatory(object, obj);
 	populate_optional(object, obj, index);

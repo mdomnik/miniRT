@@ -33,11 +33,11 @@ int	check_string_format(char *str)
 	while (str[i])
 	{
 		if ((str[i] < 65 || str[i] > 90)
-			&& (str[i] < 97 || str[i] > 122) && (str[i] < '0' || str[i] > '9') && str[i] != '_' && str[i] != '.' && str[i] != '/')
+			&& (str[i] < 97 || str[i] > 122)
+			&& (str[i] < '0' || str[i] > '9') && str[i] != '_'
+			&& str[i] != '.' && str[i] != '/')
 		{
-				printf("str: %s\n", str);
-				printf("str[i]: %c\n", str[i]);
-				ft_dprintf(2, "%s '%c'\n", ERR_INVALID_CHAR, str[i]);
+			ft_dprintf(2, "%s '%c'\n", ERR_INVALID_CHAR, str[i]);
 			return (-1);
 		}
 		i++;
@@ -53,7 +53,7 @@ int	check_string_format(char *str)
  * and an optional negative sign (-) at the beginning of the string.
  * If the string contains any other characters or multiple (.), an error message
  * is printed to the standard error stream and the function returns -1.
- * 
+ *
  * @param str The flag's float (char *) to be checked.
  * @return Returns 0 if the format is valid, -1 otherwise.
  */

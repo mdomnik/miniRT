@@ -35,10 +35,7 @@ int	get_scene_data(t_options *options)
 	options->scene.scene_objects = NULL;
 	fd = open(options->scene.scene_file, O_RDONLY);
 	if (fd == -1)
-	{
-		ft_dprintf(2, "%s\n", ERR_OPEN_FILE);
-		return (-1);
-	}
+		return (ft_dprintf(2, "%s\n", ERR_OPEN_FILE), -1);
 	line = gnl(fd);
 	if (line == NULL)
 	{
@@ -53,8 +50,7 @@ int	get_scene_data(t_options *options)
 		free(line);
 		line = gnl(fd);
 	}
-	close(fd);
-	return (0);
+	return (close(fd), 0);
 }
 
 /**

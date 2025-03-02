@@ -78,24 +78,28 @@ int			check_dup_objects(t_options *options, int binary);
 int			check_object_data(char **args);
 int			determine_object(char **args);
 
+//rt/scene_file/check_objects.c
+int		create_objects(t_options *options, t_world *world);
+int		check_objects_helper(t_scene *scene, t_world *world, int i);
+
 //rt/scene_file/create_mand.c
-int			create_objects(t_options *options, t_world *world);
-int			check_objects_helper(t_scene *scene, t_world *world, int i);
-int			create_ambient(t_options *options, char **args);
-int			create_camera(t_camera **camera, char **args);
-int			create_light(t_light_p **lights, char **args);
+int		create_ambient(t_options *options, char **args);
+int		create_camera(t_camera **camera, char **args);
+int		create_light(t_light_p **lights, char **args);
 
 //rt/scene_file/create_bonus.c
 int		check_bonus_objects(t_scene *scene, t_world *world, int i);
 int		create_cone(t_world *world, char **args);
-int	create_hourglass(t_world *world, char **args);
-int	create_cube(t_world *world, char **args);
-int	create_obj(t_world *world, char **args);
-int	create_skybox(t_world *world, char **args);
+int		create_hourglass(t_world *world, char **args);
+int		create_cube(t_world *world, char **args);
+int		create_obj(t_world *world, char **args);
+int		create_skybox(t_world *world, char **args);
 
 //rt/scene_file/create_obj.c
 int			create_sphere(t_world *world, char **args);
 int			create_plane(t_world *world, char **args);
+
+//rt/scene_file/create_cylinder.c
 int			create_cylinder(t_world *world, char **args);
 
 //rt/scene_file/file_data.c
