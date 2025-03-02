@@ -12,13 +12,14 @@
 
 #include "mrt.h"
 
-static void set_material_pattern(char *type, char *colors, char *transforms, t_material *mat);
+static void	set_pattern(char *type, char *colors, char *transforms,
+				t_material *mat);
 
 int	check_texture_args(char *str, t_material *mat)
 {
-	int i;
-	char **input;
-	
+	int		i;
+	char	**input;
+
 	input = ft_split(str, ' ');
 	i = 0;
 	while (input[i] != NULL)
@@ -29,18 +30,20 @@ int	check_texture_args(char *str, t_material *mat)
 		return (0);
 	}
 	if (ft_strncmp(input[0], "pattern:", ft_strlen(input[0])) == 0)
-		set_material_pattern(input[1], input[2], input[3], mat);
-	// if (ft_strncmp(input[0], "texture:", ft_strlen(input[0])) == 0)
-	// 	set_material_texture(input[1], input[2], mat);
-	// if (ft_strncmp(input[0], "bump_map:", ft_strlen(input[0])) == 0)
-	// 	set_material_bumpmap(input[1], mat);
+		set_pattern(input[1], input[2], input[3], mat);
+	/*
+	** Future implementations:
+	** set_material_texture(input[1], input[2], mat);
+	** set_material_bumpmap(input[1], mat);
+	*/
 	free_double(input);
 	return (0);
 }
 
-static void set_material_pattern(char *type, char *colors, char *transforms, t_material *mat)
+static void	set_pattern(char *type, char *colors, char *transforms,
+				t_material *mat)
 {
-	t_pattern *pattern;
+	t_pattern	*pattern;
 
 	pattern = malloc(sizeof(t_pattern));
 	pattern->transform = init_identity_matrix(4);

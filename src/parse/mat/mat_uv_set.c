@@ -12,14 +12,12 @@
 
 #include "mrt.h"
 
-
 void	set_uv_pattern(t_shape *shape)
 {
-	t_pattern *pattern;
+	t_pattern	*pattern;
+	t_pattern	*end_pattern;
 
 	pattern = shape->material.pattern;
-	t_pattern *end_pattern;
-
 	end_pattern = new_pattern(pattern->type, pattern->a, pattern->b);
 	set_pattern_transform(end_pattern, pattern->transform);
 	free(pattern);

@@ -131,6 +131,10 @@ int		scene_file_check(char *filename, char **scene_file, bool *scene_count);
 int		check_scene_file(char *args);
 int		check_arg_count(char **argv);
 
+//mat/mat_format_utils.c
+int		validate_arg_chars(char *arg);
+int		check_limits(char *limits, float value);
+
 //rt/tests.c
 void	printf_option_values(t_options *options);
 void	printf_objects(t_options *options);

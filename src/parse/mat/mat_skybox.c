@@ -14,38 +14,39 @@
 #include "mrt.h"
 
 // https://www.humus.name/index.php?page=Textures&start=24
+static t_pattern	*load_skybox_side(char *base_path, char *side_name)
+{
+	char		*filename;
+	t_pattern	*side;
+
+	filename = ft_strjoin(base_path, side_name);
+	side = texture_map(uv_image(canvas_from_ppm(filename)), planar_map);
+	free(filename);
+	return (side);
+}
+
+static int	load_all_sides(char *str, t_pattern *sides[6])
+{
+	sides[0] = load_skybox_side(str, "/negx.ppm");
+	sides[1] = load_skybox_side(str, "/posz.ppm");
+	sides[2] = load_skybox_side(str, "/posx.ppm");
+	sides[3] = load_skybox_side(str, "/negz.ppm");
+	sides[4] = load_skybox_side(str, "/posy.ppm");
+	sides[5] = load_skybox_side(str, "/negy.ppm");
+	return (0);
+}
+
 int	get_skybox(char *str, t_material *mat)
 {
-	char *filename;
-	t_pattern *side[6];
-	t_pattern *cube_map;
+	t_pattern	*side[6];
+	t_pattern	*cube_map;
 
-	printf("str: [%s]\n", str);
 	if (open(str, O_DIRECTORY) == -1)
 	{
 		ft_dprintf(2, "Error\nSkybox texture not found\n");
 		return (-1);
 	}
-	filename = ft_strjoin(str, "/negx.ppm");
-	printf("filename: [%s]\n", filename);
-	side[0] = texture_map(uv_image(canvas_from_ppm(filename)), planar_map);
-	free(filename);
-	filename = ft_strjoin(str, "/posz.ppm");
-	side[1] = texture_map(uv_image(canvas_from_ppm(filename)), planar_map);
-	free(filename);
-	filename = ft_strjoin(str, "/posx.ppm");
-	side[2] = texture_map(uv_image(canvas_from_ppm(filename)), planar_map);
-	free(filename);
-	filename = ft_strjoin(str, "/negz.ppm");
-	side[3] = texture_map(uv_image(canvas_from_ppm(filename)), planar_map);
-	free(filename);
-	filename = ft_strjoin(str, "/posy.ppm");
-	side[4] = texture_map(uv_image(canvas_from_ppm(filename)), planar_map);
-	free(filename);
-	filename = ft_strjoin(str, "/negy.ppm");
-	side[5] = texture_map(uv_image(canvas_from_ppm(filename)), planar_map);
-	free(filename);
-
+	load_all_sides(str, side);
 	cube_map = new_cube_map(side);
 	mat->pattern = cube_map;
 	return (0);

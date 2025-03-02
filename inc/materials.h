@@ -33,6 +33,10 @@ int	check_texture_args(char *str, t_material *mat);
 //mat_format.c
 int	get_material(char *str, t_material *mat);
 
+//mat_format_utils.c
+int	validate_arg_chars(char *arg);
+int	check_limits(char *param, float value);
+
 //mat_skybox.c
 int	get_skybox(char *str, t_material *mat);
 
