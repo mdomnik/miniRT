@@ -87,15 +87,14 @@ void	transparency_and_refraction(t_i *hit, t_comp *comp, t_x *xs)
 	t_i		*x;
 
 	containers = NULL;
-	i = 0;
-	while (i < xs->count)
+	i = -1;
+	while (++i < xs->count)
 	{
 		x = &xs->i[i];
 		if (x->t == hit->t)
 		{
-			if (containers == NULL)
-				comp->n1 = 1.0;
-			else
+			comp->n1 = 1.0;
+			if (containers)
 				comp->n1 = last_shape(containers)->material.refractive_index;
 		}
 		if (contains(containers, x->shape))
@@ -104,12 +103,10 @@ void	transparency_and_refraction(t_i *hit, t_comp *comp, t_x *xs)
 			containers = add_shape_con(containers, x->shape);
 		if (x->t == hit->t)
 		{
-			if (containers == NULL)
-				comp->n2 = 1.0;
-			else
+			comp->n2 = 1.0;
+			if (containers)
 				comp->n2 = last_shape(containers)->material.refractive_index;
 			break ;
 		}
-		i++;
 	}
 }

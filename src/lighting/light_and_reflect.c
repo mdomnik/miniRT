@@ -12,6 +12,23 @@
 
 #include "mrt.h"
 
+#define VEC_LIGHT 0
+#define VEC_AMBIENT 1
+#define VEC_REFLECT 2
+#define VEC_COUNT 3
+
+#define COL_EFFECTIVE 0
+#define COL_DIFFUSE 1
+#define COL_SPECULAR 2
+#define COL_RESULT 3
+#define COL_AMBIENT_PROD 4
+#define COL_COUNT 5
+
+#define DOT_LIGHT_NORMAL 0
+#define DOT_REFLECT_EYE 1
+#define DOT_FACTOR 2
+#define DOT_COUNT 3
+
 t_vec3	reflect(t_vec3 in, t_vec3 normal)
 {
 	float	dot;
@@ -25,54 +42,52 @@ t_vec3	reflect(t_vec3 in, t_vec3 normal)
 t_color3	lighting(t_material *m, t_shape *shape, t_light_p *light,
 	t_point3 *point, t_vec3 eyev, t_vec3 normalv, bool in_shadow)
 {
-	t_color3	effective_color;
-	t_vec3		lightv;
-	t_vec3		ambient;
-	float		light_dot_normal;
-	t_color3	diffuse;
-	t_color3	specular;
-	t_vec3		reflectv;
-	float		reflect_dot_eye;
-	float		factor;
-	t_color3	result;
-	t_color3	ambient_product;
+	t_vec3		vec[VEC_COUNT];
+	t_color3	col[COL_COUNT];
+	float		dot[DOT_COUNT];
 
 	if (m->pattern)
-		effective_color = mult_color(pattern_at_object(m->pattern, shape, point), light->intensity);
+		col[COL_EFFECTIVE] = mult_color(pattern_at_object(m->pattern,
+					shape, point), light->intensity);
 	else
-		effective_color = mult_color(m->color, light->intensity);
-	lightv = normalize(sub_tuple_p(&light->position, point));
+		col[COL_EFFECTIVE] = mult_color(m->color, light->intensity);
+	vec[VEC_LIGHT] = normalize(sub_tuple_p(&light->position, point));
 	if (shape->type != SKYBOX)
 	{
-		ambient_product = mult_color_scalar(global_color('a', (t_color3){0}), m->ambient);
-		ambient = mult_tuple(add_tuple(effective_color, ambient_product), m->ambient);
+		col[COL_AMBIENT_PROD] = mult_color_scalar(global_color('a',
+					(t_color3){0}), m->ambient);
+		vec[VEC_AMBIENT] = mult_tuple(add_tuple(col[COL_EFFECTIVE],
+					col[COL_AMBIENT_PROD]), m->ambient);
 	}
 	else
-		ambient = mult_tuple(effective_color, m->ambient);
-	light_dot_normal = dot_product(lightv, normalv);
-	if (light_dot_normal < 0)
+		vec[VEC_AMBIENT] = mult_tuple(col[COL_EFFECTIVE], m->ambient);
+	dot[DOT_LIGHT_NORMAL] = dot_product(vec[VEC_LIGHT], normalv);
+	if (dot[DOT_LIGHT_NORMAL] < 0)
 	{
-		diffuse = new_color3(0, 0, 0);
-		specular = new_color3(0, 0, 0);
+		col[COL_DIFFUSE] = new_color3(0, 0, 0);
+		col[COL_SPECULAR] = new_color3(0, 0, 0);
 	}
 	else
 	{
-		diffuse = mult_tuple(effective_color, (m->diffuse * light_dot_normal));
-		reflectv = reflect(neg_vec3(lightv), normalv);
-		reflect_dot_eye = dot_product(reflectv, eyev);
-		if (reflect_dot_eye <= 0)
-			specular = new_color3(0, 0, 0);
+		col[COL_DIFFUSE] = mult_tuple(col[COL_EFFECTIVE],
+				(m->diffuse * dot[DOT_LIGHT_NORMAL]));
+		vec[VEC_REFLECT] = reflect(neg_vec3(vec[VEC_LIGHT]), normalv);
+		dot[DOT_REFLECT_EYE] = dot_product(vec[VEC_REFLECT], eyev);
+		if (dot[DOT_REFLECT_EYE] <= 0)
+			col[COL_SPECULAR] = new_color3(0, 0, 0);
 		else
 		{
-			factor = powf(reflect_dot_eye, m->shininess);
-			specular = mult_tuple(light->intensity, (m->specular * factor));
+			dot[DOT_FACTOR] = powf(dot[DOT_REFLECT_EYE], m->shininess);
+			col[COL_SPECULAR] = mult_tuple(light->intensity,
+					(m->specular * dot[DOT_FACTOR]));
 		}
 	}
 	if (in_shadow == true)
-		result = ambient;
+		col[COL_RESULT] = vec[VEC_AMBIENT];
 	else
-		result = add_tuple(add_tuple(ambient, diffuse), specular);
-	return (result);
+		col[COL_RESULT] = add_tuple(add_tuple(vec[VEC_AMBIENT],
+					col[COL_DIFFUSE]), col[COL_SPECULAR]);
+	return (col[COL_RESULT]);
 }
 
 // t_color3	lighting(t_material *m, t_shape *shape, t_light_p *light,

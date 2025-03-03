@@ -12,20 +12,24 @@
 
 #include "mrt.h"
 
-t_color3	reflected_color(t_world *world, t_comp **comps, t_ray **ray, int remaining)
+t_color3	reflected_color(t_world *world, t_comp **comps,
+	t_ray **ray, int remaining)
 {
 	t_color3	color;
 
 	if (remaining < 1)
 		return (new_color3(0, 0, 0));
-	if (comps[RECURSIVE_DEPTH - remaining]->shape->material.reflective == 0) //maybe should be world
+	if (comps[RECURSIVE_DEPTH - remaining]->shape->material.reflective == 0)
 	{
 		return (new_color3(0, 0, 0));
 	}
-	ray[(RECURSIVE_DEPTH + 1) - remaining]->orig = comps[RECURSIVE_DEPTH-remaining]->over_point;
-	ray[(RECURSIVE_DEPTH + 1) - remaining]->dir = comps[RECURSIVE_DEPTH-remaining]->reflectv;
+	ray[(RECURSIVE_DEPTH + 1) - remaining]->orig = comps[
+		RECURSIVE_DEPTH - remaining]->over_point;
+	ray[(RECURSIVE_DEPTH + 1) - remaining]->dir = comps[
+		RECURSIVE_DEPTH - remaining]->reflectv;
 	color = color_at(world, ray, comps, remaining - 1);
-	return (mult_tuple(color, comps[RECURSIVE_DEPTH-remaining]->shape->material.reflective));
+	return (mult_tuple(color, comps[
+				RECURSIVE_DEPTH - remaining]->shape->material.reflective));
 }
 
 //refracted color
