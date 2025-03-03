@@ -21,9 +21,10 @@ void		canvas_from_ppm_pixels(FILE *file, t_canvas *canvas, int color_max);
 int			check_ppm_magic_number(char *line);
 int			canvas_from_ppm_dimensions(t_canvas *canvas, char *line);
 t_canvas	*canvas_from_ppm(const char *filename);
+// t_canvas	*process_ppm_header(FILE *file, int *color_max);
 
 //ppm/canvas_utils.c
-int			isspace(int c);
+int			ft_isspace(int c);
 void		canvas_write_pixel(t_canvas *canvas, int x, int y, t_color3 color);
 char		*skip_comments(FILE *file);
 
@@ -31,7 +32,7 @@ char		*skip_comments(FILE *file);
 t_canvas	*canvas_new(int width, int height);
 void		write_pixel(t_canvas *canvas, int x, int y, t_color3 color);
 t_color3	pixel_at(t_canvas *canvas, int x, int y);
-void		canvas_to_ppm(t_canvas *canvas, char *filename);
+int			canvas_to_ppm(t_canvas *canvas, char *filename);
 
 //rt/flags/check_value_format.c
 int			check_string_format(char *str);
@@ -144,5 +145,9 @@ int			check_limits(char *limits, float value);
 //rt/tests.c
 void		printf_option_values(t_options *options);
 void		printf_objects(t_options *options);
+
+//utils/error_handler.c
+void		*error_handler(char *error_msg, FILE *file);
+int			error_handler_int(char *error_msg, FILE *file);
 
 #endif

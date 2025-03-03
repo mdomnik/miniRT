@@ -105,7 +105,7 @@ t_obj_file *parse_obj_file(const char *filename)
     len = 0;
     while (getline(&line, &len, file) != -1)
     {
-        if (line[0] == 'v' && isspace(line[1]))
+        if (line[0] == 'v' && ft_isspace(line[1]))
         {
             if (obj_file->vertex_count >= MAX_VERTEX_COUNT)
             {
@@ -119,7 +119,7 @@ t_obj_file *parse_obj_file(const char *filename)
             else
                 fprintf(stderr, "Malformed vertex line: %s\n", line);
         }
-        else if (line[0] == 'g' && isspace(line[1]))
+        else if (line[0] == 'g' && ft_isspace(line[1]))
         {
             if (sscanf(line, "g %63s", group_name) == 1)
             {
@@ -130,7 +130,7 @@ t_obj_file *parse_obj_file(const char *filename)
             else
                 fprintf(stderr, "Malformed group line: %s\n", line);
         }
-        else if (line[0] == 'f' && isspace(line[1]))
+        else if (line[0] == 'f' && ft_isspace(line[1]))
         {
             count = 0;
             token = strtok(line + 2, " \t");

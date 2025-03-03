@@ -12,7 +12,7 @@
 
 #include "mrt.h"
 
-int	isspace(int c)
+int	ft_isspace(int c)
 {
 	return (c == ' ' || c == '\t' || c == '\n'
 		|| c == '\v' || c == '\f' || c == '\r');
@@ -39,7 +39,7 @@ char	*skip_comments(FILE *file)
 	while (getline(&line, &len, file) != -1)
 	{
 		ptr = line;
-		while (isspace(*ptr))
+		while (ft_isspace(*ptr))
 			ptr++;
 		if (*ptr == '\0' || *ptr == '#')
 		{
@@ -52,3 +52,35 @@ char	*skip_comments(FILE *file)
 	free(line);
 	return (NULL);
 }
+
+// int	canvas_from_ppm_dimensions(t_canvas *canvas, char *line)
+// {
+// 	int	width;
+// 	int	height;
+
+// 	if (sscanf(line, "%d %d", &width, &height) != 2)
+// 		return (-1);
+// 	canvas->width = width;
+// 	canvas->height = height;
+// 	return (0);
+// }
+
+// int	check_ppm_magic_number(char *line)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	j = 0;
+// 	if (strncmp(line, "P3", 2) != 0)
+// 		return (-1);
+// 	while (line[i] != '\0')
+// 	{
+// 		if (!ft_isspace(line[i]))
+// 			j++;
+// 		i++;
+// 	}
+// 	if (j == 2)
+// 		return (0);
+// 	return (-1);
+// }

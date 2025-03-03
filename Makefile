@@ -99,8 +99,11 @@ SRC_FILES	+=	parse/obj/obj_to_faces.c
 # PARSE/PPM
 SRC_FILES	+=	parse/ppm/write_to_ppm.c
 SRC_FILES	+=	parse/ppm/canvas_utils.c
+SRC_FILES	+=	parse/ppm/ppm_file_handler.c
 SRC_FILES	+=	parse/ppm/canvas_from_ppm.c
 
+# PARSE/UTILS
+SRC_FILES	+=	parse/utils/error_handler.c
 # PARSE/RT
 SRC_FILES	+=	parse/rt/find_scene_file.c
 SRC_FILES	+=	parse/rt/input.c

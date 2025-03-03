@@ -41,13 +41,10 @@ t_canvas	*canvas_new(int width, int height)
 	i = 0;
 	while (i < height)
 	{
-		j = 0;
+		j = -1;
 		canvas->pixels[i] = malloc(sizeof(t_color3) * width);
-		while (j < width)
-		{
+		while (++j < width)
 			canvas->pixels[i][j] = new_color3(0, 0, 0);
-			j++;
-		}
 		i++;
 	}
 	return (canvas);
@@ -64,8 +61,7 @@ void	write_pixel(t_canvas *canvas, int x, int y, t_color3 color)
 	canvas->pixels[y][x] = color;
 }
 
-
-void	canvas_to_ppm(t_canvas *canvas, char *filename)
+int	canvas_to_ppm(t_canvas *canvas, char *filename)
 {
 	FILE		*file;
 	t_color3	color;
@@ -74,10 +70,7 @@ void	canvas_to_ppm(t_canvas *canvas, char *filename)
 
 	file = fopen(filename, "w");
 	if (!file)
-	{
-		fprintf(stderr, "Error: Could not open file for writing.\n");
-		exit(EXIT_FAILURE);
-	}
+		return (ft_dprintf(2, "Error: Could not open file for writing.\n"), -1);
 	fprintf(file, "P3\n%d %d\n255\n", canvas->width, canvas->height);
 	i = 0;
 	while (i < canvas->height)
@@ -92,5 +85,5 @@ void	canvas_to_ppm(t_canvas *canvas, char *filename)
 		}
 		i++;
 	}
-	fclose(file);
+	return (fclose(file), 0);
 }
