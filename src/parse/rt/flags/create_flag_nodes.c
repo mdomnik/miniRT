@@ -40,7 +40,7 @@ int	value_containers(int value, t_options *options, char *str, char *flag)
 	if (value < 0)
 		return (0);
 	f_types = ft_split(opts_value, ',');
-	flag_join = gc_malloc(sizeof(char *) * 4);
+	flag_join = malloc(sizeof(char *) * 4);
 	flag_join[0] = ft_strdup(flag);
 	flag_join[1] = ft_strdup(f_types[value]);
 	if (str)
@@ -145,7 +145,7 @@ t_flags	*create_value_node(t_opts_type type, char *value_type, char *data)
 {
 	t_flags	*new_value_node;
 
-	new_value_node = (t_flags *)gc_malloc(sizeof(t_flags));
+	new_value_node = (t_flags *)malloc(sizeof(t_flags));
 	new_value_node->type = type;
 	if (ft_strnstr(value_type, "STRING", ft_strlen(value_type)))
 	{

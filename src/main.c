@@ -25,6 +25,7 @@ int	key_hook(int keycode, void *param)
 			mlx_destroy_display(loop->mlx);
 			free(loop->mlx);
 		}
+		gc_free_gc(-1);
 		exit(0);
 	}
 	return (0);

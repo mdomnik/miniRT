@@ -89,6 +89,5 @@ int	make_world(t_options *options, t_world *world)
 {
 	if (create_objects(options, world) == -1)
 		return (-1);
-	(void)world;
 	return (0);
 }

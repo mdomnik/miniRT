@@ -95,7 +95,7 @@ char	**double_dup(char **src)
 	i = 0;
 	while (src[i])
 		i++;
-	dst = gc_malloc(sizeof(char *) * (i + 1));
+	dst = malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	while (src[i])
 	{

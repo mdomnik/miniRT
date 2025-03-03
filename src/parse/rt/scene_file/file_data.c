@@ -104,14 +104,14 @@ char	**append_to_double(char **args, char *temp)
 	i = 0;
 	if (args == NULL)
 	{
-		new_args = gc_malloc(sizeof(char *) * 2);
+		new_args = malloc(sizeof(char *) * 2);
 		new_args[0] = temp;
 		new_args[1] = NULL;
 		return (new_args);
 	}
 	while (args[i] != NULL)
 		i++;
-	new_args = gc_malloc(sizeof(char *) * (i + 2));
+	new_args = malloc(sizeof(char *) * (i + 2));
 	i = 0;
 	while (args[i] != NULL)
 	{
@@ -138,7 +138,7 @@ int	append_to_triple(t_options *options, char **args)
 	i = 0;
 	if (options->scene.scene_objects == NULL)
 	{
-		options->scene.scene_objects = gc_malloc(sizeof(char **) * 2);
+		options->scene.scene_objects = malloc(sizeof(char **) * 2);
 		options->scene.scene_objects[0] = args;
 		options->scene.scene_objects[1] = NULL;
 		return (0);
@@ -147,7 +147,7 @@ int	append_to_triple(t_options *options, char **args)
 		return (-1);
 	while (options->scene.scene_objects[i] != NULL)
 		i++;
-	new_triple = gc_malloc(sizeof(char **) * (i + 2));
+	new_triple = malloc(sizeof(char **) * (i + 2));
 	i = -1;
 	while (options->scene.scene_objects[++i] != NULL)
 		new_triple[i] = options->scene.scene_objects[i];

@@ -19,7 +19,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		i;
 	int		j;
 
-	new_s = gc_malloc(((ft_strlen((char *) s1) + ft_strlen((char *) s2)) \
+	new_s = malloc(((ft_strlen((char *) s1) + ft_strlen((char *) s2)) \
 		* sizeof(char)) + 1);
 	if (new_s != NULL)
 	{

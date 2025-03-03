@@ -97,7 +97,7 @@ t_toremove	*populate_object_struct(t_obj *obj)
 	int			index;
 
 	count = count_toremoves(obj);
-	object = gc_malloc(sizeof(t_toremove) * (count + 1));
+	object = malloc(sizeof(t_toremove) * (count + 1));
 	index = populate_mandatory(object, obj);
 	populate_optional(object, obj, index);
 	return (object);

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "forward.h"
 #include "mrt.h"
 
 pthread_mutex_t	g_check_args_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -22,6 +23,9 @@ t_world	*init_local_world(t_thread_data *data)
 	local_world = malloc(sizeof(t_world));
 	if (!local_world)
 		return (NULL);
+	local_world->camera = NULL;
+	local_world->light = NULL;
+	local_world->shapes = NULL;
 	pthread_mutex_lock(&g_check_args_mutex);
 	if (make_world(data->loop->opts, local_world) == -1)
 	{

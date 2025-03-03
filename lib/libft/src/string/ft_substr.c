@@ -30,7 +30,7 @@ static char	*alloc(char const *s, unsigned int start, size_t len)
 	s_len = ft_strlen(s);
 	if (s_len <= start)
 	{
-		new_s = gc_malloc(sizeof(char));
+		new_s = malloc(sizeof(char));
 		if (!new_s)
 			return (NULL);
 		new_s[0] = '\0';
@@ -39,7 +39,7 @@ static char	*alloc(char const *s, unsigned int start, size_t len)
 	{
 		if ((s_len <= len) || (s_len < start + len))
 			len = s_len - start;
-		new_s = gc_malloc((len + 1) * sizeof(char));
+		new_s = malloc((len + 1) * sizeof(char));
 	}
 	return (new_s);
 }
