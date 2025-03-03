@@ -61,7 +61,7 @@ SRC_FILES		+= utils/ft_toupper.c
 SRC_FILES		+= utils/ft_tolower.c
 SRC_FILES		+= utils/ft_atoi.c
 SRC_FILES		+= utils/ft_itoa.c
-
+SRC_FILES		+= utils/ft_abs.c
 SRC_FILES		+= put/ft_putchar_fd.c
 SRC_FILES		+= put/ft_putstr_fd.c
 SRC_FILES		+= put/ft_putendl_fd.c
