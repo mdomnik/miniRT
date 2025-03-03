@@ -15,6 +15,8 @@
 int	key_hook(int keycode, void *param)
 {
 	t_loop *loop = (t_loop *)param;
+	if (!loop)
+		return (-1);
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(loop->mlx, loop->win);
@@ -34,7 +36,7 @@ int main(int ac, char *av[])
 	if (check_args(ac, av, loop->opts) == 1)
 		return (-1);
 	render(loop, ac, av);
-	mlx_key_hook(loop->win, key_hook, &loop);
+	mlx_key_hook(loop->win, key_hook, loop);
 	mlx_loop(loop->mlx);
 	return 0;
 }

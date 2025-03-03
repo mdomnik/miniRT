@@ -65,6 +65,6 @@
 # define ASPECT_R 1.77777777777
 # define IWIDTH 400
 
-# define NUM_THREADS 12
+# define NUM_THREADS 1
 
 #endif /* MRT_H */

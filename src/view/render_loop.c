@@ -11,20 +11,25 @@
 /* ************************************************************************** */
 
 #include "mrt.h"
+#include <stdio.h>
 
 t_loop	*loop_init(void)
 {
 	t_loop	*loop;
 
-	loop = malloc(sizeof(t_loop));
+	loop = malloc(sizeof(*loop));
 	if (!loop)
 		return (NULL);
 	loop->mlx = mlx_init();
+	if (!loop->mlx)
+		return (free(loop), NULL);
 	loop->win = mlx_new_window(loop->mlx, DEFAULT_WIDTH, DEFAULT_HEIGHT, "=D");
+	if (!loop->win)
+		return (free(loop), NULL);
 	if (!init_loop_img(loop))
-		return (NULL);
+		return (free(loop), NULL);
 	if (!init_loop_opts(loop))
-		return (NULL);
+		return (free(loop), NULL);
 	return (loop);
 }
 
