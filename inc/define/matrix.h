@@ -29,6 +29,7 @@ t_matrix	rotation_z(float rad);
 
 //matrix_inverse.c
 t_matrix	inverse(t_matrix mat);
+int	        invert_matrix(t_matrix *input, t_matrix *output);
 
 //matrix_shear_transform.c
 t_matrix	shearing_x(float y, float z);

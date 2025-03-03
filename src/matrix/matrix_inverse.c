@@ -12,79 +12,128 @@
 
 #include "mrt.h"
 
-#define abs(x) ((x) < 0 ? -(x) : (x))
-
 #define N 4
-static int invert_matrix(t_matrix *input, t_matrix *output)
+
+#define IDX_I 0
+#define IDX_J 1
+#define IDX_K 2
+#define IDX_MAX_ROW 3
+#define ITER_COUNT 4
+
+#define VAL_MAX 0
+#define VAL_TEMP 1
+#define VAL_PIVOT 2
+#define VAL_FACTOR 3
+#define VAL_COUNT 4
+
+static void	init_augmented(t_matrix *input, double aug[N][2 *N],
+		int idx[ITER_COUNT])
 {
-	double aug[N][2*N];
-
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			aug[i][j] = input->a[i][j];
-			aug[i][j+N] = (i == j) ? 1.0 : 0.0;
+	idx[IDX_I] = 0;
+	while (idx[IDX_I] < N)
+	{
+		idx[IDX_J] = 0;
+		while (idx[IDX_J] < N)
+		{
+			aug[idx[IDX_I]][idx[IDX_J]] = input->a[idx[IDX_I]][idx[IDX_J]];
+			if (idx[IDX_I] == idx[IDX_J])
+				aug[idx[IDX_I]][idx[IDX_J] + N] = 1.0;
+			else
+				aug[idx[IDX_I]][idx[IDX_J] + N] = 0.0;
+			idx[IDX_J]++;
 		}
+		idx[IDX_I]++;
 	}
-
-	for (int i = 0; i < N; i++) {
-		int max_row = i;
-		double max_val = fabs(aug[i][i]);
-
-		for (int j = i + 1; j < N; j++) {
-			if (fabs(aug[j][i]) > max_val) {
-				max_val = fabs(aug[j][i]);
-				max_row = j;
-			}
-		}
-
-		if (max_val < EPSILON) {
-			return 0;
-		}
-
-		if (max_row != i) {
-			for (int j = 0; j < 2*N; j++) {
-				double temp = aug[i][j];
-				aug[i][j] = aug[max_row][j];
-				aug[max_row][j] = temp;
-			}
-		}
-
-		double pivot = aug[i][i];
-		for (int j = 0; j < 2*N; j++) {
-			aug[i][j] /= pivot;
-		}
-
-		for (int j = 0; j < N; j++) {
-			if (j != i) {
-				double factor = aug[j][i];
-				for (int k = 0; k < 2*N; k++) {
-					aug[j][k] -= factor * aug[i][k];
-				}
-			}
-		}
-	}
-
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			output->a[i][j] = aug[i][j+N];
-		}
-	}
-
-	return 1;
 }
 
-//inverts the matrix
-t_matrix	inverse(t_matrix mat)
+static int	find_pivot(double aug[N][2 *N], int idx[ITER_COUNT],
+		double val[VAL_COUNT])
 {
-	t_matrix	result;
-
-	result.size = mat.size;
-	if (invert_matrix(&mat, &result))
-		return result;
-	else
+	idx[IDX_MAX_ROW] = idx[IDX_I];
+	val[VAL_MAX] = fabs(aug[idx[IDX_I]][idx[IDX_I]]);
+	idx[IDX_J] = idx[IDX_I] + 1;
+	while (idx[IDX_J] < N)
 	{
-		printf("Error: Matrix is not invertible\n");
-		exit(1);
+		if (fabs(aug[idx[IDX_J]][idx[IDX_I]]) > val[VAL_MAX])
+		{
+			val[VAL_MAX] = fabs(aug[idx[IDX_J]][idx[IDX_I]]);
+			idx[IDX_MAX_ROW] = idx[IDX_J];
+		}
+		idx[IDX_J]++;
 	}
-	return (result);
+	if (val[VAL_MAX] < EPSILON)
+		return (0);
+	return (1);
+}
+
+static void	swap_and_normalize(double aug[N][2 *N], int idx[ITER_COUNT],
+		double val[VAL_COUNT])
+{
+	if (idx[IDX_MAX_ROW] != idx[IDX_I])
+	{
+		idx[IDX_J] = 0;
+		while (idx[IDX_J] < 2 * N)
+		{
+			val[VAL_TEMP] = aug[idx[IDX_I]][idx[IDX_J]];
+			aug[idx[IDX_I]][idx[IDX_J]] = aug[idx[IDX_MAX_ROW]][idx[IDX_J]];
+			aug[idx[IDX_MAX_ROW]][idx[IDX_J]] = val[VAL_TEMP];
+			idx[IDX_J]++;
+		}
+	}
+	val[VAL_PIVOT] = aug[idx[IDX_I]][idx[IDX_I]];
+	idx[IDX_J] = 0;
+	while (idx[IDX_J] < 2 * N)
+	{
+		aug[idx[IDX_I]][idx[IDX_J]] /= val[VAL_PIVOT];
+		idx[IDX_J]++;
+	}
+}
+
+static void	eliminate_column(double aug[N][2 *N], int idx[ITER_COUNT],
+		double val[VAL_COUNT])
+{
+	idx[IDX_J] = 0;
+	while (idx[IDX_J] < N)
+	{
+		if (idx[IDX_J] != idx[IDX_I])
+		{
+			val[VAL_FACTOR] = aug[idx[IDX_J]][idx[IDX_I]];
+			idx[IDX_K] = 0;
+			while (idx[IDX_K] < 2 * N)
+			{
+				aug[idx[IDX_J]][idx[IDX_K]] -= val[VAL_FACTOR]
+					* aug[idx[IDX_I]][idx[IDX_K]];
+				idx[IDX_K]++;
+			}
+		}
+		idx[IDX_J]++;
+	}
+}
+
+int	invert_matrix(t_matrix *input, t_matrix *output)
+{
+	double	aug[N][2 * N];
+	int		idx[ITER_COUNT];
+	double	val[VAL_COUNT];
+
+	init_augmented(input, aug, idx);
+	idx[IDX_I] = 0;
+	while (idx[IDX_I] < N)
+	{
+		if (!find_pivot(aug, idx, val))
+			return (0);
+		swap_and_normalize(aug, idx, val);
+		eliminate_column(aug, idx, val);
+		idx[IDX_I]++;
+	}
+	idx[IDX_I] = 0;
+	while (idx[IDX_I] < N)
+	{
+		idx[IDX_J] = -1;
+		while (++idx[IDX_J] < N)
+			output->a[idx[IDX_I]][idx[IDX_J]]
+				= aug[idx[IDX_I]][idx[IDX_J] + N];
+		idx[IDX_I]++;
+	}
+	return (1);
 }

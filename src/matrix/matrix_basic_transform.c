@@ -12,7 +12,6 @@
 
 #include "mrt.h"
 
-
 //moves the unit object to a point in the scene
 t_matrix	translation(float x, float y, float z)
 {

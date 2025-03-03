@@ -80,6 +80,7 @@ SRC_FILES	+=	lighting/ambient.c
 
 # MATRIX
 SRC_FILES	+=	matrix/matrix_inverse.c
+SRC_FILES	+=	matrix/matrix_inverse2.c
 SRC_FILES	+=	matrix/matrix_basic_op.c
 SRC_FILES	+=	matrix/matrix_basic_transform.c
 SRC_FILES	+=	matrix/matrix_shear_transform.c
