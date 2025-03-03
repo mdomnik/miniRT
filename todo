@@ -21,3 +21,21 @@ siv mat mat mat mat texuture,color,pattern img 6img
 
 
 artefacting found when plane goes through 0,0,0
+
+
+Norminette:
+    src:
+        - control
+        - debug
+        - groups
+        - initialize
+        - intersection
+        - lighting
+        - [done] matrix
+        - [tbd] parse
+            - obj
+        - [done] template_obj
+        - [done] textures
+        - [done] tuple
+        - [done] view
+        - main.c
