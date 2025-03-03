@@ -42,4 +42,3 @@ t_x		*join_intersections(int num_x, t_x *xs, t_x *temp_xs);
 void	sort_intersections(t_x *xs);
 
 #endif
-

@@ -66,9 +66,5 @@
 # define IWIDTH 400
 
 # define NUM_THREADS 12
-// Define the DEBUG macro
-// Define the DEBUG macro
-#define DEBUG(fmt, ...) \
-    fprintf(stderr, "[DEBUG] %s:%d:%s(): " fmt "\n", __FILE__, __LINE__, __func__, ##__VA_ARGS__)
 
 #endif /* MRT_H */

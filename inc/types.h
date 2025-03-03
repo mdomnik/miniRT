@@ -10,39 +10,42 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mrt.h"
+#ifndef TYPES_H
+# define TYPES_H
 
-typedef struct s_tuple	t_tuple;
-typedef struct s_tuple	t_point3;
-typedef struct s_tuple	t_vec3;
-typedef struct s_tuple	t_color3;
-typedef struct s_tuple	t_vertex;
+# include "mrt.h"
 
-typedef struct s_matrix	t_matrix;
+typedef struct s_tuple				t_tuple;
+typedef struct s_tuple				t_point3;
+typedef struct s_tuple				t_vec3;
+typedef struct s_tuple				t_color3;
+typedef struct s_tuple				t_vertex;
 
-typedef struct s_ray	t_ray;
+typedef struct s_matrix				t_matrix;
 
-typedef struct s_comp	t_comp;
+typedef struct s_ray				t_ray;
 
-typedef struct s_loop	t_loop;
+typedef struct s_comp				t_comp;
 
-typedef struct s_pattern	t_pattern;
+typedef struct s_loop				t_loop;
 
-typedef struct s_material	t_material;
+typedef struct s_pattern			t_pattern;
 
-typedef struct s_uv_val		t_uv_val;
+typedef struct s_material			t_material;
 
-typedef struct s_uv			t_uv;
+typedef struct s_uv_val				t_uv_val;
 
-typedef struct s_uv_align_check	t_uv_align_check;
+typedef struct s_uv					t_uv;
 
-typedef struct s_cube_map	t_cube_map;
+typedef struct s_uv_align_check		t_uv_align_check;
 
-typedef struct s_bump_map	t_bump_map;
+typedef struct s_cube_map			t_cube_map;
 
-typedef struct s_canvas	t_canvas;
+typedef struct s_bump_map			t_bump_map;
 
-typedef struct s_uv_image	t_uv_image;
+typedef struct s_canvas				t_canvas;
+
+typedef struct s_uv_image			t_uv_image;
 
 typedef enum e_pattern_type
 {
@@ -68,33 +71,37 @@ typedef enum e_directions
 
 struct	s_tuple
 {
-	union {
-			float	a[4];
-			struct {
-				float	x;
-				float	y;
-				float	z;
-				float	w; //point is 1, vector is 0
-			};
-			struct {
-				float	r;
-				float	g;
-				float	b;
-				float	al;
-			};
+	union
+	{
+		float	a[4];
+		struct
+		{
+			float	x;
+			float	y;
+			float	z;
+			float	w; //point is 1, vector is 0
+		};
+		struct
+		{
+			float	r;
+			float	g;
+			float	b;
+			float	al;
+		};
 	};
 };
 
 struct s_matrix
 {
-	union {
+	union
+	{
 		float	a[4][4];
-		struct {
+		struct
+		{
 			float	mat[16];
 		};
-		
 	};
-	int size;
+	int			size;
 };
 
 struct s_ray
@@ -140,12 +147,13 @@ struct s_uv
 	t_color3		color_b;
 };
 
-struct s_uv_align_check {
-	t_color3 main;
-	t_color3 ul;
-	t_color3 ur;
-	t_color3 bl;
-	t_color3 br;
+struct s_uv_align_check
+{
+	t_color3	main;
+	t_color3	ul;
+	t_color3	ur;
+	t_color3	bl;
+	t_color3	br;
 };
 
 struct s_pattern
@@ -154,13 +162,13 @@ struct s_pattern
 	t_color3		b;
 	t_matrix		transform;
 	t_pattern_type	type;
-    void            *uv_pattern;
-    t_uv_val        (*uv_map)(t_point3 point);
+	void			*uv_pattern;
+	t_uv_val		(*uv_map)(t_point3 point);
 };
 
 struct s_cube_map
 {
-    t_pattern *faces[6];
+	t_pattern	*faces[6];
 };
 
 struct s_canvas
@@ -172,14 +180,14 @@ struct s_canvas
 
 struct s_uv_image
 {
-    t_canvas *canvas;
+	t_canvas	*canvas;
 };
 
 struct s_bump_map
 {
-	t_canvas *height_map;
-	t_uv_val (*uv_map)(t_point3 point);
-	float 	scale;
+	t_canvas	*height_map;
+	t_uv_val	(*uv_map)(t_point3 point);
+	float		scale;
 };
 
 struct s_material
@@ -220,3 +228,5 @@ typedef struct s_render_data
 	t_comp			**comp;
 	int				coords[2];
 }	t_render_data;
+
+#endif /* TYPES_H */

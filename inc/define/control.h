@@ -30,14 +30,17 @@ int			downscale_setting(int set, int quality);
 
 //hooks.c
 // void		my_keyhook(mlx_key_data_t keydata, void* param);
-void		my_scrollhook(double xdelta, double ydelta, void* param);
+void		my_scrollhook(double xdelta, double ydelta, void *param);
 void		rotate_camera_up(t_loop *loop, int direction);
-void		my_cursorhook(double xpos, double ypos, void* param);
-// void		my_mousehook(mouse_key_t button, action_t action, modifier_key_t mods, void* param);
+void		my_cursorhook(double xpos, double ypos, void *param);
+// void		my_mousehook(mouse_key_t button, action_t action,
+// 				modifier_key_t mods, void* param);
 
 //super_sampling.c
 int			supersampling_setting(int set, int quality);
-t_ray		*ray_for_pixel_with_offset(t_camera *camera, float x_offset, float y_offset);
-// mlx_image_t	*render_supersampling(mlx_t *mlx, t_camera *camera, t_world *world);
+t_ray		*ray_for_pixel_with_offset(t_camera *camera, float x_offset,
+				float y_offset);
+// mlx_image_t	*render_supersampling(mlx_t *mlx, t_camera *camera,
+// 					t_world *world);
 
 #endif

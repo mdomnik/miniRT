@@ -13,47 +13,46 @@
 #ifndef RTC_H
 # define RTC_H
 
-#define R 0
-#define G 1
-#define B 2
+# define R 0
+# define G 1
+# define B 2
 
-#define MAT2 2
-#define MAT3 3
-#define MAT4 4
+# define MAT2 2
+# define MAT3 3
+# define MAT4 4
 
-#define DEFAULT_WIDTH 800
-#define DEFAULT_HEIGHT 400
+# define DEFAULT_WIDTH 800
+# define DEFAULT_HEIGHT 400
 
-typedef struct s_scene	t_scene;
+typedef struct s_scene				t_scene;
 
-typedef struct s_options	t_options;
+typedef struct s_options			t_options;
 
-typedef struct s_x	t_x;
+typedef struct s_x					t_x;
 
 typedef struct s_intersection		t_i;
 
-typedef struct s_image		t_image;
+typedef struct s_image				t_image;
 
-typedef struct s_camera		t_camera;
+typedef struct s_camera				t_camera;
 
-typedef struct s_light_p	t_light_p;
+typedef struct s_light_p			t_light_p;
 
-typedef struct s_world		t_world;
+typedef struct s_world				t_world;
 
 //-----------------------------------------
 
+typedef struct s_shape				t_shape;
 
-typedef struct s_shape		t_shape;
+typedef struct s_size_cap			t_size_cap;
 
-typedef struct s_size_cap	t_size_cap;
+typedef struct s_bounds				t_bounds;
 
-typedef struct s_bounds		t_bounds;
+typedef struct s_triangle			t_triangle;
 
-typedef struct s_triangle	t_triangle;
+typedef struct s_obj_file			t_obj_file;
 
-typedef struct s_obj_file		t_obj_file;
-
-typedef struct s_group		t_group;
+typedef struct s_group				t_group;
 
 struct s_scene
 {
@@ -79,7 +78,7 @@ struct s_x
 struct s_intersection
 {
 	float			t;
-	t_shape		*shape;
+	t_shape			*shape;
 };
 
 struct s_light_p
@@ -110,13 +109,13 @@ struct s_world
 
 struct s_image
 {
-	void *img;
-    char *buffer;
-    int bits_per_pixel;
-    int size_line;
-    int endian;
-    int width;
-    int height;
+	void	*img;
+	char	*buffer;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+	int		width;
+	int		height;
 };
 
 struct s_size_cap
@@ -147,7 +146,7 @@ struct	s_shape
 	int					children_count;
 	struct s_shape		*parent;
 
-	struct s_bounds    (*bounds)(struct s_shape *shape);
+	struct s_bounds		(*bounds)(struct s_shape *shape);
 	t_bounds			bounds_cache;
 	t_bounds			transformed_bounds_cache;
 	struct s_shape		*next;

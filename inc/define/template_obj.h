@@ -14,9 +14,9 @@
 # define TEMPLATE_OBJ_H
 
 //hexagon.c
-t_shape *hexagon(void);
+t_shape	*hexagon(void);
 
 //ice_cream.c
-t_shape *ice_cream_cone(void);
+t_shape	*ice_cream_cone(void);
 
 #endif

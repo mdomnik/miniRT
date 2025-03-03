@@ -16,14 +16,15 @@
 //align_check.c
 t_uv_align_check	*uv_align_check(t_color3 colors[5]);
 t_color3			uv_pattern_at_align_check(t_uv_align_check *pattern,
-		float u, float v);
-t_pattern			*align_check_map(void *uv_pattern, t_uv_val (*uv_map)(t_point3));
+						float u, float v);
+t_pattern			*align_check_map(void *uv_pattern,
+						t_uv_val (*uv_map)(t_point3));
 
 //bump_map.c
 t_bump_map			*bump_map_from_ppm(const char *filename,
-	double scale, t_uv_val (*uv_maps)(t_point3));
+						double scale, t_uv_val (*uv_maps)(t_point3));
 t_vec3				perturb_normal(t_shape *shape,
-	t_point3 *local_point, t_vec3 local_normal);
+						t_point3 *local_point, t_vec3 local_normal);
 
 //cube_obj.c
 t_pattern			*new_cube_map(t_pattern *faces[6]);
@@ -55,16 +56,20 @@ t_color3			ring_at(t_pattern *pattern, t_point3 *point);
 t_color3			checkers_at(t_pattern *pattern, t_point3 *point);
 
 //pattern.c
-t_pattern			*new_pattern(t_pattern_type pattern, t_color3 a, t_color3 b);
-void				set_pattern_transform(t_pattern *pattern, t_matrix new_transform);
+t_pattern			*new_pattern(t_pattern_type pattern, t_color3 a,
+						t_color3 b);
+void				set_pattern_transform(t_pattern *pattern,
+						t_matrix new_transform);
 t_color3			pattern_at_object(t_pattern *pattern,
-	t_shape *shape, t_point3 *point);
+						t_shape *shape, t_point3 *point);
 t_color3			pattern_at(t_pattern *pattern, t_point3 *point);
 
 //texture_init.c
-t_uv				*uv_checkers(int width, int height, t_color3 color_a, t_color3 color_b);
+t_uv				*uv_checkers(int width, int height, t_color3 color_a,
+						t_color3 color_b);
 t_pattern			*uv_image(t_canvas *canvas);
-t_pattern			*texture_map(void *uv_pattern, t_uv_val (*uv_map)(t_point3));
+t_pattern			*texture_map(void *uv_pattern,
+						t_uv_val (*uv_map)(t_point3));
 
 //uv.c
 t_color3			uv_pattern_at(t_uv *pattern, float u, float v);

@@ -34,36 +34,37 @@ t_color3	pixel_at(t_canvas *canvas, int x, int y);
 void		canvas_to_ppm(t_canvas *canvas, char *filename);
 
 //rt/flags/check_value_format.c
-int		check_string_format(char *str);
-int		check_float_format(char *str);
-int		check_vector_format(char *str);
+int			check_string_format(char *str);
+int			check_float_format(char *str);
+int			check_vector_format(char *str);
 
 //rt/flags/create_flag_nodes.c
-int		value_containers(int value, t_options *options, char *str, char *flag);
-int		process_flag(char *f_type, t_options *options, int value,
-			char **flag_join);
-int		create_option(t_options *options, int value, char **flag_junction);
-t_flags	*create_value_node(t_opts_type type, char *value_type, char *data);
-void	append_value_node(t_options *options, t_flags *new_value_node);
+int			value_containers(int value, t_options *options, char *str,
+				char *flag);
+int			process_flag(char *f_type, t_options *options, int value,
+				char **flag_join);
+int			create_option(t_options *options, int value, char **flag_junction);
+t_flags		*create_value_node(t_opts_type type, char *value_type, char *data);
+void		append_value_node(t_options *options, t_flags *new_value_node);
 
 //rt/flags/flag_formatting.c
-int		option_preferences(char **argv, t_options *options);
-int		check_file_format(char **argv, t_options *options, char *flag,
-			int type);
-int		args_to_opts(char *str, char *options, int type);
-int		opt_binary_assignment(int value, t_options *options);
+int			option_preferences(char **argv, t_options *options);
+int			check_file_format(char **argv, t_options *options, char *flag,
+				int type);
+int			args_to_opts(char *str, char *options, int type);
+int			opt_binary_assignment(int value, t_options *options);
 
 //rt/flags/flag_utils.c
-char	*check_if_option(char *str);
-int		is_number(char *str);
-float	ft_atof(char *str);
+char		*check_if_option(char *str);
+int			is_number(char *str);
+float		ft_atof(char *str);
 
 //rt/flags/handle_values.c
-int		handle_null_value(char *str);
-int		handle_string_value(t_flags *new_value_node, char *data);
-int		handle_float_value(t_flags *new_value_node, char *data);
-int		handle_vector_value(t_flags *new_value_node, char *data);
-void	set_vector_values(t_flags *new_value_node, char **vector);
+int			handle_null_value(char *str);
+int			handle_string_value(t_flags *new_value_node, char *data);
+int			handle_float_value(t_flags *new_value_node, char *data);
+int			handle_vector_value(t_flags *new_value_node, char *data);
+void		set_vector_values(t_flags *new_value_node, char **vector);
 
 //rt/scene_file/append.c
 t_light		*append_light_list(t_light *list, t_light *new);
@@ -79,21 +80,21 @@ int			check_object_data(char **args);
 int			determine_object(char **args);
 
 //rt/scene_file/check_objects.c
-int		create_objects(t_options *options, t_world *world);
-int		check_objects_helper(t_scene *scene, t_world *world, int i);
+int			create_objects(t_options *options, t_world *world);
+int			check_objects_helper(t_scene *scene, t_world *world, int i);
 
 //rt/scene_file/create_mand.c
-int		create_ambient(t_options *options, char **args);
-int		create_camera(t_camera **camera, char **args);
-int		create_light(t_light_p **lights, char **args);
+int			create_ambient(t_options *options, char **args);
+int			create_camera(t_camera **camera, char **args);
+int			create_light(t_light_p **lights, char **args);
 
 //rt/scene_file/create_bonus.c
-int		check_bonus_objects(t_scene *scene, t_world *world, int i);
-int		create_cone(t_world *world, char **args);
-int		create_hourglass(t_world *world, char **args);
-int		create_cube(t_world *world, char **args);
-int		create_obj(t_world *world, char **args);
-int		create_skybox(t_world *world, char **args);
+int			check_bonus_objects(t_scene *scene, t_world *world, int i);
+int			create_cone(t_world *world, char **args);
+int			create_hourglass(t_world *world, char **args);
+int			create_cube(t_world *world, char **args);
+int			create_obj(t_world *world, char **args);
+int			create_skybox(t_world *world, char **args);
 
 //rt/scene_file/create_obj.c
 int			create_sphere(t_world *world, char **args);
@@ -126,21 +127,22 @@ int			check_vector_range_format(char *str);
 t_toremove	*populate_object_struct(t_obj *obj);
 
 //rt/input.c
-int		check_args(int argc, char **argv, t_options *options);
-int		make_world(t_options *options, t_world *world);
+int			check_args(int argc, char **argv, t_options *options);
+int			make_world(t_options *options, t_world *world);
 
 //rt/find_scene_file.c
-int		validate_file_name(char **argv, t_options *options);
-int		scene_file_check(char *filename, char **scene_file, bool *scene_count);
-int		check_scene_file(char *args);
-int		check_arg_count(char **argv);
+int			validate_file_name(char **argv, t_options *options);
+int			scene_file_check(char *filename, char **scene_file,
+				bool *scene_count);
+int			check_scene_file(char *args);
+int			check_arg_count(char **argv);
 
 //mat/mat_format_utils.c
-int		validate_arg_chars(char *arg);
-int		check_limits(char *limits, float value);
+int			validate_arg_chars(char *arg);
+int			check_limits(char *limits, float value);
 
 //rt/tests.c
-void	printf_option_values(t_options *options);
-void	printf_objects(t_options *options);
+void		printf_option_values(t_options *options);
+void		printf_objects(t_options *options);
 
 #endif

@@ -39,7 +39,7 @@ typedef struct s_plane		t_plane;
 typedef struct s_cylinder	t_cylinder;
 
 typedef struct s_obj		t_obj;
-typedef struct s_toremove		t_toremove;
+typedef struct s_toremove	t_toremove;
 
 typedef struct s_temp		t_temp;
 
@@ -50,7 +50,6 @@ typedef enum e_type
 	AMBIENT = 0,
 	CAMERA = 1,
 	LIGHT = 2,
-
 	SPHERE = 3,
 	PLANE = 4,
 	CUBE = 5,
@@ -68,8 +67,6 @@ struct s_ambient
 	float				light_ratio;
 	t_color3			color;
 };
-
-
 
 struct s_light
 {
@@ -129,11 +126,9 @@ struct s_obj
 
 struct s_toremove
 {
-	t_type		type;
-	void			*object;
+	t_type				type;
+	void				*object;
 	struct s_toremove	*next;
 };
-
-
 
 #endif

@@ -30,13 +30,13 @@ bool		init_loop_opts(t_loop *loop);
 //render_worker.c
 void		*render_worker(void *arg);
 void		process_pixel(t_thread_data *data, t_world *world,
-			int coords[2], t_ray **ray, t_comp **comp);
+				int coords[2], t_ray **ray, t_comp **comp);
 void		process_pixel_color(t_world *world, t_ray **ray,
-			t_comp **comp, t_pixel *px);
+				t_comp **comp, t_pixel *px);
 
 //render_worker_utils.c
 t_world		*init_local_world(t_thread_data *data);
-void		process_row(t_thread_data *data, t_world *world, 
+void		process_row(t_thread_data *data, t_world *world,
 				int y, t_ray **ray, t_comp **comp);
 void		update_display(t_loop *loop);
 void		join_threads(pthread_t *threads);

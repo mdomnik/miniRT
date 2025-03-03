@@ -41,9 +41,9 @@ t_vec3		normalize(t_vec3 a);
 t_vec3		neg_vec3(t_vec3 a);
 
 //tuple_utils.c
-bool	is_equal(float a, float b);
-float	deg_to_rad(float deg);
-bool	is_near_zero(t_tuple v);
-t_color3 div_color(t_color3 c);
+bool		is_equal(float a, float b);
+float		deg_to_rad(float deg);
+bool		is_near_zero(t_tuple v);
+t_color3	div_color(t_color3 c);
 
 #endif

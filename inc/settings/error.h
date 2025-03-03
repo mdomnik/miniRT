@@ -49,12 +49,13 @@
 # define ERR_RANGE "ERROR: of range"
 # define ERR_VEC_NUM "ERROR: Vector range takes 3 float arguments"
 
-#define ERR_SPLIT "Error: Failed to split string"
+# define ERR_SPLIT "Error: Failed to split string"
 
 //IMAGE
 # define ERR_PPM_FORMAT "Error: Invalid PPM format"
 # define ERR_MEMORY "Error: Could not allocate memory for canvas"
-# define ERR_WRITE_PIXEL "Error: Attempted to write pixel outside of canvas bounds"
+# define ERR_WRITE_PIXEL "Error: Attempted to write pixel outside of\
+	canvas bounds"
 # define ERR_COLOR_MAX "Error: Invalid color max value"
 # define ERR_INCOMPLETE_RGB "Error: Incomplete RGB values"
 
