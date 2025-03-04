@@ -14,7 +14,9 @@
 
 int	key_hook(int keycode, void *param)
 {
-	t_loop *loop = (t_loop *)param;
+	t_loop	*loop;
+
+	loop = (t_loop *)param;
 	if (!loop)
 		return (-1);
 	if (keycode == 65307)
@@ -30,13 +32,15 @@ int	key_hook(int keycode, void *param)
 	return (0);
 }
 
-int main(int ac, char *av[])
+int	main(int ac, char *av[])
 {
-	t_loop *loop = loop_init();
+	t_loop	*loop;
+
+	loop = loop_init();
 	if (check_args(ac, av, loop->opts) == 1)
 		return (-1);
 	render(loop, ac, av);
 	mlx_key_hook(loop->win, key_hook, loop);
 	mlx_loop(loop->mlx);
-	return 0;
+	return (0);
 }
