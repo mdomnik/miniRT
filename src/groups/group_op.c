@@ -12,9 +12,9 @@
 
 #include "mrt.h"
 
-void add_child(t_shape *group, t_shape *child)
+void	add_child(t_shape *group, t_shape *child)
 {
-	t_shape *temp;
+	t_shape	*temp;
 
 	if (!child)
 		return ;
@@ -33,13 +33,15 @@ void add_child(t_shape *group, t_shape *child)
 	group->children_count++;
 }
 
-void add_shape_to_group(t_shape *group, t_shape *child)
+void	add_shape_to_group(t_shape *group, t_shape *child)
 {
+	t_shape	*current;
+
 	if (!group->children)
 		group->children = child;
 	else
 	{
-		t_shape *current = group->children;
+		current = group->children;
 		while (current->next)
 			current = current->next;
 		current->next = child;
@@ -47,35 +49,42 @@ void add_shape_to_group(t_shape *group, t_shape *child)
 	child->parent = group;
 }
 
-t_point3 world_to_object(t_shape *shape, t_point3 *point)
+t_point3	world_to_object(t_shape *shape, t_point3 *point)
 {
-	t_point3 transformed_point = *point;
+	t_point3	transformed_point;
+
+	transformed_point = *point;
 	if (shape->parent)
 		transformed_point = world_to_object(shape->parent, &transformed_point);
-	return multiply_matrix_tuple(inverse(shape->transform), transformed_point);
+	return (multiply_matrix_tuple(inverse(shape->transform),
+			transformed_point));
 }
 
-
-t_vec3 normal_to_world(t_shape *shape, t_vec3 *normal)
+t_vec3	normal_to_world(t_shape *shape, t_vec3 *normal)
 {
-	t_vec3 transformed_normal = multiply_matrix_tuple(transpose_matrix(inverse(shape->transform)), *normal);
+	t_vec3	transformed_normal;
+
+	transformed_normal = multiply_matrix_tuple(
+			transpose_matrix(inverse(shape->transform)), *normal);
 	transformed_normal.w = 0;
 	transformed_normal = normalize(transformed_normal);
-
 	if (shape->parent)
-		transformed_normal = normal_to_world(shape->parent, &transformed_normal);
-
-	return transformed_normal;
+		transformed_normal = normal_to_world(shape->parent,
+				&transformed_normal);
+	return (transformed_normal);
 }
 
-t_shape *objectGroup_to_group(t_group *g)
+t_shape	*object_group_to_group(t_group *g)
 {
-	t_shape *shape = group();
-	t_group *current = g;
+	t_shape	*shape;
+	t_group	*current;
+
+	shape = group();
+	current = g;
 	while (current)
 	{
 		add_shape_to_group(shape, current->group);
 		current = current->next;
 	}
-	return shape;
+	return (shape);
 }

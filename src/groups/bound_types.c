@@ -12,7 +12,6 @@
 
 #include "mrt.h"
 
-
 t_bounds	bounds_unit(struct s_shape *shape)
 {
 	t_bounds	bounds;

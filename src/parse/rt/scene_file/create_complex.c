@@ -48,7 +48,7 @@ int	create_obj(t_world *world, char **args)
 
 	obj_file = parse_obj_file(args[1]);
 	group = obj_file->default_group;
-	obj = objectGroup_to_group(group);
+	obj = object_group_to_group(group);
 	vectors[COORD] = ft_split(args[2], ',');
 	vectors[NORMAL] = ft_split(args[3], ',');
 	vectors[COLOR] = ft_split(args[5], ',');

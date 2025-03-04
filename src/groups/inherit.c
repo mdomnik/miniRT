@@ -12,19 +12,18 @@
 
 #include "mrt.h"
 
-void inherit_material(t_shape *group)
+void	inherit_material(t_shape *group)
 {
 	t_material	material;
 	t_shape		*child;
-	
+
 	material = group->material;
-	// material.pattern = NULL;
 	material.bump_map = NULL;
 	child = group->children;
 	while (child)
 	{
 		child->material = material;
-		if(child->type == GROUP)
+		if (child->type == GROUP)
 			inherit_material(child);
 		child = child->next;
 	}
