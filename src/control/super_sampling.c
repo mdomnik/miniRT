@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   supersampling.c                                       :+:      :+:    :+:   */
+/*   supersampling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,9 +12,18 @@
 
 #include "mrt.h"
 
+#define SS_X 0
+#define SS_Y 1
+#define SS_SAMPLE_X 2
+#define SS_SAMPLE_Y 3
+#define SS_SAMPLES 4
+#define SS_PER_SIDE 5
+#define SS_COLOR_INT 6
+
 int	supersampling_setting(int set, int quality)
 {
-	static int supersample = 1;
+	static int	supersample = 1;
+
 	if (set)
 	{
 		supersample = quality;
@@ -33,7 +42,8 @@ int	supersampling_setting(int set, int quality)
 	return (-1);
 }
 
-t_ray	*ray_for_pixel_with_offset(t_camera *camera, float x_offset, float y_offset)
+t_ray	*ray_for_pixel_with_offset(t_camera *camera,
+		float x_offset, float y_offset)
 {
 	float	world_x;
 	float	world_y;
@@ -41,61 +51,69 @@ t_ray	*ray_for_pixel_with_offset(t_camera *camera, float x_offset, float y_offse
 	t_tuple	origin;
 	t_tuple	direction;
 
-	// Calculate the world coordinates of the offset
 	world_x = camera->half_width - (x_offset * camera->pixel_size);
 	world_y = camera->half_height - (y_offset * camera->pixel_size);
-
-	// Transform the pixel and origin from camera space to world space
-	pixel = multiply_matrix_tuple(inverse(camera->transform), new_point3(world_x, world_y, -1));
-	origin = multiply_matrix_tuple(inverse(camera->transform), new_point3(0, 0, 0));
-
-	// Compute the ray's direction and normalize it
+	pixel = multiply_matrix_tuple(inverse(camera->transform),
+			new_point3(world_x, world_y, -1));
+	origin = multiply_matrix_tuple(inverse(camera->transform),
+			new_point3(0, 0, 0));
 	direction = normalize(sub_tuple(pixel, origin));
-
-	// Create and return the ray
 	return (ray_new(&origin, &direction));
 }
 
+static t_color3	calculate_pixel_color(t_camera *camera, t_world *world,
+		int v[7], float step)
+{
+	t_color3	color;
+	t_color3	sample_color;
+	t_ray		*ray;
+	float		offset_x;
+	float		offset_y;
+
+	color = new_color3(0, 0, 0);
+	v[SS_SAMPLE_Y] = 0;
+	while (v[SS_SAMPLE_Y] < v[SS_PER_SIDE])
+	{
+		v[SS_SAMPLE_X] = 0;
+		while (v[SS_SAMPLE_X] < v[SS_PER_SIDE])
+		{
+			offset_x = (v[SS_SAMPLE_X] + 0.5f) * step;
+			offset_y = (v[SS_SAMPLE_Y] + 0.5f) * step;
+			ray = ray_for_pixel_with_offset(camera, v[SS_X] + offset_x,
+					v[SS_Y] + offset_y);
+			sample_color = color_at(world, ray, quality(0, RECURSIVE_DEPTH));
+			color = add_tuple(color, sample_color);
+			free(ray);
+			v[SS_SAMPLE_X]++;
+		}
+		v[SS_SAMPLE_Y]++;
+	}
+	return (mult_color_scalar(color, 1.0f / (v[SS_PER_SIDE] * v[SS_PER_SIDE])));
+}
 
 mlx_image_t	*render_supersampling(mlx_t *mlx, t_camera *camera, t_world *world)
 {
 	mlx_image_t	*image;
-	t_color3	color, sample_color;
-	int			color_int;
-	int			x, y;
-	int			sample_x, sample_y;
-	int			supersample = supersampling_setting(0, 0); // Get current supersampling setting
-	int			samples_per_side = (int)sqrt(supersample);
-	float		step = 1.0f / samples_per_side;
+	int			v[7];
+	float		step;
+	t_color3	color;
 
+	v[SS_SAMPLES] = supersampling_setting(0, 0);
+	v[SS_PER_SIDE] = (int)sqrt(v[SS_SAMPLES]);
+	step = 1.0f / v[SS_PER_SIDE];
 	image = mlx_new_image(mlx, camera->hsize, camera->vsize);
-	y = 0;
-	while (y < camera->vsize)
+	v[SS_Y] = 0;
+	while (v[SS_Y] < camera->vsize)
 	{
-		x = 0;
-		while (x < camera->hsize)
+		v[SS_X] = 0;
+		while (v[SS_X] < camera->hsize)
 		{
-			color = new_color3(0, 0, 0); // Initialize color to black
-			// Supersampling loop
-			for (sample_y = 0; sample_y < samples_per_side; sample_y++)
-			{
-				for (sample_x = 0; sample_x < samples_per_side; sample_x++)
-				{
-					float offset_x = (sample_x + 0.5f) * step;
-					float offset_y = (sample_y + 0.5f) * step;
-					t_ray *ray = ray_for_pixel_with_offset(camera, x + offset_x, y + offset_y);
-					sample_color = color_at(world, ray, quality(0, RECURSIVE_DEPTH));
-					color = add_tuple(color, sample_color);
-					free(ray); // Clean up dynamically allocated memory if applicable
-				}
-			}
-			// Average the color by dividing by the number of samples
-			color = mult_color_scalar(color, 1.0f / (samples_per_side * samples_per_side));
-			color_int = color_to_int(color);
-			mlx_put_pixel(image, x, y, color_int);
-			x++;
+			color = calculate_pixel_color(camera, world, v, step);
+			v[SS_COLOR_INT] = color_to_int(color);
+			mlx_put_pixel(image, v[SS_X], v[SS_Y], v[SS_COLOR_INT]);
+			v[SS_X]++;
 		}
-		y++;
+		v[SS_Y]++;
 	}
 	return (image);
 }

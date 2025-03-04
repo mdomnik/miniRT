@@ -29,11 +29,11 @@ int			downscale_setting(int set, int quality);
 // void		downscale_hooks(mlx_key_data_t keydata, t_loop *loop);
 
 //hooks.c
-// void		my_keyhook(mlx_key_data_t keydata, void* param);
-void		my_scrollhook(double xdelta, double ydelta, void *param);
+// void		keyhook(mlx_key_data_t keydata, void* param);
+void		scrollhook(double xdelta, double ydelta, void *param);
 void		rotate_camera_up(t_loop *loop, int direction);
-void		my_cursorhook(double xpos, double ypos, void *param);
-// void		my_mousehook(mouse_key_t button, action_t action,
+void		cursorhook(double xpos, double ypos, void *param);
+// void		mousehook(mouse_key_t button, action_t action,
 // 				modifier_key_t mods, void* param);
 
 //super_sampling.c

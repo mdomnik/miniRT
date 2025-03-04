@@ -14,17 +14,23 @@
 
 void	movement_hooks(mlx_key_data_t keydata, t_loop *loop)
 {
-	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_REPEAT
+			|| keydata.action == MLX_PRESS))
 		loop->camera->transform.a[0][3] += 1;
-	if (keydata.key == MLX_KEY_A && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	if (keydata.key == MLX_KEY_A && (keydata.action == MLX_REPEAT
+			|| keydata.action == MLX_PRESS))
 		loop->camera->transform.a[0][3] -= 1;
-	if (keydata.key == MLX_KEY_S && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	if (keydata.key == MLX_KEY_S && (keydata.action == MLX_REPEAT
+			|| keydata.action == MLX_PRESS))
 		loop->camera->transform.a[2][3] -= 1;
-	if (keydata.key == MLX_KEY_W && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	if (keydata.key == MLX_KEY_W && (keydata.action == MLX_REPEAT
+			|| keydata.action == MLX_PRESS))
 		loop->camera->transform.a[2][3] += 1;
-	if (keydata.key == MLX_KEY_SPACE && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	if (keydata.key == MLX_KEY_SPACE && (keydata.action == MLX_REPEAT
+			|| keydata.action == MLX_PRESS))
 		loop->camera->transform.a[1][3] -= 1;
-	if (keydata.key == MLX_KEY_LEFT_SHIFT && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	if (keydata.key == MLX_KEY_LEFT_SHIFT && (keydata.action == MLX_REPEAT
+			|| keydata.action == MLX_PRESS))
 		loop->camera->transform.a[1][3] += 1;
 }
 
@@ -35,17 +41,19 @@ void	movement_hooks(mlx_key_data_t keydata, t_loop *loop)
 
 	// camera = loop->camera;
 	// r = 1;
-	// if (keydata.key == MLX_KEY_UP && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	// if (keydata.key == MLX_KEY_UP && (keydata.action == MLX_REPEAT
+	// 		|| keydata.action == MLX_PRESS))
 	// {
 	// 	camera_multiply_transform(camera, rotation_x(r));
 	// }
-	// if (keydata.key == MLX_KEY_DOWN && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	// if (keydata.key == MLX_KEY_DOWN && (keydata.action == MLX_REPEAT
+			// || keydata.action == MLX_PRESS))
 	// {
-	// 	camera_multiply_transform(camera, rotation_x(r));
+		// camera_multiply_transform(camera, rotation_x(r));
 	// }
 // }
 
-void state_hooks(mlx_key_data_t keydata, t_loop *loop)
+void	state_hooks(mlx_key_data_t keydata, t_loop *loop)
 {
 	if (keydata.key == MLX_KEY_ENTER && keydata.action == MLX_PRESS)
 	{
@@ -72,7 +80,7 @@ void state_hooks(mlx_key_data_t keydata, t_loop *loop)
 	}
 }
 
-void downscale_hooks(mlx_key_data_t keydata, t_loop *loop)
+void	downscale_hooks(mlx_key_data_t keydata, t_loop *loop)
 {
 	if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
 	{

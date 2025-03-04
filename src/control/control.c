@@ -12,9 +12,9 @@
 
 #include "mrt.h"
 
-int program_state(bool set, int variable)
+int	program_state(bool set, int variable)
 {
-	static int state = CAMERA_MODE;
+	static int	state = CAMERA_MODE;
 
 	if (set)
 	{
@@ -28,61 +28,46 @@ int program_state(bool set, int variable)
 	return (RENDER_MODE);
 }
 
-int tooltip_state(bool set, int variable)
+int	tooltip_state(bool set, int variable)
 {
-	static int state = TOOLTIP_OFF;
+	static int	state = TOOLTIP_OFF;
 
 	if (set)
 	{
 		state = variable;
 		return (state);
 	}
-	if (state == TOOLTIP_OFF)
-		return (TOOLTIP_OFF);
-	if (state == TOOLTIP_ON)
-		return (TOOLTIP_ON);
-	return (TOOLTIP_OFF);
+	return (state);
 }
-
-
 
 int	quality(bool set, int variable)
 {
-	static int quality = LOW;
+	static int	quality = LOW;
+	static int	recursive_depth[4] = {
+	[LOW] = 0,
+	[MEDIUM] = 3,
+	[HIGH] = 5,
+	[MAX] = 10
+	};
+	static int	lighting[4] = {
+	[LOW] = 0,
+	[MEDIUM] = 1,
+	[HIGH] = 1,
+	[MAX] = 1
+	};
 
 	if (set)
-	{
-		quality = variable;
-		return (quality);
-	}
+		return (quality = variable);
 	if (variable == RECURSIVE_DEPTH)
-	{
-		if (quality == LOW)
-			return (0);
-		if (quality == MEDIUM)
-			return (3);
-		if (quality == HIGH)
-			return (5);
-		if (quality == MAX)
-			return (10);
-	}
+		return (recursive_depth[quality]);
 	if (variable == LIGHTING)
-	{
-		if (quality == LOW)
-			return (0);
-		if (quality == MEDIUM)
-			return (1);
-		if (quality == HIGH)
-			return (1);
-		if (quality == MAX)
-			return (1);
-	}
+		return (lighting[quality]);
 	return (quality);
 }
 
 int	render_max(bool set, int variable)
 {
-	static int max = 0;
+	static int	max = 0;
 
 	if (set)
 	{
