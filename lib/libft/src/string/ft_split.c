@@ -69,7 +69,7 @@ char	**ft_split(char const *s, char c)
 	int		j;
 
 	words = count_words(s, c);
-	r_array = malloc((words + 1) * sizeof(char *));
+	r_array = ft_calloc(words + 1, sizeof(char *));
 	if (!r_array)
 		return (NULL);
 	i = 0;
@@ -77,7 +77,7 @@ char	**ft_split(char const *s, char c)
 	{
 		while (*s == c && *s)
 			s++;
-		r_array[i] = malloc((count_letters(s, c) + 1) * sizeof(char));
+		r_array[i] = ft_calloc(count_letters(s, c) + 1, sizeof(char));
 		if (!r_array[i])
 			return (free_all(r_array, i));
 		j = 0;
