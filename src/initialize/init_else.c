@@ -12,11 +12,12 @@
 
 #include "mrt.h"
 
-t_material default_material(void)
+t_material	default_material(void)
 {
-	t_material material;
+	t_material	material;
 
-	material.color = add_tuple(new_color3(0, 0, 0), global_color('g', new_color3(0, 0, 0)));
+	material.color = add_tuple(new_color3(0, 0, 0),
+			global_color('g', new_color3(0, 0, 0)));
 	material.pattern = NULL;
 	material.ambient = current_ambient('g', 0);
 	material.diffuse = 0.9;
@@ -25,13 +26,13 @@ t_material default_material(void)
 	material.reflective = 0;
 	material.transparency = 0.0;
 	material.refractive_index = 1.0;
-    material.bump_map = NULL;
+	material.bump_map = NULL;
 	return (material);
 }
 
-t_size_cap default_size_cap(void)
+t_size_cap	default_size_cap(void)
 {
-	t_size_cap size_cap;
+	t_size_cap	size_cap;
 
 	size_cap.min = -0.5;
 	size_cap.max = 0.5;
