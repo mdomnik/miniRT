@@ -13,149 +13,58 @@
 #include "mrt.h"
 
 // Determines if given ray hit a cone object
-t_x *intersect_cone(t_shape *cone, t_ray *ray)
+t_x	*intersect_cone(t_shape *cone, t_ray *ray)
 {
-    float a, b, c, discriminant, t0, t1, temp, y0, y1;
-    t_x *xs = malloc(sizeof(t_x));
-    xs->count = 0;
-    xs->i = malloc(sizeof(t_i) * 2);
+	float	v[8];
 
-    // Compute quadratic coefficients (correcting Y behavior)
-    a = ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z - ray->dir.y * ray->dir.y;
-    b = 2 * (ray->orig.x * ray->dir.x + ray->orig.z * ray->dir.z - ray->orig.y * ray->dir.y);
-    c = ray->orig.x * ray->orig.x + ray->orig.z * ray->orig.z - ray->orig.y * ray->orig.y;
-
-    // Handle the case where a ≈ 0 (ray is nearly parallel to the cone)
-    if (fabsf(a) < EPSILON)
-    {
-        if (fabsf(b) < EPSILON)
-        {
-            free(xs->i);
-            free(xs);
-            return NULL;
-        }
-        t0 = -c / (2 * b);
-        y0 = ray->orig.y + t0 * ray->dir.y;
-        if (cone->size_cap.min <= y0 && y0 <= cone->size_cap.max)
-            xs = add_intersection(xs, t0, cone);
-        return xs;
-    }
-
-    // Compute discriminant
-    discriminant = b * b - 4 * a * c;
-    if (discriminant < 0) // No intersections
-    {
-        free(xs->i);
-        free(xs);
-        return NULL;
-    }
-
-    // Compute the two possible intersection times
-    t0 = (-b - sqrtf(discriminant)) / (2 * a);
-    t1 = (-b + sqrtf(discriminant)) / (2 * a);
-    if (t0 > t1) { temp = t0; t0 = t1; t1 = temp; }
-
-    // Compute y-values at the intersection points
-    y0 = ray->orig.y + t0 * ray->dir.y;
-    y1 = ray->orig.y + t1 * ray->dir.y;
-
-    // Check if intersections are within the finite cone's height
-    if (cone->size_cap.min <= y0 && y0 <= cone->size_cap.max)
-        xs = add_intersection(xs, t0, cone);
-    if (cone->size_cap.min <= y1 && y1 <= cone->size_cap.max)
-        xs = add_intersection(xs, t1, cone);
-
-    // Check for cap intersections
-    xs = intersect_caps_cone(cone, ray, xs);
-
-    // If no intersections were found, free memory and return NULL
-    if (xs->count == 0)
-    {
-        free(xs->i);
-        free(xs);
-        return NULL;
-    }
-    return xs;
-}
-
-
-// Helper function that checks the intersection along a single axis of an AABB
-static float	check_axis(float origin, float direction, bool ret, int min, int max)
-{
-	float	tmin_numerator;
-	float	tmax_numerator;
-	float	tmin;
-	float	tmax;
-	float	temp;
-
-	tmin_numerator = (min - origin);
-	tmax_numerator = (max - origin);
-	if (fabsf(direction) >= EPSILON)
-	{
-		tmin = tmin_numerator / direction;
-		tmax = tmax_numerator / direction;
-	}
-	else
-	{
-		tmin = tmin_numerator * INFINITY;
-		tmax = tmax_numerator * INFINITY;
-	}
-	if (tmin > tmax)
-	{
-		temp = tmin;
-		tmin = tmax;
-		tmax = temp;
-	}
-	if (ret == false)
-		return (tmin);
-	else
-		return (tmax);
+	v[A] = (ray->dir.x * ray->dir.x + ray->dir.z
+			* ray->dir.z - ray->dir.y * ray->dir.y);
+	v[LOCAL_B] = 2 * (ray->orig.x * ray->dir.x + ray->orig.z
+			* ray->dir.z - ray->orig.y * ray->dir.y);
+	v[C] = (ray->orig.x * ray->orig.x + ray->orig.z
+			* ray->orig.z - ray->orig.y * ray->orig.y);
+	if (fabsf(v[A]) < EPSILON)
+		return (handle_zero_a(v, cone, ray));
+	v[DISC] = v[LOCAL_B] * v[LOCAL_B] - 4 * v[A] * v[C];
+	if (v[DISC] < 0)
+		return (NULL);
+	return (handle_discriminant(v, cone, ray));
 }
 
 // Determines if given ray hit an axis-alligned bounding box (AABB) object
 t_x	*intersect_cube(t_shape *cube, t_ray *ray)
 {
-	float	xtmin;
-	float	xtmax;
-	float	ytmin;
-	float	ytmax;
-	float	ztmin;
-	float	ztmax;
-	float	tmin;
-	float	tmax;
-	t_i 	i1;
-	t_i 	i2;
-	t_x 	*xs;
+	int		bounds[2];
+	float	t[2];
+	float	axis_t[3][2];
+	t_x		*xs;
 
-	xtmin = check_axis(ray->orig.x, ray->dir.x, false, -1, 1);
-	xtmax = check_axis(ray->orig.x, ray->dir.x, true, -1, 1);
-	ytmin = check_axis(ray->orig.y, ray->dir.y, false, -1, 1);
-	ytmax = check_axis(ray->orig.y, ray->dir.y, true, -1, 1);
-	ztmin = check_axis(ray->orig.z, ray->dir.z, false, -1, 1);
-	ztmax = check_axis(ray->orig.z, ray->dir.z, true, -1, 1);
-	tmin = fmaxf(fmaxf(xtmin, ytmin), ztmin);
-	tmax = fminf(fminf(xtmax, ytmax), ztmax);
-	i1 = create_intersection(tmin, cube);
-	i2 = create_intersection(tmax, cube);
+	bounds[MIN] = -1;
+	bounds[L_MAX] = 1;
+	axis_t[X][TMIN] = check_axis(ray->orig.x, ray->dir.x, false, bounds);
+	axis_t[X][TMAX] = check_axis(ray->orig.x, ray->dir.x, true, bounds);
+	axis_t[Y][TMIN] = check_axis(ray->orig.y, ray->dir.y, false, bounds);
+	axis_t[Y][TMAX] = check_axis(ray->orig.y, ray->dir.y, true, bounds);
+	axis_t[Z][TMIN] = check_axis(ray->orig.z, ray->dir.z, false, bounds);
+	axis_t[Z][TMAX] = check_axis(ray->orig.z, ray->dir.z, true, bounds);
+	t[TMIN] = fmaxf(fmaxf(axis_t[X][TMIN], axis_t[Y][TMIN]), axis_t[Z][TMIN]);
+	t[TMAX] = fminf(fminf(axis_t[X][TMAX], axis_t[Y][TMAX]), axis_t[Z][TMAX]);
 	xs = malloc(sizeof(t_x));
-	if (tmin > tmax)
-	{
-		xs->count = 0;
-		return (xs);
-	}
+	if (t[TMIN] > t[TMAX])
+		return (xs->count = 0, xs);
 	xs->count = 2;
 	xs->i = malloc(sizeof(t_i) * 2);
-	xs->i[0] = i1;
-	xs->i[1] = i2;
+	xs->i[0] = create_intersection(t[TMIN], cube);
+	xs->i[1] = create_intersection(t[TMAX], cube);
 	return (xs);
 }
 
 // Determines if given ray hit a group bounding box object
 t_x	*intersect_group(t_shape *group, t_ray *ray)
 {
-	t_x			*xs;
-	t_shape		*child;
-	t_x			*temp_xs;
+	t_x		*xs;
+	t_shape	*child;
+	t_x		*temp_xs;
 
 	if (!intersect_bounds(group->bounds_cache, ray))
 		return (NULL);
@@ -165,16 +74,7 @@ t_x	*intersect_group(t_shape *group, t_ray *ray)
 	{
 		temp_xs = intersect(child, ray);
 		if (temp_xs != NULL)
-		{
-			if (xs == NULL)
-				xs = temp_xs;
-			else
-			{
-				xs =join_intersections((xs->count + temp_xs->count), xs, temp_xs);
-				// free(temp_xs->i);
-				// free(temp_xs);
-			}
-		}
+			xs = handle_child_intersection(xs, temp_xs);
 		child = child->next;
 	}
 	if (xs != NULL && xs->count > 1)
@@ -184,33 +84,28 @@ t_x	*intersect_group(t_shape *group, t_ray *ray)
 
 t_x	*intersect_triangle(t_shape *shape, t_ray *ray)
 {
+	t_vec3	vec[3];
+	float	v[5];
 	t_x		*xs;
-	t_vec3	dir_cross_e2;
-	float	det;
-	float	f;
-	t_vec3	p1_to_origin;
-	float	u;
-	t_vec3	origin_cross_e1;
-	float	v;
-	float	t;
 
-	dir_cross_e2 = cross_product(ray->dir, shape->triangle->e2);
-	det = dot_product(shape->triangle->e1, dir_cross_e2);
-	if (fabsf(det) < EPSILON)
+	vec[DIR_CROSS_E2] = cross_product(ray->dir, shape->triangle->e2);
+	v[DET] = dot_product(shape->triangle->e1, vec[DIR_CROSS_E2]);
+	if (fabsf(v[DET]) < EPSILON)
 		return (NULL);
-	f = 1.0 / det;
-	p1_to_origin = sub_tuple(ray->orig, shape->triangle->p1);
-	u = f * dot_product(p1_to_origin, dir_cross_e2);
-	if (u < 0 || u > 1)
+	v[F] = 1.0 / v[DET];
+	vec[P1_TO_ORIGIN] = sub_tuple(ray->orig, shape->triangle->p1);
+	v[U] = v[F] * dot_product(vec[P1_TO_ORIGIN], vec[DIR_CROSS_E2]);
+	if (v[U] < 0 || v[U] > 1)
 		return (NULL);
-	origin_cross_e1 = cross_product(p1_to_origin, shape->triangle->e1);
-	v = f * dot_product(ray->dir, origin_cross_e1);
-	if (v < 0 || (u + v) > 1)
+	vec[ORIGIN_CROSS_E1] = cross_product(vec[P1_TO_ORIGIN],
+			shape->triangle->e1);
+	v[V] = v[F] * dot_product(ray->dir, vec[ORIGIN_CROSS_E1]);
+	if (v[V] < 0 || (v[U] + v[V]) > 1)
 		return (NULL);
-	t = f * dot_product(shape->triangle->e2, origin_cross_e1);
+	v[T] = v[F] * dot_product(shape->triangle->e2, vec[ORIGIN_CROSS_E1]);
 	xs = malloc(sizeof(t_x));
 	xs->count = 1;
 	xs->i = malloc(sizeof(t_i));
-	xs->i[0] = create_intersection(t, shape);
+	xs->i[0] = create_intersection(v[T], shape);
 	return (xs);
 }

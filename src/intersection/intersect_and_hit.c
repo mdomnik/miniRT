@@ -86,7 +86,8 @@ t_x	*intersect_world(t_world *world, t_ray *ray)
 			if (xs == NULL)
 				xs = xs_temp;
 			else
-				xs = join_intersections((xs->count + xs_temp->count), xs, xs_temp);
+				xs = join_intersections((xs->count + xs_temp->count),
+						xs, xs_temp);
 		}
 		world->shapes = world->shapes->next;
 	}

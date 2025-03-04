@@ -33,12 +33,12 @@ t_x	*add_intersection(t_x *xs, float t, t_shape *shape)
 	xs_temp->i = malloc(sizeof(t_i));
 	i = create_intersection(t, shape);
 	xs_temp->i[0] = i;
-	xs =join_intersections(xs->count + 1, xs, xs_temp);
+	xs = join_intersections(xs->count + 1, xs, xs_temp);
 	return (xs);
 }
 
-
-// Joins 2 lists of intersections by passing the lists and a new total of intersections
+// Joins 2 lists of intersections by passing the lists and a
+// new total of intersections
 t_x	*join_intersections(int num_x, t_x *xs, t_x *temp_xs)
 {
 	t_x		*new_xs;
@@ -63,13 +63,8 @@ t_x	*join_intersections(int num_x, t_x *xs, t_x *temp_xs)
 		i++;
 		j++;
 	}
-
-	free(xs->i);
-	free(xs);
-	free(temp_xs->i);
-	free(temp_xs);
-
-	return (new_xs);
+	return (free(xs->i), free(xs), free(temp_xs->i),
+		free(temp_xs), new_xs);
 }
 
 // Sorts intersections

@@ -68,6 +68,8 @@ SRC_FILES	+=	intersection/intersect_op.c
 SRC_FILES	+=	intersection/intersect_and_hit.c
 SRC_FILES	+=	intersection/intersect_basic_obj.c
 SRC_FILES	+=	intersection/intersect_cap_obj.c
+SRC_FILES	+=	intersection/ico_utils.c
+SRC_FILES	+=	intersection/intersect_complex_utils.c
 
 # LIGHTING
 SRC_FILES	+=	lighting/transparency.c
