@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 15:46:35 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/07 18:00:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,8 @@ int	create_cylinder(t_world *world, char **args)
 	cy->material.color = div_color(cy->material.color);
 	set_cylinder_pattern(cy);
 	add_shape(&world->shapes, cy);
+	free_double(color);
+	free_double(coords);
+	free_double(normal);
 	return (0);
 }

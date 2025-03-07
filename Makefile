@@ -167,6 +167,7 @@ SRC_FILES	+=	view/render_loop.c
 SRC_FILES	+=	view/render_loop_init.c
 SRC_FILES	+=	view/render_worker.c
 SRC_FILES	+=	view/render_worker_utils.c
+SRC_FILES	+=	view/render_worker_utils_2.c
 
 # MAIN
 SRC_FILES	+=	main.c

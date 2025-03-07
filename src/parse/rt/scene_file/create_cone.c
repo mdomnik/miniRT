@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_cone.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    #+#  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-02 16:58:01 by astavrop          #+#    #+#             */
-/*   Updated: 2025-03-02 16:58:01 by astavrop         ###   ########:w        */
+/*   Created: 2025/03/02 16:58:01 by astavrop          #+#    #+#             */
+/*   Updated: 2025/03/07 18:00:14 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,8 @@ int	create_cone(t_world *world, char **args)
 			ft_atof(color[1]), ft_atof(color[2]));
 	co->material.color = div_color(co->material.color);
 	add_shape(&world->shapes, co);
+	free_double(color);
+	free_double(coords);
+	free_double(normal);
 	return (0);
 }

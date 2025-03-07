@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:21:04 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 15:35:41 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/07 18:06:59 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ int	check_mandatory_objects(t_options *options)
 		i++;
 	}
 	if (count > 0)
-		return (ft_dprintf(
+		return (free_double(mandatory), ft_dprintf(
 				2, "%s '%s'\n", ERR_MISS_OBJ, MANDATORY_OBJECTS), -1);
-	return (0);
+	return (free_double(mandatory), 0);
 }
 
 /**
@@ -109,7 +109,7 @@ int	check_dup_objects(t_options *options, int binary)
 			{
 				if (binary & (1 << j))
 				{
-					return (ret_message(ERR_DUP_OBJ,
+					return (free_double(unique), ret_message(ERR_DUP_OBJ,
 							options->scene.scene_objects[i][0]));
 				}
 				binary |= (1 << j);
@@ -118,7 +118,7 @@ int	check_dup_objects(t_options *options, int binary)
 		}
 		i++;
 	}
-	return (0);
+	return (free_double(unique), 0);
 }
 
 /**
@@ -146,10 +146,15 @@ int	check_object_data(char **args)
 	if (ids[i] == NULL)
 	{
 		ft_dprintf(2, "%s '%s'\n", ERR_INV_OBJ, args[0]);
+		free_double(ids);
 		return (-1);
 	}
 	if (determine_object(args) == -1)
+	{
+		free_double(ids);
 		return (-1);
+	}
+	free_double(ids);
 	return (0);
 }
 
@@ -181,11 +186,16 @@ int	determine_object(char **args)
 		if (ft_strcmp(data[0], args[0]) == 0)
 		{
 			if (check_object_rules(args, data) == -1)
+			{
+				free_double(data);
+				free_double(rules);
 				return (-1);
+			}
 		}
 		free_double(data);
 		data = NULL;
 		i++;
 	}
+	free_double(rules);
 	return (0);
 }

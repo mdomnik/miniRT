@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:32:19 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 21:40:21 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/07 17:10:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ void		process_row(t_thread_data *data, t_world *world,
 				int y, t_ray **ray, t_comp **comp);
 void		update_display(t_loop *loop);
 void		join_threads(pthread_t *threads);
+
+//render_worker_utils_2.c
+void free_world(t_world *world);
+void free_triple_ptr(char ***str);
 
 //view_transformation.c
 t_matrix	view_transformation(t_point3 from, t_vec3 orientation);

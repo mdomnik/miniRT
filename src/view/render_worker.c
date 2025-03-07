@@ -43,10 +43,7 @@ static void	free_worker_memory(t_ray **ray, t_comp **comp, t_world *world)
 	i = -1;
 	while (++i < (RECURSIVE_DEPTH + 1))
 		free(comp[i]);
-	free(world->camera);
-	free(world->shapes);
-	free(world->light);
-	free(world);
+	free_world(world);
 }
 
 void	process_pixel_color(t_world *world, t_ray **ray,

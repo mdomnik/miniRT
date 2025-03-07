@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:26:20 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 15:42:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/07 17:34:13 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	main(int ac, char *av[])
 	if (check_args(ac, av, loop->opts) == 1)
 		return (-1);
 	render(loop, ac, av);
+	printf("rendered\n");
+	key_hook(65307, loop);
 	mlx_key_hook(loop->win, key_hook, loop);
 	mlx_loop(loop->mlx);
 	return (0);

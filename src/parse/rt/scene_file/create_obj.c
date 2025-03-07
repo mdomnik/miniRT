@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 15:46:35 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/07 17:59:27 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	create_sphere(t_world *world, char **args)
 	sp->material.color = div_color(sp->material.color);
 	set_sphere_pattern(sp);
 	add_shape(&world->shapes, sp);
+	free_double(color);
+	free_double(coords);
 	return (0);
 }
 
@@ -112,5 +114,8 @@ int	create_plane(t_world *world, char **args)
 			ft_atof(color[2]));
 	pl->material.color = div_color(pl->material.color);
 	add_shape(&world->shapes, pl);
+	free_double(color);
+	free_double(coords);
+	free_double(normal);
 	return (0);
 }

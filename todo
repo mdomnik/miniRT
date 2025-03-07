@@ -22,7 +22,6 @@ siv mat mat mat mat texuture,color,pattern img 6img
 
 artefacting found when plane goes through 0,0,0
 
-
 Norminette:
     src:
         - control
@@ -39,3 +38,5 @@ Norminette:
         - [done] tuple
         - [done] view
         - main.c
+
+Weird multithreadeing black line bug

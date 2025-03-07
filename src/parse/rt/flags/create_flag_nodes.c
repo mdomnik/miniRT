@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:43:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/16 03:28:12 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/07 17:57:24 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ int	value_containers(int value, t_options *options, char *str, char *flag)
 
 	opts_value = ft_strdup(OPTS_VALUE);
 	if (value < 0)
-		return (0);
+		return (free(opts_value), 0);
 	f_types = ft_split(opts_value, ',');
+	free(opts_value);
 	flag_join = malloc(sizeof(char *) * 4);
 	flag_join[0] = ft_strdup(flag);
 	flag_join[1] = ft_strdup(f_types[value]);
+	free_double(f_types);
 	if (str)
 		flag_join[2] = ft_strdup(str);
 	else

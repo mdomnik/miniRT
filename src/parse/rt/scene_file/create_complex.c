@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_complex.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    #+#  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-02 16:57:56 by astavrop          #+#    #+#             */
-/*   Updated: 2025-03-02 16:57:56 by astavrop         ###   ########:w        */
+/*   Created: 2025/03/02 16:57:56 by astavrop          #+#    #+#             */
+/*   Updated: 2025/03/07 18:00:33 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ int	create_skybox(t_world *world, char **args)
 		get_skybox(args[2], &sb->material);
 	set_transform(sb, transform);
 	add_shape(&world->shapes, sb);
+	free_double(color);
 	return (0);
 }

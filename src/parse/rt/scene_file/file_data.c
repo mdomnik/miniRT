@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:51:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 19:23:18 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/07 17:48:53 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	append_object_nodes(t_options *options, char *line)
 			j++;
 		temp = ft_substr(line, i, j);
 		args = append_to_double(args, temp);
+		free(temp);
 		i += j + 1;
 	}
 	if (append_to_triple(options, args) == -1)
@@ -105,7 +106,7 @@ char	**append_to_double(char **args, char *temp)
 	if (args == NULL)
 	{
 		new_args = malloc(sizeof(char *) * 2);
-		new_args[0] = temp;
+		new_args[0] = ft_strdup(temp);
 		new_args[1] = NULL;
 		return (new_args);
 	}
@@ -118,8 +119,9 @@ char	**append_to_double(char **args, char *temp)
 		new_args[i] = args[i];
 		i++;
 	}
-	new_args[i] = temp;
+	new_args[i] = ft_strdup(temp);
 	new_args[i + 1] = NULL;
+	free(args);
 	return (new_args);
 }
 
@@ -153,6 +155,7 @@ int	append_to_triple(t_options *options, char **args)
 		new_triple[i] = options->scene.scene_objects[i];
 	new_triple[i] = args;
 	new_triple[i + 1] = NULL;
+	free(options->scene.scene_objects);
 	options->scene.scene_objects = new_triple;
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_shapes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    #+#  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-02 16:58:13 by astavrop          #+#    #+#             */
-/*   Updated: 2025-03-02 16:58:13 by astavrop         ###   ########:w        */
+/*   Created: 2025/03/02 16:58:13 by astavrop          #+#    #+#             */
+/*   Updated: 2025/03/07 18:00:00 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ int	create_hourglass(t_world *world, char **args)
 			ft_atof(color[1]), ft_atof(color[2]));
 	hg->material.color = div_color(hg->material.color);
 	add_shape(&world->shapes, hg);
+	free_double(color);
+	free_double(coords);
+	free_double(normal);
 	return (0);
 }
 
@@ -100,5 +103,8 @@ int	create_cube(t_world *world, char **args)
 			ft_atof(color[1]), ft_atof(color[2]));
 	cb->material.color = div_color(cb->material.color);
 	add_shape(&world->shapes, cb);
+	free_double(color);
+	free_double(coords);
+	free_double(normal);
 	return (0);
 }

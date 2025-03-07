@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:43:25 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 15:41:20 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/07 18:04:43 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	create_ambient(t_options *options, char **args)
 			ft_atof(colors[2]), 1);
 	current_ambient('s', ambient);
 	global_color('s', color);
+	free_double(colors);
 	return (0);
 }
 
@@ -43,6 +44,8 @@ int	create_camera(t_camera **camera, char **args)
 	orientation = new_vec3(ft_atof(vector[0]), ft_atof(vector[1]),
 			ft_atof(vector[2]));
 	(*camera)->transform = view_transformation(pos, orientation);
+	free_double(coords);
+	free_double(vector);
 	return (0);
 }
 
@@ -65,5 +68,7 @@ int	create_light(t_light_p **lights, char **args)
 	light->intensity = mult_color_scalar(light->intensity, brightness);
 	light->next = NULL;
 	add_light(lights, light);
+	free_double(coords);
+	free_double(colors);
 	return (0);
 }

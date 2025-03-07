@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:32:39 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 17:56:48 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/07 17:55:03 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,15 @@ int	check_color_format(char *str)
 	i = 0;
 	rgb = ft_split(str, ',');
 	if (rgb == NULL || pointer_count(rgb) != 3)
-		return (ret_message(ERR_COLOR_NUM, str));
+		return (free_double(rgb), ret_message(ERR_COLOR_NUM, str));
 	while (rgb[i] != NULL)
 	{
 		num = ft_atoi(rgb[i]);
 		if (num < 0 || num > 255)
-			return (ret_message(ERR_COLOR_RANGE, str));
+			return (free_double(rgb), ret_message(ERR_COLOR_RANGE, str));
 		i++;
 	}
-	return (0);
+	return (free_double(rgb), 0);
 }
 
 /**
@@ -148,12 +148,12 @@ int	check_vector_range_format(char *str)
 	i = 0;
 	xyz = ft_split(str, ',');
 	if (xyz == NULL || pointer_count(xyz) != 3)
-		return (ret_message(ERR_VEC_NUM, str));
+		return (free_double(xyz), ret_message(ERR_VEC_NUM, str));
 	while (xyz[i] != NULL)
 	{
 		if (check_ratio_format(xyz[i], -1, 1) == -1)
-			return (-1);
+			return (free_double(xyz), -1);
 		i++;
 	}
-	return (0);
+	return (free_double(xyz), 0);
 }

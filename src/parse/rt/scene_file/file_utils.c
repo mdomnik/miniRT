@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:24:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/16 03:16:07 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/07 17:22:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@ void	free_double(char **args)
 	int	i;
 
 	i = 0;
+	if (!args)
+		return ;
 	while (args[i] != NULL)
 	{
-		free(args[i]);
+		if (args[i])
+			free(args[i]);
 		i++;
 	}
 	free(args);

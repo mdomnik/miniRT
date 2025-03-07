@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:32:44 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/08/27 03:26:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/07 17:53:44 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,17 @@ int	check_file_format(char **argv, t_options *options, char *flag, int type)
 	{
 		ato_ret = args_to_opts(argv[i], ft_strdup(flag), type);
 		if (ato_ret == -2)
-			return (-1);
+			return (free(flag), -1);
 		else
 		{
 			if (opt_binary_assignment(ato_ret, options) == -1)
-				return (-1);
+				return (free(flag), -1);
 			if (value_containers(ato_ret, options, argv[i + 1], argv[i]) == -1)
-				return (-1);
+				return (free(flag), -1);
 		}
 		i++;
 	}
-	return (0);
+	return (free(flag), 0);
 }
 
 /**
@@ -94,11 +94,14 @@ int	args_to_opts(char *str, char *flag, int type)
 	int		i;
 
 	opts = ft_split(flag, ',');
+	free(flag);
 	i = 0;
 	while (opts[i])
 	{
 		if (ft_strcmp(opts[i], str) == 0)
-			return (i);
+		{
+			return (free_double(opts), i);
+		}
 		i++;
 	}
 	if (is_number(str) == 1 && check_scene_file(str) == -1)
@@ -107,10 +110,10 @@ int	args_to_opts(char *str, char *flag, int type)
 			|| (type == 1 && str[0] == '-' && str[1] != '-'))
 		{
 			ft_dprintf(2, "%s '%s'\n", ERR_INVALID_OPT, str);
-			return (-2);
+			return (free_double(opts), -2);
 		}
 	}
-	return (-1);
+	return (free_double(opts), -1);
 }
 
 /**
