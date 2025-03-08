@@ -76,7 +76,7 @@ int	append_object_nodes(t_options *options, char *line)
 			return (0);
 		j = 0;
 		if (line[i] == '\0' || line[i] == '\n')
-			return (0);
+			break ;
 		while (line[i + j] != ' ' && line[i + j] != '\t'
 			&& line[i + j] != '\0' && line[i + j] != '\n')
 			j++;
