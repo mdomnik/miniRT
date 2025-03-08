@@ -77,26 +77,23 @@ float	ft_atof(char *str)
 {
 	int		i;
 	float	result;
-	bool	is_negative;
+	int		sign;
 
 	i = 0;
-	is_negative = false;
-	if (str[i] == '-')
+	sign = 1;
+	while (str[i] == '-' || str[i] == '+')
 	{
-		is_negative = true;
+		if (str[i] == '-')
+			sign *= -1;
 		i++;
 	}
-	else if (str[i] == '+')
-		i++;
 	result = parse_num(str, &i, false, 10.0f);
 	if (str[i] == '.')
 	{
 		i++;
 		result += parse_frac(str, &i, 10.0f);
 	}
-	if (is_negative)
-		result = -result;
-	return (result);
+	return (result * sign);
 }
 
 /**
