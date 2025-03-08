@@ -40,3 +40,7 @@ Norminette:
         - main.c
 
 Weird multithreadeing black line bug
+
+Bug with numbers:
+            \/\/\/\/
+       sp	--0-001,1,0		1						100,100,100         	 
