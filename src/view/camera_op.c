@@ -17,7 +17,7 @@ void	get_pixel_size(t_camera *camera)
 	float	half_view;
 	float	aspect;
 
-	half_view = tan(camera->fov / 2);
+	half_view = tan((camera->fov * M_PI / 180.0) / 2);
 	aspect = (float)camera->hsize / (float)camera->vsize;
 	if (aspect >= 1)
 	{
