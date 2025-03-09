@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:52:36 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/09 12:48:47 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 13:11:27 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,18 @@ t_color3	lighting(t_material *m, t_shape *shape, t_light_p *light,
 	float		dot[DOT_COUNT];
 
 	if (m->pattern)
-		col[COL_EFFECTIVE] = mult_color(pattern_at_object(m->pattern,
-					shape, point), light->intensity);
+	{
+		if (shape->type != SKYBOX)
+			col[COL_EFFECTIVE] = mult_color(pattern_at_object(m->pattern,
+				shape, point), light->intensity);
+		else
+			col[COL_EFFECTIVE] = pattern_at_object(m->pattern, shape, point);
+		
+	}
 	else if (is_near_zero(light->intensity))
 		return (mult_color_scalar(m->color, m->ambient));
 	else
-	{
 		col[COL_EFFECTIVE] = mult_color(m->color, light->intensity);
-	}
 	vec[VEC_LIGHT] = normalize(sub_tuple_p(&light->position, point));
 	if (shape->type != SKYBOX)
 	{
@@ -65,7 +69,8 @@ t_color3	lighting(t_material *m, t_shape *shape, t_light_p *light,
 	}
 	else
 	{
-		col[COL_EFFECTIVE] = m->color;
+		if (!m->pattern)
+			col[COL_EFFECTIVE] = m->color;
 		vec[VEC_AMBIENT] = mult_tuple(col[COL_EFFECTIVE], m->ambient);
 	}
 	dot[DOT_LIGHT_NORMAL] = dot_product(vec[VEC_LIGHT], normalv);

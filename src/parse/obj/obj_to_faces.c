@@ -6,11 +6,16 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:21:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/08 19:44:19 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 13:13:05 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
+
+static int ft_isspace(int c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r');
+}
 
 static t_group	*create_group(const char *name)
 {
