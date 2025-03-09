@@ -84,6 +84,33 @@ int	check_float_format(char *str)
 }
 
 /**
+ * @brief Checks if the string contains any empty values between commas,
+ *        at the start, or at the end.
+ *
+ * This function checks if the input string contains consecutive commas,
+ * starts with a comma, or ends with a comma, indicating empty values in
+ * the vector format.
+ *
+ * @param str The input string to check.
+ * @return Returns 1 if there are empty values, 0 otherwise.
+ */
+static int	has_empty_value(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[0] == ',' || str[ft_strlen(str) - 1] == ',')
+		return (1);
+	while (str[i])
+	{
+		if (str[i] == ',' && str[i + 1] == ',')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+/**
  * @brief Checks the format of a flag's vector value argument.
  *
  * This function checks if the given string represents a valid vector value.
@@ -101,26 +128,24 @@ int	check_vector_format(char *str)
 	int	i;
 	int	dot_count;
 
-	i = 0;
+	if (has_empty_value(str))
+		return (-1);
+	i = -1;
 	dot_count = 0;
-	while (str[i])
+	while (str[++i])
 	{
-		if ((str[i] < 48 || str[i] > 57) && str[i] != '.'
-			&& str[i] != '-' && str[i] != ',')
-		{
-			ft_dprintf(2, "%s '%c'\n", ERR_INVALID_CHAR, str[i]);
+		if (i < ft_strlen(str) && str[i] == '-' && (str[i + 1] < '0'
+				|| str[i + 1] > '9'))
 			return (-1);
-		}
+		if ((str[i] < '0' || str[i] > '9') && str[i] != '.'
+			&& str[i] != '-' && str[i] != ',')
+			return (ft_dprintf(2, "%s '%c'\n", ERR_INVALID_CHAR, str[i]), -1);
 		else if (str[i] == '.')
 			dot_count++;
 		if (dot_count > 1)
-		{
-			ft_dprintf(2, "%s\n", ERR_DOT_COUNT);
-			return (-1);
-		}
+			return (ft_dprintf(2, "%s\n", ERR_DOT_COUNT), -1);
 		else if (str[i] == ',')
 			dot_count = 0;
-		i++;
 	}
 	return (0);
 }
