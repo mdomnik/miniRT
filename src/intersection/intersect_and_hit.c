@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 05:02:00 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/08 19:01:48 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 16:19:35 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_i	hit(t_x *xs)
 	j = 0;
 	while (j < count)
 	{
-		if (xs->i[j].t > 0)
+		if (xs->i[j].t > EPSILON)
 		{
 			if (i.shape == NULL || xs->i[j].t < i.t)
 				i = xs->i[j];
