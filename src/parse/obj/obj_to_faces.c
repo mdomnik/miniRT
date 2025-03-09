@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:21:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 17:47:15 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/08 19:44:19 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ t_obj_file	*parse_obj_file(const char *filename)
 	int			indices[64];
 	int			count;
 	char		*token;
+	char		*path;
 
 	float x, y, z;
 	obj_file = malloc(sizeof(t_obj_file));
@@ -101,7 +102,9 @@ t_obj_file	*parse_obj_file(const char *filename)
 	obj_file->vertices = malloc(MAX_VERTEX_COUNT * sizeof(t_point3));
 	obj_file->faces = malloc(MAX_VERTEX_COUNT * sizeof(t_triangle));
 	obj_file->default_group = create_group("Default");
-	file = fopen(filename, "r");
+	path = ft_strjoin("objects/", filename);
+	file = fopen(path, "r");
+	free(path);
 	if (!file)
 	{
 		fprintf(stderr, "Failed to open file: %s\n", filename);

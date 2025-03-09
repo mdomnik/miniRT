@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:29:54 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 17:50:25 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 12:18:32 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_canvas	*canvas_from_ppm(const char *filename);
 // t_canvas	*process_ppm_header(FILE *file, int *color_max);
 
 //ppm/canvas_utils.c
-int			ft_isspace(int c);
 void		canvas_write_pixel(t_canvas *canvas, int x, int y, t_color3 color);
 char		*skip_comments(FILE *file);
 

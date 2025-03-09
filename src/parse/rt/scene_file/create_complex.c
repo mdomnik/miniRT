@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:57:56 by astavrop          #+#    #+#             */
-/*   Updated: 2025/03/07 18:00:33 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 12:26:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	create_skybox(t_world *world, char **args)
 	sb->material.color = div_color(sb->material.color);
 	if (args[2])
 		get_skybox(args[2], &sb->material);
+	else
+		sb->material.pattern = NULL;
 	set_transform(sb, transform);
 	add_shape(&world->shapes, sb);
 	free_double(color);

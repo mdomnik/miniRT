@@ -6,83 +6,88 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:18:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 19:24:13 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 12:16:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-static int	process_ppm_header(FILE *file, t_canvas *canvas, int *color_max);
-
-int	check_ppm_magic_number(char *line)
+int isspace(int c)
 {
-	int	count;
-	int	i;
-
-	count = 0;
-	i = 0;
-	if (strncmp(line, "P3", 2) != 0)
-		return (-1);
-	while (line[i])
-	{
-		if (!ft_isspace(line[i]))
-			count++;
-		i++;
-	}
-	if (count != 2)
-		return (-1);
-	return (0);
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r');
 }
 
-int	canvas_from_ppm_dimensions(t_canvas *canvas, char *line)
-{
-	int	width;
-	int	height;
+int check_ppm_magic_number(char *line) {
+    int i = 0, j = 0;
 
-	if (sscanf(line, "%d %d", &width, &height) != 2)
-		return (-1);
-	canvas->width = width;
-	canvas->height = height;
-	return (0);
+    if (strncmp(line, "P3", 2) != 0)
+        return -1;
+
+    while (line[i] != '\0') {
+        if (!isspace(line[i]))
+            j++;
+        i++;
+    }
+
+    return (j == 2) ? 0 : -1;
 }
 
-t_canvas	*canvas_from_ppm(const char *filename)
-{
-	FILE		*file;
-	char		*line;
-	t_canvas	*canvas;
-	int			color_max;
+int canvas_from_ppm_dimensions(t_canvas *canvas, char *line) {
+    int width, height;
+    if (sscanf(line, "%d %d", &width, &height) != 2)
+        return -1;
 
-	file = fopen(filename, "r");
-	if (!file)
-		return (error_handler(ERR_OPEN_FILE, NULL));
-	line = skip_comments(file);
-	if (!line || check_ppm_magic_number(line) == -1)
-		return (error_handler(ERR_PPM_FORMAT, file));
-	free(line);
-	canvas = malloc(sizeof(t_canvas));
-	if (!canvas)
-		return (error_handler(ERR_MEMORY, file));
-	if (process_ppm_header(file, canvas, &color_max) == -1)
-		return (NULL);
-	canvas_from_ppm_pixels(file, canvas, color_max);
-	fclose(file);
-	return (canvas);
+    canvas->width = width;
+    canvas->height = height;
+    return 0;
 }
 
-static int	process_ppm_header(FILE *file, t_canvas *canvas, int *color_max)
-{
-	char	*line;
+t_canvas *canvas_from_ppm(const char *filename) {
+    FILE *file = fopen(filename, "r");
+    if (!file) {
+        fprintf(stderr, "Error: %s\n", ERR_OPEN_FILE);
+        return NULL;
+    }
 
-	line = skip_comments(file);
-	if (canvas_from_ppm_dimensions(canvas, line) != 0)
-		return (error_handler_int(ERR_PPM_FORMAT, file));
-	free(line);
-	line = skip_comments(file);
-	*color_max = atoi(line);
-	free(line);
-	if (*color_max > 255)
-		return (error_handler_int(ERR_COLOR_MAX, file));
-	canvas = canvas_new(canvas->width, canvas->height);
-	return (0);
+    char *line = skip_comments(file);
+    if (!line || check_ppm_magic_number(line) == -1) {
+        fprintf(stderr, "Error: %s\n", ERR_PPM_FORMAT);
+        free(line);
+        fclose(file);
+        return NULL;
+    }
+    free(line);
+
+    t_canvas *canvas = malloc(sizeof(t_canvas));
+    if (!canvas) {
+        fprintf(stderr, "Error: %s\n", ERR_MEMORY);
+        fclose(file);
+        return NULL;
+    }
+
+    line = skip_comments(file);
+    if (canvas_from_ppm_dimensions(canvas, line) != 0) {
+        fprintf(stderr, "Error: %s\n", ERR_PPM_FORMAT);
+        free(line);
+        fclose(file);
+        return NULL;
+    }
+    free(line);
+
+    line = skip_comments(file);
+    int color_max = atoi(line);
+    free(line);
+
+    if (color_max > 255) {
+        fprintf(stderr, "Error: %s\n", ERR_COLOR_MAX);
+        fclose(file);
+        return NULL;
+    }
+
+    canvas = canvas_new(canvas->width, canvas->height);
+    canvas_from_ppm_pixels(file, canvas, color_max);
+
+    fclose(file);
+    return canvas;
 }
+

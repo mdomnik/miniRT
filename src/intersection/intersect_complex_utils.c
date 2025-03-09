@@ -95,7 +95,5 @@ t_x	*handle_child_intersection(t_x *xs, t_x *temp_xs)
 	if (xs == NULL)
 		return (temp_xs);
 	xs = join_intersections((xs->count + temp_xs->count), xs, temp_xs);
-	free(temp_xs->i);
-	free(temp_xs);
 	return (xs);
 }

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:17:34 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 00:59:41 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/08 19:00:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	sort_intersections(t_x *xs)
 	t_i	temp;
 
 	i = 0;
+	if (!xs)
+		return ;
 	while (i < xs->count)
 	{
 		j = i + 1;

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 05:02:00 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 18:13:14 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/08 19:01:48 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_i	hit(t_x *xs)
 	int	j;
 	int	count;
 
+	if (xs == NULL)
+		return (create_intersection(-1, NULL));
 	count = xs->count;
 	i.t = -1;
 	i.shape = NULL;

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 20:40:50 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/08 19:02:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,11 @@ bool	is_shadowed(t_world *world, t_point3 *point)
 		free(r);
 		return (true);
 	}
-	free(xs->i);
-	free(xs);
+	if (xs)
+	{
+		free(xs->i);
+		free(xs);
+	}
 	free(r);
 	return (false);
 }

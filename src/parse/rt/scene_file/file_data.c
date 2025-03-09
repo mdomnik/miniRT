@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:51:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/07 17:48:53 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/08 19:37:33 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,18 +162,19 @@ int	append_to_triple(t_options *options, char **args)
 
 int	check_file_open_format(char *str)
 {
-	int		fd;
+	(void)str;
+	// int		fd;
 
-	if (str == NULL)
-	{
-		return (0);
-	}
-	fd = open(str, O_RDONLY);
-	if (fd == -1)
-	{
-		perror(ERR_OPEN_FILE);
-		return (-1);
-	}
-	close(fd);
+	// if (str == NULL)
+	// {
+	// 	return (0);
+	// }
+	// fd = open(str, O_RDONLY);
+	// if (fd == -1)
+	// {
+	// 	perror(ERR_OPEN_FILE);
+	// 	return (-1);
+	// }
+	// close(fd);
 	return (0);
 }

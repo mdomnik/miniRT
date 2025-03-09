@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:41:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 19:24:42 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 11:28:12 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,16 @@ int	get_skybox(char *str, t_material *mat)
 {
 	t_pattern	*side[6];
 	t_pattern	*cube_map;
+	char		*path;
 
-	if (open(str, O_DIRECTORY) == -1)
+	path = ft_strjoin("skybox/", str);
+	if (open(path, O_DIRECTORY) == -1)
 	{
 		ft_dprintf(2, "Error\nSkybox texture not found\n");
 		return (-1);
 	}
-	load_all_sides(str, side);
+	load_all_sides(path, side);
+	free(path);
 	cube_map = new_cube_map(side);
 	mat->pattern = cube_map;
 	return (0);

@@ -50,7 +50,6 @@ void free_triple_ptr(char ***str)
 	{
 		if (str[i])
 		{
-			printf("freeing %s\n", str[i][0]);
 			free_double(str[i]);
 		}
 		i++;
