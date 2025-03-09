@@ -21,6 +21,9 @@ int	key_hook(int keycode, void *param)
 		return (-1);
 	if (keycode == 65307)
 	{
+		mlx_destroy_image(loop->mlx, loop->img->img);
+		if (loop->img)
+			free(loop->img);
 		mlx_destroy_window(loop->mlx, loop->win);
 		if (loop->mlx)
 		{
@@ -38,7 +41,7 @@ int	main(int ac, char *av[])
 
 	loop = loop_init();
 	if (check_args(ac, av, loop->opts) == 1)
-		return (-1);
+		return (key_hook(65307, loop), -1);
 	// printf("flag: %d\n", loop->opts->opts_flags);
 	// printf("loop->opts->values->type %d\n", loop->opts->values->type);
 	// printf("loop->opts->values->value %f\n", (t_value_type)loop->opts->values->value);

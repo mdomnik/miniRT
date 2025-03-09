@@ -102,7 +102,7 @@ char	*gnl(int fd)
 	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-		return (NULL);
+		return (free(buffer), NULL);
 	buffer = read_file(fd, buffer);
 	if (!buffer)
 		return (NULL);

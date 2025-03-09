@@ -47,7 +47,8 @@ int	get_scene_data(t_options *options)
 	{
 		if (ft_strcmp(line,"\n") != 0
 				&& append_object_nodes(options, line) == -1)
-			return (ret_message(ERR_FAIL_LINE, line));
+			return (ret_message(ERR_FAIL_LINE, line), free(line),
+				close(fd), gnl(-1), -1);
 		free(line);
 		line = gnl(fd);
 	}
