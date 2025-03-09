@@ -97,6 +97,7 @@ int	check_float_format(char *str)
 static int	has_empty_value(char *str)
 {
 	int	i;
+	int	n_commas;
 
 	i = 0;
 	if (str[0] == ',' || str[ft_strlen(str) - 1] == ',')
@@ -107,6 +108,15 @@ static int	has_empty_value(char *str)
 			return (1);
 		i++;
 	}
+	i = -1;
+	n_commas = 0;
+	while (str[++i])
+	{
+		if (str[i] == ',')
+			n_commas++;
+	}
+	if (n_commas != 2)
+		return (1);
 	return (0);
 }
 
