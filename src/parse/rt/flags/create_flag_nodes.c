@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:43:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/07 17:57:24 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 14:42:32 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,6 @@ int	process_flag(char *f_type, t_options *options, int value, char **flag_join)
 		if (create_option(options, value, flag_join) == -1)
 			return (-1);
 	}
-	if (ft_strnstr(f_type, "NULL", ft_strlen(f_type)))
-	{
-		if (handle_null_value(flag_join[2]) == 1)
-		{
-			ft_dprintf(2, "Error: Option '%s' %s\n", flag_join[0], ERR_NO_ARG);
-			return (-1);
-		}
-	}
 	return (0);
 }
 
@@ -113,6 +105,7 @@ int	create_option(t_options *options, int value, char **flag_join)
 	char	*arg;
 
 	arg = check_if_option(flag_join[2]);
+	printf("arg: %s\n", arg);
 	if (flag_join[1][0] == '*' && arg == NULL)
 		new_value_node = create_value_node(value, flag_join[1], NULL);
 	else if (arg == NULL)
