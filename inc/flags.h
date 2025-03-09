@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:11:31 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 19:13:07 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 14:03:25 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,21 @@
  * "STRING", "FLOAT", "VECTOR" (all with optional argument setting).*/
 
 // FULL FLAG STRINGS
-# define OPTS_FULL "--save,--reflection,--test,--help,\
-					--testy,--vector,--noargvector,--added,--skybox,--what" 
+# define OPTS_FULL "--save,--antialias,--multithread" 
 // SHORT FLAG STRINGS
-# define OPTS_SHORT "-s,-r,-t,-h,-y,-v,-n,-a,-k,-w"
+# define OPTS_SHORT "-s,-a,-m"
 
 // DATA TYPES
-# define OPTS_VALUE "STRING,FLOAT,*STRING,NULL,\
-*FLOAT,VECTOR,*VECTOR,*STRING,STRING,FLOAT"
+# define OPTS_VALUE "STRING,NULL,FLOAT"
 
 typedef struct s_flags	t_flags;
 
 // FLAGS
 typedef enum e_opts_type
 {
-	OPT_SAVE = 0,
-	OPT_REFLECTION = 1,
-	OPT_TEST = 2,
-	OPT_HELP = 3,
-	OPT_TESTY = 4,
-	OPT_VECTOR = 5,
-	OPT_NOARGVECTOR = 6,
-	OPT_ADDED = 7
+	OPT_SAVE,
+	OPT_ANTIALIAS,
+	OPT_MULTITHREAD
 }	t_opts_type;
 
 // STRING DATA TYPE STRUCT
