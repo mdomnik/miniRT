@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:39:24 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/16 02:48:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 18:29:45 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ int	handle_string_value(t_flags *new_value_node, char *data)
 {
 	if (data == NULL)
 	{
-		new_value_node->value.string.string_value = NULL;
+		new_value_node->value.string = NULL;
 	}
 	else
 	{
 		if (check_string_format(data) == -1)
 			return (-1);
 		else
-			new_value_node->value.string.string_value = ft_strdup(data);
+			new_value_node->value.string= ft_strdup(data);
 	}
 	return (0);
 }
@@ -83,14 +83,14 @@ int	handle_float_value(t_flags *new_value_node, char *data)
 {
 	if (data == NULL)
 	{
-		new_value_node->value.float_value.float_value = 0;
+		new_value_node->value.value = 0;
 	}
 	else
 	{
 		if (check_float_format(data) == -1)
 			return (-1);
 		else
-			new_value_node->value.float_value.float_value = ft_atof(data);
+			new_value_node->value.value = ft_atof(data);
 	}
 	return (0);
 }

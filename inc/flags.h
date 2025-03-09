@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:11:31 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/09 14:45:01 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 19:01:30 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,16 @@ typedef struct s_flags	t_flags;
 // FLAGS
 typedef enum e_opts_type
 {
-	OPT_SAVE,
-	OPT_ANTIALIAS,
-	OPT_MULTITHREAD
+	OPT_SAVE = 1,
+	OPT_ANTIALIAS = 2,
+	OPT_MULTITHREAD = 4
 }	t_opts_type;
-
-// STRING DATA TYPE STRUCT
-typedef struct s_string
-{
-	char	*string_value;
-}	t_string;
-
-// FLOAT DATA TYPE STRUCT
-typedef struct s_float
-{
-	double	float_value;
-}	t_float;
 
 // VALUE TYPE UNION
 typedef union u_value_type
 {
-	t_string	string;
-	t_float		float_value;
+	char 		*string;
+	float		value;
 	t_vec3		vector;
 }	t_value_type;
 

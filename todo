@@ -7,20 +7,9 @@
 7. improve efficiency
 8. add camera to world struct
 
-the scene has to have a sphere
-make camera work
-implement cube and cone
-make cone work
 make mat parser
 norminette
-ambient light fix
 minor memory leaks
-
-
-siv mat mat mat mat texuture,color,pattern img 6img
-
-
-artefacting found when plane goes through 0,0,0
 
 Norminette:
     src:
@@ -41,6 +30,4 @@ Norminette:
 
 Weird multithreadeing black line bug
 
-Bug with numbers:
-            \/\/\/\/
-       sp	--0-001,1,0		1						100,100,100         	 
+on error, memory leak; related to options, will need to free options;

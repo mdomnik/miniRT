@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:43:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/09 14:42:32 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 18:51:47 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	process_flag(char *f_type, t_options *options, int value, char **flag_join)
 {
 	if (ft_strnstr(f_type, "STRING", ft_strlen(f_type))
 		|| ft_strnstr(f_type, "FLOAT", ft_strlen(f_type))
-		|| ft_strnstr(f_type, "VECTOR", ft_strlen(f_type)))
+		|| ft_strnstr(f_type, "VECTOR", ft_strlen(f_type))
+		|| ft_strnstr(f_type, "NULL", ft_strlen(f_type)))
 	{
 		if (create_option(options, value, flag_join) == -1)
 			return (-1);
@@ -105,8 +106,9 @@ int	create_option(t_options *options, int value, char **flag_join)
 	char	*arg;
 
 	arg = check_if_option(flag_join[2]);
-	printf("arg: %s\n", arg);
-	if (flag_join[1][0] == '*' && arg == NULL)
+	if (value == OPT_ANTIALIAS)
+		new_value_node = create_value_node(value, flag_join[1], NULL);
+	else if (flag_join[1][0] == '*' && arg == NULL)
 		new_value_node = create_value_node(value, flag_join[1], NULL);
 	else if (arg == NULL)
 	{
