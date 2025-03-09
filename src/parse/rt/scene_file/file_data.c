@@ -45,7 +45,8 @@ int	get_scene_data(t_options *options)
 	}
 	while (line != NULL)
 	{
-		if (append_object_nodes(options, line) == -1)
+		if (ft_strcmp(line,"\n") != 0
+				&& append_object_nodes(options, line) == -1)
 			return (ret_message(ERR_FAIL_LINE, line));
 		free(line);
 		line = gnl(fd);
@@ -69,7 +70,7 @@ int	append_object_nodes(t_options *options, char *line)
 
 	i = 0;
 	args = NULL;
-	while (line[i] != '\0' && line[i] != '\n')
+	while (line[i] != '\0')
 	{
 		i = omit_whitespaces(line, i);
 		if (line[i] == '#')
@@ -85,7 +86,7 @@ int	append_object_nodes(t_options *options, char *line)
 		free(temp);
 		i += j + 1;
 	}
-	if (append_to_triple(options, args) == -1)
+	if (line[0] != '\n' && append_to_triple(options, args) == -1)
 		return (-1);
 	return (0);
 }
