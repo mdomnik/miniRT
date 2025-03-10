@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:33:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/09 21:53:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/10 19:20:58 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	check_args(int argc, char **argv, t_options *options)
 
 int	make_world(t_options *options, t_world *world)
 {
+	printf("making world\n");
 	if (create_objects(options, world) == -1)
 		return (-1);
 	return (0);

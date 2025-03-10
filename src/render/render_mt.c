@@ -46,7 +46,10 @@ void *render_worker(void *arg)
 					px.y = y;
 
 					if (data->loop->opts->opts_flags & OPT_ANTIALIAS)
-						process_pixel_aa(world, &px, 16);  // Apply 16x Anti-Aliasing
+					{
+						if (data->loop->opts->values->aa_samples > 1)
+							process_pixel_aa(world, &px, data->loop->opts->values->aa_samples);
+					}
 					else
 						process_pixel_color(world, ray, comp, &px);
 
@@ -99,17 +102,12 @@ void render_multithreaded(t_loop *loop)
 			exit(EXIT_FAILURE);
 		}
 	}
-
 	join_threads(threads, thread_count);
-
-	// Final image display
 	mlx_put_image_to_window(loop->mlx, loop->win, loop->img->img, 0, 0);
-
 	if (loop->opts->opts_flags & OPT_SAVE) {
 		printf("Saving image to '%s'\n", loop->opts->values->filename);
 		save_image(loop->img, loop->opts->values->filename);
 	}
-
 	free(threads);
 	free(thread_data);
 }

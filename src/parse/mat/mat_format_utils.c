@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mat_format_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    #+#  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-02 16:12:38 by astavrop          #+#    #+#             */
-/*   Updated: 2025-03-02 16:12:38 by astavrop         ###   ########.fr       */
+/*   Created: 2025/03/02 16:12:38 by astavrop          #+#    #+#             */
+/*   Updated: 2025/03/10 17:56:24 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	parse_limit_values(char *limits, float *min, float *max)
 	char	**values;
 	int		status;
 
-	values = ft_split(limits, ',');
+	values = ft_split(limits, '-');
 	status = 0;
 	if (!values[0] || !values[1])
 		status = -1;
@@ -94,7 +94,7 @@ int	check_limits(char *limits, float value)
 
 	if (parse_limit_values(limits, &min, &max) == -1)
 	{
-		ft_dprintf(2, "Invalid limit format: %s\n", limits);
+		ft_dprintf(2, "Invalid limit format: [%s]\n", limits);
 		return (-1);
 	}
 	if (value < min || value > max)

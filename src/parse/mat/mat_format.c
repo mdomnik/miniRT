@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:17:29 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 19:23:33 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:52:24 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ int	get_material(char *str, t_material *mat)
 	int		fd;
 	char	*line;
 	char	**params;
+	char	*filename;
 
-	fd = open(str, O_RDONLY);
+	filename = ft_strjoin("materials/", str);
+	fd = open(filename, O_RDONLY);
+	free(filename);
 	if (fd == -1)
 		return (perror(ERR_OPEN_FILE), -1);
 	line = gnl(fd);

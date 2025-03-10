@@ -6,11 +6,14 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:22:56 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/10 17:40:34 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/10 19:22:47 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
+
+pthread_mutex_t g_check_args_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t g_mlx_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void	put_pixel_to_img(t_image *img, int x, int y, int color)
 {
@@ -21,9 +24,6 @@ void	put_pixel_to_img(t_image *img, int x, int y, int color)
 	pixel_index = (y * img->size_line) + (x * (img->bits_per_pixel / 8));
 	*(int *)(img->buffer + pixel_index) = color;
 }
-
-pthread_mutex_t g_check_args_mutex = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t g_mlx_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 // Function to update the display safely
 void update_display(t_loop *loop)
@@ -63,13 +63,9 @@ t_world *init_local_world(t_thread_data *data)
 	local_world->light = NULL;
 	local_world->shapes = NULL;
 
-	pthread_mutex_lock(&g_check_args_mutex);
 	if (make_world(data->loop->opts, local_world) == -1) {
-		pthread_mutex_unlock(&g_check_args_mutex);
 		free(local_world);
 		return NULL;
 	}
-	pthread_mutex_unlock(&g_check_args_mutex);
-
 	return local_world;
 }

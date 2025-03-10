@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:16:45 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/10 16:08:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/10 18:44:19 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ void	render_single(t_loop *loop)
 			{
 				px.color = 0;
 				if (loop->opts->opts_flags & OPT_ANTIALIAS)
-					process_pixel_aa(world, &px, 16);  // 16x AA
+				{
+					if (loop->opts->values->aa_samples > 1)
+						process_pixel_aa(world, &px, loop->opts->values->aa_samples);
+				}
 				else
 					process_pixel_color(world, ray, comp, &px);
 			
