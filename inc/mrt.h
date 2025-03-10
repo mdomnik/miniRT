@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2025/03/09 11:19:25 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:32:07 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@
 # include "define/textures.h"
 # include "define/tuple.h"
 # include "define/view.h"
+# include "define/render.h"
 
 # define VP_WIDTH  960
 # define VP_HEIGHT 540

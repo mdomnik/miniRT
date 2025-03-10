@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:43:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/09 18:51:47 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:30:04 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,7 @@ int	value_containers(int value, t_options *options, char *str, char *flag)
 int	process_flag(char *f_type, t_options *options, int value, char **flag_join)
 {
 	if (ft_strnstr(f_type, "STRING", ft_strlen(f_type))
-		|| ft_strnstr(f_type, "FLOAT", ft_strlen(f_type))
-		|| ft_strnstr(f_type, "VECTOR", ft_strlen(f_type))
-		|| ft_strnstr(f_type, "NULL", ft_strlen(f_type)))
+		|| ft_strnstr(f_type, "INT", ft_strlen(f_type)))
 	{
 		if (create_option(options, value, flag_join) == -1)
 			return (-1);
@@ -102,84 +100,27 @@ int	process_flag(char *f_type, t_options *options, int value, char **flag_join)
  */
 int	create_option(t_options *options, int value, char **flag_join)
 {
-	t_flags	*new_value_node;
 	char	*arg;
 
 	arg = check_if_option(flag_join[2]);
-	if (value == OPT_ANTIALIAS)
-		new_value_node = create_value_node(value, flag_join[1], NULL);
-	else if (flag_join[1][0] == '*' && arg == NULL)
-		new_value_node = create_value_node(value, flag_join[1], NULL);
+	if (value == 0)
+		options->values->filename = ft_strdup(arg);
+	if (value == 1)
+	{
+		options->values->aa_samples = 0;
+		if (ft_atoi(arg) > 0)
+			options->values->aa_samples = ft_atoi(arg);
+	}
+	if (value == 2)
+	{
+		options->values->threads = 0;
+		if (ft_atoi(arg) > 0)
+			options->values->threads = ft_atoi(arg);
+	}
 	else if (arg == NULL)
 	{
 		ft_dprintf(2, "Error: Option '%s' %s\n", flag_join[0], ERR_REQ_ARG);
 		return (-1);
 	}
-	else
-		new_value_node = create_value_node(value, flag_join[1], arg);
-	if (new_value_node == NULL)
-		return (-1);
-	append_value_node(options, new_value_node);
 	return (0);
-}
-
-/**
- * @brief Creates a new value node with the specified type, value type, and data.
- *
- * This function compares the value type against a list of known types and
- * runs the appropriate function to check and handle the flag's argument.
- * If the flag's argument is valid, it creates a new value node
- * and returns a pointer to it. If the flag's argument is invalid,
- * it prints an error message to stderr and returns NULL.
- *
- * @param type enum of the flag's type.
- * @param value_type string holding the value type.
- * @param data argument string.
- * @return A pointer to the newly created value node,
- * or NULL if an error occurred.
- */
-t_flags	*create_value_node(t_opts_type type, char *value_type, char *data)
-{
-	t_flags	*new_value_node;
-
-	new_value_node = (t_flags *)malloc(sizeof(t_flags));
-	new_value_node->type = type;
-	if (ft_strnstr(value_type, "STRING", ft_strlen(value_type)))
-	{
-		if (handle_string_value(new_value_node, data) == -1)
-			return (NULL);
-	}
-	else if (ft_strnstr(value_type, "FLOAT", ft_strlen(value_type)))
-	{
-		if (handle_float_value(new_value_node, data) == -1)
-			return (NULL);
-	}
-	else if (ft_strnstr(value_type, "VECTOR", ft_strlen(value_type)))
-	{
-		if (handle_vector_value(new_value_node, data) == -1)
-			return (NULL);
-	}
-	new_value_node->next = (NULL);
-	return (new_value_node);
-}
-
-/**
- * Appends a new value node to the options->value structure.
- *
- * @param options The options structure to append the value node to.
- * @param new_value_node The new value node to append.
- */
-void	append_value_node(t_options *options, t_flags *new_value_node)
-{
-	t_flags	*last;
-
-	if (options->values == NULL)
-	{
-		options->values = new_value_node;
-		return ;
-	}
-	last = options->values;
-	while (last->next != NULL)
-		last = last->next;
-	last->next = new_value_node;
 }

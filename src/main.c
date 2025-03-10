@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:26:20 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/09 19:23:50 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:44:48 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	key_hook(int keycode, void *param)
 	loop = (t_loop *)param;
 	if (!loop)
 		return (-1);
-	if (keycode == 65307)
+	if (keycode == 65307 || keycode == 17)
 	{
 		mlx_destroy_image(loop->mlx, loop->img->img);
 		if (loop->img)
@@ -42,8 +42,9 @@ int	main(int ac, char *av[])
 	loop = loop_init();
 	if (check_args(ac, av, loop->opts) == 1)
 		return (key_hook(65307, loop), -1);
-	render(loop, ac, av);
-	printf("\033[1;32mSuccessfully rendered %s\033[0m\n", loop->opts->scene.scene_file);
+	render(loop);
+	printf("\033[1;33mSuccessfully rendered '\033[1;37m%s\033[1;33m'\033[0m\n", loop->opts->scene.scene_file);
+
 	// key_hook(65307, loop);
 	mlx_key_hook(loop->win, key_hook, loop);
 	mlx_loop(loop->mlx);

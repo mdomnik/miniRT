@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 23:56:53 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/22 14:17:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/10 13:09:34 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,15 @@ int	color_to_int(t_color3 color)
 	return (0xFF << 24
 		| (int)(color.r * 255) << 16 | (int)(color.g * 255) << 8
 		| (int)(color.b * 255));
+}
+
+t_color3 int_to_color(int color)
+{
+	t_color3 result;
+
+	result.r = (color >> 16) & 0xFF;
+	result.g = (color >> 8) & 0xFF;
+	result.b = color & 0xFF;
+	result.al = 1;
+	return (result);
 }

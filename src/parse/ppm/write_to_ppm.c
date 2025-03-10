@@ -6,22 +6,13 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:39:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/09 11:13:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 19:29:49 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
-
-static t_color3	pixel_at_ppm(t_canvas *canvas, int x, int y)
-{
-	if (x < 0 || x >= canvas->width || y < 0 || y >= canvas->height)
-	{
-		fprintf(stderr, "Error: Attempted to read pixel \
-				outside of canvas bounds.\n");
-		exit(EXIT_FAILURE);
-	}
-	return (canvas->pixels[y][x]);
-}
+#include <sys/stat.h>
+#include <sys/types.h>
 
 t_canvas	*canvas_new(int width, int height)
 {
@@ -50,40 +41,65 @@ t_canvas	*canvas_new(int width, int height)
 	return (canvas);
 }
 
-void	write_pixel(t_canvas *canvas, int x, int y, t_color3 color)
+static void create_directory(const char *path)
 {
-	if (x < 0 || x >= canvas->width || y < 0 || y >= canvas->height)
-	{
-		ft_dprintf(2, "Error: Attempted to write \
-				pixel outside of canvas bounds.\n");
-		exit(EXIT_FAILURE);
-	}
-	canvas->pixels[y][x] = color;
+    struct stat st = {0};
+    if (stat(path, &st) == -1) // Check if the directory exists
+        mkdir(path, 0700); // Create the directory with rwx------ permissions
 }
 
-int	canvas_to_ppm(t_canvas *canvas, char *filename)
+void save_image(t_image *img, char *filename)
 {
-	FILE		*file;
-	t_color3	color;
-	int			i;
-	int			j;
+	FILE *file;
+	int x, y;
+	int offset;
+	unsigned char r, g, b;
+	char *file_name;
 
-	file = fopen(filename, "w");
-	if (!file)
-		return (ft_dprintf(2, "Error: Could not open file for writing.\n"), -1);
-	fprintf(file, "P3\n%d %d\n255\n", canvas->width, canvas->height);
-	i = 0;
-	while (i < canvas->height)
+	if (!img || !img->buffer)
 	{
-		j = 0;
-		while (j < canvas->width)
-		{
-			color = pixel_at_ppm(canvas, j, i);
-			fprintf(file, "%d %d %d\n", (int)(color.r * 255),
-				(int)(color.g * 255), (int)(color.b * 255));
-			j++;
-		}
-		i++;
+		fprintf(stderr, "Error: Invalid image data.\n");
+		return;
 	}
-	return (fclose(file), 0);
+	create_directory("saved/");
+	file_name = ft_strjoin("saved/", filename);
+	free(filename);
+	filename = ft_strjoin(file_name, ".ppm");
+	file = fopen(filename, "w");
+	free(file_name);
+	if (!file)
+	{
+		fprintf(stderr, "Error: Could not open file for writing.\n");
+		return;
+	}
+	// Write PPM header
+	fprintf(file, "P3\n%d %d\n255\n", img->width, img->height);
+	// Iterate over pixels row by row
+	for (y = 0; y < img->height; y++)
+	{
+		for (x = 0; x < img->width; x++)
+		{
+			offset = (y * img->size_line) + (x * (img->bits_per_pixel / 8));
+
+			// Extract pixel colors based on endian format
+			if (img->endian == 0) // Little endian (default for most systems)
+			{
+				b = (unsigned char)img->buffer[offset];
+				g = (unsigned char)img->buffer[offset + 1];
+				r = (unsigned char)img->buffer[offset + 2];
+			}
+			else // Big endian
+			{
+				r = (unsigned char)img->buffer[offset];
+				g = (unsigned char)img->buffer[offset + 1];
+				b = (unsigned char)img->buffer[offset + 2];
+			}
+
+			// Write pixel values
+			fprintf(file, "%d %d %d\n", r, g, b);
+		}
+	}
+
+	fclose(file);
+	printf("\033[1;35mImage saved as %s\033[0m\n", filename);
 }

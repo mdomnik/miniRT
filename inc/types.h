@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 14:25:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:41:46 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,19 +206,20 @@ struct s_material
 
 typedef struct s_pixel
 {
-	int	x;
-	int	y;
-	int	color;
+	float		x;
+	float		y;
+	int		color;
+	bool	computed;
 }	t_pixel;
+
 
 typedef struct s_thread_data
 {
-	t_loop	*loop;
-	int		thread_id;
-	int		ac;
-	char	**av;
-	int		current_y;
-}	t_thread_data;
+    t_loop  *loop;
+    t_world *world;
+    int     thread_id;
+    int     total_threads;
+}   t_thread_data;
 
 typedef struct s_render_data
 {

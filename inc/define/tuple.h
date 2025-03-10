@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:45:01 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/23 16:27:31 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/10 13:09:49 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_color3	sub_color(t_tuple a, t_tuple b);
 t_color3	mult_color_scalar(t_color3 a, float scalar);
 t_tuple		sub_tuple_p(t_tuple *a, t_tuple *b); //replace
 int			color_to_int(t_color3 color);
+t_color3	int_to_color(int color);
 
 //tuple_init.c
 t_tuple		new_tuple(float x, float y, float z, float w);

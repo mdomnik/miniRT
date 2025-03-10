@@ -34,6 +34,7 @@ bool	init_loop_opts(t_loop *loop)
 		return (false);
 	loop->opts->scene.scene_objects = NULL;
 	loop->opts->scene.scene_file = NULL;
-	loop->opts->values = NULL;
+	loop->opts->values = malloc(sizeof(t_flags));
+	loop->opts->values->filename = NULL;
 	return (true);
 }

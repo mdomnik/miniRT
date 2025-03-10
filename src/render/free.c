@@ -13,8 +13,6 @@
 #include "forward.h"
 #include "mrt.h"
 
-
-
 static void free_shapes(t_shape *shape)
 {
 	t_shape *temp;

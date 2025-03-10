@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:11:31 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/09 19:01:30 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 21:48:41 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define OPTS_SHORT "-s,-a,-m"
 
 // DATA TYPES
-# define OPTS_VALUE "STRING,NULL,FLOAT"
+# define OPTS_VALUE "STRING,INT,INT"
 
 typedef struct s_flags	t_flags;
 
@@ -40,20 +40,12 @@ typedef enum e_opts_type
 	OPT_MULTITHREAD = 4
 }	t_opts_type;
 
-// VALUE TYPE UNION
-typedef union u_value_type
-{
-	char 		*string;
-	float		value;
-	t_vec3		vector;
-}	t_value_type;
-
 // VALUE NODE STRUCT
 struct s_flags
 {
-	t_opts_type		type;
-	t_value_type	value;
-	struct s_flags	*next;
+	char	*filename;
+	int		aa_samples;
+	int		threads;
 };
 
 #endif

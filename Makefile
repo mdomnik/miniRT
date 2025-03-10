@@ -114,7 +114,6 @@ SRC_FILES	+=	parse/rt/input.c
 SRC_FILES	+=	parse/rt/canvas_colors.c
 
 # PARSE/RT/FLAGS
-SRC_FILES	+=	parse/rt/flags/handle_values.c
 SRC_FILES	+=	parse/rt/flags/flag_formatting.c
 SRC_FILES	+=	parse/rt/flags/check_value_format.c
 SRC_FILES	+=	parse/rt/flags/flag_utils.c
@@ -163,11 +162,16 @@ SRC_FILES	+=	tuple/tuple_product_op.c
 # VIEW
 SRC_FILES	+=	view/camera_op.c
 SRC_FILES	+=	view/view_transformation.c
-SRC_FILES	+=	view/render_loop.c
-SRC_FILES	+=	view/render_loop_init.c
-SRC_FILES	+=	view/render_worker.c
-SRC_FILES	+=	view/render_worker_utils.c
-SRC_FILES	+=	view/render_worker_utils_2.c
+
+# RENDER
+
+SRC_FILES	+=	render/free.c
+SRC_FILES	+=	render/process_pixel.c
+SRC_FILES	+=	render/render_loop_init.c
+SRC_FILES	+=	render/render_loop.c
+SRC_FILES	+=	render/render_mt.c
+SRC_FILES	+=	render/render_standard.c
+SRC_FILES	+=	render/render_utils.c
 
 # MAIN
 SRC_FILES	+=	main.c

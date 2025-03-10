@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:33:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 15:39:25 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 21:53:46 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,11 @@ void	free_tripleptr(char ***str)
 
 void	free_options(t_options *options)
 {
-	t_flags	*current_flag;
-	t_flags	*next_flag;
-
-	if (options->values != NULL)
-	{
-		current_flag = options->values;
-		while (current_flag != NULL)
-		{
-			next_flag = current_flag->next;
-			free(current_flag);
-			current_flag = next_flag;
-		}
-	}
 	free(options->scene.scene_file);
 	if (options->scene.scene_objects)
 		free_tripleptr(options->scene.scene_objects);
+	if (options->values->filename != NULL)
+		free(options->values->filename);
 	free(options);
 }
 
