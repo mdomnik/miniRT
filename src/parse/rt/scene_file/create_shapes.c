@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:58:13 by astavrop          #+#    #+#             */
-/*   Updated: 2025/03/07 18:00:00 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 17:32:22 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ int	create_hourglass(t_world *world, char **args)
 	hg->size_cap.cap = true;
 	set_hourglass_transform(hg, coords, normal, args);
 	if (args[6])
-		get_material(args[6], &hg->material);
+		get_material(args[6], &hg->material, hg);
 	hg->material.color = new_color3(ft_atof(color[0]),
 			ft_atof(color[1]), ft_atof(color[2]));
 	hg->material.color = div_color(hg->material.color);
+	set_cylinder_pattern(hg);
 	add_shape(&world->shapes, hg);
 	free_double(color);
 	free_double(coords);
@@ -98,7 +99,7 @@ int	create_cube(t_world *world, char **args)
 	color = ft_split(args[4], ',');
 	set_cube_transform(cb, coords, normal, args);
 	if (args[5])
-		get_material(args[5], &cb->material);
+		get_material(args[5], &cb->material, cb);
 	cb->material.color = new_color3(ft_atof(color[0]),
 			ft_atof(color[1]), ft_atof(color[2]));
 	cb->material.color = div_color(cb->material.color);

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:17:29 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/10 17:52:24 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 16:43:53 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int	check_mat_args(char *str, t_material *mat, char **params);
 static int	check_value_bound(char *param, char *arg);
 static void	allocate_mat(char *param, float value, t_material *mat);
-static int	process_line(char *line, t_material *mat, char **params);
+static int	process_line(char *line, t_material *mat, char **params, t_shape *shape);
 
-int	get_material(char *str, t_material *mat)
+int	get_material(char *str, t_material *mat, t_shape *shape)
 {
 	int		fd;
 	char	*line;
@@ -35,7 +35,7 @@ int	get_material(char *str, t_material *mat)
 	params = ft_split(PARAM_LIST, ',');
 	while (line != NULL)
 	{
-		if (process_line(line, mat, params) == -1)
+		if (process_line(line, mat, params, shape) == -1)
 			return (close(fd), free_double(params), -1);
 		free(line);
 		line = gnl(fd);
@@ -45,7 +45,7 @@ int	get_material(char *str, t_material *mat)
 	return (0);
 }
 
-static int	process_line(char *line, t_material *mat, char **params)
+static int	process_line(char *line, t_material *mat, char **params, t_shape *shape)
 {
 	int		i;
 	char	*trimmed;
@@ -55,9 +55,8 @@ static int	process_line(char *line, t_material *mat, char **params)
 	{
 		trimmed = ft_substr(line, 0, ft_strlen(line) - 1);
 		if (check_mat_args(trimmed, mat, params) == -1
-			|| check_texture_args(trimmed, mat) == -1)
+			|| check_texture_args(trimmed, mat, shape) == -1)
 		{
-			free(trimmed);
 			return (-1);
 		}
 		free(trimmed);

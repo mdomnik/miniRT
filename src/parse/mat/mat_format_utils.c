@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:12:38 by astavrop          #+#    #+#             */
-/*   Updated: 2025/03/10 17:56:24 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/10 21:13:05 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ static int	parse_limit_values(char *limits, float *min, float *max)
 	char	**values;
 	int		status;
 
+	if (ft_strncmp(limits, "NULL", 4) == 0)
+	{
+		*min = 0;
+		*max = 0;
+		return (0);
+	}
 	values = ft_split(limits, '-');
 	status = 0;
 	if (!values[0] || !values[1])

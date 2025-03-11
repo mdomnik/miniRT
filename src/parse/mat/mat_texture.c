@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:29:18 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/26 19:25:36 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 17:28:12 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 static void	set_pattern(char *type, char *colors, char *transforms,
 				t_material *mat);
+static void	set_texture(char *type, t_material *mat, t_shape *shape);
 
-int	check_texture_args(char *str, t_material *mat)
+int	check_texture_args(char *str, t_material *mat, t_shape *shape)
 {
 	int		i;
 	char	**input;
@@ -29,8 +30,14 @@ int	check_texture_args(char *str, t_material *mat)
 		free_double(input);
 		return (0);
 	}
+	i = 0;
 	if (ft_strncmp(input[0], "pattern:", ft_strlen(input[0])) == 0)
 		set_pattern(input[1], input[2], input[3], mat);
+	if (ft_strncmp(input[0], "texture:", ft_strlen(input[0])) == 0)
+	{
+		printf("Loading texture: %s\n", input[1]);
+		set_texture(input[1], mat, shape);
+	}
 	/*
 	** Future implementations:
 	** set_material_texture(input[1], input[2], mat);
@@ -65,4 +72,31 @@ static void	set_pattern(char *type, char *colors, char *transforms,
 		return ;
 	}
 	mat->pattern = pattern;
+}
+
+static void	set_texture(char *type, t_material *mat, t_shape *shape)
+{
+	char 		*join;
+	int			i;
+
+	join = ft_strjoin("textures/", type);
+	if (shape->type == SPHERE)
+		mat->pattern = texture_map(uv_image(canvas_from_ppm(join)), spherical_map);
+	else if (shape->type == PLANE)
+		mat->pattern = texture_map(uv_image(canvas_from_ppm(join)), planar_map);
+	else if (shape->type == CYLINDER || shape->type == CONE || shape->type == HOURGLASS)
+		mat->pattern = texture_map(uv_image(canvas_from_ppm(join)), cylindrical_map);
+	else if (shape->type == CUBE)
+	{
+		t_pattern	*side[6];
+		i = 0;
+		while (i < 6)
+		{
+			side[i] = texture_map(uv_image(canvas_from_ppm(join)), planar_map);
+			i++;
+		}
+		mat->pattern = new_cube_map(side);
+	}	
+	else
+		return ;
 }

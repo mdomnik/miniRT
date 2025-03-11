@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:58:01 by astavrop          #+#    #+#             */
-/*   Updated: 2025/03/07 18:00:14 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 17:31:25 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ int	create_cone(t_world *world, char **args)
 	co->size_cap.cap = true;
 	set_cone_transform(co, coords, normal, args);
 	if (args[6])
-		get_material(args[6], &co->material);
+		get_material(args[6], &co->material, co);
 	co->material.color = new_color3(ft_atof(color[0]),
 			ft_atof(color[1]), ft_atof(color[2]));
 	co->material.color = div_color(co->material.color);
+	set_cylinder_pattern(co);
 	add_shape(&world->shapes, co);
 	free_double(color);
 	free_double(coords);

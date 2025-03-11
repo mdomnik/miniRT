@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/07 17:59:27 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 17:30:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	set_sphere_pattern(t_shape *sp)
 
 	if (!sp->material.pattern)
 		return ;
-	set_uv_pattern(sp);
 	if (sp->material.pattern->type == CHECKERS)
 	{
 		uv = uv_checkers(10, 10, sp->material.pattern->a,
@@ -60,7 +59,7 @@ int	create_sphere(t_world *world, char **args)
 	radius = ft_atof(args[2]) / 2.0;
 	set_sphere_transform(sp, coords, radius);
 	if (args[4])
-		get_material(args[4], &sp->material);
+		get_material(args[4], &sp->material, sp);
 	sp->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 			ft_atof(color[2]));
 	sp->material.color = div_color(sp->material.color);
@@ -109,7 +108,7 @@ int	create_plane(t_world *world, char **args)
 	color = ft_split(args[3], ',');
 	set_plane_transform(pl, coords, normal);
 	if (args[4])
-		get_material(args[4], &pl->material);
+		get_material(args[4], &pl->material, pl);
 	pl->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 			ft_atof(color[2]));
 	pl->material.color = div_color(pl->material.color);

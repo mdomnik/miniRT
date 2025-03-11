@@ -54,3 +54,13 @@ void free_triple_ptr(char ***str)
 	}
 	free(str);
 }
+
+void free_pattern(t_pattern *pattern)
+{
+    if (!pattern) return;
+    if (pattern->type == UV_IMAGE) {
+        free(((t_uv_image*)pattern->uv_pattern)->canvas);
+        free(pattern->uv_pattern);
+    }
+    free(pattern);
+}

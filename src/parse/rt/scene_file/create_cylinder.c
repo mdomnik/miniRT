@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/07 18:00:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 17:30:46 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,12 @@ static void	set_cylinder_transform(t_shape *cy, char **coords,
 	set_transform(cy, transform);
 }
 
-static void	set_cylinder_pattern(t_shape *cy)
+void	set_cylinder_pattern(t_shape *cy)
 {
 	t_uv	*uv;
 
 	if (!cy->material.pattern)
 		return ;
-	set_uv_pattern(cy);
 	if (cy->material.pattern->type == CHECKERS)
 	{
 		uv = uv_checkers(10, 10, cy->material.pattern->a,
@@ -65,7 +64,7 @@ int	create_cylinder(t_world *world, char **args)
 	cy->size_cap.cap = true;
 	set_cylinder_transform(cy, coords, normal, args);
 	if (args[6])
-		get_material(args[6], &cy->material);
+		get_material(args[6], &cy->material, cy);
 	cy->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 			ft_atof(color[2]));
 	cy->material.color = div_color(cy->material.color);

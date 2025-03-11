@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:29:54 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/09 19:29:58 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 17:30:55 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int			create_plane(t_world *world, char **args);
 
 //rt/scene_file/create_cylinder.c
 int			create_cylinder(t_world *world, char **args);
-
+void		set_cylinder_pattern(t_shape *cy);
 //rt/scene_file/file_data.c
 int			get_scene_data(t_options *options);
 int			append_object_nodes(t_options *options, char *line);

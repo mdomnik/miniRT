@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:25:55 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/10 17:40:39 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 16:36:30 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 //free.c
 void free_world(t_world *world);
 void free_triple_ptr(char ***str);
+void free_pattern(t_pattern *pattern);
 
 //process_pixel.c
 void process_pixel_aa(t_world *world, t_pixel *px, int samples);

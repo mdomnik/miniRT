@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:57:56 by astavrop          #+#    #+#             */
-/*   Updated: 2025/03/09 13:02:12 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 17:11:22 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	create_obj(t_world *world, char **args)
 	vectors[COLOR] = ft_split(args[5], ',');
 	set_obj_transform(obj, vectors[COORD], vectors[NORMAL], args);
 	if (args[6])
-		get_material(args[6], &obj->material);
+		get_material(args[6], &obj->material, obj);
 	obj->material.color = new_color3(ft_atof(vectors[COLOR][0]),
 			ft_atof(vectors[COLOR][1]),
 			ft_atof(vectors[COLOR][2]));
