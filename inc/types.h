@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/10 15:41:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 20:18:54 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ struct s_bump_map
 	t_canvas	*height_map;
 	t_uv_val	(*uv_map)(t_point3 point);
 	float		scale;
+	t_matrix	transform;
 };
 
 struct s_material

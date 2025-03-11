@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:15:05 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/21 18:38:32 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 20:25:05 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_bump_map			*bump_map_from_ppm(const char *filename,
 						double scale, t_uv_val (*uv_maps)(t_point3));
 t_vec3				perturb_normal(t_shape *shape,
 						t_point3 *local_point, t_vec3 local_normal);
+int bump_map_get_transform(char *transform, t_bump_map *bump_map);
 
 //cube_obj.c
 t_pattern			*new_cube_map(t_pattern *faces[6]);

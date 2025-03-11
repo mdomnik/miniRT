@@ -1,5 +1,5 @@
 # ambient (0-1)
-ambient: 0.5
+ambient: 0.2
 # diffuse (0-1)
 diffuse: 0.5
 # specular (0-1)
@@ -14,10 +14,10 @@ transparency: 0.0
 refraction: 1.0
 # pattern (pattern_name {color_a | color_b} {scaling | rotation | translation})
 # (stripe, gradient, ring, checkers)
-pattern: checkers {0,2,0|0,0,2} {0.1,0.1,0.1|0,0,0|0,1,1}
+pattern: checkers {0,2,0|0,0,2} {1,1,1|0,0,0|0,0,0}
 # texture (texture_name, {scaling | rotation | translation})
-texture: tile.ppm {10,10,10|0,1,0|0,1,1}
+texture: stones.ppm {10,10,10|0,0,0|0,0,0}
 # bump_map (bump_map_name)
-bump_map: NULL
+bump_map:
 # bump_intensity (0-1)
-bump_intensity: 0.6
+bump_intensity: 1

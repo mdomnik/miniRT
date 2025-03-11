@@ -1,9 +1,9 @@
 # simple scene with a plane
 A   0.2								255,255,255
-C   0,0,-5		0,0,0		70
-L   1,0,-4		1					255,255,255
-pl	0,-1,0		0,0,0				26,214,9 texture.rt
-# sp 0,0,0		1					245,133,255 texture.rt
+C   0,0,-2		0,0,0		70
+L   0,1,-5		1					255,255,255
+# pl	0,-1,0		0,0,0				26,214,9 texture.rt
+sp 0,0,0		1					245,133,255 texture.rt
 # cy 1,0,0		0,0,0		1		1		0,0,0 texture.rt
 # cb -1,0,0		0,0,0		1		0,0,0 texture.rt
 # co 1,1,0		0,0,0		1	1	0,0,0 texture.rt
