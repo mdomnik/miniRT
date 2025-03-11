@@ -18,6 +18,7 @@ compile_commands.json
 *.fls
 *.fdb_latexmk
 lib/minilibx-linux
+*.tgz
 
 # Main binary
 minirt

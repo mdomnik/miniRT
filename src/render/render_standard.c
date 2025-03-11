@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_standard.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:16:45 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/10 18:44:19 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 18:45:27 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ void	render_single(t_loop *loop)
 	}
 	computed_buffer = malloc(world->camera->vsize * sizeof(bool *));
 	for (i = 0; i < world->camera->vsize; i++)
-		computed_buffer[i] = calloc(world->camera->hsize, sizeof(bool));
+		computed_buffer[i] = ft_calloc(world->camera->hsize, sizeof(bool));
 	total_pixels = world->camera->vsize * world->camera->hsize;
 	pixel_order = malloc(total_pixels * sizeof(int));
 	for (i = 0; i < total_pixels; i++)
 		pixel_order[i] = i;
-	srand(42);
+	ft_srand(42);
 	for (i = total_pixels - 1; i > 0; i--)
 	{
-		int j = rand() % (i + 1);
+		int j = ft_rand() % (i + 1);
 		int temp = pixel_order[i];
 		pixel_order[i] = pixel_order[j];
 		pixel_order[j] = temp;

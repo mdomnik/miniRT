@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:25:55 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/11 16:36:30 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 18:15:49 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,9 @@ void update_display(t_loop *loop);
 bool init_worker_memory(t_ray **ray, t_comp **comp);
 void free_worker_memory(t_ray **ray, t_comp **comp);
 t_world *init_local_world(t_thread_data *data);
+
+//render_rand.c
+int		ft_srand(int seed);
+int		ft_rand(void);
 
 #endif

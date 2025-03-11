@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:26:20 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/10 15:44:48 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 19:03:38 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(int ac, char *av[])
 	printf("\033[1;33mSuccessfully rendered '\033[1;37m%s\033[1;33m'\033[0m\n", loop->opts->scene.scene_file);
 
 	// key_hook(65307, loop);
+	mlx_hook(loop->win, 17, 1L << 17, key_hook, loop);
 	mlx_key_hook(loop->win, key_hook, loop);
 	mlx_loop(loop->mlx);
 	return (0);
