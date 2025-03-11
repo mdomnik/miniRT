@@ -15,8 +15,8 @@ refraction: 1.0
 # pattern (pattern_name {color_a | color_b} {scaling | rotation | translation})
 # (stripe, gradient, ring, checkers)
 pattern: checkers {0,2,0|0,0,2} {0.1,0.1,0.1|0,0,0|0,1,1}
-# texture (texture_name) (works for basic objects)
-texture:
+# texture (texture_name, {scaling | rotation | translation})
+texture: tile.ppm {10,10,10|0,1,0|0,1,1}
 # bump_map (bump_map_name)
 bump_map: NULL
 # bump_intensity (0-1)
