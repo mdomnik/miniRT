@@ -16,7 +16,7 @@ refraction: 1.0
 # (stripe, gradient, ring, checkers)
 pattern: checkers {0,2,0|0,0,2} {0.1,0.1,0.1|0,0,0|0,1,1}
 # texture (texture_name) (works for basic objects)
-texture: NULL
+texture:
 # bump_map (bump_map_name)
 bump_map: NULL
 # bump_intensity (0-1)

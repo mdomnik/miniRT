@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:29:18 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/11 17:28:12 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 17:44:35 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,10 @@ static void	set_texture(char *type, t_material *mat, t_shape *shape)
 	int			i;
 
 	join = ft_strjoin("textures/", type);
+	if (open(join, O_RDONLY) == -1)
+	{
+		return ;
+	}
 	if (shape->type == SPHERE)
 		mat->pattern = texture_map(uv_image(canvas_from_ppm(join)), spherical_map);
 	else if (shape->type == PLANE)
@@ -96,7 +100,6 @@ static void	set_texture(char *type, t_material *mat, t_shape *shape)
 			i++;
 		}
 		mat->pattern = new_cube_map(side);
-	}	
-	else
-		return ;
+	}
+	free(join);
 }
