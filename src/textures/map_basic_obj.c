@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:23:46 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/11 21:07:44 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 23:14:34 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ t_uv_val	spherical_map(t_point3 p)
 	uv.v = 1.0f - (phi / M_PI);
 	return (uv);
 }
+
+t_uv_val spherical_map_scaled(t_pattern *pattern, t_point3 p)
+{
+    t_uv_val uv = spherical_map(p); // Use existing function
+    uv.u *= pattern->sphere_scale; // Apply scaling
+    uv.v *= pattern->sphere_scale;
+    return uv;
+}
+
 
 t_uv_val	planar_map(t_point3 p)
 {

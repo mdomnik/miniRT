@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:29:18 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/11 21:14:47 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 23:27:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	check_texture_args(char *str, t_material *mat, t_shape *shape)
 		return (0);
 	}
 	i = 0;
-	if (ft_strncmp(input[0], "pattern:", ft_strlen(input[0])) == 0)
-		set_pattern(input[1], input[2], input[3], mat);
 	if (ft_strncmp(input[0], "texture:", ft_strlen(input[0])) == 0)
 		set_texture(input[1], input[2], mat, shape);
+	else if (ft_strncmp(input[0], "pattern:", ft_strlen(input[0])) == 0)
+		set_pattern(input[1], input[2], input[3], mat);
 	if (ft_strncmp(input[0], "bump_map:", ft_strlen(input[0])) == 0)
 		set_bump_map(input[1], input[2], mat, shape);
 	free_double(input);
@@ -97,6 +97,10 @@ static void	set_texture(char *type, char *transform, t_material *mat, t_shape *s
 		mat->pattern = new_cube_map(side);
 	}
 	pattern_get_transform(transform, mat->pattern);
+	if (shape->type == SPHERE)
+		mat->pattern->sphere_scale = 10.0f;
+	else
+		mat->pattern->sphere_scale = 1.0f;
 	free(join);
 }
 

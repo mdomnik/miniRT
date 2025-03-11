@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:15:05 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/11 20:25:05 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/11 23:09:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_uv_val			cube_uv_down(t_point3 point);
 
 //map_basic_obj.c
 t_uv_val			spherical_map(t_point3 p);
+t_uv_val			spherical_map_scaled(t_pattern *pattern, t_point3 p);
 t_uv_val			planar_map(t_point3 p);
 t_uv_val			cylindrical_map(t_point3 p);
 
