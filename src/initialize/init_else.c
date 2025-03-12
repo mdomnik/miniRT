@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:29:09 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/23 16:32:26 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:17:48 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_material	default_material(void)
 	material.transparency = 0.0;
 	material.refractive_index = 1.0;
 	material.bump_map = NULL;
+	material.bump_map_scale = 1;
 	return (material);
 }
 

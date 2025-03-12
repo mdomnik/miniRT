@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:12:38 by astavrop          #+#    #+#             */
-/*   Updated: 2025/03/10 21:13:05 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:30:45 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ int	validate_arg_chars(char *arg)
 			return (-1);
 		i++;
 	}
-	if (dot_count == 0)
-		return (2);
 	return (0);
 }
 

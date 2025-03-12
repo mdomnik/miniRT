@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 00:57:55 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:15:52 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ struct s_material
 	float			transparency;
 	float			refractive_index;
 	t_bump_map		*bump_map;
+	float			bump_map_scale;
 };
 
 typedef struct s_pixel

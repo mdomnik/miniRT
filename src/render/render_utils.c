@@ -6,13 +6,14 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:22:56 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/10 19:22:47 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:11:59 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
 pthread_mutex_t g_check_args_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t world_mutex = PTHREAD_MUTEX_INITIALIZER; // Global mutex
 pthread_mutex_t g_mlx_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void	put_pixel_to_img(t_image *img, int x, int y, int color)
@@ -53,19 +54,26 @@ void free_worker_memory(t_ray **ray, t_comp **comp)
 	}
 }
 
-// Initialize local world for each thread
+
 t_world *init_local_world(t_thread_data *data)
 {
-	t_world *local_world = malloc(sizeof(t_world));
-	if (!local_world) return NULL;
+    t_world *local_world = malloc(sizeof(t_world));
+    if (!local_world) return NULL;
 
-	local_world->camera = NULL;
-	local_world->light = NULL;
-	local_world->shapes = NULL;
+    local_world->camera = NULL;
+    local_world->light = NULL;
+    local_world->shapes = NULL;
 
-	if (make_world(data->loop->opts, local_world) == -1) {
-		free(local_world);
-		return NULL;
-	}
-	return local_world;
+    pthread_mutex_lock(&world_mutex); // Lock before accessing shared resources
+
+    if (make_world(data->loop->opts, local_world) == -1) {
+        pthread_mutex_unlock(&world_mutex); // Unlock before returning
+        free(local_world);
+        return NULL;
+    }
+
+    pthread_mutex_unlock(&world_mutex); // Unlock after finishing `make_world`
+
+    return local_world;
 }
+

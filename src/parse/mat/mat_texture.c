@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:29:18 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 01:55:29 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:41:25 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,11 @@ static void	set_bump_map(char *type, char *transform, t_material *mat, t_shape *
 	if (open(join, O_RDONLY) == -1)
 		return ;
 	if (shape->type == SPHERE)
-		mat->bump_map = bump_map_from_ppm_sphere(join, 100, spherical_map);
+		mat->bump_map = bump_map_from_ppm_sphere(join, mat->bump_map_scale, spherical_map);
 	else if (shape->type == PLANE)
-		mat->bump_map = bump_map_from_ppm(join, 10, planar_map);
+		mat->bump_map = bump_map_from_ppm(join, mat->bump_map_scale, planar_map);
 	else if (shape->type == CYLINDER || shape->type == CONE || shape->type == HOURGLASS)
-		mat->bump_map = bump_map_from_ppm(join, 5, cylindrical_map);
+		mat->bump_map = bump_map_from_ppm(join, mat->bump_map_scale, cylindrical_map);
 	else if (shape->type == CUBE || shape->type == GROUP)
 	{
 		free(join);
