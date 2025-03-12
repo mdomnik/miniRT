@@ -13,9 +13,9 @@
 #include "forward.h"
 #include "mrt.h"
 
-static void free_shapes(t_shape *shape)
+static void	free_shapes(t_shape *shape)
 {
-	t_shape *temp;
+	t_shape	*temp;
 
 	while (shape)
 	{
@@ -31,7 +31,8 @@ static void free_shapes(t_shape *shape)
 			break ;
 	}
 }
-void free_world(t_world *world)
+
+void	free_world(t_world *world)
 {
 	free(world->camera);
 	free_shapes(world->shapes);
@@ -39,9 +40,9 @@ void free_world(t_world *world)
 	free(world);
 }
 
-void free_triple_ptr(char ***str)
+void	free_triple_ptr(char ***str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -55,12 +56,14 @@ void free_triple_ptr(char ***str)
 	free(str);
 }
 
-void free_pattern(t_pattern *pattern)
+void	free_pattern(t_pattern *pattern)
 {
-    if (!pattern) return;
-    if (pattern->type == UV_IMAGE) {
-        free(((t_uv_image*)pattern->uv_pattern)->canvas);
-        free(pattern->uv_pattern);
-    }
-    free(pattern);
+	if (!pattern)
+		return ;
+	if (pattern->type == UV_IMAGE)
+	{
+		free(((t_uv_image*)pattern->uv_pattern)->canvas);
+		free(pattern->uv_pattern);
+	}
+	free(pattern);
 }

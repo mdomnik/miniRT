@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 16:43:14 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/23 18:18:45 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:58:42 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ t_x	*intersect_caps_cone(t_shape *cone, t_ray *ray, t_x *xs)
 
 	if (!cone->size_cap.cap || fabsf(ray->dir.y) < EPSILON)
 		return (xs);
-	// **Fix: Use correct radius for min/max caps**
 	t = (cone->size_cap.min - ray->orig.y) / ray->dir.y;
-	// Fix: should check max radius
 	if (check_cap_cone(ray, t, fabsf(cone->size_cap.max)))
 		xs = add_intersection(xs, t, cone);
 	t = (cone->size_cap.max - ray->orig.y) / ray->dir.y;
@@ -73,8 +71,6 @@ t_x	*intersect_caps_cone(t_shape *cone, t_ray *ray, t_x *xs)
 	return (xs);
 }
 
-//makes ends of the cylinder
-//makes ends of the cylinder
 void	apply_cap_transformation(t_shape *cone, t_matrix *transform)
 {
 	float	translate_y;

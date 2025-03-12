@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:51:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/08 19:37:33 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:32:02 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ int	get_scene_data(t_options *options)
 	}
 	while (line != NULL)
 	{
-		if (ft_strcmp(line,"\n") != 0
-				&& append_object_nodes(options, line) == -1)
+		if ((ft_strcmp(line,"\n") != 0) && (append_object_nodes(options, line) == -1))
 			return (ret_message(ERR_FAIL_LINE, line), free(line),
 				close(fd), gnl(-1), -1);
 		free(line);
@@ -165,18 +164,5 @@ int	append_to_triple(t_options *options, char **args)
 int	check_file_open_format(char *str)
 {
 	(void)str;
-	// int		fd;
-
-	// if (str == NULL)
-	// {
-	// 	return (0);
-	// }
-	// fd = open(str, O_RDONLY);
-	// if (fd == -1)
-	// {
-	// 	perror(ERR_OPEN_FILE);
-	// 	return (-1);
-	// }
-	// close(fd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:39:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/09 19:29:49 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:23:03 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,28 @@ t_canvas	*canvas_new(int width, int height)
 	return (canvas);
 }
 
-static void create_directory(const char *path)
+static void	create_directory(const char *path)
 {
-    struct stat st = {0};
-    if (stat(path, &st) == -1) // Check if the directory exists
-        mkdir(path, 0700); // Create the directory with rwx------ permissions
+	struct stat	st = {0};
+	if (stat(path, &st) == -1)
+		mkdir(path, 0700);
 }
 
-void save_image(t_image *img, char *filename)
+void	save_image(t_image *img, char *filename)
 {
-	FILE *file;
-	int x, y;
-	int offset;
-	unsigned char r, g, b;
-	char *file_name;
+	FILE			*file;
+	int				x;
+	int				y;
+	int				offset;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	char 			*file_name;
 
 	if (!img || !img->buffer)
 	{
 		fprintf(stderr, "Error: Invalid image data.\n");
-		return;
+		return ;
 	}
 	create_directory("saved/");
 	file_name = ft_strjoin("saved/", filename);
@@ -70,36 +73,29 @@ void save_image(t_image *img, char *filename)
 	if (!file)
 	{
 		fprintf(stderr, "Error: Could not open file for writing.\n");
-		return;
+		return ;
 	}
-	// Write PPM header
 	fprintf(file, "P3\n%d %d\n255\n", img->width, img->height);
-	// Iterate over pixels row by row
 	for (y = 0; y < img->height; y++)
 	{
 		for (x = 0; x < img->width; x++)
 		{
 			offset = (y * img->size_line) + (x * (img->bits_per_pixel / 8));
-
-			// Extract pixel colors based on endian format
-			if (img->endian == 0) // Little endian (default for most systems)
+			if (img->endian == 0)
 			{
 				b = (unsigned char)img->buffer[offset];
 				g = (unsigned char)img->buffer[offset + 1];
 				r = (unsigned char)img->buffer[offset + 2];
 			}
-			else // Big endian
+			else
 			{
 				r = (unsigned char)img->buffer[offset];
 				g = (unsigned char)img->buffer[offset + 1];
 				b = (unsigned char)img->buffer[offset + 2];
 			}
-
-			// Write pixel values
 			fprintf(file, "%d %d %d\n", r, g, b);
 		}
 	}
-
 	fclose(file);
 	printf("\033[1;35mImage saved as %s\033[0m\n", filename);
 }

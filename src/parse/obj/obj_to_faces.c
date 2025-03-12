@@ -6,15 +6,16 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:21:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/09 13:13:05 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:04:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-static int ft_isspace(int c)
+static int	ft_isspace(int c)
 {
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r');
+	return (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f' || c == '\r');
 }
 
 static t_group	*create_group(const char *name)
@@ -23,7 +24,7 @@ static t_group	*create_group(const char *name)
 
 	g = malloc(sizeof(t_group));
 	g->name = strdup(name);
-	g->group = group(); // Assuming group() is defined elsewhere
+	g->group = group();
 	g->next = NULL;
 	return (g);
 }
@@ -33,7 +34,7 @@ static void	add_triangle_to_group(t_group *g, t_triangle *tri)
 	void	*t;
 
 	t = triangle(tri->p1, tri->p2, tri->p3);
-	add_child(g->group, t); // Assuming add_child() is defined elsewhere
+	add_child(g->group, t);
 }
 
 static void	add_group_to_default(t_obj_file *obj_file, t_group *group)

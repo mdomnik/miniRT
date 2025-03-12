@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/11 21:05:18 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:28:23 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ static void	set_sphere_transform(t_shape *sp, char **coords, float radius)
 	set_transform(sp, transform);
 }
 
-// static void	set_sphere_pattern(t_shape *sp)
-// {
-// 	t_uv	*uv;
+static void	set_sphere_pattern(t_shape *sp)
+{
+	t_uv	*uv;
 
-// 	if (!sp->material.pattern)
-// 		return ;
-// 	if (sp->material.pattern->type == CHECKERS)
-// 	{
-// 		uv = uv_checkers(10, 10, sp->material.pattern->a,
-// 				sp->material.pattern->b);
-// 		free(sp->material.pattern);
-// 		sp->material.pattern = texture_map(uv, spherical_map);
-// 	}
-// }
+	if (!sp->material.pattern)
+		return ;
+	if (sp->material.pattern->type == CHECKERS)
+	{
+		uv = uv_checkers(10, 10, sp->material.pattern->a,
+				sp->material.pattern->b);
+		free(sp->material.pattern);
+		sp->material.pattern = texture_map_sphere(uv, spherical_map);
+	}
+}
 
 /**
  * Creates a sphere object and adds it to the list of objects in the options.
@@ -63,7 +63,7 @@ int	create_sphere(t_world *world, char **args)
 	sp->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
 			ft_atof(color[2]));
 	sp->material.color = div_color(sp->material.color);
-	// set_sphere_pattern(sp);
+	set_sphere_pattern(sp);
 	add_shape(&world->shapes, sp);
 	free_double(color);
 	free_double(coords);

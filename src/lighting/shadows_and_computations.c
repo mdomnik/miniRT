@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/08 19:02:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:00:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #define VEC_DIR 1
 
 //prepare computations
+// transparency_and_refraction(i, comps, xs); reflection broken
+// (void)xs; // needs to stay until we add reflection
 void	prepare_computations(t_i *i, t_ray *ray, t_x *xs, t_comp *comps)
 {
 	comps->t = i->t;
@@ -35,8 +37,7 @@ void	prepare_computations(t_i *i, t_ray *ray, t_x *xs, t_comp *comps)
 	comps->under_point = sub_tuple(comps->point,
 			mult_tuple(comps->normalv, EPSILON));
 	comps->reflectv = reflect(ray->dir, comps->normalv);
-	// transparency_and_refraction(i, comps, xs); reflection broken
-	(void)xs; // needs to stay when we add reflection
+	(void)xs;
 }
 
 t_color3	shade_hit(t_world *world, t_comp **comps, t_ray **ray,

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:17:29 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 12:33:48 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:01:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static int	check_mat_args(char *str, t_material *mat, char **params);
 static int	check_value_bound(char *param, char *arg);
 static void	allocate_mat(char *param, float value, t_material *mat);
-static int	process_line(char *line, t_material *mat, char **params, t_shape *shape);
+static int	process_line(char *line, t_material *mat, char **params,
+				t_shape *shape);
 
 int	get_material(char *str, t_material *mat, t_shape *shape)
 {
@@ -45,7 +46,8 @@ int	get_material(char *str, t_material *mat, t_shape *shape)
 	return (0);
 }
 
-static int	process_line(char *line, t_material *mat, char **params, t_shape *shape)
+static int	process_line(char *line, t_material *mat, char **params,
+			t_shape *shape)
 {
 	int		i;
 	char	*trimmed;

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 22:14:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 18:58:05 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:10:35 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,35 +52,3 @@ char	*skip_comments(FILE *file)
 	free(line);
 	return (NULL);
 }
-
-// int	canvas_from_ppm_dimensions(t_canvas *canvas, char *line)
-// {
-// 	int	width;
-// 	int	height;
-
-// 	if (sscanf(line, "%d %d", &width, &height) != 2)
-// 		return (-1);
-// 	canvas->width = width;
-// 	canvas->height = height;
-// 	return (0);
-// }
-
-// int	check_ppm_magic_number(char *line)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	j = 0;
-// 	if (strncmp(line, "P3", 2) != 0)
-// 		return (-1);
-// 	while (line[i] != '\0')
-// 	{
-// 		if (!ft_isspace(line[i]))
-// 			j++;
-// 		i++;
-// 	}
-// 	if (j == 2)
-// 		return (0);
-// 	return (-1);
-// }
