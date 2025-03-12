@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:29:18 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 21:22:51 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:03:54 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static void	set_pattern(char *type, char *colors, char *transforms,
 {
 	t_pattern	*pattern;
 
-	if (mat->pattern)
-		return ;
 	pattern = malloc(sizeof(t_pattern));
 	pattern->transform = init_identity_matrix(4);
 	if (pattern_get_type(type, pattern) == -1)

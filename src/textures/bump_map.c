@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 20:09:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 20:27:29 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 01:49:47 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,25 +86,27 @@ t_vec3	perturb_normal(t_shape *shape, t_point3 *local_point,
 	float		d[2];
 	t_vec3		perturbed_normal;
 	t_uv_val	uv;
-	t_point3	transformed_point;
 
 	if (!shape->material.bump_map || !shape->material.bump_map->height_map)
 		return (local_normal);
 	bump_map = shape->material.bump_map;
-	transformed_point = multiply_matrix_tuple(
-			bump_map->transform, *local_point);
+
+	t_point3 transformed_point = multiply_matrix_tuple(bump_map->transform, *local_point);
+
 	if (shape->type == SPHERE)
 		uv = bump_map->uv_map_sphere(transformed_point, bump_map->sphere_scale);
 	else
 		uv = bump_map->uv_map(transformed_point);
 	get_height_values(bump_map, uv, heights);
+
 	d[DU] = (heights[1] - heights[0]) * bump_map->scale;
 	d[DV] = (heights[3] - heights[2]) * bump_map->scale;
+
 	perturbed_normal = add_tuple(local_normal,
 			add_tuple(new_vec3(1, 0, d[DU]), new_vec3(0, 1, d[DV])));
+
 	return (normalize(perturbed_normal));
 }
-
 static int	apply_transform(char **transform_str, t_bump_map *bump_map)
 {
 	t_matrix	transform;
@@ -131,7 +133,7 @@ static int	apply_transform(char **transform_str, t_bump_map *bump_map)
 	return (0);
 }
 
-int	bump_map_get_transform(char *transform, t_bump_map *bump_map)
+int bump_map_get_transform(char *transform, t_bump_map *bump_map)
 {
 	char	*temp;
 	char	**transform_str;
@@ -150,3 +152,4 @@ int	bump_map_get_transform(char *transform, t_bump_map *bump_map)
 	free(temp);
 	return (status);
 }
+

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 21:14:37 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:00:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ t_color3	color_at(t_world *world, t_ray **ray, t_comp **comp, int remaining)
 		return (new_color3(0, 0, 0));
 	if (xs->count == 0)
 	{
-		if (xs->i)
-			free(xs->i);
+		free(xs->i);
 		free(xs);
 		return (new_color3(0, 0, 0));
 	}

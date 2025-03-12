@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:05:26 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 20:53:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/09 18:03:37 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,29 @@
 
 t_vec3	rotate_x(t_vec3 v, double angle)
 {
-	double	cos_a;
-	double	sin_a;
+	double cos_a = cos(angle);
+	double sin_a = sin(angle);
 
-	cos_a = cos(angle);
-	sin_a = sin(angle);
-	return (new_vec3(v.x, v.y * cos_a - v.z
-			* sin_a, v.y * sin_a + v.z * cos_a));
+	return (new_vec3(v.x, v.y * cos_a - v.z * sin_a, v.y * sin_a + v.z * cos_a));
 }
 
 t_vec3	rotate_y(t_vec3 v, double angle)
 {
-	double	cos_a;
-	double	sin_a;
+	double cos_a = cos(angle);
+	double sin_a = sin(angle);
 
-	cos_a = cos(angle);
-	sin_a = sin(angle);
-	return (new_vec3(v.x * cos_a + v.z * sin_a, v.y,
-			-v.x * sin_a + v.z * cos_a));
+	return (new_vec3(v.x * cos_a + v.z * sin_a, v.y, -v.x * sin_a + v.z * cos_a));
 }
 
 t_vec3	rotate_z(t_vec3 v, double angle)
 {
-	double	cos_a;
-	double	sin_a;
+	double cos_a = cos(angle);
+	double sin_a = sin(angle);
 
-	cos_a = cos(angle);
-	sin_a = sin(angle);
-	return (new_vec3(v.x * cos_a - v.y * sin_a,
-			v.x * sin_a + v.y * cos_a, v.z));
+	return (new_vec3(v.x * cos_a - v.y * sin_a, v.x * sin_a + v.y * cos_a, v.z));
 }
 
-double	degrees_to_radians(double degrees)
+double degrees_to_radians(double degrees)
 {
 	return (degrees * M_PI / 180.0);
 }
@@ -71,27 +62,41 @@ t_matrix	view_transformation(t_point3 from, t_vec3 orientation)
 	t_vec3		up;
 	t_vec3		left;
 
+	// Convert normalized range (-1 to 1) to rotation angles (-180° to 180°)
 	double angle_x = orientation.x * 180.0;
 	double angle_y = orientation.y * 180.0;
 	double angle_z = orientation.z * 180.0;
 
+	// Convert angles to radians
 	double rad_x = degrees_to_radians(angle_x);
 	double rad_y = degrees_to_radians(angle_y);
 	double rad_z = degrees_to_radians(angle_z);
 
+	// Compute forward vector using rotations (Default forward is +z)
 	forward = new_vec3(0, 0, 1);
 	forward = rotate_x(forward, rad_x);
 	forward = rotate_y(forward, rad_y);
 	forward = rotate_z(forward, rad_z);
 	forward = normalize(forward);
+
+	// Choose up vector dynamically to prevent gimbal lock
 	if (fabs(forward.x) < EPSILON && fabs(forward.z) < EPSILON)
 		up = (forward.y > 0) ? new_vec3(0, 0, 1) : new_vec3(0, 0, -1);
 	else
 		up = new_vec3(0, 1, 0);
+
+	// Compute left and correct up vector
 	left = normalize(cross_product(forward, up));
-	up = cross_product(left, forward);
+	up = cross_product(left, forward); // Ensure orthogonality
+
+	// Fill orientation matrix
 	orientation_matrix = init_identity_matrix(4);
 	fill_orientation_matrix(&orientation_matrix, left, up, forward);
+
+	// Create translation matrix
 	translation_matrix = translation(-from.x, -from.y, -from.z);
-	return (multiply_matrices(orientation_matrix, translation_matrix));
+
+	// Combine orientation and translation
+	return multiply_matrices(orientation_matrix, translation_matrix);
 }
+

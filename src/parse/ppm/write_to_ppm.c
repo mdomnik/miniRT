@@ -6,35 +6,37 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:39:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 21:56:44 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:23:03 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_canvas	*canvas_new(t_canvas *canv, int width, int height)
+t_canvas	*canvas_new(int width, int height)
 {
+	t_canvas	*canvas;
 	int			i;
 	int			j;
 
-	canv->pixels = malloc(sizeof(t_color3 *) * height);
+	canvas = malloc(sizeof(t_canvas));
+	if (!canvas)
+	{
+		ft_dprintf(2, "Error: Could not allocate memory for canvas.\n");
+		exit(EXIT_FAILURE);
+	}
+	canvas->width = width;
+	canvas->height = height;
+	canvas->pixels = malloc(sizeof(t_color3 *) * height);
 	i = 0;
 	while (i < height)
 	{
 		j = -1;
-		canv->pixels[i] = malloc(sizeof(t_color3) * width);
+		canvas->pixels[i] = malloc(sizeof(t_color3) * width);
 		while (++j < width)
-			canv->pixels[i][j] = new_color3(0, 0, 0);
+			canvas->pixels[i][j] = new_color3(0, 0, 0);
 		i++;
 	}
 	return (canvas);
-}
-
-static void	create_directory(const char *path)
-{
-	struct stat	st = {0};
-	if (stat(path, &st) == -1)
-		mkdir(path, 0700);
 }
 
 void	save_image(t_image *img, char *filename)

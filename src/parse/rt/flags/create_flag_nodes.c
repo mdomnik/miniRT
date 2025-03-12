@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:43:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 16:52:11 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:30:04 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	value_containers(int value, t_options *options, char *str, char *flag)
 	flag_join[3] = NULL;
 	if (process_flag(flag_join[1], options, value, flag_join) == -1)
 		return (-1);
-	free_double(flag_join);
 	return (0);
 }
 

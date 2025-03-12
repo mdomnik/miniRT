@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:07:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 20:06:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/10 14:39:19 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ray_for_pixel(t_camera *camera, float px, float py, t_ray *ray)
 	world_x = camera->half_width - xoffset;
 	world_y = camera->half_height - yoffset;
 	ray->orig = multiply_matrix_tuple(inv_transform, new_point3(0, 0, 0));
+	// printf("hi\n");
 	ray->dir = multiply_matrix_tuple(inv_transform, new_point3(world_x,
 				world_y, -1));
 	ray->dir = sub_tuple(ray->dir, ray->orig);

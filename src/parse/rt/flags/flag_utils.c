@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 19:22:37 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 16:57:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/02/25 19:13:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,16 @@ static float	parse_frac(const char *str, int *i, float frac_div);
  */
 char	*check_if_option(char *str)
 {
+	char	*ret;
+
 	if (!str)
 		return (NULL);
 	if (check_scene_file(str) == 0)
 		return (NULL);
 	if ((is_number(str) == 1) && str[0] == '-')
 		return (NULL);
-	return (str);
+	ret = ft_strdup(str);
+	return (ret);
 }
 
 /**

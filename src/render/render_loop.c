@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 20:40:55 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 16:07:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,10 @@ t_loop	*loop_init(void)
 void	render(t_loop *loop)
 {
 	if (loop->opts->values->aa_samples > 1)
-		printf("\033[1;33mAntialiasing enabled with %d\
-			samples\033[0m\n", loop->opts->values->aa_samples);
-	if (loop->opts->opts_flags & OPT_MULTITHREAD
-		&& loop->opts->values->threads > 1)
+		printf("\033[1;33mAntialiasing enabled with %d samples\033[0m\n", loop->opts->values->aa_samples);
+	if (loop->opts->opts_flags & OPT_MULTITHREAD && loop->opts->values->threads > 1)
 	{
-		printf("\033[1;33mMultithreaded rendering enabled with %d\
-			 threads\033[0m\n", loop->opts->values->threads);
+		printf("\033[1;33mMultithreaded rendering enabled with %d threads\033[0m\n", loop->opts->values->threads);
 		render_multithreaded(loop);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:15:22 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 20:43:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:35:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,58 @@
 
 void	process_pixel_aa(t_world *world, t_pixel *px, int samples)
 {
-	int			i;
-	int			j;
-	t_color3	accumulated_color;
+	int			i, j;
+	t_color3	accumulated_color = new_color3(0, 0, 0);
 	t_color3	sample_color;
 	t_ray		*sample_ray[RECURSIVE_DEPTH + 1];
 	t_comp		*sample_comp[RECURSIVE_DEPTH + 1];
-	int			grid_size;
-	float		step_size;
-	float		half_step;
 
-	accumulated_color = new_color3(0, 0, 0);
+	// Allocate memory for sample rays and computation buffers
 	for (i = 0; i <= RECURSIVE_DEPTH; i++)
 	{
 		sample_ray[i] = malloc(sizeof(t_ray));
 		sample_comp[i] = malloc(sizeof(t_comp));
 	}
-	grid_size = sqrt(samples);
-	step_size = 1.0f / grid_size;
-	half_step = step_size / 2.0f;
+
+	// Grid size for stratified sampling
+	int grid_size = sqrt(samples);
+	float step_size = 1.0f / grid_size;
+	float half_step = step_size / 2.0f;  // Center samples inside each subpixel
+
 	for (i = 0; i < grid_size; i++)
 	{
 		for (j = 0; j < grid_size; j++)
 		{
+			// Sample points **deterministically** in a grid
 			float sample_x = px->x + (i * step_size) + half_step;
 			float sample_y = px->y + (j * step_size) + half_step;
+
+			// Reset ray and computation buffers
 			for (int k = 0; k <= RECURSIVE_DEPTH; k++)
 				ft_memset(sample_ray[k], 0, sizeof(t_ray));
+
+			// Cast ray for each sample
 			ray_for_pixel(world->camera, sample_x, sample_y, sample_ray[0]);
+
+			// Reset computation buffer for each depth level
 			for (int k = 0; k <= RECURSIVE_DEPTH; k++)
 				ft_memset(sample_comp[k], 0, sizeof(t_comp));
+
+			// Compute color for this sample
 			sample_color = color_at(world, sample_ray, sample_comp, RECURSIVE_DEPTH);
+
+			// Accumulate color for averaging
 			accumulated_color = add_tuple(accumulated_color, sample_color);
 		}
 	}
+
+	// Average the accumulated color over all samples
 	accumulated_color = mult_color_scalar(accumulated_color, 1.0f / samples);
+
+	// Convert to final integer color and assign to pixel
 	px->color = color_to_int(accumulated_color);
+
+	// Free allocated memory
 	for (i = 0; i <= RECURSIVE_DEPTH; i++)
 	{
 		free(sample_ray[i]);
@@ -57,16 +73,17 @@ void	process_pixel_aa(t_world *world, t_pixel *px, int samples)
 	}
 }
 
+
 void	process_pixel_color(t_world *world, t_ray **ray,
 	t_comp **comp, t_pixel *px)
 {
-	int			i;
-	t_color3	color;
+int			i;
+t_color3	color;
 
-	i = -1;
-	ray_for_pixel(world->camera, px->x, px->y, ray[0]);
-	while (++i < (RECURSIVE_DEPTH + 1))
-		ft_memset(comp[i], 0, sizeof(t_comp));
-	color = color_at(world, ray, comp, RECURSIVE_DEPTH);
-	px->color = color_to_int(color);
+i = -1;
+ray_for_pixel(world->camera, px->x, px->y, ray[0]);
+while (++i < (RECURSIVE_DEPTH + 1))
+ft_memset(comp[i], 0, sizeof(t_comp));
+color = color_at(world, ray, comp, RECURSIVE_DEPTH);
+px->color = color_to_int(color);
 }
