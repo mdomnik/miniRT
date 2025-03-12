@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2025/03/10 15:32:07 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:48:53 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@
 # include "materials.h"
 
 // Implementation headers
-# include "define/control.h"
 # include "define/debug.h"
 # include "define/groups.h"
 # include "define/initialize.h"
