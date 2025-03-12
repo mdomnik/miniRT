@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2025/03/12 12:48:53 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:51:03 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@
 # include "define/lighting.h"
 # include "define/matrix.h"
 # include "define/parse.h"
-# include "define/template_obj.h"
 # include "define/textures.h"
 # include "define/tuple.h"
 # include "define/view.h"

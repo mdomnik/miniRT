@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:58:12 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 12:31:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:54:21 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define MATERIALS_H
 
 # define PARAM_LIST "ambient:0-1,diffuse:0-1,specular:0-1,shininess:10-200,\
-reflection:0-1,transparency:0-1,refraction:1-3,bump_intensity:0-100,pattern:NULL,texture:NULL,bump_map:NULL"
+reflection:0-1,transparency:0-1,refraction:1-3,bump_intensity:0-100,\
+pattern:NULL,texture:NULL,bump_map:NULL"
 
 # define PREDETERMINED_PATTERNS "stripe,gradient,ring,checkers"
 
@@ -27,10 +28,10 @@ int		pattern_get_color(char *colors, t_pattern *pattern);
 int		pattern_get_transform(char *transforms, t_pattern *pattern);
 
 //mat_texture.c
-int	check_texture_args(char *str, t_material *mat, t_shape *shape);
+int		check_texture_args(char *str, t_material *mat, t_shape *shape);
 
 //mat_format.c
-int	get_material(char *str, t_material *mat, t_shape *shape);
+int		get_material(char *str, t_material *mat, t_shape *shape);
 
 //mat_format_utils.c
 int		validate_arg_chars(char *arg);

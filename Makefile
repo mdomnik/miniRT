@@ -127,10 +127,6 @@ SRC_FILES	+=	parse/rt/scene_file/file_utils.c
 SRC_FILES	+=	parse/rt/scene_file/create_obj.c
 SRC_FILES	+=	parse/rt/scene_file/check_objects.c
 
-# TEMPLATE_OBJ
-SRC_FILES	+=	template_obj/hexagon.c
-SRC_FILES	+=	template_obj/ice_cream.c
-
 # TEXTURES
 SRC_FILES	+=	textures/texture_init.c
 SRC_FILES	+=	textures/cube_obj.c

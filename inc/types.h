@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 12:15:52 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:57:22 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,18 +214,17 @@ typedef struct s_pixel
 {
 	float		x;
 	float		y;
-	int		color;
-	bool	computed;
+	int			color;
+	bool		computed;
 }	t_pixel;
-
 
 typedef struct s_thread_data
 {
-    t_loop  *loop;
-    t_world *world;
-    int     thread_id;
-    int     total_threads;
-}   t_thread_data;
+	t_loop	*loop;
+	t_world	*world;
+	int		thread_id;
+	int		total_threads;
+}	t_thread_data;
 
 typedef struct s_render_data
 {

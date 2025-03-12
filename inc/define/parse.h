@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:29:54 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/11 17:30:55 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:51:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ char		*skip_comments(FILE *file);
 //ppm/write_to_ppm.c
 t_canvas	*canvas_new(int width, int height);
 t_color3	pixel_at(t_canvas *canvas, int x, int y);
-void 		save_image(t_image *img, char *filename);
+void		save_image(t_image *img, char *filename);
+
 //rt/flags/check_value_format.c
 int			check_string_format(char *str);
 int			check_float_format(char *str);
@@ -42,8 +43,6 @@ int			value_containers(int value, t_options *options, char *str,
 int			process_flag(char *f_type, t_options *options, int value,
 				char **flag_join);
 int			create_option(t_options *options, int value, char **flag_junction);
-t_flags		*create_value_node(t_opts_type type, char *value_type, char *data);
-void		append_value_node(t_options *options, t_flags *new_value_node);
 
 //rt/flags/flag_formatting.c
 int			option_preferences(char **argv, t_options *options);
@@ -56,13 +55,6 @@ int			opt_binary_assignment(int value, t_options *options);
 char		*check_if_option(char *str);
 int			is_number(char *str);
 float		ft_atof(char *str);
-
-//rt/flags/handle_values.c
-int			handle_null_value(char *str);
-int			handle_string_value(t_flags *new_value_node, char *data);
-int			handle_float_value(t_flags *new_value_node, char *data);
-int			handle_vector_value(t_flags *new_value_node, char *data);
-void		set_vector_values(t_flags *new_value_node, char **vector);
 
 //rt/scene_file/append.c
 t_light		*append_light_list(t_light *list, t_light *new);
