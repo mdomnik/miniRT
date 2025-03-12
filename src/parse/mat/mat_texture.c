@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:29:18 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/11 23:27:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 01:55:29 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	set_texture(char *type, char *transform, t_material *mat, t_shape *s
 	if (open(join, O_RDONLY) == -1)
 		return ;
 	if (shape->type == SPHERE)
-		mat->pattern = texture_map(uv_image(canvas_from_ppm(join)), spherical_map);
+		mat->pattern = texture_map_sphere(uv_image(canvas_from_ppm(join)), spherical_map);
 	else if (shape->type == PLANE)
 		mat->pattern = texture_map(uv_image(canvas_from_ppm(join)), planar_map);
 	else if (shape->type == CYLINDER || shape->type == CONE || shape->type == HOURGLASS)
@@ -98,9 +98,7 @@ static void	set_texture(char *type, char *transform, t_material *mat, t_shape *s
 	}
 	pattern_get_transform(transform, mat->pattern);
 	if (shape->type == SPHERE)
-		mat->pattern->sphere_scale = 10.0f;
-	else
-		mat->pattern->sphere_scale = 1.0f;
+		mat->pattern->sphere_scale = mat->pattern->transform.a[0][0];
 	free(join);
 }
 
@@ -111,26 +109,21 @@ static void	set_bump_map(char *type, char *transform, t_material *mat, t_shape *
 	if (!transform)
 	return ;
 	join = ft_strjoin("bump_maps/", type);
-	printf("Bump map: %s\n", join);
 	if (open(join, O_RDONLY) == -1)
 		return ;
 	if (shape->type == SPHERE)
-		mat->bump_map = bump_map_from_ppm(join, 10, spherical_map);
+		mat->bump_map = bump_map_from_ppm_sphere(join, 100, spherical_map);
 	else if (shape->type == PLANE)
 		mat->bump_map = bump_map_from_ppm(join, 10, planar_map);
 	else if (shape->type == CYLINDER || shape->type == CONE || shape->type == HOURGLASS)
 		mat->bump_map = bump_map_from_ppm(join, 5, cylindrical_map);
-	else if (shape->type == CUBE)
+	else if (shape->type == CUBE || shape->type == GROUP)
 	{
-		// t_pattern	*side[6];
-		// i = 0;
-		// while (i < 6)
-		// {
-		// 	side[i] = texture_map(uv_image(canvas_from_ppm(join)), planar_map);
-		// 	i++;
-		// }
-		// mat->pattern = new_cube_map(side);
+		free(join);
+		return ;
 	}
 	bump_map_get_transform(transform, mat->bump_map);
+	if (shape->type == SPHERE)
+		mat->bump_map->sphere_scale = mat->bump_map->transform.a[0][0];
 	free(join);
 }

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:49:12 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 00:42:41 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 00:57:45 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,20 @@ t_color3	pattern_at_object(t_pattern *pattern,
 	object_space = multiply_matrix_tuple(inverse(shape->transform), *point);
 	pattern_space = multiply_matrix_tuple
 		(inverse(pattern->transform), object_space);
-	c = pattern_at(pattern, &pattern_space);
+	c = pattern_at(pattern, &pattern_space, shape);
 	return (c);
 }
 
-static t_color3	handle_texture_map(t_pattern *pattern, t_point3 *point)
+static t_color3	handle_texture_map(t_pattern *pattern, t_point3 *point, t_shape *shape)
 {
 	t_uv_val	uv;
 	t_color3	color;
 	t_uv		*uv_pattern;
 
-	uv = pattern->uv_map(*point);
+	if (shape->type == SPHERE)
+		uv = pattern->uv_map_sphere(*point, pattern->sphere_scale);
+	else
+		uv = pattern->uv_map(*point);
 	if (((t_pattern *)pattern->uv_pattern)->type == UV_IMAGE)
 	{
 		color = uv_pattern_at_image((t_pattern *)pattern->uv_pattern,
@@ -77,7 +80,7 @@ static t_color3	handle_texture_map(t_pattern *pattern, t_point3 *point)
 	return (new_color3(color.r, color.g, color.b));
 }
 
-t_color3	pattern_at(t_pattern *pattern, t_point3 *point)
+t_color3	pattern_at(t_pattern *pattern, t_point3 *point, t_shape *shape)
 {
 	t_uv_val			uv;
 	t_color3			color;
@@ -92,7 +95,7 @@ t_color3	pattern_at(t_pattern *pattern, t_point3 *point)
 	if (pattern->type == CHECKERS)
 		return (checkers_at(pattern, point));
 	if (pattern->type == TEXTURE_MAP)
-		return (handle_texture_map(pattern, point));
+		return (handle_texture_map(pattern, point, shape));
 	if (pattern->type == ALIGN_CHECK)
 	{
 		uv = pattern->uv_map(*point);

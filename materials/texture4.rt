@@ -14,10 +14,10 @@ transparency: 0.0
 refraction: 1.0
 # pattern (pattern_name {color_a | color_b} {scaling | rotation | translation})
 # (stripe, gradient, ring, checkers)
-pattern: 
+pattern: checkers {0,2,0|0,0,2} {1,1,1|0,0,0|0,0,0}
 # texture (texture_name, {scaling | rotation | translation})
-texture:
+texture:  soil.ppm {3,3,3|0,0,0|0,0,0}
 # bump_map (bump_map_name)
-bump_map:  stones.ppm {1,1,1|0,0,0|0,0,0}
+bump_map:  soil.ppm {3,3,3|0,0,0|0,0,0}
 # bump_intensity (0-1)
 bump_intensity: 1

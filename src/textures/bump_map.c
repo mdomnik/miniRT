@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 20:09:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/11 20:25:20 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 01:49:47 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,27 @@ t_bump_map	*bump_map_from_ppm(const char *filename,
 	bump_map->height_map = height_map;
 	bump_map->scale = scale;
 	bump_map->uv_map = uv_maps;
+	bump_map->transform = init_identity_matrix(4);
+	return (bump_map);
+}
+
+t_bump_map	*bump_map_from_ppm_sphere(const char *filename,
+	double scale, t_uv_val (*uv_maps)(t_point3, float))
+{
+	t_canvas	*height_map;
+	t_bump_map	*bump_map;
+
+	height_map = canvas_from_ppm(filename);
+	if (!height_map)
+	{
+		fprintf(stderr, "Error loading bump map: %s\n", filename);
+		exit(EXIT_FAILURE);
+	}
+	bump_map = malloc(sizeof(t_bump_map));
+	bump_map->height_map = height_map;
+	bump_map->scale = scale;
+	bump_map->uv_map_sphere = uv_maps;
+	bump_map->sphere_scale = 1.0f;
 	bump_map->transform = init_identity_matrix(4);
 	return (bump_map);
 }
@@ -72,7 +93,10 @@ t_vec3	perturb_normal(t_shape *shape, t_point3 *local_point,
 
 	t_point3 transformed_point = multiply_matrix_tuple(bump_map->transform, *local_point);
 
-	uv = bump_map->uv_map(transformed_point);
+	if (shape->type == SPHERE)
+		uv = bump_map->uv_map_sphere(transformed_point, bump_map->sphere_scale);
+	else
+		uv = bump_map->uv_map(transformed_point);
 	get_height_values(bump_map, uv, heights);
 
 	d[DU] = (heights[1] - heights[0]) * bump_map->scale;

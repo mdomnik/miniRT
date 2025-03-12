@@ -5,7 +5,7 @@ diffuse: 0.5
 # specular (0-1)
 specular: 0.9
 # shininess (10-200)
-shininess: 150
+shininess: 100
 # reflection (0-1)
 reflection: 0
 # transparency (0-1)
@@ -16,7 +16,7 @@ refraction: 1.0
 # (stripe, gradient, ring, checkers)
 pattern: checkers {0,2,0|0,0,2} {1,1,1|0,0,0|0,0,0}
 # texture (texture_name, {scaling | rotation | translation})
-texture: stones.ppm {2,2,2|0,0,0|0,0,0}
+texture:  stones.ppm {1,1,1|0,0,0|0,0,0}
 # bump_map (bump_map_name)
 bump_map:
 # bump_intensity (0-1)

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/11 23:10:15 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 00:57:55 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ struct s_pattern
 	t_pattern_type	type;
 	void			*uv_pattern;
 	t_uv_val		(*uv_map)(t_point3 point);
+	t_uv_val		(*uv_map_sphere)(t_point3 point, float scale);
 	float			sphere_scale;
 };
 
@@ -188,6 +189,7 @@ struct s_bump_map
 {
 	t_canvas	*height_map;
 	t_uv_val	(*uv_map)(t_point3 point);
+	t_uv_val	(*uv_map_sphere)(t_point3 point, float scale);
 	float		scale;
 	float		sphere_scale;
 	t_matrix	transform;
