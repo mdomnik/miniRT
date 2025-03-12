@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:39:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 13:23:03 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 22:18:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_canvas	*canvas_new(int width, int height)
 			canvas->pixels[i][j] = new_color3(0, 0, 0);
 		i++;
 	}
-	return (canvas);
+	return (canv);
 }
 
 void	save_image(t_image *img, char *filename)

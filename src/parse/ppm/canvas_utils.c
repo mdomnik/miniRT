@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 22:14:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 13:10:35 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 22:14:05 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ void	canvas_write_pixel(t_canvas *canvas, int x, int y, t_color3 color)
 	canvas->pixels[y][x] = color;
 }
 
-char	*skip_comments(int fd)
+char	*skip_comments(FILE *file)
 {
 	char	*line;
 	char	*ptr;
+	size_t	len;
 
-	line = gnl(fd);
-	while (line != NULL)
+	line = NULL;
+	len = 0;
+	while (getline(&line, &len, file) != -1)
 	{
 		ptr = line;
 		while (ft_isspace(*ptr))
@@ -36,7 +38,7 @@ char	*skip_comments(int fd)
 		if (*ptr == '\0' || *ptr == '#')
 		{
 			free(line);
-			line = gnl(fd);
+			line = NULL;
 			continue ;
 		}
 		return (line);

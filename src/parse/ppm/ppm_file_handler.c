@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:18:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 13:15:32 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 22:18:35 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,49 +62,49 @@ int	canvas_from_ppm_dimensions(t_canvas *canvas, char *line)
 
 t_canvas	*canvas_from_ppm(const char *filename)
 {
-	int			fd;
+	FILE		*file;
 	char		*line;
 	t_canvas	*canvas;
 	int			color_max;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	file = fopen(filename, "r");
+	if (!file)
 	{
-		ft_dprintf(2, "Error: %s\n", ERR_OPEN_FILE);
+		fprintf(stderr, "Error: %s\n", ERR_OPEN_FILE);
 		return (NULL);
 	}
-	line = skip_comments(fd);
+	line = skip_comments(file);
 	if (!line || check_ppm_magic_number(line) == -1)
 	{
-		ft_dprintf(2, "Error: %s\n", ERR_PPM_FORMAT);
+		fprintf(stderr, "Error: %s\n", ERR_PPM_FORMAT);
 		free(line);
-		close(fd);
+		fclose(file);
 		return (NULL);
 	}
 	free(line);
 	canvas = malloc(sizeof(t_canvas));
 	if (!canvas)
 	{
-		ft_dprintf(2, "Error: %s\n", ERR_MEMORY);
-		close(fd);
+		fprintf(stderr, "Error: %s\n", ERR_MEMORY);
+		fclose(file);
 		return (NULL);
 	}
-	line = skip_comments(fd);
+	line = skip_comments(file);
 	if (canvas_from_ppm_dimensions(canvas, line) != 0)
 	{
-		ft_dprintf(2, "Error: %s\n", ERR_PPM_FORMAT);
+		fprintf(stderr, "Error: %s\n", ERR_PPM_FORMAT);
 		free(line);
-		close(fd);
+		fclose(file);
 		return (NULL);
 	}
 	free(line);
-	line = skip_comments(fd);
-	color_max = ft_atoi(line);
+	line = skip_comments(file);
+	color_max = atoi(line);
 	free(line);
 	if (color_max > 255)
 	{
-		ft_dprintf(2, "Error: %s\n", ERR_COLOR_MAX);
-		close(fd);
+		fprintf(stderr, "Error: %s\n", ERR_COLOR_MAX);
+		fclose(file);
 		return (NULL);
 	}
 	canvas = canvas_new(canvas->width, canvas->height);
