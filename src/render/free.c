@@ -57,6 +57,26 @@ void	free_triple_ptr(char ***str)
 	free(str);
 }
 
+void free_canvas(t_canvas *canvas)
+{
+    int i;
+
+    if (!canvas)
+        return;
+
+    // Free each row of the pixels array
+    for (i = 0; i < canvas->height; i++)
+    {
+        free(canvas->pixels[i]);
+    }
+
+    // Free the pixels array itself
+    free(canvas->pixels);
+
+    // Free the canvas structure
+    free(canvas);
+}
+
 void	free_pattern(t_pattern *pattern, t_shape *shape)
 {
 	t_pattern	*pat;

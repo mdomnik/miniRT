@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:39:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 21:56:44 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 22:45:29 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,7 @@ t_canvas	*canvas_new(t_canvas *canv, int width, int height)
 			canv->pixels[i][j] = new_color3(0, 0, 0);
 		i++;
 	}
-	return (canvas);
-}
-
-static void	create_directory(const char *path)
-{
-	struct stat	st = {0};
-	if (stat(path, &st) == -1)
-		mkdir(path, 0700);
+	return (canv);
 }
 
 void	save_image(t_image *img, char *filename)

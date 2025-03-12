@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    #+#  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-04 18:53:17 by astavrop          #+#    #+#             */
-/*   Updated: 2025-03-04 18:53:17 by astavrop         ###   ########:w        */
+/*   Created: 2025/03/04 18:53:17 by astavrop          #+#    #+#             */
+/*   Updated: 2025/03/12 23:20:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,15 @@ char	*get_next(char *buffer)
 
 char	*gnl(int fd)
 {
-	static char		*buffer;
+	static char		*buffer[1024];
 	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-		return (free(buffer), NULL);
-	buffer = read_file(fd, buffer);
-	if (!buffer)
 		return (NULL);
-	line = get_line(buffer);
-	buffer = get_next(buffer);
+	buffer[fd] = read_file(fd, buffer[fd]);
+	if (!buffer[fd])
+		return (NULL);
+	line = get_line(buffer[fd]);
+	buffer[fd] = get_next(buffer[fd]);
 	return (line);
 }

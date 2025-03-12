@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:30:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 18:36:20 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 23:13:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 # define ERR_SPLIT "Error: Failed to split string"
 
 //IMAGE
-# define ERR_PPM_FORMAT "Error: Invalid PPM format"
+# define ERR_PPM_FORMAT "Invalid PPM format"
 # define ERR_MEMORY "Error: Could not allocate memory for canvas"
 # define ERR_WRITE_PIXEL "Error: Attempted to write pixel outside of\
 	canvas bounds"
