@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:26:20 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/11 19:03:38 by astavrop         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:47:37 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ int	key_hook(int keycode, void *param)
 	return (0);
 }
 
+int	close_window(void *param)
+{
+	(void)param;
+	exit(0);
+	return (0);
+}
+
 int	main(int ac, char *av[])
 {
 	t_loop	*loop;
@@ -44,10 +51,9 @@ int	main(int ac, char *av[])
 		return (key_hook(65307, loop), -1);
 	render(loop);
 	printf("\033[1;33mSuccessfully rendered '\033[1;37m%s\033[1;33m'\033[0m\n", loop->opts->scene.scene_file);
-
-	// key_hook(65307, loop);
 	mlx_hook(loop->win, 17, 1L << 17, key_hook, loop);
 	mlx_key_hook(loop->win, key_hook, loop);
+	mlx_hook(loop->win, 17, 0, close_window, NULL);
 	mlx_loop(loop->mlx);
 	return (0);
 }
