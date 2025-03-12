@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:49:12 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 00:57:45 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 20:25:08 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ t_color3	pattern_at_object(t_pattern *pattern,
 	return (c);
 }
 
-static t_color3	handle_texture_map(t_pattern *pattern, t_point3 *point, t_shape *shape)
+static t_color3	handle_texture_map(t_pattern *pattern,
+		t_point3 *point, t_shape *shape)
 {
 	t_uv_val	uv;
 	t_color3	color;

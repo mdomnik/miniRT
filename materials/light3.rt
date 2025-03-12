@@ -14,10 +14,10 @@ transparency: 0.0
 refraction: 1.0
 # bump_intensity (0-1)
 bump_intensity: 20
+# texture (texture_name, {scaling | rotation | translation})
+texture:
 # pattern (pattern_name {color_a | color_b} {scaling | rotation | translation})
 # (stripe, gradient, ring, checkers)
 pattern:
-# texture (texture_name, {scaling | rotation | translation})
-texture:
 # bump_map (bump_map_name)
 bump_map:

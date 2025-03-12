@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 23:56:53 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/10 13:09:34 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 20:06:56 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ int	color_to_int(t_color3 color)
 		| (int)(color.b * 255));
 }
 
-t_color3 int_to_color(int color)
+t_color3	int_to_color(int color)
 {
-	t_color3 result;
+	t_color3	result;
 
 	result.r = (color >> 16) & 0xFF;
 	result.g = (color >> 8) & 0xFF;

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:16:45 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 16:18:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 20:32:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	render_single(t_loop *loop)
 
 	world = malloc(sizeof(t_world));
 	if (!world)
-		return;
+		return ;
 	world->camera = NULL;
 	world->light = NULL;
 	world->shapes = NULL;
@@ -66,7 +66,6 @@ void	render_single(t_loop *loop)
 				}
 				else
 					process_pixel_color(world, ray, comp, &px);
-			
 				computed_buffer[(int)px.y][(int)px.x] = true;
 				put_pixel_to_img(loop->img, (int)px.x, (int)px.y, px.color);
 			}
@@ -74,14 +73,11 @@ void	render_single(t_loop *loop)
 				mlx_put_image_to_window(loop->mlx, loop->win, loop->img->img, 0, 0);
 		}
 	}
-
 	mlx_put_image_to_window(loop->mlx, loop->win, loop->img->img, 0, 0);
-
 	free(pixel_order);
 	for (i = 0; i < world->camera->vsize; i++)
 		free(computed_buffer[i]);
 	free(computed_buffer);
-
 	for (i = 0; i <= RECURSIVE_DEPTH; i++)
 	{
 		free(ray[i]);

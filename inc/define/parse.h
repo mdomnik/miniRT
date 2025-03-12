@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:29:54 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 12:51:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 19:33:21 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_obj_file	*parse_obj_file(const char *filename);
 void		canvas_from_ppm_pixels(int fd, t_canvas *canvas, int color_max);
 int			check_ppm_magic_number(char *line);
 int			canvas_from_ppm_dimensions(t_canvas *canvas, char *line);
+void		free_canvas(t_canvas *canvas);
 t_canvas	*canvas_from_ppm(const char *filename);
 // t_canvas	*process_ppm_header(FILE *file, int *color_max);
 
@@ -28,7 +29,7 @@ void		canvas_write_pixel(t_canvas *canvas, int x, int y, t_color3 color);
 char		*skip_comments(int fd);
 
 //ppm/write_to_ppm.c
-t_canvas	*canvas_new(int width, int height);
+t_canvas	*canvas_new(t_canvas *canv, int width, int height);
 t_color3	pixel_at(t_canvas *canvas, int x, int y);
 void		save_image(t_image *img, char *filename);
 

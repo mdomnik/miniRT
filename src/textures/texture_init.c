@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:25:57 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 00:58:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 20:25:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ t_pattern	*texture_map(void *uv_pattern, t_uv_val (*uv_map)(t_point3))
 	pattern->sphere_scale = 1.0f;
 	return (pattern);
 }
-t_pattern	*texture_map_sphere(void *uv_pattern, t_uv_val (*uv_map)(t_point3, float))
+
+t_pattern	*texture_map_sphere(void *uv_pattern,
+		t_uv_val (*uv_map)(t_point3, float))
 {
 	t_pattern	*pattern;
 

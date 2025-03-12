@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:18:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 13:15:32 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 21:56:24 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,22 @@ int	canvas_from_ppm_dimensions(t_canvas *canvas, char *line)
 	return (0);
 }
 
+void	free_canvas(t_canvas *canvas)
+{
+	int	i;
+
+	if (!canvas)
+		return ;
+	for (i = 0; i < canvas->height; i++)
+	{
+		if (canvas->pixels[i])
+			free(canvas->pixels[i]);
+	}
+	if (canvas->pixels)
+		free(canvas->pixels);
+	free(canvas);
+}
+
 t_canvas	*canvas_from_ppm(const char *filename)
 {
 	int			fd;
@@ -107,8 +123,8 @@ t_canvas	*canvas_from_ppm(const char *filename)
 		close(fd);
 		return (NULL);
 	}
-	canvas = canvas_new(canvas->width, canvas->height);
-	canvas_from_ppm_pixels(fd, canvas, color_max);
-	close(fd);
+	canvas = canvas_new(canvas, canvas->width, canvas->height);
+	canvas_from_ppm_pixels(file, canvas, color_max);
+	fclose(file);
 	return (canvas);
 }

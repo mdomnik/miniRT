@@ -20,7 +20,7 @@ static void	free_shapes(t_shape *shape)
 	while (shape)
 	{
 		temp = shape->next;
-		free_pattern(shape->material.pattern);
+		free_pattern(shape->material.pattern, shape);
 		if (shape->triangle)
 			free(shape->triangle);
 		if (shape->children)
@@ -57,14 +57,43 @@ void	free_triple_ptr(char ***str)
 	free(str);
 }
 
-void	free_pattern(t_pattern *pattern)
+void	free_pattern(t_pattern *pattern, t_shape *shape)
 {
+	t_pattern	*pat;
+	t_uv_image	*uv_img;
+	t_cube_map	*cube_map;
+	t_canvas	*canvas;
+
 	if (!pattern)
 		return ;
-	if (pattern->type == UV_IMAGE)
+	if (shape->type != CUBE && shape->type != SKYBOX)
 	{
-		free(((t_uv_image*)pattern->uv_pattern)->canvas);
-		free(pattern->uv_pattern);
+		pat = (t_pattern *)pattern->uv_pattern;
+		uv_img = (t_uv_image *)pat->uv_pattern;
+		if (uv_img && uv_img->canvas)
+		{
+			canvas = uv_img->canvas;
+			free_canvas(canvas);
+		}
+		if (uv_img)
+			free(uv_img);
+		if (pat)
+			free(pat);
+	}
+	else
+	{
+		pat = (t_pattern *)pattern->uv_pattern;
+		t_pattern *p = pat->uv_pattern;
+		uv_img = (t_uv_image *)p->uv_pattern;
+		cube_map = (t_cube_map *)uv_img->canvas;
+		if (cube_map)
+		{
+				for (int i = 0; i < 6; i++)
+				{
+					free_pattern(cube_map->faces[i], shape);
+				}
+				free(cube_map);
+		}
 	}
 	free(pattern);
 }

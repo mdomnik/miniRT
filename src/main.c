@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:26:20 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 16:43:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 20:03:24 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,14 @@ int	close_window(void *param)
 	return (0);
 }
 
+void	free_dependencies(t_loop *loop)
+{
+	free_triple_ptr(loop->opts->scene.scene_objects);
+	free(loop->opts->values);
+	free(loop->opts->scene.scene_file);
+	free(loop->opts);
+}
+
 int	main(int ac, char *av[])
 {
 	t_loop	*loop;
@@ -52,14 +60,12 @@ int	main(int ac, char *av[])
 	if (check_args(ac, av, loop->opts) == 1)
 		return (key_hook(65307, loop), -1);
 	render(loop);
-	ft_dprintf(1, "\033[1;33mSuccessfully rendered '\033[1;37m%s\033[1;33m'\033[0m\n", loop->opts->scene.scene_file);
-	free_triple_ptr(loop->opts->scene.scene_objects);
-	free(loop->opts->values);
-	free(loop->opts->scene.scene_file);
-	free(loop->opts);
+	ft_dprintf(1, "\033[1;33mSuccessfully rendered\
+			 '\033[1;37m%s\033[1;33m'\033[0m\n", loop->opts->scene.scene_file);
+	free_dependencies(loop);
 	mlx_hook(loop->win, 17, 1L << 17, key_hook, loop);
 	mlx_key_hook(loop->win, key_hook, loop);
-	mlx_hook(loop->win, 17, 1L<<17, close_window, NULL);
+	mlx_hook(loop->win, 17, 1L << 17, close_window, NULL);
 	mlx_loop(loop->mlx);
 	return (0);
 }
