@@ -22,7 +22,7 @@ static int	parse_color(char *color_str, t_color3 *color)
 	if (!rgb[0] || !rgb[1] || !rgb[2])
 		status = -1;
 	else
-		*color = new_color3(ft_atof(rgb[0]), ft_atof(rgb[1]), ft_atof(rgb[2]));
+		*color = new_color3(ft_atof_mrt(rgb[0]), ft_atof_mrt(rgb[1]), ft_atof_mrt(rgb[2]));
 	free_double(rgb);
 	return (status);
 }
@@ -61,17 +61,17 @@ static int	apply_transform(char **transform_str, t_pattern *pattern)
 	transform = init_identity_matrix(4);
 	scale = ft_split(transform_str[0], ',');
 	transform = multiply_matrices(transform,
-			scaling(ft_atof(scale[0]), ft_atof(scale[1]), ft_atof(scale[2])));
+			scaling(ft_atof_mrt(scale[0]), ft_atof_mrt(scale[1]), ft_atof_mrt(scale[2])));
 	free_double(scale);
 	rotate = ft_split(transform_str[1], ',');
-	transform = multiply_matrices(transform, rotation_x(ft_atof(rotate[0])));
-	transform = multiply_matrices(transform, rotation_y(ft_atof(rotate[1])));
-	transform = multiply_matrices(transform, rotation_z(ft_atof(rotate[2])));
+	transform = multiply_matrices(transform, rotation_x(ft_atof_mrt(rotate[0])));
+	transform = multiply_matrices(transform, rotation_y(ft_atof_mrt(rotate[1])));
+	transform = multiply_matrices(transform, rotation_z(ft_atof_mrt(rotate[2])));
 	free_double(rotate);
 	translate = ft_split(transform_str[2], ',');
 	transform = multiply_matrices(transform,
-			translation(ft_atof(translate[0]), ft_atof(translate[1]),
-				ft_atof(translate[2])));
+			translation(ft_atof_mrt(translate[0]), ft_atof_mrt(translate[1]),
+				ft_atof_mrt(translate[2])));
 	free_double(translate);
 	set_pattern_transform(pattern, transform);
 	return (0);

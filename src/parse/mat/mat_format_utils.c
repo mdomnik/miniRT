@@ -32,7 +32,7 @@ int	check_value_bound(char *param, char *arg)
 	i = validate_arg_chars(arg);
 	if (i == 2)
 		return (2);
-	value = ft_atof(arg);
+	value = ft_atof_mrt(arg);
 	i = 0;
 	if (parse_param_value(param, &i) == -1)
 		return (-1);
@@ -82,8 +82,8 @@ static int	parse_limit_values(char *limits, float *min, float *max)
 		status = -1;
 	else
 	{
-		*min = ft_atof(values[0]);
-		*max = ft_atof(values[1]);
+		*min = ft_atof_mrt(values[0]);
+		*max = ft_atof_mrt(values[1]);
 		if (*min > *max)
 			status = -1;
 	}

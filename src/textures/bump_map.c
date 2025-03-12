@@ -21,7 +21,7 @@ t_bump_map	*bump_map_from_ppm(const char *filename,
 	height_map = canvas_from_ppm(filename);
 	if (!height_map)
 	{
-		fprintf(stderr, "Error loading bump map: %s\n", filename);
+		 ft_dprintf(2, "Error loading bump map: %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
 	bump_map = malloc(sizeof(t_bump_map));
@@ -41,7 +41,7 @@ t_bump_map	*bump_map_from_ppm_sphere(const char *filename,
 	height_map = canvas_from_ppm(filename);
 	if (!height_map)
 	{
-		fprintf(stderr, "Error loading bump map: %s\n", filename);
+		 ft_dprintf(2, "Error loading bump map: %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
 	bump_map = malloc(sizeof(t_bump_map));
@@ -117,17 +117,17 @@ static int	apply_transform(char **transform_str, t_bump_map *bump_map)
 	transform = init_identity_matrix(4);
 	scale = ft_split(transform_str[0], ',');
 	transform = multiply_matrices(transform,
-			scaling(ft_atof(scale[0]), ft_atof(scale[1]), ft_atof(scale[2])));
+			scaling(ft_atof_mrt(scale[0]), ft_atof_mrt(scale[1]), ft_atof_mrt(scale[2])));
 	free_double(scale);
 	rotate = ft_split(transform_str[1], ',');
-	transform = multiply_matrices(transform, rotation_x(ft_atof(rotate[0])));
-	transform = multiply_matrices(transform, rotation_y(ft_atof(rotate[1])));
-	transform = multiply_matrices(transform, rotation_z(ft_atof(rotate[2])));
+	transform = multiply_matrices(transform, rotation_x(ft_atof_mrt(rotate[0])));
+	transform = multiply_matrices(transform, rotation_y(ft_atof_mrt(rotate[1])));
+	transform = multiply_matrices(transform, rotation_z(ft_atof_mrt(rotate[2])));
 	free_double(rotate);
 	translate = ft_split(transform_str[2], ',');
 	transform = multiply_matrices(transform,
-			translation(ft_atof(translate[0]), ft_atof(translate[1]),
-				ft_atof(translate[2])));
+			translation(ft_atof_mrt(translate[0]), ft_atof_mrt(translate[1]),
+				ft_atof_mrt(translate[2])));
 	free_double(translate);
 	bump_map->transform = transform;
 	return (0);

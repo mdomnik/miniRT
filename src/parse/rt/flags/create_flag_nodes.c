@@ -64,7 +64,7 @@ int	value_containers(int value, t_options *options, char *str, char *flag)
  * If the flag type matches a given type, it calls the create_option function.
  * If the flag type is "NULL", it calls the handle_null_value function.
  * The following process will check if the argument for a flag is valid, if not,
- * it will print an error message to stderr and return -1.
+ * it will print an error message to 2 and return -1.
  * 
  * @param f_type The type of the flag.
  * @param options The options structure to update.
@@ -90,7 +90,7 @@ int	process_flag(char *f_type, t_options *options, int value, char **flag_join)
  * This function checks if the flag's argument is valid against its
  * relevant flag type. If the flag's argument is valid, it creates a new
  * t_value node and appends it to the back of the options->values linked list.
- * if the flag's argument is invalid, it prints an error message to stderr
+ * if the flag's argument is invalid, it prints an error message to 2
  * and returns -1.
  * 
  * @param options The options list to add the new node to.
@@ -103,24 +103,24 @@ int	create_option(t_options *options, int value, char **flag_join)
 	char	*arg;
 
 	arg = check_if_option(flag_join[2]);
-	if (value == 0)
+	if (arg == NULL)
+	{
+		ft_dprintf(2, "Error: Option '%s' %s\n", flag_join[0], ERR_REQ_ARG);
+		return (-1);
+	}
+	else if (value == 0)
 		options->values->filename = ft_strdup(arg);
-	if (value == 1)
+	else if (value == 1)
 	{
 		options->values->aa_samples = 0;
 		if (ft_atoi(arg) > 0)
 			options->values->aa_samples = ft_atoi(arg);
 	}
-	if (value == 2)
+	else if (value == 2)
 	{
 		options->values->threads = 0;
 		if (ft_atoi(arg) > 0)
 			options->values->threads = ft_atoi(arg);
-	}
-	else if (arg == NULL)
-	{
-		ft_dprintf(2, "Error: Option '%s' %s\n", flag_join[0], ERR_REQ_ARG);
-		return (-1);
 	}
 	return (0);
 }

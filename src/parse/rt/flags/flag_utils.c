@@ -73,7 +73,7 @@ int	is_number(char *str)
  * @param str The string to be converted.
  * @return The converted float value.
  */
-float	ft_atof(char *str)
+float	ft_atof_mrt(char *str)
 {
 	int		i;
 	float	result;

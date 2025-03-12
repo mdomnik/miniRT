@@ -18,8 +18,8 @@ static void	set_sphere_transform(t_shape *sp, char **coords, float radius)
 
 	transform = init_identity_matrix(4);
 	transform = multiply_matrices(
-			translation(ft_atof(coords[0]), ft_atof(coords[1]),
-				ft_atof(coords[2])),
+			translation(ft_atof_mrt(coords[0]), ft_atof_mrt(coords[1]),
+				ft_atof_mrt(coords[2])),
 			scaling(radius, radius, radius));
 	set_transform(sp, transform);
 }
@@ -56,12 +56,12 @@ int	create_sphere(t_world *world, char **args)
 	sp = sphere();
 	coords = ft_split(args[1], ',');
 	color = ft_split(args[3], ',');
-	radius = ft_atof(args[2]) / 2.0;
+	radius = ft_atof_mrt(args[2]) / 2.0;
 	set_sphere_transform(sp, coords, radius);
 	if (args[4])
 		get_material(args[4], &sp->material, sp);
-	sp->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
-			ft_atof(color[2]));
+	sp->material.color = new_color3(ft_atof_mrt(color[0]), ft_atof_mrt(color[1]),
+			ft_atof_mrt(color[2]));
 	sp->material.color = div_color(sp->material.color);
 	set_sphere_pattern(sp);
 	add_shape(&world->shapes, sp);
@@ -76,14 +76,14 @@ static void	set_plane_transform(t_shape *pl, char **coords, char **normal)
 
 	transform = init_identity_matrix(4);
 	transform = multiply_matrices(transform,
-			translation(ft_atof(coords[0]), ft_atof(coords[1]),
-				ft_atof(coords[2])));
+			translation(ft_atof_mrt(coords[0]), ft_atof_mrt(coords[1]),
+				ft_atof_mrt(coords[2])));
 	transform = multiply_matrices(transform,
-			rotation_x(deg_to_rad(ft_atof(normal[0]) * 180)));
+			rotation_x(deg_to_rad(ft_atof_mrt(normal[0]) * 180)));
 	transform = multiply_matrices(transform,
-			rotation_y(deg_to_rad(ft_atof(normal[1]) * 180)));
+			rotation_y(deg_to_rad(ft_atof_mrt(normal[1]) * 180)));
 	transform = multiply_matrices(transform,
-			rotation_z(deg_to_rad(ft_atof(normal[2]) * 180)));
+			rotation_z(deg_to_rad(ft_atof_mrt(normal[2]) * 180)));
 	set_transform(pl, transform);
 }
 
@@ -109,8 +109,8 @@ int	create_plane(t_world *world, char **args)
 	set_plane_transform(pl, coords, normal);
 	if (args[4])
 		get_material(args[4], &pl->material, pl);
-	pl->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
-			ft_atof(color[2]));
+	pl->material.color = new_color3(ft_atof_mrt(color[0]), ft_atof_mrt(color[1]),
+			ft_atof_mrt(color[2]));
 	pl->material.color = div_color(pl->material.color);
 	add_shape(&world->shapes, pl);
 	free_double(color);

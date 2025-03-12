@@ -61,13 +61,13 @@ int	check_args(int argc, char **argv, t_options *options)
 		return (free_options(options), 1);
 	if (get_scene_data(options) == -1)
 	{
-		fprintf(stderr, "Error: Failed to load scene data\n");
+		 ft_dprintf(2, "Error: Failed to load scene data\n");
 		free_options(options);
 		return (1);
 	}
 	if (check_scene_data(options) == -1)
 	{
-		fprintf(stderr, "Error: Invalid scene data\n");
+		 ft_dprintf(2, "Error: Invalid scene data\n");
 		free_options(options);
 		return (1);
 	}

@@ -12,31 +12,23 @@
 
 #include "mrt.h"
 
-int	ft_isspace(int c)
-{
-	return (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r');
-}
-
 void	canvas_write_pixel(t_canvas *canvas, int x, int y, t_color3 color)
 {
 	if (x < 0 || x >= canvas->width || y < 0 || y >= canvas->height)
 	{
-		fprintf(stderr, "Error: %s\n", ERR_WRITE_PIXEL);
+		 ft_dprintf(2, "Error: %s\n", ERR_WRITE_PIXEL);
 		exit(EXIT_FAILURE);
 	}
 	canvas->pixels[y][x] = color;
 }
 
-char	*skip_comments(FILE *file)
+char	*skip_comments(int fd)
 {
 	char	*line;
 	char	*ptr;
-	size_t	len;
 
-	line = NULL;
-	len = 0;
-	while (getline(&line, &len, file) != -1)
+	line = gnl(fd);
+	while (line != NULL)
 	{
 		ptr = line;
 		while (ft_isspace(*ptr))
@@ -44,7 +36,7 @@ char	*skip_comments(FILE *file)
 		if (*ptr == '\0' || *ptr == '#')
 		{
 			free(line);
-			line = NULL;
+			line = gnl(fd);
 			continue ;
 		}
 		return (line);

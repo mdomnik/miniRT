@@ -12,77 +12,74 @@
 
 #include "mrt.h"
 
-static int	ft_isspace(int c)
+static void	get_rgb_values(char *ptr, int *r, int *g, int *b, int *read_count)
 {
-	return (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r');
+	while (ft_isspace(*ptr))
+		ptr++;
+	*r = ft_atoi(ptr);
+	while (*ptr && !ft_isspace(*ptr))
+		ptr++;
+	while (ft_isspace(*ptr))
+		ptr++;
+	*g = ft_atoi(ptr);
+	while (*ptr && !ft_isspace(*ptr))
+		ptr++;
+	while (ft_isspace(*ptr))
+		ptr++;
+	*b = ft_atoi(ptr);
+	*read_count = (*r >= 0 && *g >= 0 && *b >= 0) ? 3 : 0;
 }
 
-void	canvas_from_ppm_pixels(FILE *file, t_canvas *canvas, int color_max)
+void	canvas_from_ppm_pixels(int fd, t_canvas *canvas, int color_max)
 {
 	char		*line;
-	size_t		len;
-	ssize_t		read;
 	float		scale_factor;
-	int			x;
-	int			y;
-	int			r;
-	int			g;
-	int			b;
+	int			v[6];
 	char		*ptr;
-	int			read_count;
 	t_color3	color;
 
-	line = NULL;
-	len = 0;
+	line = gnl(fd);
 	scale_factor = 1.0f / color_max;
-	x = 0;
-	y = 0;
-	r = -1;
-	g = -1;
-	b = -1;
-	while ((read = getline(&line, &len, file)) != -1)
+	v[0] = 0;  // x
+	v[1] = 0;  // y
+	v[2] = -1; // r
+	v[3] = -1; // g
+	v[4] = -1; // b
+	while (line != NULL)
 	{
 		ptr = line;
 		while (*ptr)
 		{
-			while (ft_isspace(*ptr))
-				ptr++;
-			read_count = sscanf(ptr, "%d %d %d", &r, &g, &b);
-			if (read_count == 3)
+			get_rgb_values(ptr, &v[2], &v[3], &v[4], &v[5]);
+			if (v[5] == 3)
 			{
-				color = new_color3(
-						r * scale_factor,
-						g * scale_factor,
-						b * scale_factor
-						);
-				canvas_write_pixel(canvas, x, y, color);
-				x++;
-				if (x >= canvas->width)
+				color = new_color3(v[2] * scale_factor,
+						v[3] * scale_factor, v[4] * scale_factor);
+				canvas_write_pixel(canvas, v[0], v[1], color);
+				v[0]++;
+				if (v[0] >= canvas->width)
 				{
-					x = 0;
-					y++;
-					if (y >= canvas->height)
+					v[0] = 0;
+					v[1]++;
+					if (v[1] >= canvas->height)
 						break ;
 				}
-				ptr = strchr(ptr, ' ');
-				if (ptr)
-					ptr = strchr(ptr + 1, ' ');
-				if (ptr)
-					ptr = strchr(ptr + 1, ' ');
+				while (*ptr && !ft_isspace(*ptr))
+					ptr++;
 			}
 			else
 				break ;
 		}
 		free(line);
 		line = NULL;
-		if (y >= canvas->height)
+		if (v[1] >= canvas->height)
 			break ;
+		line = gnl(fd);
 	}
 	free(line);
-	if (r == -1 || g == -1 || b == -1)
+	if (v[2] == -1 || v[3] == -1 || v[4] == -1)
 	{
-		fprintf(stderr, "Error: %s\n", ERR_INCOMPLETE_RGB);
+		ft_dprintf(2, "Error: %s\n", ERR_INCOMPLETE_RGB);
 		exit(EXIT_FAILURE);
 	}
 }

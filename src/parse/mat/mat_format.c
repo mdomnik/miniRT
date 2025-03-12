@@ -90,7 +90,7 @@ static int	check_mat_args(char *str, t_material *mat, char **params)
 	if (params[i] == NULL || check_value_bound(params[i], args[1]) == -1)
 		return (free_double(args), -1);
 	else if (check_value_bound(params[i], args[1]) == 0)
-		allocate_mat(args[0], ft_atof(args[1]), mat);
+		allocate_mat(args[0], ft_atof_mrt(args[1]), mat);
 	free_double(args);
 	return (0);
 }
@@ -103,7 +103,7 @@ static int	check_value_bound(char *param, char *arg)
 	i = validate_arg_chars(arg);
 	if (i == 2)
 		return (2);
-	value = ft_atof(arg);
+	value = ft_atof_mrt(arg);
 	i = 0;
 	while (param[i] != ':' && param[i] != '\0')
 		i++;

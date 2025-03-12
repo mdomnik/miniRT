@@ -115,7 +115,7 @@ int	check_ratio_format(char *str, int min, int max)
 		i++;
 	}
 	i = 0;
-	if (ft_atof(str) < min || ft_atof(str) > max)
+	if (ft_atof_mrt(str) < min || ft_atof_mrt(str) > max)
 		return (ret_message(ERR_RANGE, str));
 	return (0);
 }

@@ -20,9 +20,9 @@ int	create_ambient(t_options *options, char **args)
 
 	(void)options;
 	colors = ft_split(args[2], ',');
-	ambient = ft_atof(args[1]);
-	color = new_tuple(ft_atof(colors[0]), ft_atof(colors[1]),
-			ft_atof(colors[2]), 1);
+	ambient = ft_atof_mrt(args[1]);
+	color = new_tuple(ft_atof_mrt(colors[0]), ft_atof_mrt(colors[1]),
+			ft_atof_mrt(colors[2]), 1);
 	current_ambient('s', ambient);
 	global_color('s', color);
 	free_double(colors);
@@ -36,13 +36,13 @@ int	create_camera(t_camera **camera, char **args)
 	char		**coords;
 	char		**vector;
 
-	(*camera) = camera_new(DEFAULT_WIDTH, DEFAULT_HEIGHT, ft_atof(args[3]));
+	(*camera) = camera_new(DEFAULT_WIDTH, DEFAULT_HEIGHT, ft_atof_mrt(args[3]));
 	coords = ft_split(args[1], ',');
-	pos = new_point3(ft_atof(coords[0]), ft_atof(coords[1]),
-			ft_atof(coords[2]));
+	pos = new_point3(ft_atof_mrt(coords[0]), ft_atof_mrt(coords[1]),
+			ft_atof_mrt(coords[2]));
 	vector = ft_split(args[2], ',');
-	orientation = new_vec3(ft_atof(vector[0]), ft_atof(vector[1]),
-			ft_atof(vector[2]));
+	orientation = new_vec3(ft_atof_mrt(vector[0]), ft_atof_mrt(vector[1]),
+			ft_atof_mrt(vector[2]));
 	(*camera)->transform = view_transformation(pos, orientation);
 	free_double(coords);
 	free_double(vector);
@@ -59,12 +59,12 @@ int	create_light(t_light_p **lights, char **args)
 	coords = ft_split(args[1], ',');
 	colors = ft_split(args[3], ',');
 	light = malloc(sizeof(t_light_p));
-	light->position = new_point3(ft_atof(coords[0]), ft_atof(coords[1]),
-			ft_atof(coords[2]));
-	light->intensity = new_tuple(ft_atof(colors[0]), ft_atof(colors[1]),
-			ft_atof(colors[2]), 1);
+	light->position = new_point3(ft_atof_mrt(coords[0]), ft_atof_mrt(coords[1]),
+			ft_atof_mrt(coords[2]));
+	light->intensity = new_tuple(ft_atof_mrt(colors[0]), ft_atof_mrt(colors[1]),
+			ft_atof_mrt(colors[2]), 1);
 	light->intensity = normalize(light->intensity);
-	brightness = ft_atof(args[2]);
+	brightness = ft_atof_mrt(args[2]);
 	light->intensity = mult_color_scalar(light->intensity, brightness);
 	light->next = NULL;
 	add_light(lights, light);

@@ -17,7 +17,7 @@
 t_obj_file	*parse_obj_file(const char *filename);
 
 //ppm/canvas_from_ppm.c
-void		canvas_from_ppm_pixels(FILE *file, t_canvas *canvas, int color_max);
+void		canvas_from_ppm_pixels(int fd, t_canvas *canvas, int color_max);
 int			check_ppm_magic_number(char *line);
 int			canvas_from_ppm_dimensions(t_canvas *canvas, char *line);
 t_canvas	*canvas_from_ppm(const char *filename);
@@ -25,12 +25,15 @@ t_canvas	*canvas_from_ppm(const char *filename);
 
 //ppm/canvas_utils.c
 void		canvas_write_pixel(t_canvas *canvas, int x, int y, t_color3 color);
-char		*skip_comments(FILE *file);
+char		*skip_comments(int fd);
 
 //ppm/write_to_ppm.c
 t_canvas	*canvas_new(int width, int height);
 t_color3	pixel_at(t_canvas *canvas, int x, int y);
 void		save_image(t_image *img, char *filename);
+
+//ppm/ppm_file_handler.c
+int			ft_isspace(int c);
 
 //rt/flags/check_value_format.c
 int			check_string_format(char *str);
@@ -54,7 +57,7 @@ int			opt_binary_assignment(int value, t_options *options);
 //rt/flags/flag_utils.c
 char		*check_if_option(char *str);
 int			is_number(char *str);
-float		ft_atof(char *str);
+float		ft_atof_mrt(char *str);
 
 //rt/scene_file/append.c
 t_light		*append_light_list(t_light *list, t_light *new);

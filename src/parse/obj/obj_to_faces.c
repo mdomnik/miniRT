@@ -12,18 +12,12 @@
 
 #include "mrt.h"
 
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r');
-}
-
 static t_group	*create_group(const char *name)
 {
 	t_group	*g;
 
 	g = malloc(sizeof(t_group));
-	g->name = strdup(name);
+	g->name = ft_strdup(name);
 	g->group = group();
 	g->next = NULL;
 	return (g);
@@ -63,7 +57,7 @@ static void	fan_triangulation(t_group *group, t_obj_file *obj_file,
 
 	if (count < 3)
 	{
-		fprintf(stderr, "Face has fewer than 3 vertices, skipping\n");
+		ft_dprintf(2, "Face has fewer than 3 vertices, skipping\n");
 		return ;
 	}
 	i = 0;
@@ -82,92 +76,119 @@ static void	fan_triangulation(t_group *group, t_obj_file *obj_file,
 			add_triangle_to_group(group, &triangle);
 		}
 		else
-			fprintf(stderr, "Face references out-of-bounds vertex indices\n");
+			ft_dprintf(2, "Face references out-of-bounds vertex indices\n");
 		i++;
 	}
 }
 
-t_obj_file	*parse_obj_file(const char *filename)
+static void	parse_vertex_line(t_obj_file *obj_file, char *line)
+{
+	char	**tokens;
+	float	coords[3];
+
+	if (obj_file->vertex_count >= MAX_VERTEX_COUNT)
+	{
+		ft_dprintf(2, "Exceeded maximum vertex count: %d\n", MAX_VERTEX_COUNT);
+		return ;
+	}
+	tokens = ft_split(line + 2, ' ');
+	if (!tokens || !tokens[0] || !tokens[1] || !tokens[2])
+	{
+		ft_dprintf(2, "Malformed vertex line: %s\n", line);
+		return ;
+	}
+	coords[0] = ft_atof(tokens[0]);
+	coords[1] = ft_atof(tokens[1]);
+	coords[2] = ft_atof(tokens[2]);
+	obj_file->vertices[++obj_file->vertex_count] = new_point3(coords[0],
+			coords[1], coords[2]);
+	free_double(tokens);
+}
+
+static t_obj_file	*init_obj_file(const char *filename, int *fd)
 {
 	t_obj_file	*obj_file;
-	FILE		*file;
-	t_group		*current_group;
-	char		*line;
-	size_t		len;
-	char		group_name[64];
-	t_group		*new_group;
-	int			indices[64];
-	int			count;
-	char		*token;
 	char		*path;
 
-	float x, y, z;
 	obj_file = malloc(sizeof(t_obj_file));
+	if (!obj_file)
+		return (NULL);
 	obj_file->vertex_count = 0;
 	obj_file->face_count = 0;
 	obj_file->vertices = malloc(MAX_VERTEX_COUNT * sizeof(t_point3));
 	obj_file->faces = malloc(MAX_VERTEX_COUNT * sizeof(t_triangle));
 	obj_file->default_group = create_group("Default");
 	path = ft_strjoin("objects/", filename);
-	file = fopen(path, "r");
+	*fd = open(path, O_RDONLY);
 	free(path);
-	if (!file)
+	if (!*fd)
 	{
-		fprintf(stderr, "Failed to open file: %s\n", filename);
+		ft_dprintf(2, "Failed to open file: %s\n", filename);
+		free(obj_file->vertices);
+		free(obj_file->faces);
 		free(obj_file);
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
+	return (obj_file);
+}
+
+t_obj_file	*parse_obj_file(const char *filename)
+{
+	t_obj_file	*obj_file;
+	int			fd;
+	t_group		*current_group;
+	char		*line;
+	t_group		*new_group;
+	char		**tokens;
+	int			indices[64];
+	int			count;
+	int			tok_i;
+
+	obj_file = init_obj_file(filename, &fd);
+	if (!obj_file)
+		return (NULL);
 	current_group = obj_file->default_group;
-	line = NULL;
-	len = 0;
-	while (getline(&line, &len, file) != -1)
+	line = gnl(fd);
+	while (line != NULL)
 	{
 		if (line[0] == 'v' && ft_isspace(line[1]))
-		{
-			if (obj_file->vertex_count >= MAX_VERTEX_COUNT)
-			{
-				fprintf(stderr, "Exceeded maximum vertex count: %d\n",
-					MAX_VERTEX_COUNT);
-				break ;
-			}
-			if (sscanf(line, "v %f %f %f", &x, &y, &z) == 3)
-			{
-				obj_file->vertices[++obj_file->vertex_count] = new_point3(x, y,
-						z);
-			}
-			else
-				fprintf(stderr, "Malformed vertex line: %s\n", line);
-		}
+			parse_vertex_line(obj_file, line);
 		else if (line[0] == 'g' && ft_isspace(line[1]))
 		{
-			if (sscanf(line, "g %63s", group_name) == 1)
+			tokens = ft_split(line + 2, ' ');
+			if (tokens && tokens[0])
 			{
-				new_group = create_group(group_name);
+				new_group = create_group(tokens[0]);
 				add_group_to_default(obj_file, new_group);
 				current_group = new_group;
 			}
 			else
-				fprintf(stderr, "Malformed group line: %s\n", line);
+				ft_dprintf(2, "Malformed group line: %s\n", line);
+			free_double(tokens);
 		}
 		else if (line[0] == 'f' && ft_isspace(line[1]))
 		{
 			count = 0;
-			token = strtok(line + 2, " \t");
-			while (token && count < 64)
+			tokens = ft_split(line + 2, ' ');
+			tok_i = 0;
+			while (tokens[tok_i] && count < 64)
 			{
-				if (sscanf(token, "%d", &indices[count]) == 1)
+				indices[count] = ft_atoi(tokens[tok_i]);
+				if (indices[count] != 0)
 					count++;
 				else
 				{
-					fprintf(stderr, "Malformed face line: %s\n", line);
+					ft_dprintf(2, "Malformed face line: %s\n", line);
 					break ;
 				}
-				token = strtok(NULL, " \t");
+				tok_i++;
 			}
 			fan_triangulation(current_group, obj_file, indices, count);
+			free_double(tokens);
 		}
+		free(line);
+		line = gnl(fd);
 	}
-	free(line);
-	fclose(file);
+	close(fd);
 	return (obj_file);
 }

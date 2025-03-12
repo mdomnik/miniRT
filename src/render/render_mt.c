@@ -18,7 +18,7 @@ void *render_worker(void *arg)
 	t_thread_data *data = (t_thread_data *)arg;
 	t_world *world = init_local_world(data);
 	if (!world) {
-		fprintf(stderr, "Thread %d failed to initialize world.\n", data->thread_id);
+		 ft_dprintf(2, "Thread %d failed to initialize world.\n", data->thread_id);
 		pthread_exit(NULL);
 	}
 
@@ -34,7 +34,7 @@ void *render_worker(void *arg)
 
 	// Create computed buffer to track rendered pixels
 	bool **computed_buffer = malloc(vsize * sizeof(bool *));
-	for (int i = 0; i < vsize; i++) computed_buffer[i] = calloc(hsize, sizeof(bool));
+	for (int i = 0; i < vsize; i++) computed_buffer[i] = ft_calloc(hsize, sizeof(bool));
 
 	// Progressive refinement: render in decreasing block sizes
 	for (int step = 16; step >= 1; step /= 2) {
@@ -88,7 +88,7 @@ void render_multithreaded(t_loop *loop)
 	t_thread_data *thread_data = malloc(thread_count * sizeof(t_thread_data));
 
 	if (!threads || !thread_data) {
-		fprintf(stderr, "Memory allocation failed.\n");
+		 ft_dprintf(2, "Memory allocation failed.\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -98,7 +98,7 @@ void render_multithreaded(t_loop *loop)
 		thread_data[i].total_threads = thread_count;
 
 		if (pthread_create(&threads[i], NULL, render_worker, &thread_data[i]) != 0) {
-			fprintf(stderr, "Failed to create thread %d\n", i);
+			 ft_dprintf(2, "Failed to create thread %d\n", i);
 			exit(EXIT_FAILURE);
 		}
 	}

@@ -19,17 +19,17 @@ static void	set_cylinder_transform(t_shape *cy, char **coords,
 
 	transform = init_identity_matrix(4);
 	transform = multiply_matrices(transform,
-			translation(ft_atof(coords[0]), ft_atof(coords[1]),
-				ft_atof(coords[2])));
+			translation(ft_atof_mrt(coords[0]), ft_atof_mrt(coords[1]),
+				ft_atof_mrt(coords[2])));
 	transform = multiply_matrices(transform,
-			rotation_x(deg_to_rad(ft_atof(normal[0]) * 180)));
+			rotation_x(deg_to_rad(ft_atof_mrt(normal[0]) * 180)));
 	transform = multiply_matrices(transform,
-			rotation_y(deg_to_rad(ft_atof(normal[1]) * 180)));
+			rotation_y(deg_to_rad(ft_atof_mrt(normal[1]) * 180)));
 	transform = multiply_matrices(transform,
-			rotation_z(deg_to_rad(ft_atof(normal[2]) * 180)));
+			rotation_z(deg_to_rad(ft_atof_mrt(normal[2]) * 180)));
 	transform = multiply_matrices(transform,
-			scaling(ft_atof(args[3]) / 2.0, ft_atof(args[4]),
-				ft_atof(args[3]) / 2.0));
+			scaling(ft_atof_mrt(args[3]) / 2.0, ft_atof_mrt(args[4]),
+				ft_atof_mrt(args[3]) / 2.0));
 	set_transform(cy, transform);
 }
 
@@ -65,8 +65,8 @@ int	create_cylinder(t_world *world, char **args)
 	set_cylinder_transform(cy, coords, normal, args);
 	if (args[6])
 		get_material(args[6], &cy->material, cy);
-	cy->material.color = new_color3(ft_atof(color[0]), ft_atof(color[1]),
-			ft_atof(color[2]));
+	cy->material.color = new_color3(ft_atof_mrt(color[0]), ft_atof_mrt(color[1]),
+			ft_atof_mrt(color[2]));
 	cy->material.color = div_color(cy->material.color);
 	set_cylinder_pattern(cy);
 	add_shape(&world->shapes, cy);

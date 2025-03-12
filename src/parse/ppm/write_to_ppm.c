@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "mrt.h"
-#include <sys/stat.h>
-#include <sys/types.h>
 
 t_canvas	*canvas_new(int width, int height)
 {
@@ -23,7 +21,7 @@ t_canvas	*canvas_new(int width, int height)
 	canvas = malloc(sizeof(t_canvas));
 	if (!canvas)
 	{
-		fprintf(stderr, "Error: Could not allocate memory for canvas.\n");
+		ft_dprintf(2, "Error: Could not allocate memory for canvas.\n");
 		exit(EXIT_FAILURE);
 	}
 	canvas->width = width;
@@ -41,16 +39,9 @@ t_canvas	*canvas_new(int width, int height)
 	return (canvas);
 }
 
-static void	create_directory(const char *path)
-{
-	struct stat	st = {0};
-	if (stat(path, &st) == -1)
-		mkdir(path, 0700);
-}
-
 void	save_image(t_image *img, char *filename)
 {
-	FILE			*file;
+	int				fd;
 	int				x;
 	int				y;
 	int				offset;
@@ -61,21 +52,18 @@ void	save_image(t_image *img, char *filename)
 
 	if (!img || !img->buffer)
 	{
-		fprintf(stderr, "Error: Invalid image data.\n");
+		 ft_dprintf(2, "Error: Invalid image data.\n");
 		return ;
 	}
-	create_directory("saved/");
-	file_name = ft_strjoin("saved/", filename);
-	free(filename);
-	filename = ft_strjoin(file_name, ".ppm");
-	file = fopen(filename, "w");
+	file_name = ft_strjoin(filename, ".ppm");
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	free(file_name);
-	if (!file)
+	if (!fd)
 	{
-		fprintf(stderr, "Error: Could not open file for writing.\n");
+		ft_dprintf(2, "Error: Could not open file for writing.\n");
 		return ;
 	}
-	fprintf(file, "P3\n%d %d\n255\n", img->width, img->height);
+	ft_dprintf(fd, "P3\n%d %d\n255\n", img->width, img->height);
 	for (y = 0; y < img->height; y++)
 	{
 		for (x = 0; x < img->width; x++)
@@ -93,9 +81,9 @@ void	save_image(t_image *img, char *filename)
 				g = (unsigned char)img->buffer[offset + 1];
 				b = (unsigned char)img->buffer[offset + 2];
 			}
-			fprintf(file, "%d %d %d\n", r, g, b);
+			 ft_dprintf(fd, "%d %d %d\n", r, g, b);
 		}
 	}
-	fclose(file);
+	close(fd);
 	printf("\033[1;35mImage saved as %s\033[0m\n", filename);
 }

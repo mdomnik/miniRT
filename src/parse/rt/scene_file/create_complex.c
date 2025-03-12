@@ -23,19 +23,19 @@ static void	set_obj_transform(t_shape *obj, char **coords,
 
 	transform = init_identity_matrix(4);
 	transform = multiply_matrices(transform,
-			translation(ft_atof(coords[0]),
-				ft_atof(coords[1]),
-				ft_atof(coords[2])));
+			translation(ft_atof_mrt(coords[0]),
+				ft_atof_mrt(coords[1]),
+				ft_atof_mrt(coords[2])));
 	transform = multiply_matrices(transform,
-			rotation_x(deg_to_rad(ft_atof(normal[0]) * 180)));
+			rotation_x(deg_to_rad(ft_atof_mrt(normal[0]) * 180)));
 	transform = multiply_matrices(transform,
-			rotation_y(deg_to_rad(ft_atof(normal[1]) * 180)));
+			rotation_y(deg_to_rad(ft_atof_mrt(normal[1]) * 180)));
 	transform = multiply_matrices(transform,
-			rotation_z(deg_to_rad(ft_atof(normal[2]) * 180)));
+			rotation_z(deg_to_rad(ft_atof_mrt(normal[2]) * 180)));
 	transform = multiply_matrices(transform,
-			scaling(ft_atof(args[4]) / 2.0,
-				ft_atof(args[4]) / 2.0,
-				ft_atof(args[4]) / 2.0));
+			scaling(ft_atof_mrt(args[4]) / 2.0,
+				ft_atof_mrt(args[4]) / 2.0,
+				ft_atof_mrt(args[4]) / 2.0));
 	set_transform(obj, transform);
 }
 
@@ -55,13 +55,16 @@ int	create_obj(t_world *world, char **args)
 	set_obj_transform(obj, vectors[COORD], vectors[NORMAL], args);
 	if (args[6])
 		get_material(args[6], &obj->material, obj);
-	obj->material.color = new_color3(ft_atof(vectors[COLOR][0]),
-			ft_atof(vectors[COLOR][1]),
-			ft_atof(vectors[COLOR][2]));
+	obj->material.color = new_color3(ft_atof_mrt(vectors[COLOR][0]),
+			ft_atof_mrt(vectors[COLOR][1]),
+			ft_atof_mrt(vectors[COLOR][2]));
 	obj->material.color = div_color(obj->material.color);
 	obj->bounds_cache = group_bounds(obj);
 	inherit_material(obj);
 	add_shape(&world->shapes, obj);
+	free(obj_file->vertices);
+	free(obj_file->faces);
+	free(obj_file);
 	return (0);
 }
 
@@ -80,8 +83,8 @@ int	create_skybox(t_world *world, char **args)
 	sb->material.specular = 0;
 	sb->material.reflective = 0;
 	sb->material.ambient = 1;
-	sb->material.color = new_color3(ft_atof(color[0]),
-			ft_atof(color[1]), ft_atof(color[2]));
+	sb->material.color = new_color3(ft_atof_mrt(color[0]),
+			ft_atof_mrt(color[1]), ft_atof_mrt(color[2]));
 	sb->material.color = div_color(sb->material.color);
 	if (args[2])
 		get_skybox(args[2], &sb->material);
