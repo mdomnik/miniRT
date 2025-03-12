@@ -16,12 +16,22 @@
 # include <string.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <stdbool.h>
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+typedef struct s_format
+{
+	int		width;
+	int		precision;
+	int		flags;
+	char	type;
+}	t_format;
+
 
 /* DEQUE */
 
@@ -105,6 +115,7 @@ void			*ft_memchr(const void *src, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 char			*ft_strnstr(char *big, char *little, size_t len);
 long			ft_atoi(const char *nptr);
+float			ft_atof(const char *str);
 void			*ft_calloc(size_t nmemb, size_t size);
 char			*ft_strdup(const char *s);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
