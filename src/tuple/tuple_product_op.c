@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:31:22 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 15:07:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 16:25:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ t_vec3	neg_vec3(t_vec3 a)
 	result.x = -a.x;
 	result.y = -a.y;
 	result.z = -a.z;
+	result.w = 0;
 	return (result);
 }

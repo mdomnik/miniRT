@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:57:56 by astavrop          #+#    #+#             */
-/*   Updated: 2025/03/11 17:11:22 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 15:28:39 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	create_skybox(t_world *world, char **args)
 	char		**color;
 	t_matrix	transform;
 
-	sb = create_mapped_cube();
+	sb = cube();
 	sb->type = SKYBOX;
 	color = ft_split(args[1], ',');
 	transform = init_identity_matrix(4);

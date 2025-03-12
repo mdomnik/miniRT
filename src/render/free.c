@@ -20,6 +20,7 @@ static void	free_shapes(t_shape *shape)
 	while (shape)
 	{
 		temp = shape->next;
+		free_pattern(shape->material.pattern);
 		if (shape->triangle)
 			free(shape->triangle);
 		if (shape->children)

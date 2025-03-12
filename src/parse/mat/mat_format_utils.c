@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:12:38 by astavrop          #+#    #+#             */
-/*   Updated: 2025/03/12 12:30:45 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 14:01:04 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	check_limits(char *limits, float value)
 	}
 	if (value < min || value > max)
 	{
-		ft_dprintf(2, "Value %.2f out of bounds [%.2f,%.2f]\n",
+		printf("Value %f out of bounds [%f,%f]\n",
 			value, min, max);
 		return (-1);
 	}

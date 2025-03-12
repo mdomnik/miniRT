@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:22:56 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 12:11:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:53:54 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void free_worker_memory(t_ray **ray, t_comp **comp)
 		free(comp[i]);
 	}
 }
-
 
 t_world *init_local_world(t_thread_data *data)
 {

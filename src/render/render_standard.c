@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_standard.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:16:45 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/11 18:45:27 by astavrop         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:18:38 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ void	render_single(t_loop *loop)
 		free(computed_buffer[i]);
 	free(computed_buffer);
 
+	for (i = 0; i <= RECURSIVE_DEPTH; i++)
+	{
+		free(ray[i]);
+		free(comp[i]);
+	}
 	if (loop->opts->opts_flags & OPT_SAVE)
 	{
 		if (loop->opts->values->filename != NULL)
@@ -89,4 +94,5 @@ void	render_single(t_loop *loop)
 		printf("Saving image...\n");
 		save_image(loop->img, loop->opts->values->filename);
 	}
+	free_world(world);
 }
