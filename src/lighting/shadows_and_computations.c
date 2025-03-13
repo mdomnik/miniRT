@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 21:37:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 22:02:16 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #define VEC_DIR 1
 
 //prepare computations
-// transparency_and_refraction(i, comps, xs); reflection broken
+// transparency_and_refraction(i, comps, xs); reflection broken i = -1;
 // (void)xs; // needs to stay until we add reflection
 void	prepare_computations(t_i *i, t_ray *ray, t_x *xs, t_comp *comps)
 {
@@ -40,50 +40,49 @@ void	prepare_computations(t_i *i, t_ray *ray, t_x *xs, t_comp *comps)
 	(void)xs;
 }
 
+t_color3	calculate_surface(t_world *world, t_comp *comp)
+{
+	t_lighting	light_struct;
+	t_color3	surface;
 
-t_color3	shade_hit(t_world *world, t_comp **comps, t_ray **ray,
-				int remaining)
+	surface = new_color3(0, 0, 0);
+	while (world->light != NULL)
+	{
+		light_struct.m = &comp->shape->material;
+		light_struct.shape = comp->shape;
+		light_struct.light = world->light;
+		light_struct.point = &comp->over_point;
+		light_struct.eyev = comp->eyev;
+		light_struct.normalv = comp->normalv;
+		light_struct.in_shadow = is_shadowed(world, &comp->over_point);
+		if (comp->shape->type != SKYBOX)
+			surface = add_tuple(lighting(light_struct), surface);
+		else if (comp->shape->material.pattern)
+			surface = pattern_at_object(comp->shape->material.pattern,
+					comp->shape, &comp->over_point);
+		else
+			surface = comp->shape->material.color;
+		world->light = world->light->next;
+	}
+	return (surface);
+}
+
+t_color3	shade_hit(t_world *world, t_comp **comps,
+		t_ray **ray, int remaining)
 {
 	t_color3	surface;
 	t_color3	reflected;
 	t_light_p	*light_temp;
-	t_lighting	light_struct;
+	t_comp		*comp;
 
 	light_temp = world->light;
-	surface = new_color3(0, 0, 0);
-	if (comps[RECURSIVE_DEPTH - remaining]->shape->type != NONE)
-	{
-		while (world->light != NULL)
-		{
-			light_struct.m
-				= &comps[RECURSIVE_DEPTH - remaining]->shape->material;
-			light_struct.shape = comps[RECURSIVE_DEPTH - remaining]->shape;
-			light_struct.light = world->light;
-			light_struct.point
-				= &comps[RECURSIVE_DEPTH - remaining]->over_point;
-			light_struct.eyev = comps[RECURSIVE_DEPTH - remaining]->eyev;
-			light_struct.normalv = comps[RECURSIVE_DEPTH - remaining]->normalv;
-			light_struct.in_shadow = is_shadowed(world,
-					&comps[RECURSIVE_DEPTH - remaining]->over_point);
-			if (comps[RECURSIVE_DEPTH - remaining]->shape->type != SKYBOX)
-				surface = add_tuple(lighting(light_struct), surface);
-			else if (comps[RECURSIVE_DEPTH - remaining]->shape
-				->material.pattern)
-				surface = pattern_at_object(
-						comps[RECURSIVE_DEPTH - remaining]->shape
-						->material.pattern,
-						comps[RECURSIVE_DEPTH - remaining]->shape,
-						&comps[RECURSIVE_DEPTH - remaining]->over_point);
-			else
-				surface = comps[RECURSIVE_DEPTH - remaining]->shape
-					->material.color;
-			world->light = world->light->next;
-		}
-		world->light = light_temp;
-		reflected = reflected_color(world, comps, ray, remaining);
-		return (add_tuple(surface, reflected));
-	}
-	return (new_color3(0, 0, 0));
+	comp = comps[RECURSIVE_DEPTH - remaining];
+	if (comp->shape->type == NONE)
+		return (new_color3(0, 0, 0));
+	surface = calculate_surface(world, comp);
+	world->light = light_temp;
+	reflected = reflected_color(world, comps, ray, remaining);
+	return (add_tuple(surface, reflected));
 }
 
 t_color3	color_at(t_world *world, t_ray **ray, t_comp **comp, int remaining)
@@ -111,10 +110,8 @@ t_color3	color_at(t_world *world, t_ray **ray, t_comp **comp, int remaining)
 	}
 	prepare_computations(&i, ray[RECURSIVE_DEPTH - remaining], xs,
 		comp[RECURSIVE_DEPTH - remaining]);
-	free(xs->i);
-	free(xs);
 	color = shade_hit(world, comp, ray, remaining);
-	return (color);
+	return (free(xs->i), free(xs), color);
 }
 
 bool	is_shadowed(t_world *world, t_point3 *point)
@@ -143,6 +140,5 @@ bool	is_shadowed(t_world *world, t_point3 *point)
 		free(xs->i);
 		free(xs);
 	}
-	free(r);
-	return (false);
+	return (free(r), false);
 }

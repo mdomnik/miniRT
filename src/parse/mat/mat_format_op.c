@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:08:04 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 20:09:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 22:04:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,8 @@ static int	apply_transform(char **transform_str, t_pattern *pattern)
 	transform = multiply_matrices(transform,
 			translation(ft_atof_mrt(translate[0]), ft_atof_mrt(translate[1]),
 				ft_atof_mrt(translate[2])));
-	free_double(translate);
 	set_pattern_transform(pattern, transform);
-	return (0);
+	return (free_double(translate), 0);
 }
 
 int	pattern_get_transform(char *transforms, t_pattern *pattern)

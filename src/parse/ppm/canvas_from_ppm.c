@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:18:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 19:36:08 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 21:43:14 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,3 @@ void	canvas_from_ppm_pixels(FILE *file, t_canvas *canvas, int color_max)
 		exit(EXIT_FAILURE);
 	}
 }
-
-
-

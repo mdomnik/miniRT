@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:39:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 13:26:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 21:43:30 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	save_image(t_image *img, char *filename)
 
 	if (!img || !img->buffer)
 	{
-		 ft_dprintf(2, "Error: Invalid image data.\n");
+		ft_dprintf(2, "Error: Invalid image data.\n");
 		return ;
 	}
 	file_name = ft_strjoin(filename, ".ppm");

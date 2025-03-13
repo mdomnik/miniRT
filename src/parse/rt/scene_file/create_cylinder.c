@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/11 17:37:49 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 21:44:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	create_cylinder(t_world *world, char **args)
 	set_cylinder_transform(cy, coords, normal, args);
 	if (args[6])
 		get_material(args[6], &cy->material, cy);
-	cy->material.color = new_color3(ft_atof_mrt(color[0]), ft_atof_mrt(color[1]),
-			ft_atof_mrt(color[2]));
+	cy->material.color = new_color3(ft_atof_mrt(color[0]),
+			ft_atof_mrt(color[1]), ft_atof_mrt(color[2]));
 	cy->material.color = div_color(cy->material.color);
 	set_cylinder_pattern(cy);
 	add_shape(&world->shapes, cy);

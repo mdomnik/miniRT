@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:52:36 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 21:12:06 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 21:41:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,20 @@ t_color3	get_effective_color(t_lighting l)
 	if (l.m->pattern)
 	{
 		if (l.shape->type != SKYBOX)
-			return mult_color(pattern_at_object(l.m->pattern, l.shape, l.point),
-					l.light->intensity);
+			return (mult_color(pattern_at_object(l.m->pattern, l.shape,
+						l.point), l.light->intensity));
 		else
-			return pattern_at_object(l.m->pattern, l.shape, l.point);
+			return (pattern_at_object(l.m->pattern, l.shape, l.point));
 	}
 	else if (is_near_zero(l.light->intensity))
-		return mult_color_scalar(l.m->color, l.m->ambient);
-	return mult_color(l.m->color, l.light->intensity);
+		return (mult_color_scalar(l.m->color, l.m->ambient));
+	return (mult_color(l.m->color, l.light->intensity));
 }
 
 t_color3	get_ambient_component(t_lighting l, t_color3 effective_color)
 {
-	t_color3 ambient_prod;
-	t_color3 ambient;
+	t_color3	ambient_prod;
+	t_color3	ambient;
 
 	if (l.shape->type != SKYBOX)
 	{
@@ -72,7 +72,7 @@ t_color3	get_ambient_component(t_lighting l, t_color3 effective_color)
 			effective_color = l.m->color;
 		ambient = mult_tuple(effective_color, l.m->ambient);
 	}
-	return ambient;
+	return (ambient);
 }
 
 void	calculate_diffuse_specular(t_lighting l, t_vec3 *vec,

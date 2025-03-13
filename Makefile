@@ -87,6 +87,7 @@ SRC_FILES	+=	parse/mat/mat_format_op2.c
 SRC_FILES	+=	parse/mat/mat_format.c
 SRC_FILES	+=	parse/mat/mat_format_utils.c
 SRC_FILES	+=	parse/mat/mat_texture.c
+SRC_FILES	+=	parse/mat/set_texture.c
 SRC_FILES	+=	parse/mat/mat_uv_set.c
 SRC_FILES	+=	parse/mat/mat_skybox.c
 

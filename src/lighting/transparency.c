@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:03:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/19 17:03:14 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 22:02:27 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,12 @@ static bool	contains(t_shape *containers, t_shape *shape)
 	return (false);
 }
 
-void	transparency_and_refraction(t_i *hit, t_comp *comp, t_x *xs)
+void	transparency_and_refraction(t_i *hit, t_comp *comp, t_x *xs, int i)
 {
 	t_shape	*containers;
-	int		i;
 	t_i		*x;
 
 	containers = NULL;
-	i = -1;
 	while (++i < xs->count)
 	{
 		x = &xs->i[i];

@@ -16,11 +16,11 @@ void	*render_worker(void *arg)
 {
 	t_thread_data	*data;
 	t_world			*world;
-	t_ray *ray[RECURSIVE_DEPTH + 1] = {NULL};
-	t_comp *comp[RECURSIVE_DEPTH + 1] = {NULL};
-	int hsize;
-	int vsize;
-	bool **computed_buffer;
+	t_ray			*ray[RECURSIVE_DEPTH + 1] = {NULL};
+	t_comp			*comp[RECURSIVE_DEPTH + 1] = {NULL};
+	int				hsize;
+	int				vsize;
+	bool			**computed_buffer;
 
 	data = (t_thread_data *)arg;
 	world = init_local_world(data);
@@ -63,7 +63,8 @@ void	*render_worker(void *arg)
 		{
 			for (int x = 0; x < hsize; x++)
 			{
-				if ((x % step == 0) && (y % step == 0) && !computed_buffer[y][x])
+				if ((x % step == 0) && (y % step == 0)
+					&& !computed_buffer[y][x])
 				{
 					t_pixel px;
 					px.x = x;
@@ -71,7 +72,8 @@ void	*render_worker(void *arg)
 					if (data->loop->opts->opts_flags & OPT_ANTIALIAS)
 					{
 						if (data->loop->opts->values->aa_samples > 1)
-							process_pixel_aa(world, &px, data->loop->opts->values->aa_samples);
+							process_pixel_aa(world, &px,
+								data->loop->opts->values->aa_samples);
 					}
 					else
 						process_pixel_color(world, ray, comp, &px);
@@ -122,7 +124,7 @@ void	render_multithreaded(t_loop *loop)
 		thread_data[i].thread_id = i;
 		thread_data[i].total_threads = thread_count;
 		if (pthread_create(&threads[i], NULL, render_worker,
-					&thread_data[i]) != 0)
+				&thread_data[i]) != 0)
 		{
 			fprintf(stderr, "Failed to create thread %d\n", i);
 			free(threads);

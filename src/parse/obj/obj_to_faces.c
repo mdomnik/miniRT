@@ -6,11 +6,12 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:21:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 20:13:29 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 21:42:36 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
+
 int	isspace(int c)
 {
 	return (c == ' ' || c == '\t' || c == '\n'

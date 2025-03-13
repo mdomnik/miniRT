@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 17:57:55 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 21:44:42 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	create_sphere(t_world *world, char **args)
 	set_sphere_transform(sp, coords, radius);
 	if (args[4])
 		get_material(args[4], &sp->material, sp);
-	sp->material.color = new_color3(ft_atof_mrt(color[0]), ft_atof_mrt(color[1]),
-			ft_atof_mrt(color[2]));
+	sp->material.color = new_color3(ft_atof_mrt(color[0]),
+			ft_atof_mrt(color[1]), ft_atof_mrt(color[2]));
 	sp->material.color = div_color(sp->material.color);
 	set_sphere_pattern(sp);
 	add_shape(&world->shapes, sp);
@@ -110,8 +110,8 @@ int	create_plane(t_world *world, char **args)
 	set_plane_transform(pl, coords, normal);
 	if (args[4])
 		get_material(args[4], &pl->material, pl);
-	pl->material.color = new_color3(ft_atof_mrt(color[0]), ft_atof_mrt(color[1]),
-			ft_atof_mrt(color[2]));
+	pl->material.color = new_color3(ft_atof_mrt(color[0]),
+			ft_atof_mrt(color[1]), ft_atof_mrt(color[2]));
 	pl->material.color = div_color(pl->material.color);
 	add_shape(&world->shapes, pl);
 	free_double(color);
