@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:07:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 12:49:25 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 21:05:55 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ t_vec3		normal_at(t_shape *shape, t_point3 point);
 
 //light_and_reflect.c
 t_vec3		reflect(t_vec3 in, t_vec3 normal);
-t_color3	lighting(t_material *m, t_shape *shape, t_light_p *light,
-				t_point3 *point, t_vec3 eyev, t_vec3 normalv, bool in_shadow);
+t_color3	lighting(t_lighting l);
 
 //ray_op.c
 t_ray		*ray_new(t_point3 *orig, t_vec3 *dir);

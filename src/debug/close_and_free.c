@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 20:34:47 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 20:36:31 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 20:57:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	set_window(t_loop *loop)
 		free(loop);
 }
 
-void	clean_dependencies(t_loop *loop)
+static void	clean_options(t_loop *loop)
 {
 	if (loop->opts)
 	{
@@ -58,6 +58,11 @@ void	clean_dependencies(t_loop *loop)
 		free(loop->opts);
 		loop->opts = NULL;
 	}
+}
+
+void	clean_dependencies(t_loop *loop)
+{
+	clean_options(loop);
 	if (loop->img)
 	{
 		mlx_destroy_image(loop->mlx, loop->img->img);

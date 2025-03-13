@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 20:08:25 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 21:15:44 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_color3	shade_hit(t_world *world, t_comp **comps, t_ray **ray,
 	t_color3	surface;
 	t_color3	reflected;
 	t_light_p	*light_temp;
-	bool		in_shadow;
+	t_lighting	light_struct;
 
 	light_temp = world->light;
 	surface = new_color3(0, 0, 0);
@@ -54,21 +54,26 @@ t_color3	shade_hit(t_world *world, t_comp **comps, t_ray **ray,
 	{
 		while (world->light != NULL)
 		{
-			in_shadow = is_shadowed(world,
+			light_struct.m
+				= &comps[RECURSIVE_DEPTH - remaining]->shape->material;
+			light_struct.shape = comps[RECURSIVE_DEPTH - remaining]->shape;
+			light_struct.light = world->light;
+			light_struct.point
+				= &comps[RECURSIVE_DEPTH - remaining]->over_point;
+			light_struct.eyev = comps[RECURSIVE_DEPTH - remaining]->eyev;
+			light_struct.normalv = comps[RECURSIVE_DEPTH - remaining]->normalv;
+			light_struct.in_shadow = is_shadowed(world,
 					&comps[RECURSIVE_DEPTH - remaining]->over_point);
 			if (comps[RECURSIVE_DEPTH - remaining]->shape->type != SKYBOX)
-				surface = add_tuple(lighting(
-					&comps[RECURSIVE_DEPTH - remaining]->shape->material,
-					comps[RECURSIVE_DEPTH - remaining]->shape, world->light,
-					&comps[RECURSIVE_DEPTH - remaining]->over_point,
-					comps[RECURSIVE_DEPTH - remaining]->eyev,
-					comps[RECURSIVE_DEPTH - remaining]->normalv,
-					in_shadow), surface);
-			else
+				surface = add_tuple(lighting(light_struct), surface);
+			else if (comps[RECURSIVE_DEPTH - remaining]->shape->material.pattern)
 				surface = pattern_at_object(
-						comps[RECURSIVE_DEPTH - remaining]->shape->material.pattern,
+						comps[RECURSIVE_DEPTH - remaining]->shape
+						->material.pattern,
 						comps[RECURSIVE_DEPTH - remaining]->shape,
 						&comps[RECURSIVE_DEPTH - remaining]->over_point);
+			else
+				surface = comps[RECURSIVE_DEPTH - remaining]->shape->material.color;
 			world->light = world->light->next;
 		}
 		world->light = light_temp;

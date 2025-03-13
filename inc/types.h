@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 17:54:12 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 21:01:53 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,5 +236,17 @@ typedef struct s_render_data
 	t_comp			**comp;
 	int				coords[2];
 }	t_render_data;
+
+typedef struct s_lighting
+{
+	t_material	*m;
+	t_shape		*shape;
+	t_light_p	*light;
+	t_point3	*point;
+	t_vec3		eyev;
+	t_vec3		normalv;
+	bool		in_shadow;
+
+}	t_lighting;
 
 #endif /* TYPES_H */
