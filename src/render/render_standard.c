@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:16:45 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 20:32:50 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 13:17:58 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,7 @@ void	render_single(t_loop *loop)
 	if (loop->opts->opts_flags & OPT_SAVE)
 	{
 		if (loop->opts->values->filename != NULL)
-			printf("Saving image to '%s'\n", loop->opts->values->filename);
-		printf("Saving image...\n");
-		save_image(loop->img, loop->opts->values->filename);
+			save_image(loop->img, loop->opts->values->filename);
 	}
 	free_world(world);
 }

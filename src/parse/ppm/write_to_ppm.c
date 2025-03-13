@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:39:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 22:45:29 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 13:26:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	save_image(t_image *img, char *filename)
 	}
 	file_name = ft_strjoin(filename, ".ppm");
 	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	free(file_name);
 	if (!fd)
 	{
 		ft_dprintf(2, "Error: Could not open file for writing.\n");
@@ -72,9 +71,10 @@ void	save_image(t_image *img, char *filename)
 				g = (unsigned char)img->buffer[offset + 1];
 				b = (unsigned char)img->buffer[offset + 2];
 			}
-			 ft_dprintf(fd, "%d %d %d\n", r, g, b);
+			ft_dprintf(fd, "%d %d %d\n", r, g, b);
 		}
 	}
 	close(fd);
-	printf("\033[1;35mImage saved as %s\033[0m\n", filename);
+	ft_dprintf(0, "\033[1;35mImage saved to %s!\033[0m\n", file_name);
+	free(file_name);
 }

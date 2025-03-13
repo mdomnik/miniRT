@@ -6,29 +6,37 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 22:14:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 23:43:36 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 23:46:38 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
+int	ft_isspace(int c)
+{
+	return (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f' || c == '\r');
+}
+
 void	canvas_write_pixel(t_canvas *canvas, int x, int y, t_color3 color)
 {
 	if (x < 0 || x >= canvas->width || y < 0 || y >= canvas->height)
 	{
-		 ft_dprintf(2, "Error: %s\n", ERR_WRITE_PIXEL);
+		fprintf(stderr, "Error: %s\n", ERR_WRITE_PIXEL);
 		exit(EXIT_FAILURE);
 	}
 	canvas->pixels[y][x] = color;
 }
 
-char	*skip_comments(int fd)
+char	*skip_comments(FILE *file)
 {
 	char	*line;
 	char	*ptr;
+	size_t	len;
 
-	line = gnl(fd);
-	while (line != NULL)
+	line = NULL;
+	len = 0;
+	while (getline(&line, &len, file) != -1)
 	{
 		ptr = line;
 		while (ft_isspace(*ptr))
@@ -36,7 +44,7 @@ char	*skip_comments(int fd)
 		if (*ptr == '\0' || *ptr == '#')
 		{
 			free(line);
-			line = gnl(fd);
+			line = NULL;
 			continue ;
 		}
 		return (line);

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 19:33:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 12:01:36 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 13:04:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,37 +40,19 @@ void	free_tripleptr(char ***str)
 	free(str);
 }
 
-void	free_options(t_options *options)
-{
-	free(options->scene.scene_file);
-	if (options->scene.scene_objects)
-		free_tripleptr(options->scene.scene_objects);
-	if (options->values->filename != NULL)
-		free(options->values->filename);
-	free(options);
-}
-
 int	check_args(int argc, char **argv, t_options *options)
 {
 	(void)argc;
 	if (validate_file_name(argv, options) == -1)
-		return (free_options(options), 1);
+		return (1);
 	if (check_arg_count(argv) == -1)
-		return (free_options(options), 1);
+		return (1);
 	if (option_preferences(argv, options) == -1)
-		return (free_options(options), 1);
+		return (1);
 	if (get_scene_data(options) == -1)
-	{
-		 ft_dprintf(2, "Error: Failed to load scene data\n");
-		free_options(options);
 		return (1);
-	}
 	if (check_scene_data(options) == -1)
-	{
-		 ft_dprintf(2, "Error: Invalid scene data\n");
-		free_options(options);
 		return (1);
-	}
 	return (0);
 }
 

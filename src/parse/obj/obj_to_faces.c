@@ -6,11 +6,17 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:21:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 13:04:31 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 23:50:13 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
+
+int	isspace(int c)
+{
+	return (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f' || c == '\r');
+}
 
 static t_group	*create_group(const char *name)
 {
@@ -151,9 +157,9 @@ t_obj_file	*parse_obj_file(const char *filename)
 	line = gnl(fd);
 	while (line != NULL)
 	{
-		if (line[0] == 'v' && ft_isspace(line[1]))
+		if (line[0] == 'v' && isspace(line[1]))
 			parse_vertex_line(obj_file, line);
-		else if (line[0] == 'g' && ft_isspace(line[1]))
+		else if (line[0] == 'g' && isspace(line[1]))
 		{
 			tokens = ft_split(line + 2, ' ');
 			if (tokens && tokens[0])
@@ -166,7 +172,7 @@ t_obj_file	*parse_obj_file(const char *filename)
 				ft_dprintf(2, "Malformed group line: %s\n", line);
 			free_double(tokens);
 		}
-		else if (line[0] == 'f' && ft_isspace(line[1]))
+		else if (line[0] == 'f' && isspace(line[1]))
 		{
 			count = 0;
 			tokens = ft_split(line + 2, ' ');
