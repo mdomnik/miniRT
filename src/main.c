@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:26:20 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 14:31:30 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 14:36:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void set_window(t_loop *loop)
 }
 void clean_dependencies(t_loop *loop)
 {
-	if (!loop->win)
-		set_window(loop);
 	if (loop->opts)
 	{
 		if (loop->opts->values)
@@ -105,6 +103,7 @@ int	main(int ac, char *av[])
 	loop = loop_init();
 	if (check_args(ac, av, loop->opts) == 1)
 	{
+		set_window(loop);
 		key_hook(65307, loop);
 		return (-1);
 	}
