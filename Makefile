@@ -150,6 +150,7 @@ SRC_FILES	+=	tuple/tuple_product_op.c
 # VIEW
 SRC_FILES	+=	view/camera_op.c
 SRC_FILES	+=	view/view_transformation.c
+SRC_FILES	+=	view/rotate_xyz.c
 
 # RENDER
 

@@ -3,49 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   view_transformation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: artem <artem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:05:26 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 20:53:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 20:10:35 by artem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_vec3	rotate_x(t_vec3 v, double angle)
-{
-	double	cos_a;
-	double	sin_a;
+#define VT_ANGLE_X  0
+#define VT_ANGLE_Y  1
+#define VT_ANGLE_Z  2
+#define VT_RAD_X    0
+#define VT_RAD_Y    1
+#define VT_RAD_Z    2
 
-	cos_a = cos(angle);
-	sin_a = sin(angle);
-	return (new_vec3(v.x, v.y * cos_a - v.z
-			* sin_a, v.y * sin_a + v.z * cos_a));
-}
-
-t_vec3	rotate_y(t_vec3 v, double angle)
-{
-	double	cos_a;
-	double	sin_a;
-
-	cos_a = cos(angle);
-	sin_a = sin(angle);
-	return (new_vec3(v.x * cos_a + v.z * sin_a, v.y,
-			-v.x * sin_a + v.z * cos_a));
-}
-
-t_vec3	rotate_z(t_vec3 v, double angle)
-{
-	double	cos_a;
-	double	sin_a;
-
-	cos_a = cos(angle);
-	sin_a = sin(angle);
-	return (new_vec3(v.x * cos_a - v.y * sin_a,
-			v.x * sin_a + v.y * cos_a, v.z));
-}
-
-double	degrees_to_radians(double degrees)
+inline double	degrees_to_radians(double degrees)
 {
 	return (degrees * M_PI / 180.0);
 }
@@ -63,35 +37,42 @@ static void	fill_orientation_matrix(t_matrix *m, t_vec3 l, t_vec3 u, t_vec3 f)
 	m->a[2][2] = -f.z;
 }
 
+static void	calculate_view_vectors(t_vec3 vectors[3], double radians[3])
+{
+	vectors[0] = new_vec3(0, 0, 1);
+	vectors[0] = rotate_x(vectors[0], radians[VT_RAD_X]);
+	vectors[0] = rotate_y(vectors[0], radians[VT_RAD_Y]);
+	vectors[0] = rotate_z(vectors[0], radians[VT_RAD_Z]);
+	vectors[0] = normalize(vectors[0]);
+	if (fabs(vectors[0].x) < EPSILON && fabs(vectors[0].z) < EPSILON)
+	{
+		if (vectors[0].y > 0)
+			vectors[1] = new_vec3(0, 0, 1);
+		else
+			vectors[1] = new_vec3(0, 0, -1);
+	}
+	else
+		vectors[1] = new_vec3(0, 1, 0);
+	vectors[2] = normalize(cross_product(vectors[0], vectors[1]));
+	vectors[1] = cross_product(vectors[2], vectors[0]);
+}
+
 t_matrix	view_transformation(t_point3 from, t_vec3 orientation)
 {
-	t_matrix	orientation_matrix;
-	t_matrix	translation_matrix;
-	t_vec3		forward;
-	t_vec3		up;
-	t_vec3		left;
+	t_matrix	matrices[2];
+	t_vec3		vectors[3];
+	double		angles[3];
+	double		radians[3];
 
-	double angle_x = orientation.x * 180.0;
-	double angle_y = orientation.y * 180.0;
-	double angle_z = orientation.z * 180.0;
-
-	double rad_x = degrees_to_radians(angle_x);
-	double rad_y = degrees_to_radians(angle_y);
-	double rad_z = degrees_to_radians(angle_z);
-
-	forward = new_vec3(0, 0, 1);
-	forward = rotate_x(forward, rad_x);
-	forward = rotate_y(forward, rad_y);
-	forward = rotate_z(forward, rad_z);
-	forward = normalize(forward);
-	if (fabs(forward.x) < EPSILON && fabs(forward.z) < EPSILON)
-		up = (forward.y > 0) ? new_vec3(0, 0, 1) : new_vec3(0, 0, -1);
-	else
-		up = new_vec3(0, 1, 0);
-	left = normalize(cross_product(forward, up));
-	up = cross_product(left, forward);
-	orientation_matrix = init_identity_matrix(4);
-	fill_orientation_matrix(&orientation_matrix, left, up, forward);
-	translation_matrix = translation(-from.x, -from.y, -from.z);
-	return (multiply_matrices(orientation_matrix, translation_matrix));
+	angles[VT_ANGLE_X] = orientation.x * 180.0;
+	angles[VT_ANGLE_Y] = orientation.y * 180.0;
+	angles[VT_ANGLE_Z] = orientation.z * 180.0;
+	radians[VT_RAD_X] = deg_to_rad(angles[VT_ANGLE_X]);
+	radians[VT_RAD_Y] = deg_to_rad(angles[VT_ANGLE_Y]);
+	radians[VT_RAD_Z] = deg_to_rad(angles[VT_ANGLE_Z]);
+	calculate_view_vectors(vectors, radians);
+	matrices[0] = init_identity_matrix(4);
+	fill_orientation_matrix(&matrices[0], vectors[2], vectors[1], vectors[0]);
+	matrices[1] = translation(-from.x, -from.y, -from.z);
+	return (multiply_matrices(matrices[0], matrices[1]));
 }
