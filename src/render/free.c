@@ -73,24 +73,20 @@ void	free_triple_ptr(char ***str)
 	free(str);
 }
 
-void free_canvas(t_canvas *canvas)
+void	free_canvas(t_canvas *canvas)
 {
-    int i;
+	int	i;
 
-    if (!canvas)
-        return;
-
-    // Free each row of the pixels array
-    for (i = 0; i < canvas->height; i++)
-    {
-        free(canvas->pixels[i]);
-    }
-
-    // Free the pixels array itself
-    free(canvas->pixels);
-
-    // Free the canvas structure
-    free(canvas);
+	if (!canvas)
+		return ;
+	i = 0;
+	while (i < canvas->height)
+	{
+		free(canvas->pixels[i]);
+		i++;
+	}
+	free(canvas->pixels);
+	free(canvas);
 }
 
 void	free_pattern(t_pattern *pattern, t_shape *shape)
@@ -100,6 +96,7 @@ void	free_pattern(t_pattern *pattern, t_shape *shape)
 	t_cube_map	*cube_map;
 	t_pattern	*p;
 	t_canvas	*canvas;
+	int			i;
 
 	if (!pattern)
 		return ;
@@ -126,7 +123,7 @@ void	free_pattern(t_pattern *pattern, t_shape *shape)
 	else
 	{
 		cube_map = (t_cube_map *)pattern->uv_pattern;
-		int i = 0;
+		i = 0;
 		while (i < 6)
 		{
 			pat = cube_map->faces[i];
@@ -150,7 +147,7 @@ void	free_pattern(t_pattern *pattern, t_shape *shape)
 	free(pattern);
 }
 
-void free_bump_map(t_bump_map *bump_map)
+void	free_bump_map(t_bump_map *bump_map)
 {
 	if (!bump_map)
 		return ;
