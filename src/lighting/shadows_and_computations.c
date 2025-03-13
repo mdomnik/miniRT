@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 21:19:28 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 21:37:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,7 @@ void	prepare_computations(t_i *i, t_ray *ray, t_x *xs, t_comp *comps)
 	(void)xs;
 }
 
-// else if (comps[RECURSIVE_DEPTH - remaining]->shape
-// 	->material.pattern)
-// 	surface = pattern_at_object(
-// 			comps[RECURSIVE_DEPTH - remaining]->shape
-// 			->material.pattern,
-// 			comps[RECURSIVE_DEPTH - remaining]->shape,
-// 			&comps[RECURSIVE_DEPTH - remaining]->over_point);
-// else
-// 	surface = comps[RECURSIVE_DEPTH - remaining]->shape
-// 		->material.color;
+
 t_color3	shade_hit(t_world *world, t_comp **comps, t_ray **ray,
 				int remaining)
 {
@@ -76,12 +67,16 @@ t_color3	shade_hit(t_world *world, t_comp **comps, t_ray **ray,
 					&comps[RECURSIVE_DEPTH - remaining]->over_point);
 			if (comps[RECURSIVE_DEPTH - remaining]->shape->type != SKYBOX)
 				surface = add_tuple(lighting(light_struct), surface);
-			else
+			else if (comps[RECURSIVE_DEPTH - remaining]->shape
+				->material.pattern)
 				surface = pattern_at_object(
 						comps[RECURSIVE_DEPTH - remaining]->shape
 						->material.pattern,
 						comps[RECURSIVE_DEPTH - remaining]->shape,
 						&comps[RECURSIVE_DEPTH - remaining]->over_point);
+			else
+				surface = comps[RECURSIVE_DEPTH - remaining]->shape
+					->material.color;
 			world->light = world->light->next;
 		}
 		world->light = light_temp;
