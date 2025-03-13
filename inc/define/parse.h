@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:29:54 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 23:48:48 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 20:14:26 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 //obj/obj_to_faces.c
 t_obj_file	*parse_obj_file(const char *filename);
+void		parse_vertex_line(t_obj_file *obj_file, char *line);
+t_obj_file	*init_obj_file(const char *filename, int *fd);
+void		fan_triangulation(t_group *group, t_obj_file *obj_file,
+				int *indices, int count);
+void		add_group_to_default(t_obj_file *obj_file, t_group *group);
+void		add_triangle_to_group(t_group *g, t_triangle *tri);
+t_group		*create_group(const char *name);
 
 //ppm/canvas_from_ppm.c
 void		canvas_from_ppm_pixels(FILE *file, t_canvas *canvas, int color_max);

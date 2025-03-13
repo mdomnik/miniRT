@@ -91,6 +91,7 @@ SRC_FILES	+=	parse/mat/mat_skybox.c
 
 # PARSE/OBJ
 SRC_FILES	+=	parse/obj/obj_to_faces.c
+SRC_FILES	+=	parse/obj/obj_to_faces_helper.c
 
 # PARSE/PPM
 SRC_FILES	+=	parse/ppm/write_to_ppm.c

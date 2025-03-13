@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:29:18 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 17:59:43 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 20:10:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	set_texture(char *type, char *transform, t_material *mat,
 	if (shape->type == SPHERE)
 	{
 		mat->pattern = texture_map_sphere(uv_image(canvas_from_ppm(join)),
-		spherical_map);
+				spherical_map);
 	}
 	else if (shape->type == PLANE)
 		mat->pattern = texture_map(uv_image(canvas_from_ppm(join)), planar_map);
