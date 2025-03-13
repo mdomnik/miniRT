@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:17:29 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 13:01:28 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 19:43:48 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,6 @@ static void	allocate_mat(char *param, float value, t_material *mat)
 		mat->shininess = value;
 	else if (ft_strncmp(param, "reflection:", ft_strlen(param)) == 0)
 		mat->reflective = value;
-	else if (ft_strncmp(param, "transparency:", ft_strlen(param)) == 0)
-		mat->transparency = value;
-	else if (ft_strncmp(param, "refraction:", ft_strlen(param)) == 0)
-		mat->refractive_index = value;
 	else if (ft_strncmp(param, "bump_intensity:", ft_strlen(param)) == 0)
 		mat->bump_map_scale = value;
 }

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:26:20 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 14:36:31 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 17:43:46 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ void clean_dependencies(t_loop *loop)
 	if (loop->mlx)
 	{
 		if (loop->win)
+		{
 			mlx_destroy_window(loop->mlx, loop->win);
+		}
 		mlx_destroy_display(loop->mlx);
 		free(loop->mlx);
 		loop->mlx = NULL;

@@ -8,16 +8,12 @@ specular: 0.9
 shininess: 100
 # reflection (0-1)
 reflection: 0
-# transparency (0-1)
-transparency: 0.0
-# refraction (1-3)
-refraction: 1.0
 # bump_intensity (0-1)
 bump_intensity: 20
 # texture (texture_name, {scaling | rotation | translation})
-texture: stones.ppm {1,1,1|0,0,0|0,0,0}
+texture: fabric.ppm {1,1,1|0,0,0|0,0,0}
 # pattern (pattern_name {color_a | color_b} {scaling | rotation | translation})
 # (stripe, gradient, ring, checkers)
 pattern: checkers {0,2,0|0,0,2} {1,1,1|0,0,0|0,0,0}
 # bump_map (bump_map_name)
-bump_map:
+bump_map: stones.ppm {1,1,1|0,0,0|0,0,0}

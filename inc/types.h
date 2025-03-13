@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 12:57:22 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 17:54:12 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ typedef enum e_pattern_type
 	TEXTURE_MAP,
 	ALIGN_CHECK,
 	CUBE_MAP,
-	UV_IMAGE
+	UV_IMAGE,
+	FAIL
 }	t_pattern_type;
 
 typedef enum e_directions
@@ -162,6 +163,7 @@ struct s_pattern
 	t_color3		b;
 	t_matrix		transform;
 	t_pattern_type	type;
+	bool			simple;
 	void			*uv_pattern;
 	t_uv_val		(*uv_map)(t_point3 point);
 	t_uv_val		(*uv_map_sphere)(t_point3 point, float scale);

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:49:12 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 20:25:08 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 18:17:22 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ t_pattern	*new_pattern(t_pattern_type pattern, t_color3 a, t_color3 b)
 	t_pattern	*p;
 
 	p = malloc(sizeof(t_pattern));
-	p->type = pattern;
+	if (pattern)
+		p->type = pattern;
+	else
+		p->type = FAIL;
+	p->simple = false;
 	p->a = a;
 	p->b = b;
 	p->transform = init_identity_matrix(4);

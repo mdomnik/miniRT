@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:27:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/21 18:09:11 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 18:56:10 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_pattern	*new_cube_map(t_pattern *faces[6])
 	cube->faces[DOWN] = faces[DOWN];
 	pattern = malloc(sizeof(t_pattern));
 	pattern->type = CUBE_MAP;
+	pattern->simple = false;
 	pattern->uv_pattern = cube;
 	pattern->uv_map = NULL;
 	pattern->transform = init_identity_matrix(4);
@@ -103,6 +104,9 @@ t_color3	pattern_at_cube_map(t_pattern *pattern, t_point3 point)
 	else
 		uv = cube_uv_down(point);
 	face_pattern = cube->faces[face];
-	color = uv_pattern_at_image(face_pattern->uv_pattern, uv.u, uv.v);
+	if (!face_pattern->simple)
+		color = uv_pattern_at_image(face_pattern->uv_pattern, uv.u, uv.v);
+	else
+		color = uv_pattern_at(face_pattern->uv_pattern, uv.u, uv.v);
 	return (color);
 }

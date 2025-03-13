@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:18:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 23:46:27 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 19:36:08 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	canvas_from_ppm_pixels(FILE *file, t_canvas *canvas, int color_max)
 	if (r == -1 || g == -1 || b == -1)
 	{
 		fprintf(stderr, "Error: %s\n", ERR_INCOMPLETE_RGB);
+		fclose(file);
 		exit(EXIT_FAILURE);
 	}
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_worker_utils_2.c                            :+:      :+:    :+:   */
+/*   free.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+      */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,6 +21,7 @@ static void	free_shapes(t_shape *shape)
 	{
 		temp = shape->next;
 		free_pattern(shape->material.pattern, shape);
+		free_bump_map(shape->material.bump_map);
 		if (shape->triangle)
 			free(shape->triangle);
 		if (shape->children)
@@ -96,11 +97,18 @@ void	free_pattern(t_pattern *pattern, t_shape *shape)
 {
 	t_pattern	*pat;
 	t_uv_image	*uv_img;
-	// t_cube_map	*cube_map;
+	t_cube_map	*cube_map;
+	t_pattern	*p;
 	t_canvas	*canvas;
 
 	if (!pattern)
 		return ;
+	if (pattern->simple == true)
+	{
+		free(pattern->uv_pattern);
+		free(pattern);
+		return ;
+	}
 	if (shape->type != CUBE && shape->type != SKYBOX)
 	{
 		pat = (t_pattern *)pattern->uv_pattern;
@@ -117,18 +125,35 @@ void	free_pattern(t_pattern *pattern, t_shape *shape)
 	}
 	else
 	{
-		// pat = (t_pattern *)pattern->uv_pattern;
-		// t_pattern *p = pat->uv_pattern;
-		// uv_img = (t_uv_image *)p->uv_pattern;
-		// cube_map = (t_cube_map *)uv_img->canvas;
-		// if (cube_map)
-		// {
-		// 		for (int i = 0; i < 6; i++)
-		// 		{
-		// 			free_pattern(cube_map->faces[i], shape);
-		// 		}
-		// 		free(cube_map);
-		// }
+		cube_map = (t_cube_map *)pattern->uv_pattern;
+		int i = 0;
+		while (i < 6)
+		{
+			pat = cube_map->faces[i];
+			p = (t_pattern *)pat->uv_pattern;
+			uv_img = (t_uv_image *)p->uv_pattern;
+			if (uv_img && uv_img->canvas)
+			{
+				canvas = uv_img->canvas;
+				free_canvas(canvas);
+			}
+			if (uv_img)
+				free(uv_img);
+			if (p)
+				free(p);
+			if (pat)
+				free(pat);
+			i++;
+		}
+		free(cube_map);
 	}
 	free(pattern);
+}
+
+void free_bump_map(t_bump_map *bump_map)
+{
+	if (!bump_map)
+		return ;
+	free_canvas(bump_map->height_map);
+	free(bump_map);
 }

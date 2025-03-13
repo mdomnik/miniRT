@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:58:12 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 12:54:21 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 19:43:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define MATERIALS_H
 
 # define PARAM_LIST "ambient:0-1,diffuse:0-1,specular:0-1,shininess:10-200,\
-reflection:0-1,transparency:0-1,refraction:1-3,bump_intensity:0-100,\
-pattern:NULL,texture:NULL,bump_map:NULL"
+reflection:0-1,bump_intensity:0-100,pattern:NULL,texture:NULL,bump_map:NULL"
 
 # define PREDETERMINED_PATTERNS "stripe,gradient,ring,checkers"
 
