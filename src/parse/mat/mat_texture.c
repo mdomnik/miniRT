@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:29:18 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 20:10:06 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 21:27:22 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,9 @@ static void	set_texture(char *type, char *transform, t_material *mat,
 				spherical_map);
 	}
 	else if (shape->type == PLANE)
+	{
 		mat->pattern = texture_map(uv_image(canvas_from_ppm(join)), planar_map);
+	}
 	else if (shape->type == CYLINDER || shape->type == CONE
 		|| shape->type == HOURGLASS)
 		mat->pattern = texture_map(uv_image(canvas_from_ppm(join)),
