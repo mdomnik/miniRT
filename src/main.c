@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:26:20 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 14:21:36 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 14:31:30 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void set_window(t_loop *loop)
 }
 void clean_dependencies(t_loop *loop)
 {
-	set_window(loop);
+	if (!loop->win)
+		set_window(loop);
 	if (loop->opts)
 	{
 		if (loop->opts->values)
