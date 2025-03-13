@@ -42,6 +42,7 @@ SRC_DIR         := src
 
 # DEBUG
 SRC_FILES	+=	debug/debug_methods.c
+SRC_FILES	+= debug/close_and_free.c
 
 # GROUPS
 SRC_FILES	+=	groups/group_op.c

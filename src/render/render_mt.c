@@ -122,7 +122,7 @@ void	render_multithreaded(t_loop *loop)
 		thread_data[i].thread_id = i;
 		thread_data[i].total_threads = thread_count;
 		if (pthread_create(&threads[i], NULL, render_worker,
-			&thread_data[i]) != 0)
+					&thread_data[i]) != 0)
 		{
 			fprintf(stderr, "Failed to create thread %d\n", i);
 			free(threads);
