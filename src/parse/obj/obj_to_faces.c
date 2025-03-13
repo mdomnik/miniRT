@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:21:30 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 23:58:02 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 00:00:04 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	fan_triangulation(t_group *group, t_obj_file *obj_file,
 	int			v[3];
 
 	if (count < 3)
-		return (ft_dprintf(2, "Face has fewer than 3 vertices, skipping\n"));
+		return ((void)ft_dprintf(2, "Face with < 3 vertices, skipping\n"));
 	i = 0;
 	while (i < count - 1)
 	{
