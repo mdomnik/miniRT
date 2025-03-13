@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:56:28 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 20:22:39 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 14:48:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_x	*intersect_cube(t_shape *cube, t_ray *ray)
 	axis_t[Z][TMAX] = check_axis(ray->orig.z, ray->dir.z, true, bounds);
 	t[TMIN] = fmaxf(fmaxf(axis_t[X][TMIN], axis_t[Y][TMIN]), axis_t[Z][TMIN]);
 	t[TMAX] = fminf(fminf(axis_t[X][TMAX], axis_t[Y][TMAX]), axis_t[Z][TMAX]);
-	xs = malloc(sizeof(t_x));
+	xs = ft_calloc(1, sizeof(t_x));
 	if (t[TMIN] > t[TMAX])
 		return (xs->count = 0, xs);
 	xs->count = 2;

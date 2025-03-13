@@ -6,20 +6,16 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:17:34 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/08 19:00:50 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 14:51:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
 // Creates an intersection from distance and shape
-t_i	create_intersection(float t, t_shape *shape)
+inline t_i	create_intersection(float t, t_shape *shape)
 {
-	t_i	i;
-
-	i.t = t;
-	i.shape = shape;
-	return (i);
+	return ((t_i){t, shape});
 }
 
 // Adds an intersection to a list of intersections

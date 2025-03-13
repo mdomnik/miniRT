@@ -33,11 +33,26 @@ static void	free_shapes(t_shape *shape)
 	}
 }
 
+void free_lights(t_light_p *light)
+{
+	t_light_p	*temp;
+
+	while (light)
+	{
+		temp = light->next;
+		free(light);
+		if (temp)
+			light = temp;
+		else
+			break ;
+	}
+}
+
 void	free_world(t_world *world)
 {
 	free(world->camera);
 	free_shapes(world->shapes);
-	free(world->light);
+	free_lights(world->light);
 	free(world);
 }
 
@@ -81,7 +96,7 @@ void	free_pattern(t_pattern *pattern, t_shape *shape)
 {
 	t_pattern	*pat;
 	t_uv_image	*uv_img;
-	t_cube_map	*cube_map;
+	// t_cube_map	*cube_map;
 	t_canvas	*canvas;
 
 	if (!pattern)
@@ -102,18 +117,18 @@ void	free_pattern(t_pattern *pattern, t_shape *shape)
 	}
 	else
 	{
-		pat = (t_pattern *)pattern->uv_pattern;
-		t_pattern *p = pat->uv_pattern;
-		uv_img = (t_uv_image *)p->uv_pattern;
-		cube_map = (t_cube_map *)uv_img->canvas;
-		if (cube_map)
-		{
-				for (int i = 0; i < 6; i++)
-				{
-					free_pattern(cube_map->faces[i], shape);
-				}
-				free(cube_map);
-		}
+		// pat = (t_pattern *)pattern->uv_pattern;
+		// t_pattern *p = pat->uv_pattern;
+		// uv_img = (t_uv_image *)p->uv_pattern;
+		// cube_map = (t_cube_map *)uv_img->canvas;
+		// if (cube_map)
+		// {
+		// 		for (int i = 0; i < 6; i++)
+		// 		{
+		// 			free_pattern(cube_map->faces[i], shape);
+		// 		}
+		// 		free(cube_map);
+		// }
 	}
 	free(pattern);
 }

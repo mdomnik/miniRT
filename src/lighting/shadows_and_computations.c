@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:08:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 21:14:37 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 15:11:58 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,19 @@ t_color3	shade_hit(t_world *world, t_comp **comps, t_ray **ray,
 		{
 			in_shadow = is_shadowed(world,
 					&comps[RECURSIVE_DEPTH - remaining]->over_point);
-			surface = add_tuple(lighting(
+			if (comps[RECURSIVE_DEPTH - remaining]->shape->type != SKYBOX)
+				surface = add_tuple(lighting(
 						&comps[RECURSIVE_DEPTH - remaining]->shape->material,
 						comps[RECURSIVE_DEPTH - remaining]->shape, world->light,
 						&comps[RECURSIVE_DEPTH - remaining]->over_point,
 						comps[RECURSIVE_DEPTH - remaining]->eyev,
 						comps[RECURSIVE_DEPTH - remaining]->normalv,
 						in_shadow), surface);
+			else 
+				surface = pattern_at_object(
+						comps[RECURSIVE_DEPTH - remaining]->shape->material.pattern,
+						comps[RECURSIVE_DEPTH - remaining]->shape,
+						&comps[RECURSIVE_DEPTH - remaining]->over_point);
 			world->light = world->light->next;
 		}
 		world->light = light_temp;
