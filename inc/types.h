@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: artem <artem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 21:01:53 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 21:37:00 by artem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,11 +230,16 @@ typedef struct s_thread_data
 
 typedef struct s_render_data
 {
-	t_thread_data	*data;
-	t_world			*world;
-	t_ray			**ray;
-	t_comp			**comp;
-	int				coords[2];
+	t_ray	**ray;
+	t_comp	**comp;
+	int		*pixel_order;
+	bool	**cmped_buf;
+	int		total_pixels;
+	int		width;
+	int		height;
+	t_image	*img;
+	void	*mlx;
+	void	*win;
 }	t_render_data;
 
 typedef struct s_lighting

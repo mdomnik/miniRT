@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: artem <artem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:25:55 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 20:00:32 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/13 21:27:12 by artem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void	*render_worker(void *arg);
 
 //render_standard.c
 void	render_single(t_loop *loop);
+
+//render_standard2.c
+void	free_render_data(t_render_data *data);
 
 //render_utils.c
 void	put_pixel_to_img(t_image *img, int x, int y, int color);
