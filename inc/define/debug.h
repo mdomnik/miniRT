@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:57:28 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 00:32:15 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:08:52 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 void	print_matrix(t_matrix mat);
 void	print_tuple(t_tuple tuple);
 int		ft_isspace(int c);
+int		count_args(char **args);
 
 void	set_window(t_loop *loop);
 void	clean_dependencies(t_loop *loop);

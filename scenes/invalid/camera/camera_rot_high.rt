@@ -1,5 +1,5 @@
-# simple scene with a cube
+# Camera's rotataion is too high
 A   0.2								255,255,255
-C   0,0,-5		0,00,0		70
+C   0,0,-5		1.1,0,0		70
 L   1,1,-10		1					255,255,255
 sp	0,0,0		1					245,133,255

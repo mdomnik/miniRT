@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 20:34:47 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 20:57:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:13:07 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	key_hook(int keycode, void *param)
 	loop = (t_loop *)param;
 	if (!loop)
 		return (-1);
-	if (keycode == 65307 || keycode == 17)
+	if (keycode == ESCAPE || keycode == 17)
 	{
 		clean_dependencies(loop);
 		exit(0);

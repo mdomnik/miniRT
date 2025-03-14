@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:32:39 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/07 17:55:03 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:44:05 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@ int	check_object_rules(char **args, char **rules)
 
 	i = 0;
 	status = 0;
+	if ((ft_strncmp(rules[0], "A", ft_strlen(rules[0])) == 0)
+		|| (ft_strncmp(rules[0], "C", ft_strlen(rules[0])) == 0)
+		|| (ft_strncmp(rules[0], "L", ft_strlen(rules[0])) == 0))
+	{
+		if (count_args(args) != (count_args(rules)))
+			return (ret_message(ERR_ARGS, NULL));
+	}
+	else
+	{
+		if ((count_args(args) < (count_args(rules) - 1))
+			|| count_args(args) > (count_args(rules)))
+			return (ret_message(ERR_ARGS, NULL));
+	}
 	while (rules[++i] != NULL && status == 0)
 	{
 		if (ft_strcmp(rules[i], "COLOR") == 0)

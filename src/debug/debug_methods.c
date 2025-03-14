@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:27:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 00:32:06 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:08:34 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,14 @@ int	ft_isspace(int c)
 {
 	return (c == ' ' || c == '\t' || c == '\n'
 		|| c == '\v' || c == '\f' || c == '\r');
+}
+
+int	count_args(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i] != NULL)
+		i++;
+	return (i);
 }

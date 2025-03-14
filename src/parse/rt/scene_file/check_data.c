@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:21:04 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/07 18:06:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:54:27 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ int	determine_object(char **args)
 			{
 				free_double(data);
 				free_double(rules);
-				return (-1);
+				return (ret_message(PARSE_ARGS, NULL));
 			}
 		}
 		free_double(data);

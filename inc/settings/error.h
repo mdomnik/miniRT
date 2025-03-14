@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:30:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 15:02:38 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:54:39 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,14 @@
 
 //THREAD
 # define ERR_THREAD "Thread %d failed to initialize world.\n"
+
+//ARGS
+# define AMBIENT_ARGS "Error: Ambient light requires 2 arguments 'intensity,\
+	color'\n"
+# define CAMERA_ARGS "Error: Camera requires 3 arguments 'position,\
+	orientation, fov'\n"
+# define LIGHT_ARGS "Error: Light requires 3 arguments 'position, brightness,\
+	color'\n"
+# define PARSE_ARGS "Error: Could not parse arguments"
+
 #endif

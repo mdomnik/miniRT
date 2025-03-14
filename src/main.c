@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:26:20 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 02:30:48 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:13:01 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char *av[])
 	if (check_args(ac, av, loop->opts) == 1)
 	{
 		set_window(loop);
-		key_hook(65307, loop);
+		key_hook(ESCAPE, loop);
 		return (-1);
 	}
 	set_window(loop);

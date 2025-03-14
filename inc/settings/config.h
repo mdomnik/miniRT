@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:37:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 20:40:16 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:12:51 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define EPSILON 0.001
 
+# define ESCAPE 65307
 # define LIGHTING 4
 # define RECURSIVE_DEPTH 5
 

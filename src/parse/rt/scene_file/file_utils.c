@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:24:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/09 18:02:52 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:55:49 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,12 @@ int	pointer_count(char **args)
  */
 int	ret_message(char *message, char *str)
 {
-	ft_dprintf(2, "%s '%s'\n", message, str);
+	if (str && message)
+		ft_dprintf(2, "%s '%s'\n", message, str);
+	else if (message)
+		ft_dprintf(2, "%s\n", message);
+	else
+		ft_dprintf(2, "Error: Invalid message.\n");
 	return (-1);
 }
 

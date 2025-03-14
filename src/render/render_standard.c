@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_standard.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: artem <artem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:16:45 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 21:32:05 by artem            ###   ########.fr       */
+/*   Updated: 2025/03/14 16:13:22 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,12 @@ void	render_single(t_loop *l)
 	world->camera = NULL;
 	world->light = NULL;
 	world->shapes = NULL;
-	create_objects(l->opts, world);
+	if (create_objects(l->opts, world) == -1)
+	{
+		free_world(world);
+		key_hook(ESCAPE, l);
+		return ;
+	}
 	data = init_render_data(world, l);
 	if (!data && (free_world(world), 1))
 		return ;
