@@ -32,7 +32,6 @@ typedef struct s_format
 	char	type;
 }	t_format;
 
-
 /* DEQUE */
 
 typedef struct s_deque			t_deque;
