@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:30:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 16:54:39 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 18:03:17 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@
 # define LIGHT_ARGS "Error: Light requires 3 arguments 'position, brightness,\
 	color'\n"
 # define PARSE_ARGS "Error: Could not parse arguments"
+# define ERR_NON_NEG "Error: Non-negative value required"
 
 #endif

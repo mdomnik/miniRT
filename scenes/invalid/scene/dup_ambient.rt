@@ -1,4 +1,4 @@
-# This scene has no light
+# This scene has 2 ambient light
 A   0.2							255,255,255
 A   0.2							255,255,255
 L   1,1,-5		1				255,255,255

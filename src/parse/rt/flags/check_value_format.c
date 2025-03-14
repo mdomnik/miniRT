@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:40:48 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 15:45:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 18:03:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,12 @@ int	check_float_format(char *str)
 	dot_count = 0;
 	while (str[i])
 	{
-		if ((str[i] < 48 || str[i] > 57) && str[i] != '.' && str[i] != '-')
+		if ((str[i] < 48 || str[i] > 57) && str[i] != '.')
 		{
-			ft_dprintf(2, "%s '%c'\n", ERR_INVALID_CHAR, str[i]);
+			if (str[i] == '-')
+				return (ret_message(ERR_NON_NEG, str));
+			else
+				ft_dprintf(2, "%s '%c'\n", ERR_INVALID_CHAR, str[i]);
 			return (-1);
 		}
 		if (str[i] == '.')
