@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 10:21:22 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 14:33:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,5 +276,15 @@ typedef struct s_mutexes
 	pthread_mutex_t		world;
 	pthread_mutex_t		mlx;
 }	t_mutexes;
+
+typedef struct s_aa_sample_data
+{
+	int		grid_size;
+	float	a[4];
+	t_pixel	*px;
+	t_world	*world;
+	t_ray	*sample_ray[RECURSIVE_DEPTH + 1];
+	t_comp	*sample_comp[RECURSIVE_DEPTH + 1];
+}	t_aa_sample_data;
 
 #endif /* TYPES_H */

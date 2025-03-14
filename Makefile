@@ -160,6 +160,7 @@ SRC_FILES	+=	view/rotate_xyz.c
 SRC_FILES	+=	render/free.c
 SRC_FILES	+=	render/free2.c
 SRC_FILES	+=	render/process_pixel.c
+SRC_FILES	+=	render/process_pixel_2.c
 SRC_FILES	+=	render/render_loop_init.c
 SRC_FILES	+=	render/render_loop.c
 SRC_FILES	+=	render/render_mt.c
