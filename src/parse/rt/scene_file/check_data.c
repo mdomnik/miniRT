@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:21:04 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 16:54:27 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 20:09:00 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ int	check_dup_objects(t_options *options, int binary)
 
 	i = 0;
 	unique = ft_split(UNIQUE_OBJECTS, ',');
+	if (options->scene.scene_objects == NULL)
+		return (free_double(unique), ret_message(ERR_EMPTY_FILE, NULL));
 	while (options->scene.scene_objects[i] != NULL)
 	{
 		j = 0;

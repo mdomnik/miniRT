@@ -35,7 +35,7 @@ LFT_A           := $(LFT_DIR)/libft.a
 INCLUDES        := -Iinc -I$(MLX_DIR)
 
 # Target executable
-NAME            := minirt
+NAME            := miniRT
 
 # Source files directory
 SRC_DIR         := src
