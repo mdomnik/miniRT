@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 01:41:10 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 01:44:20 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 15:28:06 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,11 @@ void	free_pattern(t_pattern *pattern, t_shape *shape)
 		return ;
 	if (pattern->simple == true)
 	{
-		free(pattern->uv_pattern);
-		free(pattern);
+		if (shape->type != CUBE && shape->type != SKYBOX)
+		{
+			free(pattern->uv_pattern);
+			free(pattern);
+		}
 		return ;
 	}
 	if (shape->type != CUBE && shape->type != SKYBOX)
