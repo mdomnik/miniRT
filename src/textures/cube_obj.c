@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:27:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 18:56:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 02:24:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,13 @@ t_directions	face_from_point(t_point3 point)
 	return (get_direction(point, val));
 }
 
-t_color3	pattern_at_cube_map(t_pattern *pattern, t_point3 point)
+// Helper function to determine UV coordinates and color for a cube face
+static t_color3	get_cube_face_color(t_cube_map *cube,
+		t_directions face, t_point3 point)
 {
-	t_cube_map		*cube;
-	t_directions	face;
-	t_uv_val		uv;
-	t_pattern		*face_pattern;
-	t_color3		color;
+	t_uv_val	uv;
+	t_pattern	*face_pattern;
 
-	cube = (t_cube_map *)pattern->uv_pattern;
-	face = face_from_point(point);
 	if (face == LEFT)
 		uv = cube_uv_left(point);
 	else if (face == FRONT)
@@ -105,8 +102,17 @@ t_color3	pattern_at_cube_map(t_pattern *pattern, t_point3 point)
 		uv = cube_uv_down(point);
 	face_pattern = cube->faces[face];
 	if (!face_pattern->simple)
-		color = uv_pattern_at_image(face_pattern->uv_pattern, uv.u, uv.v);
-	else
-		color = uv_pattern_at(face_pattern->uv_pattern, uv.u, uv.v);
-	return (color);
+		return (uv_pattern_at_image(face_pattern->uv_pattern, uv.u, uv.v));
+	return (uv_pattern_at(face_pattern->uv_pattern, uv.u, uv.v));
+}
+
+// Main function to determine the pattern color at a given point on a cube map
+t_color3	pattern_at_cube_map(t_pattern *pattern, t_point3 point)
+{
+	t_cube_map		*cube;
+	t_directions	face;
+
+	cube = (t_cube_map *)pattern->uv_pattern;
+	face = face_from_point(point);
+	return (get_cube_face_color(cube, face, point));
 }

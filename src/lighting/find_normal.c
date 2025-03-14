@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:32:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/09 16:12:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 02:27:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_vec3	normal_at(t_shape *shape, t_point3 point)
 
 	local_point = world_to_object(shape, &point);
 	local_normal = local_normal_at(shape, &local_point);
-	local_normal = perturb_normal(shape, &local_point, local_normal);
+	local_normal = perturb_normal(shape, &local_point, local_normal,
+			new_point3(0, 0, 0));
 	return (normal_to_world(shape, &local_normal));
 }

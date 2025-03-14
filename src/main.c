@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:26:20 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 20:37:49 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 02:30:48 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int	main(int ac, char *av[])
 	}
 	set_window(loop);
 	render(loop);
-	ft_dprintf(1, "\033[1;32mSuccessfully rendered '\033[1;37m%s\033[1;32m'\033[0m\n", loop->opts->scene.scene_file);
+	ft_dprintf(1, "\033[1;32mSuccessfully rendered '");
+	ft_dprintf(1, "\033[1;37m%s\033[1;32m'\033[0m\n",
+		loop->opts->scene.scene_file);
 	mlx_key_hook(loop->win, key_hook, loop);
 	mlx_hook(loop->win, 17, 0, close_window, loop);
 	mlx_loop(loop->mlx);

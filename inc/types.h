@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: artem <artem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 21:37:00 by artem            ###   ########.fr       */
+/*   Updated: 2025/03/14 02:07:42 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,5 +253,19 @@ typedef struct s_lighting
 	bool		in_shadow;
 
 }	t_lighting;
+
+typedef struct s_sampling_params
+{
+	int		grid_size;
+	float	step_size;
+	float	half_step;
+
+}	t_sampling_params;
+
+typedef struct s_sample_context
+{
+	t_ray	*rays[RECURSIVE_DEPTH + 1];
+	t_comp	*comps[RECURSIVE_DEPTH + 1];
+}	t_sample_context;
 
 #endif /* TYPES_H */

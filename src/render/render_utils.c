@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:22:56 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 20:30:57 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 02:21:26 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,16 @@ void	update_display(t_loop *loop)
 // Function to initialize memory for rays and computation buffers
 bool	init_worker_memory(t_ray **ray, t_comp **comp)
 {
-	for (int i = 0; i <= RECURSIVE_DEPTH; i++)
+	int	i;
+
+	i = 0;
+	while (i <= RECURSIVE_DEPTH)
 	{
 		ray[i] = malloc(sizeof(t_ray));
 		comp[i] = malloc(sizeof(t_comp));
 		if (!ray[i] || !comp[i])
 			return (false);
+		i++;
 	}
 	return (true);
 }
@@ -50,10 +54,14 @@ bool	init_worker_memory(t_ray **ray, t_comp **comp)
 // Function to free allocated memory
 void	free_worker_memory(t_ray **ray, t_comp **comp)
 {
-	for (int i = 0; i <= RECURSIVE_DEPTH; i++)
+	int	i;
+
+	i = 0;
+	while (i <= RECURSIVE_DEPTH)
 	{
 		free(ray[i]);
 		free(comp[i]);
+		i++;
 	}
 }
 

@@ -6,13 +6,13 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 00:40:25 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 00:44:59 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 02:19:01 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-static FILE	*open_ppm_file(const char *filename)
+static FILE	*open_ppm_file_a(const char *filename)
 {
 	FILE	*file;
 
@@ -81,7 +81,7 @@ t_canvas	*canvas_from_ppm(const char *filename)
 	t_canvas	*canvas;
 	int			color_max;
 
-	file = open_ppm_file(filename);
+	file = open_ppm_file_a(filename);
 	if (!file)
 		return (NULL);
 	if (!validate_ppm_format(file))

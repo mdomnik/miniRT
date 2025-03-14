@@ -6,31 +6,11 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 20:09:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 20:33:28 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 02:29:27 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
-
-t_bump_map	*bump_map_from_ppm(const char *filename,
-	double scale, t_uv_val (*uv_maps)(t_point3))
-{
-	t_canvas	*height_map;
-	t_bump_map	*bump_map;
-
-	height_map = canvas_from_ppm(filename);
-	if (!height_map)
-	{
-		ft_dprintf(2, "Error loading bump map: %s\n", filename);
-		exit(EXIT_FAILURE);
-	}
-	bump_map = malloc(sizeof(t_bump_map));
-	bump_map->height_map = height_map;
-	bump_map->scale = scale;
-	bump_map->uv_map = uv_maps;
-	bump_map->transform = init_identity_matrix(4);
-	return (bump_map);
-}
 
 t_bump_map	*bump_map_from_ppm_sphere(const char *filename,
 	double scale, t_uv_val (*uv_maps)(t_point3, float))
@@ -79,14 +59,13 @@ static void	get_height_values(t_bump_map *bump_map, t_uv_val uv,
 #define DV 1
 
 t_vec3	perturb_normal(t_shape *shape, t_point3 *local_point,
-	t_vec3 local_normal)
+	t_vec3 local_normal, t_point3 transformed_point)
 {
 	t_bump_map	*bump_map;
 	float		heights[4];
 	float		d[2];
 	t_vec3		perturbed_normal;
 	t_uv_val	uv;
-	t_point3	transformed_point;
 
 	if (!shape->material.bump_map || !shape->material.bump_map->height_map)
 		return (local_normal);
@@ -130,9 +109,8 @@ static int	apply_transform(char **transform_str, t_bump_map *bump_map)
 	transform = multiply_matrices(transform,
 			translation(ft_atof_mrt(translate[0]), ft_atof_mrt(translate[1]),
 				ft_atof_mrt(translate[2])));
-	free_double(translate);
 	bump_map->transform = transform;
-	return (0);
+	return (free_double(translate), 0);
 }
 
 int	bump_map_get_transform(char *transform, t_bump_map *bump_map)

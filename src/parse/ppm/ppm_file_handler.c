@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:18:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 01:23:28 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 02:29:48 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,24 @@ int	open_ppm_file(char *filename)
 	ft_dprintf(0, "\033[1;35mImage saved to %s.ppm!\033[0m\n", filename);
 	free(file_name);
 	return (fd);
+}
+
+t_bump_map	*bump_map_from_ppm(const char *filename,
+	double scale, t_uv_val (*uv_maps)(t_point3))
+{
+	t_canvas	*height_map;
+	t_bump_map	*bump_map;
+
+	height_map = canvas_from_ppm(filename);
+	if (!height_map)
+	{
+		ft_dprintf(2, "Error loading bump map: %s\n", filename);
+		exit(EXIT_FAILURE);
+	}
+	bump_map = malloc(sizeof(t_bump_map));
+	bump_map->height_map = height_map;
+	bump_map->scale = scale;
+	bump_map->uv_map = uv_maps;
+	bump_map->transform = init_identity_matrix(4);
+	return (bump_map);
 }

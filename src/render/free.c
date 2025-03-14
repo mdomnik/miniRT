@@ -34,7 +34,7 @@ static void	free_shapes(t_shape *shape)
 	}
 }
 
-void free_lights(t_light_p *light)
+void	free_lights(t_light_p *light)
 {
 	t_light_p	*temp;
 
@@ -87,70 +87,4 @@ void	free_canvas(t_canvas *canvas)
 	}
 	free(canvas->pixels);
 	free(canvas);
-}
-
-void	free_pattern(t_pattern *pattern, t_shape *shape)
-{
-	t_pattern	*pat;
-	t_uv_image	*uv_img;
-	t_cube_map	*cube_map;
-	t_pattern	*p;
-	t_canvas	*canvas;
-	int			i;
-
-	if (!pattern)
-		return ;
-	if (pattern->simple == true)
-	{
-		free(pattern->uv_pattern);
-		free(pattern);
-		return ;
-	}
-	if (shape->type != CUBE && shape->type != SKYBOX)
-	{
-		pat = (t_pattern *)pattern->uv_pattern;
-		uv_img = (t_uv_image *)pat->uv_pattern;
-		if (uv_img && uv_img->canvas)
-		{
-			canvas = uv_img->canvas;
-			free_canvas(canvas);
-		}
-		if (uv_img)
-			free(uv_img);
-		if (pat)
-			free(pat);
-	}
-	else
-	{
-		cube_map = (t_cube_map *)pattern->uv_pattern;
-		i = 0;
-		while (i < 6)
-		{
-			pat = cube_map->faces[i];
-			p = (t_pattern *)pat->uv_pattern;
-			uv_img = (t_uv_image *)p->uv_pattern;
-			if (uv_img && uv_img->canvas)
-			{
-				canvas = uv_img->canvas;
-				free_canvas(canvas);
-			}
-			if (uv_img)
-				free(uv_img);
-			if (p)
-				free(p);
-			if (pat)
-				free(pat);
-			i++;
-		}
-		free(cube_map);
-	}
-	free(pattern);
-}
-
-void	free_bump_map(t_bump_map *bump_map)
-{
-	if (!bump_map)
-		return ;
-	free_canvas(bump_map->height_map);
-	free(bump_map);
 }
