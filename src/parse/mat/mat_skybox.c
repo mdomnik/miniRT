@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:41:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/09 13:23:29 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 15:40:30 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ int	get_skybox(char *str, t_material *mat)
 	t_pattern	*side[6];
 	t_pattern	*cube_map;
 	char		*path;
+	int			fd;
 
 	path = ft_strjoin("skybox/", str);
-	if (open(path, O_DIRECTORY) == -1)
+	fd = open(path, O_DIRECTORY);
+	if (fd == -1)
 	{
 		mat->pattern = NULL;
 		return (-1);
@@ -52,5 +54,6 @@ int	get_skybox(char *str, t_material *mat)
 	free(path);
 	cube_map = new_cube_map(side);
 	mat->pattern = cube_map;
+	close(fd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 01:41:10 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 15:28:06 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 15:42:47 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	free_pattern(t_pattern *pattern, t_shape *shape)
 			free(pattern->uv_pattern);
 			free(pattern);
 		}
+		else
+			free(pattern);
 		return ;
 	}
 	if (shape->type != CUBE && shape->type != SKYBOX)
