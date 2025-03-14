@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:57:56 by astavrop          #+#    #+#             */
-/*   Updated: 2025/03/12 15:28:39 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 01:25:22 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,5 @@ int	create_skybox(t_world *world, char **args)
 	}
 	set_transform(sb, transform);
 	add_shape(&world->shapes, sb);
-	free_double(color);
-	return (0);
+	return (free_double(color), 0);
 }

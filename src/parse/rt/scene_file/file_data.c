@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 14:51:23 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 20:50:02 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 01:27:56 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,30 +62,32 @@ int	get_scene_data(t_options *options)
  * @param line The line containing the object nodes.
  * @return 0 if successful, -1 if an error occurred.
  */
+#define I 0
+#define J 1
+
 int	append_object_nodes(t_options *options, char *line)
 {
-	int		i;
-	int		j;
+	int		a[2];
 	char	**args;
 	char	*temp;
 
-	i = 0;
+	a[I] = 0;
 	args = NULL;
-	while (line[i] != '\0')
+	while (line[a[I]] != '\0')
 	{
-		i = omit_whitespaces(line, i);
-		if (line[i] == '#')
+		a[I] = omit_whitespaces(line, a[I]);
+		if (line[a[I]] == '#')
 			return (0);
-		j = 0;
-		if (line[i] == '\0' || line[i] == '\n')
+		a[J] = 0;
+		if (line[a[I]] == '\0' || line[a[I]] == '\n')
 			break ;
-		while (line[i + j] != ' ' && line[i + j] != '\t'
-			&& line[i + j] != '\0' && line[i + j] != '\n')
-			j++;
-		temp = ft_substr(line, i, j);
+		while (line[a[I] + a[J]] != ' ' && line[a[I] + a[J]] != '\t'
+			&& line[a[I] + a[J]] != '\0' && line[a[I] + a[J]] != '\n')
+			a[J]++;
+		temp = ft_substr(line, a[I], a[J]);
 		args = append_to_double(args, temp);
 		free(temp);
-		i += j + 1;
+		a[I] += a[J] + 1;
 	}
 	if (line[0] != '\n' && append_to_triple(options, args) == -1)
 		return (-1);
