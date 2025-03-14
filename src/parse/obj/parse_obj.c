@@ -6,17 +6,11 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 23:48:37 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 23:55:36 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 00:34:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
-
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r');
-}
 
 static void	parse_group_line(t_obj_file *obj_file, char *line,
 		t_group **current_group)

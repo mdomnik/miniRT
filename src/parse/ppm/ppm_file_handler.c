@@ -6,17 +6,11 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:18:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 21:43:22 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 01:23:28 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
-
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r');
-}
 
 int	check_ppm_magic_number(char *line)
 {
@@ -50,55 +44,41 @@ int	canvas_from_ppm_dimensions(t_canvas *canvas, char *line)
 	return (0);
 }
 
-t_canvas	*canvas_from_ppm(const char *filename)
+t_canvas	*canvas_new(t_canvas *canv, int width, int height)
 {
-	FILE		*file;
-	char		*line;
-	t_canvas	*canvas;
-	int			color_max;
+	int			i;
+	int			j;
 
-	file = fopen(filename, "r");
-	if (!file)
+	canv->pixels = malloc(sizeof(t_color3 *) * height);
+	i = 0;
+	while (i < height)
 	{
-		fprintf(stderr, "Error: %s\n", ERR_OPEN_FILE);
-		return (NULL);
+		j = -1;
+		canv->pixels[i] = malloc(sizeof(t_color3) * width);
+		while (++j < width)
+			canv->pixels[i][j] = new_color3(0, 0, 0);
+		i++;
 	}
-	line = skip_comments(file);
-	if (!line || check_ppm_magic_number(line) == -1)
+	return (canv);
+}
+
+int	open_ppm_file(char *filename)
+{
+	char	*file_name;
+	char	*temp;
+	int		fd;
+
+	temp = ft_strjoin("saved/", filename);
+	file_name = ft_strjoin(temp, ".ppm");
+	free(temp);
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
 	{
-		fprintf(stderr, "Error: %s\n", ERR_PPM_FORMAT);
-		free(line);
-		fclose(file);
-		return (NULL);
+		ft_dprintf(2, "Error: Could not open file for writing.\n");
+		free(file_name);
+		return (-1);
 	}
-	free(line);
-	canvas = malloc(sizeof(t_canvas));
-	if (!canvas)
-	{
-		fprintf(stderr, "Error: %s\n", ERR_MEMORY);
-		fclose(file);
-		return (NULL);
-	}
-	line = skip_comments(file);
-	if (canvas_from_ppm_dimensions(canvas, line) != 0)
-	{
-		fprintf(stderr, "Error: %s\n", ERR_PPM_FORMAT);
-		free(line);
-		fclose(file);
-		return (NULL);
-	}
-	free(line);
-	line = skip_comments(file);
-	color_max = atoi(line);
-	free(line);
-	if (color_max > 255)
-	{
-		fprintf(stderr, "Error: %s\n", ERR_COLOR_MAX);
-		fclose(file);
-		return (NULL);
-	}
-	canvas = canvas_new(canvas, canvas->width, canvas->height);
-	canvas_from_ppm_pixels(file, canvas, color_max);
-	fclose(file);
-	return (canvas);
+	ft_dprintf(0, "\033[1;35mImage saved to %s.ppm!\033[0m\n", filename);
+	free(file_name);
+	return (fd);
 }

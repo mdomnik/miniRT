@@ -6,17 +6,11 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 22:14:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 21:43:19 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 00:34:15 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
-
-int	ft_isspace(int c)
-{
-	return (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r');
-}
 
 void	canvas_write_pixel(t_canvas *canvas, int x, int y, t_color3 color)
 {

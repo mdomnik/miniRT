@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:58:12 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 22:09:26 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 00:00:32 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		pattern_get_transform(char *transforms, t_pattern *pattern);
 //mat_texture.c
 int		check_texture_args(char *str, t_material *mat, t_shape *shape);
 void	set_texture(char *type, char *transform, t_material *mat,
-	t_shape *shape);
+			t_shape *shape);
 
 //mat_format.c
 int		get_material(char *str, t_material *mat, t_shape *shape);

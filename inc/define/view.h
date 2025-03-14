@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   view.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: artem <artem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:32:19 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 20:12:11 by artem            ###   ########.fr       */
+/*   Updated: 2025/03/14 00:00:52 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void		ray_for_pixel(t_camera *camera, float px, float py, t_ray *ray);
 t_matrix	view_transformation(t_point3 from, t_vec3 orientation);
 
 //rotate_xyz.c
-t_vec3	    rotate_x(t_vec3 v, double angle);
-t_vec3	    rotate_y(t_vec3 v, double angle);
-t_vec3	    rotate_z(t_vec3 v, double angle);
+t_vec3		rotate_x(t_vec3 v, double angle);
+t_vec3		rotate_y(t_vec3 v, double angle);
+t_vec3		rotate_z(t_vec3 v, double angle);
 
 #endif

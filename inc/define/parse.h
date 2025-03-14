@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:29:54 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 20:14:26 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 01:23:45 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_group		*create_group(const char *name);
 void		canvas_from_ppm_pixels(FILE *file, t_canvas *canvas, int color_max);
 int			check_ppm_magic_number(char *line);
 int			canvas_from_ppm_dimensions(t_canvas *canvas, char *line);
+int			open_ppm_file(char *filename);
 t_canvas	*canvas_from_ppm(const char *filename);
 // t_canvas	*process_ppm_header(FILE *file, int *color_max);
 
