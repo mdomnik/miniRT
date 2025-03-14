@@ -167,6 +167,7 @@ SRC_FILES	+=	render/render_mt.c
 SRC_FILES	+=	render/render_standard.c
 SRC_FILES	+=	render/render_standard2.c
 SRC_FILES	+=	render/render_utils.c
+SRC_FILES	+=	render/render_utils_2.c
 SRC_FILES	+=	render/render_worker.c
 SRC_FILES	+=	render/render_rand.c
 

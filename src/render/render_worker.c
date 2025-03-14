@@ -6,104 +6,108 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 02:32:53 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 11:26:11 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 15:15:38 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-void	*render_worker(void *arg)
+static void	free_computed_buffer(bool **computed_buffer, int vsize)
 {
-	t_thread_data	*data;
-	t_world			*world;
-	t_ray			*ray[RECURSIVE_DEPTH + 1] = {NULL};
-	t_comp			*comp[RECURSIVE_DEPTH + 1] = {NULL};
-	int				hsize;
-	int				vsize;
-	bool			**computed_buffer;
+	int	i;
 
-	data = (t_thread_data *)arg;
-	world = init_local_world(data);
-	if (!world)
+	i = 0;
+	while (i < vsize)
 	{
-		fprintf(stderr, "Thread %d failed to initialize world.\n",
-			data->thread_id);
-		pthread_exit(NULL);
-	}
-	if (!init_worker_memory(ray, comp))
-	{
-		free_world(world);
-		pthread_exit(NULL);
-	}
-	hsize = world->camera->hsize;
-	vsize = world->camera->vsize;
-	computed_buffer = malloc(vsize * sizeof(bool *));
-	if (!computed_buffer)
-	{
-		free_worker_memory(ray, comp);
-		free_world(world);
-		pthread_exit(NULL);
-	}
-	for (int i = 0; i < vsize; i++)
-	{
-		computed_buffer[i] = calloc(hsize, sizeof(bool));
-		if (!computed_buffer[i])
-		{
-			for (int j = 0; j < i; j++)
-				free(computed_buffer[j]);
-			free(computed_buffer);
-			free_worker_memory(ray, comp);
-			free_world(world);
-			pthread_exit(NULL);
-		}
-	}
-	for (int step = 16; step >= 1; step /= 2)
-	{
-		for (int y = data->thread_id; y < vsize; y += data->total_threads)
-		{
-			for (int x = 0; x < hsize; x++)
-			{
-				if ((x % step == 0) && (y % step == 0)
-					&& !computed_buffer[y][x])
-				{
-					t_pixel px;
-					px.x = x;
-					px.y = y;
-					if (data->loop->opts->opts_flags & OPT_ANTIALIAS)
-					{
-						if (data->loop->opts->values->aa_samples > 1)
-							process_pixel_aa(world, &px,
-								data->loop->opts->values->aa_samples);
-					}
-					else
-						process_pixel_color(world, ray, comp, &px);
-					computed_buffer[y][x] = true;
-					put_pixel_to_img(data->loop->img, px.x, px.y, px.color);
-				}
-			}
-			if (y % 10 == 0)
-				update_display(data->loop);
-		}
-	}
-	for (int i = 0; i < vsize; i++)
 		free(computed_buffer[i]);
+		i++;
+	}
 	free(computed_buffer);
-	free_worker_memory(ray, comp);
-	free_world(world);
-	pthread_exit(NULL);
 }
 
-void	assign_loop_locks(t_loop *loop)
+static void	process_pixel(t_multithread_data *mdata, int x, int y)
 {
-	t_mutexes	*mutexes;
+	t_pixel	px;
 
-	mutexes = malloc(sizeof(t_mutexes));
-	if (!mutexes)
+	if (!mdata->computed_buffer[y][x])
 	{
-		fprintf(stderr, "Failed to allocate memory for mutexes.\n");
-		exit(EXIT_FAILURE);
+		px.x = x;
+		px.y = y;
+		if (mdata->thread_data->loop->opts->opts_flags & OPT_ANTIALIAS)
+		{
+			if (mdata->thread_data->loop->opts->values->aa_samples > 1)
+				process_pixel_aa(mdata->world, &px,
+					mdata->thread_data->loop->opts->values->aa_samples);
+		}
+		else
+			process_pixel_color(mdata->world, mdata->ray, mdata->comp, &px);
+		mdata->computed_buffer[y][x] = true;
+		put_pixel_to_img(mdata->thread_data->loop->img, px.x, px.y, px.color);
 	}
-	pthread_mutex_init(&mutexes->world, NULL);
-	pthread_mutex_init(&mutexes->mlx, NULL);
-	loop->mutexes = mutexes;
+}
+
+static void	render_pass(t_multithread_data *mdata, int step)
+{
+	int	y;
+	int	x;
+
+	y = mdata->thread_data->thread_id;
+	while (y < mdata->world->camera->vsize)
+	{
+		x = 0;
+		while (x < mdata->world->camera->hsize)
+		{
+			if (x % step == 0 && y % step == 0)
+				process_pixel(mdata, x, y);
+			x++;
+		}
+		if (y % 10 == 0)
+			update_display(mdata->thread_data->loop);
+		y += mdata->thread_data->total_threads;
+	}
+}
+
+static bool	setup_multithread_data(t_multithread_data *mdata,
+		t_thread_data *thread_data)
+{
+	mdata->thread_data = thread_data;
+	mdata->world = init_local_world(thread_data);
+	if (!mdata->world)
+	{
+		fprintf(stderr, ERR_THREAD, thread_data->thread_id);
+		return (false);
+	}
+	if (!init_worker_memory(mdata->ray, mdata->comp))
+	{
+		free_world(mdata->world);
+		return (false);
+	}
+	mdata->computed_buffer = allocate_computed_buffer(
+			mdata->world->camera->hsize, mdata->world->camera->vsize);
+	if (!mdata->computed_buffer)
+	{
+		free_worker_memory(mdata->ray, mdata->comp);
+		free_world(mdata->world);
+		return (false);
+	}
+	return (true);
+}
+
+void	*render_worker(void *arg)
+{
+	t_multithread_data	mdata;
+	int					step;
+
+	if (!setup_multithread_data(&mdata, (t_thread_data *)arg))
+		pthread_exit(NULL);
+	step = 16;
+	while (step >= 1)
+	{
+		render_pass(&mdata, step);
+		step /= 2;
+	}
+	free_computed_buffer(mdata.computed_buffer, mdata.world->camera->vsize);
+	free_worker_memory(mdata.ray, mdata.comp);
+	free_world(mdata.world);
+	pthread_exit(NULL);
 }

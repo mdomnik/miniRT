@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 14:33:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 15:13:09 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,5 +286,14 @@ typedef struct s_aa_sample_data
 	t_ray	*sample_ray[RECURSIVE_DEPTH + 1];
 	t_comp	*sample_comp[RECURSIVE_DEPTH + 1];
 }	t_aa_sample_data;
+
+typedef struct s_multithread_data
+{
+	t_thread_data	*thread_data;
+	t_world			*world;
+	t_ray			*ray[RECURSIVE_DEPTH + 1];
+	t_comp			*comp[RECURSIVE_DEPTH + 1];
+	bool			**computed_buffer;
+}	t_multithread_data;
 
 #endif /* TYPES_H */

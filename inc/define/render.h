@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:25:55 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 14:36:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 15:15:56 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void		render_multithreaded(t_loop *loop);
 void		join_threads(pthread_t *threads, int thread_count);
 void		*render_worker(void *arg);
 void		assign_loop_locks(t_loop *loop);
+bool		**allocate_computed_buffer(int hsize, int vsize);
 
 //render_standard.c
 void		render_single(t_loop *loop);

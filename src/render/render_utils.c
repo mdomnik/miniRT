@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:22:56 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 10:20:50 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 15:04:43 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ bool	init_worker_memory(t_ray **ray, t_comp **comp)
 	i = 0;
 	while (i <= RECURSIVE_DEPTH)
 	{
-		ray[i] = malloc(sizeof(t_ray));
-		comp[i] = malloc(sizeof(t_comp));
+		ray[i] = ft_calloc(1, sizeof(t_ray));
+		comp[i] = ft_calloc(1, sizeof(t_comp));
 		if (!ray[i] || !comp[i])
 			return (false);
 		i++;
