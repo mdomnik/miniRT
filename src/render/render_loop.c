@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 20:32:07 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 10:15:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	render(t_loop *loop)
 	{
 		ft_dprintf(0, "\033[1;33mMultithreaded rendering [%d threads]\033[0m\n",
 			loop->opts->values->threads);
+		assign_loop_locks(loop);
 		render_multithreaded(loop);
 	}
 	else

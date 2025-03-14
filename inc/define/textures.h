@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:15:05 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 02:27:10 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 10:13:56 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ t_bump_map			*bump_map_from_ppm(const char *filename,
 t_bump_map			*bump_map_from_ppm_sphere(const char *filename,
 						double scale, t_uv_val (*uv_maps)(t_point3, float));
 t_vec3				perturb_normal(t_shape *shape,
-						t_point3 *local_point, t_vec3 local_normal, t_point3 transformed_point);
+						t_point3 *local_point, t_vec3 local_normal,
+						t_point3 transformed_point);
 int					bump_map_get_transform(char *transform,
 						t_bump_map *bump_map);
 

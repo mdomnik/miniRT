@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 02:07:42 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 10:21:22 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_pattern			t_pattern;
 typedef struct s_material			t_material;
 
 typedef struct s_uv_val				t_uv_val;
+
+typedef struct s_mutexes			t_mutexes;
 
 typedef struct s_uv					t_uv;
 
@@ -132,6 +134,7 @@ struct	s_loop
 	void		*win;
 	t_image		*img;
 	t_options	*opts;
+	t_mutexes	*mutexes;
 };
 
 struct s_uv_val
@@ -267,5 +270,11 @@ typedef struct s_sample_context
 	t_ray	*rays[RECURSIVE_DEPTH + 1];
 	t_comp	*comps[RECURSIVE_DEPTH + 1];
 }	t_sample_context;
+
+typedef struct s_mutexes
+{
+	pthread_mutex_t		world;
+	pthread_mutex_t		mlx;
+}	t_mutexes;
 
 #endif /* TYPES_H */

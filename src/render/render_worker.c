@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 02:32:53 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 02:37:33 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 11:26:11 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,19 @@ void	*render_worker(void *arg)
 	free_worker_memory(ray, comp);
 	free_world(world);
 	pthread_exit(NULL);
+}
+
+void	assign_loop_locks(t_loop *loop)
+{
+	t_mutexes	*mutexes;
+
+	mutexes = malloc(sizeof(t_mutexes));
+	if (!mutexes)
+	{
+		fprintf(stderr, "Failed to allocate memory for mutexes.\n");
+		exit(EXIT_FAILURE);
+	}
+	pthread_mutex_init(&mutexes->world, NULL);
+	pthread_mutex_init(&mutexes->mlx, NULL);
+	loop->mutexes = mutexes;
 }

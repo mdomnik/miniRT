@@ -6,15 +6,11 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:22:56 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 02:21:26 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 10:20:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
-
-pthread_mutex_t	g_check_args_mutex = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t	g_world_mutex = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t	g_mlx_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void	put_pixel_to_img(t_image *img, int x, int y, int color)
 {
@@ -29,9 +25,9 @@ void	put_pixel_to_img(t_image *img, int x, int y, int color)
 // Function to update the display safely
 void	update_display(t_loop *loop)
 {
-	pthread_mutex_lock(&g_mlx_mutex);
+	pthread_mutex_lock(&loop->mutexes->mlx);
 	mlx_put_image_to_window(loop->mlx, loop->win, loop->img->img, 0, 0);
-	pthread_mutex_unlock(&g_mlx_mutex);
+	pthread_mutex_unlock(&loop->mutexes->mlx);
 }
 
 // Function to initialize memory for rays and computation buffers
@@ -75,13 +71,13 @@ t_world	*init_local_world(t_thread_data *data)
 	local_world->camera = NULL;
 	local_world->light = NULL;
 	local_world->shapes = NULL;
-	pthread_mutex_lock(&g_world_mutex);
+	pthread_mutex_lock(&data->loop->mutexes->world);
 	if (make_world(data->loop->opts, local_world) == -1)
 	{
-		pthread_mutex_unlock(&g_world_mutex);
+		pthread_mutex_unlock(&data->loop->mutexes->world);
 		free(local_world);
 		return (NULL);
 	}
-	pthread_mutex_unlock(&g_world_mutex);
+	pthread_mutex_unlock(&data->loop->mutexes->world);
 	return (local_world);
 }
