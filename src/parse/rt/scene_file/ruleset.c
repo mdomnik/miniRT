@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:32:39 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 16:44:05 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 17:25:45 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	check_object_rules(char **args, char **rules)
 			status |= check_vector_range_format(args[i]);
 		if (ft_strcmp(rules[i], "FLOAT") == 0)
 			status |= check_float_format(args[i]);
+		if (ft_strcmp(rules[i], "BRIGHT") == 0)
+			status |= check_ratio_format(args[i], 0, 1);
 		if (ft_strcmp(rules[i], "FOV") == 0)
 			status |= check_ratio_format(args[i], 0, 180);
 		if (ft_strcmp(rules[i], "STRING") == 0)

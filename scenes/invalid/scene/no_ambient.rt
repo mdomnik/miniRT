@@ -1,0 +1,4 @@
+# This scene has no ambient light
+C   0,0,-5		0,0,0		70
+L   1,1,-5		1				255,255,255
+sp	0,0,0		1				245,133,255

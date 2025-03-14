@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 18:43:25 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/25 15:41:20 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 17:43:17 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ int	create_objects(t_options *options, t_world *world)
 		if (check_bonus_objects(&options->scene, world, i) == (-1))
 			return (-1);
 		i++;
+	}
+	if (world->shapes == NULL)
+	{
+		ft_dprintf(2, "Error: No objects found in the scene\n");
+		return (-1);
 	}
 	return (0);
 }

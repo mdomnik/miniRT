@@ -6,14 +6,14 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:39:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 01:23:21 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 17:29:53 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
 #define FD 0
-#define OFFSET 3
+#define OFFSET 2
 
 static void	write_number(int fd, int num)
 {

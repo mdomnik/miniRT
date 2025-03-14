@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 12:55:49 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 17:26:05 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 //MANDATORY OBJECTS
 # define OBJECT_RULES	"A,RATIO,COLOR;\
 C,VECTOR,VRANGE,FOV;\
-L,VECTOR,FLOAT,COLOR;\
+L,VECTOR,BRIGHT,COLOR;\
 sp,VECTOR,FLOAT,COLOR,FILE;\
 pl,VECTOR,VRANGE,COLOR,FILE;\
 cy,VECTOR,VRANGE,FLOAT,FLOAT,COLOR,FILE;\
