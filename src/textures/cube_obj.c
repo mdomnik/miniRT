@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:27:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 02:24:28 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 18:31:46 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_pattern	*new_cube_map(t_pattern *faces[6])
 	cube->faces[UP] = faces[UP];
 	cube->faces[DOWN] = faces[DOWN];
 	pattern = malloc(sizeof(t_pattern));
+	pattern->is_checkers = false;
 	pattern->type = CUBE_MAP;
 	pattern->simple = false;
 	pattern->uv_pattern = cube;

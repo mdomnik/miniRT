@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 20:19:17 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 18:30:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	set_cylinder_pattern(t_shape *cy)
 				cy->material.pattern->b);
 		free(cy->material.pattern);
 		cy->material.pattern = texture_map(uv, cylindrical_map);
+		cy->material.pattern->is_checkers = true;
 		cy->material.pattern->simple = true;
 	}
 }

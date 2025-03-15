@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 20:16:01 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 17:56:32 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 18:31:41 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_pattern	*align_check_map(void *uv_pattern, t_uv_val (*uv_map)(t_point3))
 	t_pattern	*pattern;
 
 	pattern = malloc(sizeof(t_pattern));
+	pattern->is_checkers = false;
 	pattern->type = ALIGN_CHECK;
 	pattern->simple = false;
 	pattern->uv_pattern = uv_pattern;

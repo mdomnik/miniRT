@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/15 17:22:48 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 18:29:48 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ struct s_pattern
 	t_matrix		transform;
 	t_pattern_type	type;
 	bool			simple;
+	bool			is_checkers;
 	void			*uv_pattern;
 	t_uv_val		(*uv_map)(t_point3 point);
 	t_uv_val		(*uv_map_sphere)(t_point3 point, float scale);

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:20:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 21:44:42 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 18:30:40 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	set_sphere_pattern(t_shape *sp)
 				sp->material.pattern->b);
 		free(sp->material.pattern);
 		sp->material.pattern = texture_map_sphere(uv, spherical_map);
+		sp->material.pattern->is_checkers = true;
 		sp->material.pattern->simple = true;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:29:18 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/15 14:10:23 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 18:42:19 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	check_texture_args(char *str, t_material *mat, t_shape *shape)
 	int		i;
 	char	**input;
 
-	input = ft_split(str, ' ');
 	i = 0;
 	if (shape->type == GROUP)
 		return (0);
+	input = ft_split(str, ' ');
 	while (input[i] != NULL)
 		i++;
 	if (i < 2)
@@ -52,6 +52,7 @@ static void	set_pattern(char *type, char *colors, char *transforms,
 	if (mat->pattern)
 		return ;
 	pattern = malloc(sizeof(t_pattern));
+	pattern->is_checkers = false;
 	pattern->transform = init_identity_matrix(4);
 	if (pattern_get_type(type, pattern) == -1)
 	{

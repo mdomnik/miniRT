@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:49:12 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 18:17:22 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 18:46:30 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static t_color3	handle_texture_map(t_pattern *pattern,
 		uv = pattern->uv_map_sphere(*point, pattern->sphere_scale);
 	else
 		uv = pattern->uv_map(*point);
-	if (((t_pattern *)pattern->uv_pattern)->type == UV_IMAGE)
+	if (pattern->simple == false)
 	{
 		color = uv_pattern_at_image((t_pattern *)pattern->uv_pattern,
 				uv.u, uv.v);
