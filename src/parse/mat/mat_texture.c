@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:29:18 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 22:09:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 11:40:20 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	check_texture_args(char *str, t_material *mat, t_shape *shape)
 	int		i;
 	char	**input;
 
+	if (shape->type == GROUP)
+		return (0);
 	input = ft_split(str, ' ');
 	i = 0;
 	while (input[i] != NULL)

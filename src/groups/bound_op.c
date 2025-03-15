@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 16:41:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/15 02:44:07 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 10:54:44 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_bounds	group_bounds(t_shape *group)
 	child = group->children;
 	while (child != NULL)
 	{
-		if (!child->bounds_cache.initialized)
+		if (child->bounds_cache.initialized == false)
 		{
 			child->bounds_cache = child->bounds(child);
 			child->transformed_bounds_cache = transform_bounds(

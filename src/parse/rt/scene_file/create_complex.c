@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:57:56 by astavrop          #+#    #+#             */
-/*   Updated: 2025/03/14 01:25:22 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 12:23:51 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@ static void	set_obj_transform(t_shape *obj, char **coords,
 	set_transform(obj, transform);
 }
 
+void	free_group(t_group *group)
+{
+	t_group	*tmp;
+
+	while (group)
+	{
+		tmp = group->next;
+		free(group->name);
+		free(group);
+		group = tmp;
+	}
+}
+
 int	create_obj(t_world *world, char **args)
 {
 	t_shape		*obj;
@@ -49,6 +62,7 @@ int	create_obj(t_world *world, char **args)
 	obj_file = parse_obj_file(args[1]);
 	group = obj_file->default_group;
 	obj = object_group_to_group(group);
+	free_group(group);
 	vectors[COORD] = ft_split(args[2], ',');
 	vectors[NORMAL] = ft_split(args[3], ',');
 	vectors[COLOR] = ft_split(args[5], ',');
@@ -62,10 +76,9 @@ int	create_obj(t_world *world, char **args)
 	obj->bounds_cache = group_bounds(obj);
 	inherit_material(obj);
 	add_shape(&world->shapes, obj);
-	free(obj_file->vertices);
-	free(obj_file->faces);
-	free(obj_file);
-	return (0);
+	return (free_double(vectors[COLOR]), free_double(vectors[NORMAL]),
+		free_double(vectors[COORD]), free(obj_file->vertices),
+		free(obj_file->faces), free(obj_file), 0);
 }
 
 int	create_skybox(t_world *world, char **args)

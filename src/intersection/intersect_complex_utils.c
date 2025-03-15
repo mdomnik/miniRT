@@ -94,6 +94,8 @@ t_x	*handle_child_intersection(t_x *xs, t_x *temp_xs)
 {
 	if (xs == NULL)
 		return (temp_xs);
+	if (temp_xs == NULL)
+		return (xs);
 	xs = join_intersections((xs->count + temp_xs->count), xs, temp_xs);
 	return (xs);
 }
