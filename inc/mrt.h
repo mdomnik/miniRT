@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2025/03/12 12:51:03 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 17:18:08 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # include <math.h>
 
 // External libraries
-# include "../lib/minilibx-linux/mlx.h"
+// # include "../lib/minilibx-linux/mlx.h"
+# include <mlx.h>
 # include "../lib/libft/libft.h"
 
 // Project settings

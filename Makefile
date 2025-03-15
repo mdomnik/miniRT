@@ -21,7 +21,7 @@ endif
 
 # Libraries to be linked
 LIBS            += -L$(LFT_DIR) -lft
-LIBS            += -L$(MLX_BUILD_DIR) -lmlx_Linux
+LIBS            += -lmlx
 LIBS            += -L/usr/lib -I$(MLX_DIR) -lXext -lX11 -lm -lz
 
 MLX_DIR         := lib/minilibx-linux
@@ -188,14 +188,13 @@ DEP_DIR         := .dep
 DEPENDS         := $(patsubst %.o, $(DEP_DIR)/%.d, $(OBJ_FILES))
 -include $(DEPENDS)
 
-RM              := /bin/rm -f
+RM              := rm -f
 MKDIR           := /bin/mkdir -p
 
 .DEFAULT_GOAL   := all
 
 all: ## Build this project
 	@$(MAKE) libft
-	@$(MAKE) mlx
 	@$(MAKE) -j $(NAME)
 
 libft: ## Build libft
@@ -220,7 +219,7 @@ $(OBJ_DIR):
 	@$(MKDIR) $@
 
 # Rule for linking the target executable
-$(NAME): $(OBJ_FILES) $(LFT_A) $(MLX_A)
+$(NAME): $(OBJ_FILES) $(LFT_A)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(INCLUDES) $(LIBS)
 	-@echo -ne "🚀 $(MAGENTA)" && ls -lah $(NAME) && echo -ne "$(RESET)"
 

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 23:56:53 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 02:30:14 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 17:22:19 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_color3	mult_color_scalar(t_color3 a, float scalar)
 }
 
 //subtracts tuple b from tuple a and returns a pointer to the result
-t_tuple	sub_tuple_p(t_tuple *a, t_tuple *b) //replace
+t_tuple	sub_tuple_p(t_tuple *a, t_tuple *b)
 {
 	t_vec3	result;
 

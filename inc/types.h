@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 15:13:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 17:22:48 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ struct	s_tuple
 			float	x;
 			float	y;
 			float	z;
-			float	w; //point is 1, vector is 0
+			float	w;
 		};
 		struct
 		{
