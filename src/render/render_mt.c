@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 11:37:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 21:38:12 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ void	render_multithreaded(t_loop *loop)
 		i++;
 	}
 	mlx_put_image_to_window(loop->mlx, loop->win, loop->img->img, 0, 0);
+	if (loop->opts->opts_flags & OPT_SAVE
+		&& loop->opts->values->filename != NULL)
+		save_image(loop->img, loop->opts->values->filename);
 	free(threads);
 	free(thread_data);
 }

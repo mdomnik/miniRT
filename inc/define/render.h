@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:25:55 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 15:15:56 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 09:52:50 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ bool		**allocate_computed_buffer(int hsize, int vsize);
 
 //render_standard.c
 void		render_single(t_loop *loop);
+void		process_step_pixels(t_render_data *data, t_world *world, int step,
+				t_loop *loop);
 
 //render_standard2.c
 void		free_render_data(t_render_data *data);

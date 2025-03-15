@@ -21,7 +21,7 @@ lib/minilibx-linux
 *.tgz
 
 # Main binary
-minirt
+miniRT
 
 # MLX42
 *.tar.gz

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:32:39 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 17:25:45 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 09:46:44 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,11 @@
  * @param rules An array of strings representing the rules for each object.
  * @return Returns 0 if all the rules are satisfied, -1 otherwise.
  */
-int	check_object_rules(char **args, char **rules)
+static int	check_format_rules(char **args, char **rules, int i)
 {
-	int	i;
 	int	status;
 
-	i = 0;
 	status = 0;
-	if ((ft_strncmp(rules[0], "A", ft_strlen(rules[0])) == 0)
-		|| (ft_strncmp(rules[0], "C", ft_strlen(rules[0])) == 0)
-		|| (ft_strncmp(rules[0], "L", ft_strlen(rules[0])) == 0))
-	{
-		if (count_args(args) != (count_args(rules)))
-			return (ret_message(ERR_ARGS, NULL));
-	}
-	else
-	{
-		if ((count_args(args) < (count_args(rules) - 1))
-			|| count_args(args) > (count_args(rules)))
-			return (ret_message(ERR_ARGS, NULL));
-	}
 	while (rules[++i] != NULL && status == 0)
 	{
 		if (ft_strcmp(rules[i], "COLOR") == 0)
@@ -66,6 +51,24 @@ int	check_object_rules(char **args, char **rules)
 			status |= check_file_open_format(args[i]);
 	}
 	return (status);
+}
+
+int	check_object_rules(char **args, char **rules)
+{
+	int	i;
+
+	i = 0;
+	if ((ft_strncmp(rules[0], "A", ft_strlen(rules[0])) == 0)
+		|| (ft_strncmp(rules[0], "C", ft_strlen(rules[0])) == 0)
+		|| (ft_strncmp(rules[0], "L", ft_strlen(rules[0])) == 0))
+	{
+		if (count_args(args) != count_args(rules))
+			return (ret_message(ERR_ARGS, NULL));
+	}
+	else if ((count_args(args) < (count_args(rules) - 1))
+		|| (count_args(args) > count_args(rules)))
+		return (ret_message(ERR_ARGS, NULL));
+	return (check_format_rules(args, rules, i));
 }
 
 /**

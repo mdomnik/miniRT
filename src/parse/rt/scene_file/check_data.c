@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:21:04 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 20:09:00 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 09:42:59 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ int	check_dup_objects(t_options *options, int binary)
 	int		i;
 	int		j;
 
-	i = 0;
+	i = -1;
 	unique = ft_split(UNIQUE_OBJECTS, ',');
 	if (options->scene.scene_objects == NULL)
 		return (free_double(unique), ret_message(ERR_EMPTY_FILE, NULL));
-	while (options->scene.scene_objects[i] != NULL)
+	while (options->scene.scene_objects[++i] != NULL)
 	{
-		j = 0;
-		while (unique[j] != NULL)
+		j = -1;
+		while (unique[++j] != NULL)
 		{
 			if (ft_strcmp(options->scene.scene_objects[i][0], unique[j]) == 0)
 			{
@@ -116,9 +116,7 @@ int	check_dup_objects(t_options *options, int binary)
 				}
 				binary |= (1 << j);
 			}
-			j++;
 		}
-		i++;
 	}
 	return (free_double(unique), 0);
 }

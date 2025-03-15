@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 16:41:02 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/02/24 20:27:31 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 02:44:07 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ t_bounds	group_bounds(t_shape *group)
 static void	update_transformed_bounds(t_bounds *bounds, t_point3 transformed)
 {
 	if (isnan(transformed.x) || isnan(transformed.y) || isnan(transformed.z))
-	{
-		printf("Invalid transformation detected.\n");
 		return ;
-	}
 	bounds->min.x = fminf(bounds->min.x, transformed.x);
 	bounds->min.y = fminf(bounds->min.y, transformed.y);
 	bounds->min.z = fminf(bounds->min.z, transformed.z);
