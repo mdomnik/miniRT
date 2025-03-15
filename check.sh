@@ -12,10 +12,11 @@ fi
 #  	./miniRT "$path"
 # done
 
-# # Find all files in the src/ directory and subdirectories
-# find scenes/2_basic_shapes -type f | while read -r path; do
-#     echo "Running ./miniRT with $path"
-#     ./miniRT "$path"
+# Find all files in the src/ directory and subdirectories
+find scenes/2_basic_shapes -type f | while read -r path; do
+    echo "Running ./miniRT with $path"
+    ./miniRT "$path"
+done
 
 # # Find all files in the src/ directory and subdirectories
 # find scenes/3_tasked_scenes -type f | while read -r path; do
@@ -35,9 +36,8 @@ fi
 #     ./miniRT "$path"
 # done
 
-# Find all files in the src/ directory and subdirectories
-find scenes/6_showcase -type f | while read -r path; do
-    echo "Running ./miniRT with $path"
-    ./miniRT "$path"
-done
-
+# # Find all files in the src/ directory and subdirectories
+# find scenes/6_showcase -type f | while read -r path; do
+#     echo "Running ./miniRT with $path"
+#     ./miniRT "$path"
+# done

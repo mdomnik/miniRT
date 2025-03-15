@@ -19,6 +19,7 @@ compile_commands.json
 *.fdb_latexmk
 lib/minilibx-linux
 *.tgz
+assets/
 
 # Main binary
 miniRT
