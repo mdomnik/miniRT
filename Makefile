@@ -201,9 +201,9 @@ all: ## Build this project
 libft: ## Build libft
 	$(MAKE) -C $(LFT_DIR)
 
-mlx: ## Build MLX42
+mlx: ## Build MinilibX
 	@if [ ! -d "$(MLX_DIR)" ]; then \
-		echo "MLX42 not found, please ensure it is cloned in $(MLX_DIR)"; \
+		echo "MinilibX not found, please ensure it is cloned in $(MLX_DIR)"; \
 		exit 1; \
 	else \
 		cd $(MLX_DIR) && ./configure && $(MAKE); \
