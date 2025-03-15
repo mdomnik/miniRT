@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 22:08:35 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 22:14:11 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 14:02:17 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	set_texture(char *type, char *transform, t_material *mat,
 
 	if (!transform)
 		return ;
-	filename = ft_strjoin("textures/", type);
+	filename = ft_strjoin("assets/textures/", type);
 	if (open(filename, O_RDONLY) == -1)
 	{
 		free(filename);

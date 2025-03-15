@@ -9,22 +9,35 @@ fi
 # # Find all files in the src/ directory and subdirectories
 # find scenes/1_invalid -type f | while read -r path; do
 #     echo "Running ./miniRT with $path"
-#     valgrind --leak-check=full ./miniRT "$path"
+#  	./miniRT "$path"
 # done
 
 # # Find all files in the src/ directory and subdirectories
 # find scenes/2_basic_shapes -type f | while read -r path; do
 #     echo "Running ./miniRT with $path"
-#     valgrind --leak-check=full ./miniRT "$path"
+#     ./miniRT "$path"
 
 # # Find all files in the src/ directory and subdirectories
 # find scenes/3_tasked_scenes -type f | while read -r path; do
 #     echo "Running ./miniRT with $path"
-#     valgrind --leak-check=full ./miniRT "$path"
+#     ./miniRT "$path"
+# done
+
+# # Find all files in the src/ directory and subdirectories
+# find scenes/4_subject_scenes -type f | while read -r path; do
+#     echo "Running ./miniRT with $path"
+#     ./miniRT "$path"
+# done
+
+# # Find all files in the src/ directory and subdirectories
+# find scenes/5_bonus_scenes -type f | while read -r path; do
+#     echo "Running ./miniRT with $path"
+#     ./miniRT "$path"
 # done
 
 # Find all files in the src/ directory and subdirectories
-find scenes/4_subject_scenes -type f | while read -r path; do
+find scenes/6_showcase -type f | while read -r path; do
     echo "Running ./miniRT with $path"
-    valgrind --leak-check=full ./miniRT "$path"
+    ./miniRT "$path"
 done
+

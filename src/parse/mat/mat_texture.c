@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:29:18 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/15 11:40:20 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 14:10:23 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	check_texture_args(char *str, t_material *mat, t_shape *shape)
 	int		i;
 	char	**input;
 
-	if (shape->type == GROUP)
-		return (0);
 	input = ft_split(str, ' ');
 	i = 0;
+	if (shape->type == GROUP)
+		return (0);
 	while (input[i] != NULL)
 		i++;
 	if (i < 2)
@@ -80,7 +80,7 @@ static void	set_bump_map(char *type, char *transform, t_material *mat,
 
 	if (!transform)
 		return ;
-	join = ft_strjoin("bump_maps/", type);
+	join = ft_strjoin("assets/bump_maps/", type);
 	if (open(join, O_RDONLY) == -1)
 		return ;
 	if (shape->type == SPHERE)

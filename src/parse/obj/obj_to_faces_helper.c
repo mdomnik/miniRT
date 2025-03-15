@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 20:10:37 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/13 23:50:15 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 14:09:43 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_obj_file	*init_obj_file(const char *filename, int *fd)
 	obj_file->vertices = malloc(MAX_VERTEX_COUNT * sizeof(t_point3));
 	obj_file->faces = malloc(MAX_VERTEX_COUNT * sizeof(t_triangle));
 	obj_file->default_group = create_group("Default");
-	path = ft_strjoin("objects/", filename);
+	path = ft_strjoin("assets/objects/", filename);
 	*fd = open(path, O_RDONLY);
 	free(path);
 	if (!*fd)

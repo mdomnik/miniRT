@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:41:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/14 15:40:30 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 14:01:34 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	get_skybox(char *str, t_material *mat)
 	char		*path;
 	int			fd;
 
-	path = ft_strjoin("skybox/", str);
+	path = ft_strjoin("assets/skybox/", str);
 	fd = open(path, O_DIRECTORY);
 	if (fd == -1)
 	{
