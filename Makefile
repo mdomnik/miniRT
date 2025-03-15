@@ -221,7 +221,7 @@ $(OBJ_DIR):
 
 # Rule for linking the target executable
 $(NAME): $(OBJ_FILES) $(LFT_A) $(MLX_A)
-	$(CC) $(CFLAGS) -pg -o $(NAME) $(OBJ_FILES) $(INCLUDES) $(LIBS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(INCLUDES) $(LIBS)
 	-@echo -ne "🚀 $(MAGENTA)" && ls -lah $(NAME) && echo -ne "$(RESET)"
 
 c clean: ## Clean objects and dependencies

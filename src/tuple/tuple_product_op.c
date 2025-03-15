@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:31:22 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/12 16:25:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 15:45:46 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,10 @@ float	dot_product(t_vec3 a, t_vec3 b)
 }
 
 //cross product of two vectors
-t_vec3	cross_product(t_vec3 a, t_vec3 b)
+inline t_vec3	cross_product(t_vec3 a, t_vec3 b)
 {
-	t_vec3	result;
-
-	result.x = a.y * b.z - a.z * b.y;
-	result.y = a.z * b.x - a.x * b.z;
-	result.z = a.x * b.y - a.y * b.x;
-	return (result);
+	return ((t_vec3){.x = (a.y * b.z - a.z * b.y),
+		.y = (a.z * b.x - a.x * b.z), .z = (a.x * b.y - a.y * b.x), .w = 0});
 }
 
 //normalize a vector

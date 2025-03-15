@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:35:20 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/03/15 10:50:24 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/15 15:39:18 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_shape	*triangle(t_point3 p1, t_point3 p2, t_point3 p3)
 {
 	t_shape	*shape;
 
-	shape = malloc(sizeof(t_shape));
+	shape = ft_calloc(1, sizeof(t_shape));
 	shape->type = TRIANGLE;
 	shape->material = default_material();
 	shape->transform = init_identity_matrix(4);
@@ -90,7 +90,7 @@ t_shape	*group(void)
 {
 	t_shape	*shape;
 
-	shape = malloc(sizeof(t_shape));
+	shape = ft_calloc(1, sizeof(t_shape));
 	shape->type = GROUP;
 	shape->transform = init_identity_matrix(4);
 	shape->material = default_material();
