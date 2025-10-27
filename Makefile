@@ -1,11 +1,15 @@
-#                                     #
-#            _       _ _____ _______  #
-#           (_)     (_)  __ \__   __| #
-#  _ __ ___  _ _ __  _| |__) | | |    #
-# | '_ ` _ \| | '_ \| |  _  /  | |    #
-# | | | | | | | | | | | | \ \  | |    #
-# |_| |_| |_|_|_| |_|_|_|  \_\ |_|    #
-#                                     #
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/10/27 14:04:15 by mdomnik           #+#    #+#              #
+#    Updated: 2025/10/27 14:08:24 by mdomnik          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 
 # Compiler to be used
 CC              := cc
@@ -19,17 +23,20 @@ ifeq ($(DEBUG), 1)
     CFLAGS      += -ggdb3 -gdwarf-4
 endif
 
-# Libraries to be linked
-LIBS            += -L$(LFT_DIR) -lft
-LIBS            += -lmlx
-LIBS            += -L/usr/lib -I$(MLX_DIR) -lXext -lX11 -lm -lz
-
-MLX_DIR         := lib/minilibx-linux
+MLX_DIR := lib/minilibx-linux
 MLX_BUILD_DIR   := $(MLX_DIR)
 MLX_A           := $(MLX_BUILD_DIR)/libmlx_Linux.a
 
-LFT_DIR         := lib/libft
+LFT_DIR := lib/libft
 LFT_A           := $(LFT_DIR)/libft.a
+
+# Libraries to be linked
+LIBS := \
+    -L$(LFT_DIR) -lft \
+    -L$(MLX_DIR) -lmlx \
+    -L/usr/lib -lXext -lX11 -lm -lz
+
+
 
 # Include directories
 INCLUDES        := -Iinc -I$(MLX_DIR)
@@ -220,7 +227,7 @@ $(OBJ_DIR):
 
 # Rule for linking the target executable
 $(NAME): $(OBJ_FILES) $(LFT_A)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(INCLUDES) $(LIBS)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJ_FILES) $(LIBS) -o $(NAME)
 	-@echo -ne "🚀 $(MAGENTA)" && ls -lah $(NAME) && echo -ne "$(RESET)"
 
 c clean: ## Clean objects and dependencies
