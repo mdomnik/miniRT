@@ -1,0 +1,83 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   obj_to_faces.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/19 17:21:30 by mdomnik           #+#    #+#             */
+/*   Updated: 2025/03/14 00:00:04 by mdomnik          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "mrt.h"
+
+int	isspace(int c)
+{
+	return (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f' || c == '\r');
+}
+
+t_group	*create_group(const char *name)
+{
+	t_group	*g;
+
+	g = malloc(sizeof(t_group));
+	g->name = ft_strdup(name);
+	g->group = group();
+	g->next = NULL;
+	return (g);
+}
+
+void	add_triangle_to_group(t_group *g, t_triangle *tri)
+{
+	void	*t;
+
+	t = triangle(tri->p1, tri->p2, tri->p3);
+	add_child(g->group, t);
+}
+
+void	add_group_to_default(t_obj_file *obj_file, t_group *group)
+{
+	t_group	*current;
+
+	if (!obj_file->default_group)
+		obj_file->default_group = group;
+	else
+	{
+		current = obj_file->default_group;
+		while (current->next)
+			current = current->next;
+		current->next = group;
+	}
+}
+
+void	fan_triangulation(t_group *group, t_obj_file *obj_file,
+		int *indices, int count)
+{
+	t_triangle	triangle;
+	int			i;
+	int			v[3];
+
+	if (count < 3)
+		return ((void)ft_dprintf(2, "Face with < 3 vertices, skipping\n"));
+	i = 0;
+	while (i < count - 1)
+	{
+		v[0] = indices[0];
+		v[1] = indices[i];
+		v[2] = indices[i + 1];
+		if (v[0] > 0 && v[0] <= obj_file->vertex_count && v[1] > 0
+			&& v[1] <= obj_file->vertex_count && v[2] > 0
+			&& v[2] <= obj_file->vertex_count)
+		{
+			triangle.p1 = obj_file->vertices[v[0]];
+			triangle.p2 = obj_file->vertices[v[1]];
+			triangle.p3 = obj_file->vertices[v[2]];
+			add_triangle_to_group(group, &triangle);
+		}
+		else
+			ft_dprintf(2, "Face references out-of-bounds vertex indices\n");
+		i++;
+	}
+}

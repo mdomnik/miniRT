@@ -60,8 +60,9 @@ SRC_FILES		+= utils/ft_bzero.c
 SRC_FILES		+= utils/ft_toupper.c
 SRC_FILES		+= utils/ft_tolower.c
 SRC_FILES		+= utils/ft_atoi.c
+SRC_FILES		+= utils/ft_atof.c
 SRC_FILES		+= utils/ft_itoa.c
-
+SRC_FILES		+= utils/ft_abs.c
 SRC_FILES		+= put/ft_putchar_fd.c
 SRC_FILES		+= put/ft_putstr_fd.c
 SRC_FILES		+= put/ft_putendl_fd.c
@@ -128,7 +129,7 @@ a all: $(NAME) ## Build this project
 # Compilation rule for object files
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
 	@$(MKDIR) $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 # Rule for linking the target executable
 $(NAME): $(OBJ_FILES)

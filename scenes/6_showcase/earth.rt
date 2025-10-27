@@ -1,0 +1,6 @@
+# simple scene with a sphere
+A   0.2								255,255,255
+C   0,1,2		-0.15,-1,1		60
+L   2,2,2		0.6					255,255,255
+sb 255,255,255 space
+sp  0,0,0		1				0,0,0 earth.rt

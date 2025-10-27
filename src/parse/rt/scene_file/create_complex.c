@@ -1,0 +1,111 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_complex.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/02 16:57:56 by astavrop          #+#    #+#             */
+/*   Updated: 2025/03/15 12:23:51 by mdomnik          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "mrt.h"
+
+#define COORD 0
+#define NORMAL 1
+#define COLOR 2
+
+static void	set_obj_transform(t_shape *obj, char **coords,
+		char **normal, char **args)
+{
+	t_matrix	transform;
+
+	transform = init_identity_matrix(4);
+	transform = multiply_matrices(transform,
+			translation(ft_atof_mrt(coords[0]),
+				ft_atof_mrt(coords[1]),
+				ft_atof_mrt(coords[2])));
+	transform = multiply_matrices(transform,
+			rotation_x(deg_to_rad(ft_atof_mrt(normal[0]) * 180)));
+	transform = multiply_matrices(transform,
+			rotation_y(deg_to_rad(ft_atof_mrt(normal[1]) * 180)));
+	transform = multiply_matrices(transform,
+			rotation_z(deg_to_rad(ft_atof_mrt(normal[2]) * 180)));
+	transform = multiply_matrices(transform,
+			scaling(ft_atof_mrt(args[4]) / 2.0,
+				ft_atof_mrt(args[4]) / 2.0,
+				ft_atof_mrt(args[4]) / 2.0));
+	set_transform(obj, transform);
+}
+
+void	free_group(t_group *group)
+{
+	t_group	*tmp;
+
+	while (group)
+	{
+		tmp = group->next;
+		free(group->name);
+		free(group);
+		group = tmp;
+	}
+}
+
+int	create_obj(t_world *world, char **args)
+{
+	t_shape		*obj;
+	t_group		*group;
+	t_obj_file	*obj_file;
+	char		**vectors[3];
+
+	obj_file = parse_obj_file(args[1]);
+	group = obj_file->default_group;
+	obj = object_group_to_group(group);
+	free_group(group);
+	vectors[COORD] = ft_split(args[2], ',');
+	vectors[NORMAL] = ft_split(args[3], ',');
+	vectors[COLOR] = ft_split(args[5], ',');
+	set_obj_transform(obj, vectors[COORD], vectors[NORMAL], args);
+	if (args[6])
+		get_material(args[6], &obj->material, obj);
+	obj->material.color = new_color3(ft_atof_mrt(vectors[COLOR][0]),
+			ft_atof_mrt(vectors[COLOR][1]),
+			ft_atof_mrt(vectors[COLOR][2]));
+	obj->material.color = div_color(obj->material.color);
+	obj->bounds_cache = group_bounds(obj);
+	inherit_material(obj);
+	add_shape(&world->shapes, obj);
+	return (free_double(vectors[COLOR]), free_double(vectors[NORMAL]),
+		free_double(vectors[COORD]), free(obj_file->vertices),
+		free(obj_file->faces), free(obj_file), 0);
+}
+
+int	create_skybox(t_world *world, char **args)
+{
+	t_shape		*sb;
+	char		**color;
+	t_matrix	transform;
+
+	sb = cube();
+	sb->type = SKYBOX;
+	color = ft_split(args[1], ',');
+	transform = init_identity_matrix(4);
+	transform = scaling(100, 100, 100);
+	sb->material.diffuse = 0;
+	sb->material.specular = 0;
+	sb->material.reflective = 0;
+	sb->material.ambient = 1;
+	sb->material.color = new_color3(ft_atof_mrt(color[0]),
+			ft_atof_mrt(color[1]), ft_atof_mrt(color[2]));
+	sb->material.color = div_color(sb->material.color);
+	if (args[2])
+		get_skybox(args[2], &sb->material);
+	else
+	{
+		sb->material.pattern = NULL;
+	}
+	set_transform(sb, transform);
+	add_shape(&world->shapes, sb);
+	return (free_double(color), 0);
+}

@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:29:54 by astavrop          #+#    #+#             */
-/*   Updated: 2024/08/29 16:10:18 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/12 23:11:31 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,21 @@
 # include <string.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <stdbool.h>
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+typedef struct s_format
+{
+	int		width;
+	int		precision;
+	int		flags;
+	char	type;
+}	t_format;
 
 /* DEQUE */
 
@@ -105,6 +114,7 @@ void			*ft_memchr(const void *src, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 char			*ft_strnstr(char *big, char *little, size_t len);
 long			ft_atoi(const char *nptr);
+float			ft_atof(const char *str);
 void			*ft_calloc(size_t nmemb, size_t size);
 char			*ft_strdup(const char *s);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
@@ -114,6 +124,7 @@ char			**ft_split(char const *s, char c);
 char			*ft_itoa(int n);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
+int				ft_abs(int n);
 
 /* Printing functions */
 
@@ -148,7 +159,7 @@ char			**ft_strarray_remove_by_index(char **array, size_t index);
 /* GET NEXT LINE */
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 2048
 
 # endif
 

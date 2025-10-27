@@ -15,7 +15,7 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	int i;
+	int	i;
 
 	i = write(fd, s, ft_strlen(s));
 	i = write(fd, "\n", 1);

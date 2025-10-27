@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:30:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2025/01/13 23:39:35 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 18:03:17 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define ERR_NO_SCENE "Error: No scene file provided"
 # define ERR_ARGS "Error: Invalid number of arguments"
 # define ERR_NO_NAME "Error: No file name provided with '.rt' extension"
+# define ERR_EMPTY_FILE "Error: Empty file"
 
 //FILE READING
 # define ERR_OPEN_FILE "Error: Failed to open file"
@@ -45,15 +46,30 @@
 # define ERR_COLOR_NUM "ERROR: Colors take 3 arguments 'r,g,b'"
 # define ERR_COLOR_RANGE "ERROR: Color values must be between 0 and 255"
 # define ERR_INV_CHAR "ERROR: Invalid character in value"
-# define ERR_RANGE "ERROR: Value out of range"
+# define ERR_RANGE "ERROR: of range"
 # define ERR_VEC_NUM "ERROR: Vector range takes 3 float arguments"
 
-#define ERR_SPLIT "Error: Failed to split string"
+# define ERR_SPLIT "Error: Failed to split string"
 
 //IMAGE
-# define ERR_PPM_FORMAT "Error: Invalid PPM format"
+# define ERR_PPM_FORMAT "Invalid PPM format"
 # define ERR_MEMORY "Error: Could not allocate memory for canvas"
-# define ERR_WRITE_PIXEL "Error: Attempted to write pixel outside of canvas bounds"
+# define ERR_WRITE_PIXEL "Error: Attempted to write pixel outside of\
+	canvas bounds"
 # define ERR_COLOR_MAX "Error: Invalid color max value"
 # define ERR_INCOMPLETE_RGB "Error: Incomplete RGB values"
+
+//THREAD
+# define ERR_THREAD "Thread %d failed to initialize world.\n"
+
+//ARGS
+# define AMBIENT_ARGS "Error: Ambient light requires 2 arguments 'intensity,\
+	color'\n"
+# define CAMERA_ARGS "Error: Camera requires 3 arguments 'position,\
+	orientation, fov'\n"
+# define LIGHT_ARGS "Error: Light requires 3 arguments 'position, brightness,\
+	color'\n"
+# define PARSE_ARGS "Error: Could not parse arguments"
+# define ERR_NON_NEG "Error: Non-negative value required"
+
 #endif

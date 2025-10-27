@@ -6,14 +6,14 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/12/03 18:00:13 by mdomnik          ###   ########.fr       */
+/*   Updated: 2025/03/14 17:26:05 by mdomnik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-# define SCENE_OBJECTS	"A,C,L,sp,pl,cy"
+# define SCENE_OBJECTS	"A,C,L,sp,pl,cy,co,hg,cb,obj,sb"
 
 # define UNIQUE_OBJECTS	"A,C"
 # define MANDATORY_OBJECTS	"A,C,L"
@@ -21,11 +21,15 @@
 //MANDATORY OBJECTS
 # define OBJECT_RULES	"A,RATIO,COLOR;\
 C,VECTOR,VRANGE,FOV;\
-L,VECTOR,FLOAT,COLOR;\
-sp,VECTOR,FLOAT,COLOR;\
-pl,VECTOR,VRANGE,COLOR;\
-cy,VECTOR,VRANGE,FLOAT,FLOAT,COLOR"
-
+L,VECTOR,BRIGHT,COLOR;\
+sp,VECTOR,FLOAT,COLOR,FILE;\
+pl,VECTOR,VRANGE,COLOR,FILE;\
+cy,VECTOR,VRANGE,FLOAT,FLOAT,COLOR,FILE;\
+co,VECTOR,VRANGE,FLOAT,FLOAT,COLOR,FILE;\
+hg,VECTOR,VRANGE,FLOAT,FLOAT,COLOR,FILE;\
+cb,VECTOR,VRANGE,FLOAT,COLOR,FILE;\
+obj,FILE,VECTOR,VRANGE,FLOAT,COLOR,FILE;\
+sb,COLOR,FILE;"
 
 typedef struct s_ambient	t_ambient;
 // typedef struct s_camera		t_camera;
@@ -35,7 +39,7 @@ typedef struct s_plane		t_plane;
 typedef struct s_cylinder	t_cylinder;
 
 typedef struct s_obj		t_obj;
-typedef struct s_toremove		t_toremove;
+typedef struct s_toremove	t_toremove;
 
 typedef struct s_temp		t_temp;
 
@@ -46,12 +50,15 @@ typedef enum e_type
 	AMBIENT = 0,
 	CAMERA = 1,
 	LIGHT = 2,
-
 	SPHERE = 3,
 	PLANE = 4,
 	CUBE = 5,
 	CYLINDER = 6,
-	CONE = 7
+	CONE = 7,
+	GROUP = 8,
+	TRIANGLE = 9,
+	HOURGLASS = 10,
+	SKYBOX = 11,
 }	t_type;
 
 //REQUIRED OBJECT STRUCTS
@@ -60,8 +67,6 @@ struct s_ambient
 	float				light_ratio;
 	t_color3			color;
 };
-
-
 
 struct s_light
 {
@@ -121,11 +126,9 @@ struct s_obj
 
 struct s_toremove
 {
-	t_type		type;
-	void			*object;
+	t_type				type;
+	void				*object;
 	struct s_toremove	*next;
 };
-
-
 
 #endif

@@ -1,0 +1,5 @@
+# shape's parameter has too many arguments
+A   0.2							255,255,255
+C   0,0,-5		0,0,0		70
+L   1,1,-5		1				255,255,255
+pl	0,-1,0	0,0,0,0				255,255,255
