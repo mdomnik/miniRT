@@ -1,7 +1,6 @@
 # additional
 *.ppm
 *.bmp
-*.png
 *.jpg
 z_hdri/
 earthmap1k.ppm
