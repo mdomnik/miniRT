@@ -6,7 +6,7 @@
 
 miniRT is a small but feature-rich ray tracing engine written in C. It renders realistic 3D scenes by simulating the physics of light - tracing rays from the camera through each pixel and calculating their interactions with objects in the world.
 
-Developed as part of the 42 school curriculum, it focuses on mathematical precision, object transformations, and physically inspired lighting models, including reflections, refractions, shadows, and textures — all built from the ground up using the MiniLibX graphical library.
+Developed as part of the 42 school curriculum, it focuses on mathematical precision, object transformations, and physically inspired lighting models, including reflections, refractions, shadows, and textures - all built from the ground up using the MiniLibX graphical library.
 
 ---
 
